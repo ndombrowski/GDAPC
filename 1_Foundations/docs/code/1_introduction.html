@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Introduction to data science - 2&nbsp; Data, data everywhere</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/2_core_data_tool.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data, data everywhere</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../images/tree_of_life.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Introduction to data science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to data analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_introduction.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data, data everywhere</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_core_data_tool.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core data tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_jobs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Job opportunities</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction-to-data-science" id="toc-introduction-to-data-science" class="nav-link active" data-scroll-target="#introduction-to-data-science"><span class="toc-section-number">2.1</span>  Introduction to data science</a>
+  <ul class="collapse">
+  <li><a href="#useful-terms" id="toc-useful-terms" class="nav-link" data-scroll-target="#useful-terms"><span class="toc-section-number">2.1.1</span>  Useful terms</a></li>
+  <li><a href="#the-data-ecosystem" id="toc-the-data-ecosystem" class="nav-link" data-scroll-target="#the-data-ecosystem"><span class="toc-section-number">2.1.2</span>  The data ecosystem</a></li>
+  <li><a href="#data-and-decision-making" id="toc-data-and-decision-making" class="nav-link" data-scroll-target="#data-and-decision-making"><span class="toc-section-number">2.1.3</span>  Data and decision making</a></li>
+  </ul></li>
+  <li><a href="#data-analyst-skills" id="toc-data-analyst-skills" class="nav-link" data-scroll-target="#data-analyst-skills"><span class="toc-section-number">2.2</span>  Data analyst skills</a>
+  <ul class="collapse">
+  <li><a href="#basic-terms" id="toc-basic-terms" class="nav-link" data-scroll-target="#basic-terms"><span class="toc-section-number">2.2.1</span>  Basic terms</a></li>
+  <li><a href="#analytical-thinking" id="toc-analytical-thinking" class="nav-link" data-scroll-target="#analytical-thinking"><span class="toc-section-number">2.2.2</span>  Analytical thinking</a></li>
+  </ul></li>
+  <li><a href="#following-the-data-life-cycle" id="toc-following-the-data-life-cycle" class="nav-link" data-scroll-target="#following-the-data-life-cycle"><span class="toc-section-number">2.3</span>  Following the data life cycle</a>
+  <ul class="collapse">
+  <li><a href="#phases-in-the-life-cycle-of-data" id="toc-phases-in-the-life-cycle-of-data" class="nav-link" data-scroll-target="#phases-in-the-life-cycle-of-data"><span class="toc-section-number">2.3.1</span>  Phases in the life cycle of data</a></li>
+  <li><a href="#the-data-analysis-process" id="toc-the-data-analysis-process" class="nav-link" data-scroll-target="#the-data-analysis-process"><span class="toc-section-number">2.3.2</span>  The data analysis process</a></li>
+  <li><a href="#data-analysis-tools" id="toc-data-analysis-tools" class="nav-link" data-scroll-target="#data-analysis-tools"><span class="toc-section-number">2.3.3</span>  Data analysis tools</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data, data everywhere</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction-to-data-science" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="introduction-to-data-science"><span class="header-section-number">2.1</span> Introduction to data science</h2>
+<p>Here, we find notes covered in Weeks 1 and 2.</p>
+<section id="useful-terms" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="useful-terms"><span class="header-section-number">2.1.1</span> Useful terms</h3>
+<ul>
+<li><p>Data: A collection of facts</p></li>
+<li><p>Data analysis: the collection, transformation, and organization of data in order to draw conclusions, make predictions, and drive informed decision-making</p></li>
+<li><p>Data science is an umbrella term that encompasses three disciplines:</p>
+<ul>
+<li>Machine learning</li>
+<li>Statistics</li>
+<li>Analytics</li>
+</ul></li>
+<li><p>People analytics is the practice of collecting and analyzing data on the people who make up a company’s workforce in order to gain insights to improve how the company operates</p></li>
+<li><p>Business analytics is “the use of math and statistics to derive meaning from data in order to make better business decisions”</p></li>
+<li><p><a href="https://online.hbs.edu/blog/post/business-analytics-examples">Examples of buisness analytics in action</a></p></li>
+<li><p>Steps in the analysis process:</p>
+<ul>
+<li>Ask questions and define the problem</li>
+<li>Prepare data by collecting and storing the information</li>
+<li>Process data by cleaning and checking the information</li>
+<li>Analyze data to find patterns, relationships, and trends</li>
+<li>Share data with your audience</li>
+<li>Act on the data and use the analysis results</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-data-ecosystem" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="the-data-ecosystem"><span class="header-section-number">2.1.2</span> The data ecosystem</h3>
+<ul>
+<li>Ecosystem: a group of elements that interact with one another</li>
+<li>Data ecosystems: the various elements that interact with one another in order to produce, manage, store, organize, analyze, and share data. These elements include hardware and software tools and the people that use them</li>
+<li>The cloud: a place to keep data online, rather than on a computer hard drive</li>
+<li>Data science: creating new ways of modeling and understanding the unknown by using raw data</li>
+<li><strong>Data scientists</strong> create new questions using data, while <strong>analysts</strong> find answers to existing questions by creating insights from data sources</li>
+</ul>
+</section>
+<section id="data-and-decision-making" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="data-and-decision-making"><span class="header-section-number">2.1.3</span> Data and decision making</h3>
+<ul>
+<li>Data-driven decision-making is defined as using facts to guide business strategy</li>
+<li>Important questions to ask:
+<ul>
+<li>What kind of results are needed?</li>
+<li>Who will be informed?</li>
+<li>Am I answering the question being asked?</li>
+<li>How quickly does a decision need to be made?</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="data-analyst-skills" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="data-analyst-skills"><span class="header-section-number">2.2</span> Data analyst skills</h2>
+<section id="basic-terms" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="basic-terms"><span class="header-section-number">2.2.1</span> Basic terms</h3>
+<ul>
+<li>Analytical skills: Qualities and characteristics associated with solving problems using facts</li>
+<li>Important skills include:
+<ul>
+<li><strong>Curiosity</strong></li>
+<li><strong>Understanding context</strong>, i.e.&nbsp;understanding the condition in which something exists or happens</li>
+<li>Having a <strong>technical mindset</strong>, i.e.&nbsp;the ability to break things down into smaller steps or pieces and work with them in an orderly way</li>
+<li><strong>Data design</strong>, i.e.&nbsp;how we organize information</li>
+<li><strong>Data strategy</strong>, i.e.&nbsp;the management of the people, processes and tools used in data analysis</li>
+</ul></li>
+</ul>
+</section>
+<section id="analytical-thinking" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="analytical-thinking"><span class="header-section-number">2.2.2</span> Analytical thinking</h3>
+<ul>
+<li>Definition: Identifying and defining a problem and then solving it by using data in an organized, step-by-step manner</li>
+<li>Key aspects:
+<ul>
+<li><strong>Visualization</strong>: the graphical representation of information; important to understand and explain information</li>
+<li><strong>Strategy</strong>: Helps data analysts see what they want to achieve with the data and how they can get there. Strategy also helps improve the quality and usefulness of the data we collect</li>
+<li><strong>Problem-orientation</strong>: Data analysts use a problem- oriented approach in order to identify, describe, and solve problems</li>
+<li><strong>Correlation</strong>: being able to identify a correlation between two or more pieces of data</li>
+<li><strong>Big-picture and detail-oriented thinking</strong>: being able to see the big picture as well as the details</li>
+</ul></li>
+</ul>
+<p>Let’s talk about some of the questions data analysts ask when they’re on the hunt for a solution.</p>
+<p>Here’s one that will come up a lot:</p>
+<ul>
+<li>What is the root cause of a problem? A <strong>root cause</strong> is the reason why a problem occurs. A simple way to wrap your head around root causes is with the process called the <strong>Five Whys</strong>. In the Five Whys you ask “why” five times to reveal the root cause.</li>
+<li>Where are the gaps in our process? For this, many people will use something called gap analysis. <strong>Gap analysis</strong> lets you examine and evaluate how a process works currently in order to get where you want to be in the future. The general approach to gap analysis is understanding where you are now compared to where you want to be. Then you can identify the gaps that exist between the current and future state and determine how to bridge them</li>
+<li>What did we not consider before?</li>
+</ul>
+</section>
+</section>
+<section id="following-the-data-life-cycle" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="following-the-data-life-cycle"><span class="header-section-number">2.3</span> Following the data life cycle</h2>
+<section id="phases-in-the-life-cycle-of-data" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="phases-in-the-life-cycle-of-data"><span class="header-section-number">2.3.1</span> Phases in the life cycle of data</h3>
+<p><strong>Database</strong>: A collection of data stored in a computer system</p>
+<p>Individual stages in the data life cycle will vary from company to company or by industry or sector but in general key steps are:</p>
+<ol type="1">
+<li><strong>Plan</strong>: During planning, a business decides what kind of data it needs, how it will be managed throughout its life cycle, who will be responsible for it, and the optimal outcomes</li>
+<li><strong>Capture</strong>: This is where data is collected from a variety of different sources, i.e.&nbsp;from outside resources or company documents, and brought into the organization</li>
+<li><strong>Manage</strong>: How we care for our data, how and where it’s stored, the tools used to keep it safe and secure, and the actions taken to make sure that it’s maintained properly</li>
+<li><strong>Analyze</strong>: the data is used to solve problems, make great decisions, and support business goals</li>
+<li><strong>Archive</strong>: storing data in a place where it’s still available, but may not be used again</li>
+<li><strong>Destroy</strong>: destroy data via a secure data erasure software, this is important to protect private information</li>
+</ol>
+<p>Be careful not to mix up or confuse the six stages of the data life cycle (Plan, Capture, Manage, Analyze, Archive, and Destroy) with the six phases of the data analysis life cycle (Ask, Prepare, Process, Analyze, Share, and Act). They shouldn’t be used or referred to interchangeably.</p>
+</section>
+<section id="the-data-analysis-process" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="the-data-analysis-process"><span class="header-section-number">2.3.2</span> The data analysis process</h3>
+<p>Now that you understand all the phases of the data life cycle, it’s time to move on to the phases of data analysis. They sound similar, but are two different things. Data analysis isn’t a life cycle. It’s the process of analyzing data.</p>
+<section id="ask-step" class="level4" data-number="2.3.2.1">
+<h4 data-number="2.3.2.1" class="anchored" data-anchor-id="ask-step"><span class="header-section-number">2.3.2.1</span> Ask step</h4>
+<p>We define the problem to be solved and we make sure that we fully understand stakeholder expectations.</p>
+<p><strong>Stakeholders</strong> are people who have invested time and resources into a project and are interested in the outcome</p>
+<p>Defining a problem means you look at the current state and identify how it’s different from the ideal state.</p>
+<p>Another important part of the ask phase is understanding stakeholder expectations. The first step here is to determine who the stakeholders are. That may include your manager, an executive sponsor, or your sales partners.</p>
+</section>
+<section id="prepare-step" class="level4" data-number="2.3.2.2">
+<h4 data-number="2.3.2.2" class="anchored" data-anchor-id="prepare-step"><span class="header-section-number">2.3.2.2</span> Prepare step</h4>
+<p>Here, the data analysts collect and store data they’ll use for the upcoming analysis process. Decisions made from your analysis should always be based on facts and be fair and impartial.</p>
+</section>
+<section id="process-step" class="level4" data-number="2.3.2.3">
+<h4 data-number="2.3.2.3" class="anchored" data-anchor-id="process-step"><span class="header-section-number">2.3.2.3</span> Process step</h4>
+<p>Here, data analysts find and eliminate any errors and inaccuracies that can get in the way of results. This usually means cleaning data, transforming it into a more useful format, combining two or more data sets to make information more complete and removing outliers, which are any data points that could skew the information. You’ll also fix typos, inconsistencies, or missing and inaccurate data</p>
+</section>
+<section id="analysis-step" class="level4" data-number="2.3.2.4">
+<h4 data-number="2.3.2.4" class="anchored" data-anchor-id="analysis-step"><span class="header-section-number">2.3.2.4</span> Analysis step</h4>
+<p>Analyzing the data you’ve collected involves using tools to transform and organize that information so that you can draw useful conclusions, make predictions, and drive informed decision-making</p>
+</section>
+<section id="share-step" class="level4" data-number="2.3.2.5">
+<h4 data-number="2.3.2.5" class="anchored" data-anchor-id="share-step"><span class="header-section-number">2.3.2.5</span> Share step</h4>
+<p>Here you’ll learn how data analysts interpret results and share them with others to help stakeholders make effective data-driven decisions. In the share phase, visualization is a data analyst’s best friend.</p>
+</section>
+<section id="act-step" class="level4" data-number="2.3.2.6">
+<h4 data-number="2.3.2.6" class="anchored" data-anchor-id="act-step"><span class="header-section-number">2.3.2.6</span> Act step</h4>
+<p>This is the exciting moment when the business takes all of the insights you, the data analyst, have provided and puts them to work in order to solve the original business problem</p>
+</section>
+</section>
+<section id="data-analysis-tools" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="data-analysis-tools"><span class="header-section-number">2.3.3</span> Data analysis tools</h3>
+<p>The most commonly used tools are:</p>
+<ul>
+<li><strong>Spreadsheets</strong>:
+<ul>
+<li>Spreadsheets structure data in a meaningful way by letting you Collect, store, organize, and sort information AND identify patterns and piece the data together in a way that works for each specific data project AND create excellent data visualizations, like graphs and charts.</li>
+<li>For example excel or google sheets.</li>
+<li>Uses formulas, a set of instructions that performs a specific calculation using the data in a spreadsheet</li>
+<li>Uses functions, i.e.&nbsp;preset command that automatically performs a specific process or task using the data in a spreadsheet</li>
+</ul></li>
+<li><strong>Query languages</strong>:
+<ul>
+<li>A query language is a computer programming language that allows you to retrieve and manipulate data from a database</li>
+<li>A database is a collection of data stored in a computer system</li>
+<li>Sequel, i.e.&nbsp;structured query language, SQL is a language that lets data analysts communicate with a database</li>
+<li>These languages allow us to isolate specific information from a database(s), learn and understand the requests made to databases and finally allows us to select, create, add, or download data from a database for analysis</li>
+</ul></li>
+<li><strong>Visualization tools</strong>:
+<ul>
+<li>I.e. the graphical representation of information, includes graphs, maps or tables</li>
+<li>Example tools: Tableau, Looker</li>
+</ul></li>
+</ul>
+<p>Differences between spreadsheets and databases:</p>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Spreadsheets</th>
+<th>Databases</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Software applications</td>
+<td>Data stores - accessed using a query language (e.g.&nbsp;SQL)</td>
+</tr>
+<tr class="even">
+<td>Structure data in a row and column format</td>
+<td>Structure data using rules and relationships</td>
+</tr>
+<tr class="odd">
+<td>Organize information in cells</td>
+<td>Organize information in complex collections</td>
+</tr>
+<tr class="even">
+<td>Provide access to a limited amount of data</td>
+<td>Provide access to huge amounts of data</td>
+</tr>
+<tr class="odd">
+<td>Manual data entry</td>
+<td>Strict and consistent data entry</td>
+</tr>
+<tr class="even">
+<td>Generally one user at a time</td>
+<td>Multiple users</td>
+</tr>
+<tr class="odd">
+<td>Controlled by the user</td>
+<td>Controlled by a database management system</td>
+</tr>
+</tbody>
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to data analysis</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/2_core_data_tool.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core data tools</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

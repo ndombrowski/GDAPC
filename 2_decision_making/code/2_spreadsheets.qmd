@@ -1,0 +1,203 @@
+# Working with spreadsheets
+
+Let's briefly go again through each phase of the data life cycle: plan, capture, manage, analyze, archive, and destroy.
+
+- **Plan** for the users who will work within a spreadsheet by developing organizational standards. This can mean formatting your cells, the headings you choose to highlight, the color scheme, and the way you order your data points. When you take the time to set these standards, you will improve communication, ensure consistency, and help people be more efficient with their time.
+
+- **Capture** data by the source by connecting spreadsheets to other data sources, such as an online survey application or a database. This data will automatically be updated in the spreadsheet. That way, the information is always as current and accurate as possible.
+
+- **Manage** different kinds of data with a spreadsheet. This can involve storing, organizing, filtering, and updating information. Spreadsheets also let you decide who can access the data, how the information is shared, and how to keep your data safe and secure. 
+
+- **Analyze** data in a spreadsheet to help make better decisions. Some of the most common spreadsheet analysis tools include formulas to aggregate data or create reports, and pivot tables for clear, easy-to-understand visuals. 
+
+- **Archive** any spreadsheet that you don’t use often, but might need to reference later with built-in tools. This is especially useful if you want to store historical data before it gets updated. 
+
+- **Destroy** your spreadsheet when you are certain that you will never need it again, if you have better backup copies, or for legal or security reasons. Keep in mind, lots of businesses are required to follow certain rules or have measures in place to make sure data is destroyed properly.	
+
+Spreadsheet shortcuts can help you become more efficient with spreadsheets. If you’d like to learn more, you can explore the collection of [Google Sheets shortcuts](https://support.google.com/docs/answer/181110), or visit the [Microsoft Excel shortcuts](https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f) page if you are using Excel.
+
+
+## Spreadsheets in Google Sheet 
+
+The link to the finished spreadsheet is [here](https://docs.google.com/spreadsheets/d/1_wFdBiH4ctoA0bVyyReJ9hBu1Hmj6Jh0Jpo0z-R18Qc/edit?resourcekey=0-4MdCgWBSKFZqE7rnk8A-qw#gid=932264330)
+
+- The column headers. The first row of the spreadsheet is for data **attributes**, which is another name for column headers. An attribute is a characteristic or quality of data used to label a column in a table. It's basically labeling the type of data in each column. 
+
+### Resources for excel
+
+- [Office Quick Starts](https://support.microsoft.com/en-us/office/office-quick-starts-25f909da-3e76-443d-94f4-6cdf7dedc51e#ID0EAADAAA=At_work_or_school): Scroll down to the Downloadable guides section to d​ownload the Excel Quick Start Guide: This PDF guide begins with a labeled map of Excel that can guide you through the basic tasks you can accomplish in Excel. 
+
+- [Excel video training](https://support.microsoft.com/en-us/office/excel-for-windows-training-9bc05390-e94c-46af-a5b3-d7c22f6990bb?wt.mc_id=otc_home): This is a collection of step-by-step videos to use all sorts of Excel features, including adding and working within rows, columns, and cells; formatting; using formulas and functions; and adding charts and pivot tables. 
+
+- [Sort data in a range or table](https://support.microsoft.com/en-us/office/sort-data-in-a-range-or-table-62d0b95d-2a90-4610-a6ae-2e545c4a4654): This page guides you through all of the steps you will need to sort data by number, text, and color. You’ll also have the option to sort by custom list so that you can customize exactly what you want to sort.
+
+- [Filter data in a range or table](https://support.microsoft.com/en-us/office/filter-data-in-a-range-or-table-01832226-31b5-4568-8806-38c37dcc180e): This article has step-by-step instructions on how to filter an Excel spreadsheet to show only the data you want to see. You can also use built-in comparison operators, such as “greater than” and “top 10” to reveal only the most relevant data.
+
+- [Format a worksheet](https://support.microsoft.com/en-us/office/quick-start-format-a-worksheet-d70f75a2-23e6-4c92-83d6-2f219e4ad42e): The guide will help you select and format your Excel spreadsheet, then change the borders, shading, colors, and text. This can help improve your spreadsheet’s readability.
+
+- Pro tip: If you’re searching for information about using customizable options, check out [Microsoft’s Guidelines for organizing and formatting data](https://support.microsoft.com/en-us/office/guidelines-for-organizing-and-formatting-data-on-a-worksheet-90895cad-6c85-4e02-90d3-8798660166e3) on a worksheet. This article provides clear methods for creating easy-to-read spreadsheets.
+
+
+### Resources for Google sheets
+
+- [Google Sheets cheat sheet](https://support.google.com/a/users/answer/9300022): The cheat sheet puts all the basics of Sheets on a single page for easy reference. Here, you can learn about customizing your spreadsheet and the data inside; working with rows, columns, and cells; sharing your spreadsheet with others; creating different versions and copies of a spreadsheet; and more.
+
+- [Get started with Sheets](https://support.google.com/a/users/answer/9300311?hl=en&ref_topic=9296423): Create and import files: This guide is a step-by-step guide for working with Sheets. You start by learning how to open a spreadsheet, then move on to adding data.
+
+- [Sort and filter your data](https://support.google.com/docs/answer/3540681?co=GENIE.Platform%3DDesktop&hl=en): This resource can help you organize data in Sheets. Use this guide to sort part or all of a spreadsheet. You can sort by text, number, and color. Then, learn how to create filters to show only certain data while hiding the rest. Finally, the article includes information on creating, saving, and removing a filter view. 
+
+- [Edit and format a spreadsheet](https://support.google.com/docs/answer/46973?co=GENIE.Platform%3DDesktop&hl=en&oco=0): This will help you make easy-to-read spreadsheets. You will learn how to assign a color, customize borders around cells, and change the appearance of text. If you’d like to give your spreadsheet a theme, you can scroll to the bottom of the page and find how to apply it to parts of your spreadsheet.
+
+- Tip: Microsoft Excel and Google Sheets are very similar in terms of calculations, formulas, functions, and many other features. But there are some differences, which can make it tricky to switch from one to the other. If you are moving between Excel and Google Sheets, find a quick list of the differences between the two kinds of spreadsheet applications in Overview: [Differences between Sheets and Excel](https://support.google.com/a/users/answer/9331278?hl=en).
+
+
+## Formulas
+
+A **formula** is a set of instructions that perform a specific calculation. 
+
+Formulas are built on **operators** which are symbols that name the type of operation or calculation to be performed. For example, a plus sign is a common operator. 
+
+If you already have data in your spreadsheet, you can use cell references in your formulas instead. A **cell reference** is a single cell or range of cells in a worksheet that can be used in a formula. Cell references contain the letter of the column and the number of the row where the data is. 
+
+A **range of cells** is a collection of two or more cells. A range can include cells from the same row or column, or from different columns and rows collected together. 
+
+
+### Auto filling
+
+The lower-right corner of each cell has a fill handle. It is a small green square in Microsoft Excel and a small blue square in Google Sheets.
+
+Click the fill handle for a cell and drag it down a column to auto-fill other cells in the column with the same value or formula in that cell. 
+
+Click the fill handle for a cell and drag it across a row to auto-fill other cells in the row with the same value or formula in that cell. 
+
+If you want to create a numbered sequence in a column or row, do the following: 1) Fill in the first two numbers of the sequence in two adjacent cells, 2) Select to highlight the cells, and 3) Drag the fill handle to the last cell to complete the sequence of numbers. For example, to insert 1 through 100 in each row of column A, enter 1 in cell A1 and 2 in cell A2. Then, select to highlight both cells, click the fill handle in cell A2, and drag it down to cell A100. This auto-fills the numbers sequentially so you don't have to type them in each cell.
+
+
+### Absolute referencing
+
+Absolute referencing is marked by a dollar sign ($). For example, =$A$10 has absolute referencing for both the column and the row value
+
+Relative references (which is what you normally do e.g. “=A10”) will change anytime the formula is copied and pasted. They are in relation to where the referenced cell is located. For example if you copied “=A10” to the cell to the right it would become “=B10”. With absolute referencing “=$A$10” copied to the cell to the right would remain “=$A$10”. But if you copied $A10 to the cell below, it would change to $A11 because the row value isn't an absolute reference.
+
+Absolute references will not change when you copy and paste the formula in a different cell. The cell being referenced is always the same.
+
+**To easily switch between absolute and relative referencing in the formula bar, highlight the reference you want to change and press the F4** key; for example, if you want to change the absolute reference, $A$10, in your formula to a relative reference, A10, highlight $A$10 in the formula bar and then press the F4 key to make the change. 
+
+
+
+## Errors and fixes
+
+- One error you may encounter is the **DIV error**. The DIV error happens when a formula is trying to divide a value in a cell by zero or by an empty cell. To avoid this problem, we can have this spreadsheet automatically enter not applicable whenever a cell in column A contains a zero that would cause the error. To do this, we'll use the **IFERROR** function. If it encounters a DIV error caused by a cell that contains the zero, the phrase "Not applicable" will be inserted.
+- In Google Sheets, **ERROR** tells us the formula can't be interpreted as it is input. This is also known as a parsing error.
+- Another type of error is **N/A**. The N/A error tells you that the data in your formula can't be found by the spreadsheet. Generally, this means the data doesn't exist. This can happen if we use the VLOOKUP functions but there is a slight difference in how things are typed, i.e. almond vs almonds
+- Speaking of typos, sometimes a typo can cause a **NAME error**. A NAME error can happen when a formula's name isn't recognized or understood.
+- Sometimes an error is caused by inconsistent or wrong data. For instance, the **NUM error** tells us that a formula's calculation can't be performed as specified by the data. The data doesn't make sense for that calculation.
+- The **VALUE error** can indicate a problem with a formula or referenced cells.
+- The REF error often comes up when cells being referenced in a formula have been deleted, thus making the formula unable to perform the calculation
+
+
+As a follow-up to what you learned in the previous video, here are a few best practices and helpful tips. These strategies will help you avoid spreadsheet errors to begin with, making your life in analytics a whole lot less stressful:
+
+1. Filter data to make your spreadsheet less complex and busy.
+1. Use and freeze headers so you know what is in each column, even when scrolling.
+1. When multiplying numbers, use an asterisk (*) not an X.
+1. Start every formula and function with an equal sign (=).
+1. Whenever you use an open parenthesis, make sure there is a closed parenthesis on the other end to match.
+1. Change the font to something easy to read.
+1. Set the border colors to white so that you are working in a blank sheet. 
+1. Create a tab with just the raw data, and a separate tab with just the data you need.
+
+### Pro tip: Spotting errors in spreadsheets with conditional formatting
+
+Conditional formatting can be used to highlight cells a different color based on their contents. This feature can be extremely helpful when you want to locate all errors in a large spreadsheet. For example, using conditional formatting, you can highlight in yellow all cells that contain an error, and then work to fix them.
+
+
+#### In excel
+
+- Click the gray triangle above row number 1 and to the left of Column A to select all cells in the spreadsheet.
+- From the main menu, click Home, and then click Conditional Formatting to select Highlight Cell Rules > More Rules.
+- For Select a Rule Type, choose Use a formula to determine which cells to format.
+- For Format values where this formula is true, enter =ISERROR(A1).
+- Click the Format button, select the Fill tab, select yellow (or any other color), and then click OK. 
+- Click OK to close the format rule window.
+
+
+#### In Google Sheets
+
+- Click the empty rectangle above row number 1 and to the left of Column A to select all cells in the spreadsheet. In the Step-by-step in spreadsheets video, this was called the Select All button. 
+- From the main menu, click Format and select Conditional Formatting to open the Conditional format rules pane on the right.
+- While in the Single Color tab, under Format rules, use the drop-down to select Custom formula is, enter =ISERROR(A1), select yellow (or any other color) for the formatting style, and then click Done.
+
+
+
+## Functions 101
+
+A **function** is a preset command that automatically performs a specific process or task using the data
+
+**COUNTIF** is an example of a function that returns a value based on a condition that the data range is evaluated for. The function counts the number of cells that meet the criteria. For example, in an expense spreadsheet, use COUNTIF to count the number of cells that contain a reimbursement for "airfare."
+
+The **TEXT** function converts a number into text according to a specified format. In this case, you want to list the months of the year.
+
+
+
+
+### Relative, absolute, and mixed references
+
+**Relative references** (cells referenced without a dollar sign, like A2) will change when you copy and paste the function into a different cell. With relative references, the location of the cell that contains the function determines the cells used by the function. 
+
+**Absolute references** (cells fully referenced with a dollar sign, like `$A$2`) will not change when you copy and paste the function into a different cell. With absolute references, the cells referenced always remain the same.
+
+** Mixed references**  (cells partially referenced with a dollar sign, like `$A2` or `A$2`) will change when you copy and paste the function into a different cell. With mixed references, the location of the cell that contains the function determines the cells used by the function, but only the row or column is relative (not both).   
+
+In spreadsheets, you can press the **F4** key to toggle between relative, absolute, and mixed references in a function. Click the cell containing the function, highlight the referenced cells in the formula bar, and then press F4 to toggle between and select relative, absolute, or mixed referencing. 
+
+
+### References
+
+Use these links to discover the most popular shortcuts, for [Chromebook](https://support.google.com/chromebook/answer/183101?hl=en), [PC](https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec), and [Mac.](https://support.apple.com/en-us/HT201236)
+
+
+
+## Structured thinking
+
+- The **problem domain**: the specific area of analysis that encompasses every activity affecting or affected by the problem
+- **Contest**: The condition in which something exists or happens
+- **Structured thinking** is the process of recognizing the current problem or situation, organizing available information, revealing gaps and opportunities, and identifying the options
+- A **scope of work** or SOW is an agreed- upon outline of the work you're going to perform on a project, it sets the expectations and boundaries of a project. try not to confuse statement of work with scope of work, which are both abbreviated as SOW. Although they both are used to define deliverables and a timeline, they aren't the same and shouldn't be used interchangeably. A **statement of work** is a document that clearly identifies the products and services a vendor or contractor will provide to an organization. It includes objectives, guidelines, deliverables, schedule, and costs. A scope of work may be included in a statement of work to help define project outcomes. 
+
+- Examples of [analytics projects for beginners](https://www.coursera.org/articles/data-analytics-projects-for-beginners)
+
+An example for a SOW: 
+
+- Deliverable:  What work is being done, and what things are being created as a result of this project? When the project is complete, what are you expected to deliver to the stakeholders? Be specific here. Will you collect data for this project? How much, or for how long?   
+
+- Timeline:  The timeline is a way of mapping expectations for how long each step of the process should take. The timeline should be specific enough to help all involved decide if a project is on schedule. When will the deliverables be completed? How long do you expect the project will take to complete? If all goes as planned, how long do you expect each component of the project will take? When can we expect to reach each milestone?
+
+- Milestones, i.e. significant tasks you will confirm along your timeline to help everyone know the project is on track. This is closely related to your timeline. What are the major milestones for progress in your project? How do you know when a given part of the project is considered complete? 
+
+- Reports: Good SOWs also set boundaries for how and when you’ll give status updates to stakeholders. How will you communicate progress with stakeholders and sponsors, and how often? Will progress be reported weekly? Monthly? When milestones are completed? What information will status reports contain?
+
+SOWs should also contain information specific to what is and isn’t considered part of the project. The scope of your project is everything that you are expected to complete or accomplish, defined to a level of detail that doesn’t leave any ambiguity or confusion about whether a given task or item is part of the project or not. 
+
+
+## The importance of context
+
+A data analyst considers who, what, when, where, why, and how in order to put data into context.
+
+Context is the condition in which something exists or happens. Context is important in data analytics because it helps you sift through huge amounts of disorganized data and turn it into something meaningful. The fact is, data has little value if it is not paired with context. 
+
+Context can turn raw data into meaningful information. It is very important for data analysts to contextualize their data. This means giving the data perspective by defining it. To do this, you need to identify:
+
+- Who: The person or organization that created, collected, and/or funded the data collection
+- What: The things in the world that data could have an impact on
+- Where: The origin of the data
+- When: The time when the data was created or collected
+- Why: The motivation behind the creation or collection
+- How: The method used to create or collect it
+
+
+
+
+
+
+

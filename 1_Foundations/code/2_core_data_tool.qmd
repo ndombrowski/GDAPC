@@ -1,0 +1,115 @@
+# Core data tools
+
+## Columns and rows and cells, oh my!
+
+Main features of a spreadsheet:
+
+- **Row**: organized horizontally and ordered by number. A row is also called an **observation**. An observation includes all of the attributes for something contained in a row of a data table.
+- **Column**: organized vertically and by letter
+- **Cell**: Each cell is meant for one data point, it is named by combining the column letter and the row number where the cell is located
+- Labeling data is important for organization. Adding labels to the top of the columns will make it easier to reference and find data later on when you're doing analysis. These column names are also called **attributes**, i.e. a characteristic or quality of the data used to label a column in a table
+
+Organizing data:
+
+See `data/playground.xlsx` for an example.
+
+1. Select all data, so its organized together
+2. Go to Data menu --> Sort range 
+3. Choose whether or not we have a header
+4. Select Siblings and decide how you want to sort
+
+ A **formula** is a set of instructions that performs a specific action using the data in a spreadsheet.
+ 
+ 1. Click into C5 (the cell empty cell in the siblings column)
+ 2. type an '=' sign. All formulas begin with this symbol
+ 3. Type in what cells we want to analyse `C2+C3+C4` to calculate the total number of siblings
+ 
+ Displaying a chart:
+ 
+ 1. Select the all data
+ 2. Select Insert --> Chart --> Bar (the bar can be rotated with change chart type in the chart design tab)
+ 3. Try to update a value and see what happens with the chart
+ 4. To change the title of your chart, double click on the chart. You should find that a “Chart Editor” menu displays on the side of your screen. Click on “Chart & axis titles”, and then enter the name of your chart in the “Title Text” box. If you’re using Microsoft Excel, you can double click on the title in the chart to edit directly.  
+ 
+ 
+### Useful links
+
+- [Google Sheets Training an Help](https://support.google.com/a/users/answer/9282959?visit_id=637361702049227170-1815413770&rd=1)
+- [Google Sheets Cheat Sheet](https://support.google.com/a/users/answer/9300022)
+- [Microsoft Excel Training](https://support.microsoft.com/en-us/office/excel-video-training-9bc05390-e94c-46af-a5b3-d7c22f6990bb)
+
+ 
+ 
+## SQL in action
+ 
+SQL can do lots of the same things with data that spreadsheets can do. You can use it to store, organize and analyze your data, among other things. But like any good sequel, it's on a larger scale, bigger, more action-packed.
+
+**Query**: A request for data or information from a database.
+
+### Writing queries
+
+The structure for a basic query looks like this
+
+<img width=400 src="../images/sql1.png">
+
+You can write your SQL queries in all lowercase and don’t have to worry about extra spaces between words. However, using **capitalization** and indentation can help you read the information more easily. Keep your queries neat, and they will be easier to review or troubleshoot if you need to check them later on.
+
+<img width=400 src="../images/sql2.png">
+
+Notice that the SQL statement shown above has a **semicolon** at the end. The semicolon is a statement terminator and is part of the American National Standards Institute (ANSI) SQL-92 standard, which is a recommended common syntax for adoption by all SQL databases. However, not all SQL databases have adopted or enforce the semicolon, so it’s possible you may come across some SQL statements that aren’t terminated with a semicolon. If a statement works without a semicolon, it’s fine.
+
+### The where clause
+
+However, if you are looking for all customers with a last name that begins with the letters “Ch," the WHERE clause would be:
+
+```
+WHERE field1 LIKE 'Ch%'
+```
+
+You can conclude that the LIKE clause is very powerful because it allows you to tell the database to look for a certain pattern! The percent sign (%) is used as a **wildcard** to match one or more characters. In the example above, both Chavez and Chen would be returned. Note that in some databases an asterisk (*) is used as the wildcard instead of a percent sign (%).
+
+### Adding comments
+
+Some tables aren’t designed with descriptive enough naming conventions. In the example, field1 was the column for a customer’s last name, but you wouldn’t know it by the name. A better name would have been something such as last_name. In these cases, you can place comments alongside your SQL to help you remember what the name represents. **Comments** are text placed between certain characters, /* and */, or after two dashes (--) as shown below.
+
+<img width=400 src="../images/sql3.png">
+
+Two dashes (--) are generally supported. So it is best to use -- and be consistent with it. You can use # in place of -- in the above query, but # is not recognized in all SQL versions; for example, MySQL doesn’t recognize #.  You can also place comments between /* and */ if the database you are using supports it. 
+
+### Aliases
+
+You can also make it easier on yourself by assigning a new name or alias to the column or table names to make them easier to work with (and avoid the need for comments). This is done with a SQL AS clause. In the example below, the alias last_name has been assigned to field1 and the alias customers assigned to table. These aliases are good for the duration of the query only. An alias doesn’t change the actual name of a column or table in the database.
+
+<img width=400 src="../images/sql4.png">
+
+### Resources
+
+[W3Schools SQL Tutorial](https://www.w3schools.com/sql/default.asp): If you would like to explore a detailed tutorial of SQL, this is the perfect place to start. This tutorial includes interactive examples you can edit, test, and recreate. Use it as a reference or complete the whole tutorial to practice using SQL. Click the green Start learning SQL now button or the Next button to begin the tutorial.
+
+[SQL Cheat Sheet](https://towardsdatascience.com/sql-cheat-sheet-776f8e3189fa): For more advanced learners, go through this article for standard SQL syntax used in PostgreSQL. By the time you are finished, you will know a lot more about SQL and will be prepared to use it for business analysis and other tasks.
+
+
+## Visualization
+
+Steps to plan a data visualization:
+
+1. Explore the data for patterns 
+2. Plan your visuals
+3. Create visuals: Line charts track sales over time, Maps connect sales to locations, Piecharts show customer segments, bar charts can compare total visitors to visitors that make a purchase
+
+### Resources: Tableau
+
+If you want to explore Tablue, lool [here](https://public.tableau.com/app/resources/learn) Tableau Public is free, easy to use, and full of helpful information. Fir some inspirations, go [here](https://public.tableau.com/app/discover/viz-of-the-day)
+
+
+### Resources:R
+
+You could easily spend days exploring all the resources provided at RStudio.com, but the [RStudio Cheatsheets](https://rstudio.com/resources/cheatsheets/) and the [RStudio Visualize Data Primer](https://rstudio.cloud/learn/primers/3) are great places to start. 
+
+
+
+
+
+
+
+

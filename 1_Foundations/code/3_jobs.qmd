@@ -1,0 +1,43 @@
+# Job opportunities
+
+## Basic terms
+
+- **Issue**: A topic or subject to investigate
+- **Question**: is designed to discover information
+- **Problem**: an obstacle or complication that needs to be worked out
+- **Business task**: The question or problem a data analyst answers for a business
+
+
+## Understanding data and fairness
+
+- **Fairness**: ensuring that your analysis doesn't create or reinforce bias
+
+Sometimes conclusions based on data can be true and unfair. What can you do then? 
+
+An ethical data analyst can look at the data gathered and conclude that the company culture is preventing some employees from succeeding, and the company needs to address those problems to boost performance.
+
+As a data analyst it's your responsibility to make sure your analysis is fair and factors in the complicated social context that could create bias in your conclusions.
+
+
+
+## Job descriptions
+
+- Business analyst — analyzes data to help businesses improve processes, products, or services
+- Data analytics consultant — analyzes the systems and models for using data
+- Data engineer — prepares and integrates data from different sources for analytical use
+- Data scientist — uses expert skills in technology and social science to find trends through data analysis
+- Data specialist — organizes or converts data for use in databases or software systems
+- Operations analyst — analyzes data to assess the performance of business operations and workflows
+
+<img width=400 src="../images/da_vs_ds.png">
+
+
+## Resources
+
+Rather than a reading, we invite you to watch [Anna Leach's TEDx talk](https://www.youtube.com/watch?v=t2oOFs4WgI0&feature=emb_title) on YouTube or on the [TED platform](https://www.ted.com/talks/anna_leach_building_authentic_relationships) to learn about another interesting journey as a data analyst.
+
+
+
+
+
+

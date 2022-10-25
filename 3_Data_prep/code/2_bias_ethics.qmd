@@ -1,0 +1,79 @@
+# Bias, credibility, privacy, ethics and access
+
+## Unbiased and objectice data
+
+- **Bias**: A preference in favor of or against a person, group of people, or thing
+- **Data bias**: A type of error that systematically skews results in a certain direction
+
+Types of data bias:
+
+- **Sampling bias**: When a sample is not representative of the population as a whole, avoid this by choosing a sample at random
+- **Observer bias**: Sometimes referred to as experimenter bias or research bias. It is the tendency for different people to observe things differently
+- **Interpretation bias**: The tendency to always interpret ambiguous situations in a positive, or negative way
+- **Confirmation bias**: The tendency to search for, or interpret information in a way that confirms preexisting beliefs
+
+
+## Identifying good data sources
+
+- **Reliable**: Data that is based on accurate, complete and unbiased information and that's been vetted and proven fit for use
+- **Original**: When dealing with data through a second or third party source, be sure to validate it with the original source
+- **Comprehensive**: The data contains all critical information needed 
+- **Current**: The usefulness of data decreases as time passes
+- **Cited**: Citing makes the information you're providing more credible: Who created the data set? Is it part of a credible organization? When was the data last refreshed?
+
+
+## Data ethics and privacy
+
+- **Ethics**: well-founded standards of right and wrong that prescribe what humans ought to do, usually in terms of rights, obligations, benefits to society, fairness or specific virtues
+- **Data ethics**: well- founded standards of right and wrong that dictate how data is collected, shared, and used
+
+### Aspects of data ethics:
+
+- **Ownership**: This answers the question who owns data? I.e. Individuals own the raw data they provide, and they have primary control over its usage, how it's processed and how it's shared.
+- **Transaction transparency**: All data processing activities and algorithms should be completely explainable and understood by the individual who provides their data. This is in response to concerns over data bias
+- **Consent**: An individual's right to know explicit details about how and why their data will be used before agreeing to provide it
+- **Currency**:  Individuals should be aware of financial transactions resulting from the use of their personal data and the scale of these transactions
+- **Privacy**: Preserving a data subject's information and activity any time a data transaction occurs, i.e.  information privacy or data protection. It also covers a person's legal right to their data:
+    - Protection from unauthorized access to our private data, 
+    - Freedom from inappropriate use of our data, 
+    - The right to inspect, update, or correct our data, 
+    - The ability to give consent to use our data, 
+    - The legal right to access our data
+- **Openness**: Free access, usage, and sharing of data 
+
+
+### Data anonymization
+
+**Data anonymization** is the process of protecting people's private or sensitive data by eliminating that kind of information. Typically, data anonymization involves blanking, hashing, or masking personal information, often by using fixed-length codes to represent data columns, or hiding data with altered values. 
+
+Healthcare and financial data are two of the most sensitive types of data. That’s why data in these two industries usually goes through de-identification, which is a process used to wipe data clean of all personally identifying information.
+
+
+
+## Open data
+
+- Open data must be available as a whole, preferably by downloading over the Internet in a convenient and modifiable form
+- Open data must be provided under terms that allow reuse and redistribution including the ability to use it with other datasets
+- Everyone must be able to use, reuse, and redistribute the data, i.e.  **universal participation ** should be possible
+- **Interoperability** is key to open data's success. Interoperability is the ability of data systems and services to openly connect and share data
+
+One of the biggest benefits of open data is that credible databases can be used more widely. Basically, this means that all of that good data can be leveraged, shared, and combined with other data. But it is important to think about the individuals being represented by the public, open data, too. 
+
+ **Personal identifiable information (PII) ** is data that is reasonably likely to identify a person and make information known about them. It is important to keep this data safe. PII can include a person’s address, credit card information, social security number, medical records, and more. 
+
+
+Resources:
+
+- [U.S. government data site](https://www.data.gov/): Data.gov is one of the most comprehensive data sources in the US. This resource gives users the data and tools that they need to do research, and even helps them develop web and mobile applications and design data visualizations. 
+- [U.S. Census Bureau](https://www.census.gov/data.html): This open data source offers demographic information from federal, state, and local governments, and commercial entities in the U.S. too. 
+- [Open Data Network](https://www.opendatanetwork.com/): This data source has a really powerful search engine and advanced filters. Here, you can find data on topics like finance, public safety, infrastructure, and housing and development.
+- [Google Cloud Public Datasets](https://cloud.google.com/public-datasets): There are a selection of public datasets available through the Google Cloud Public Dataset Program that you can find already loaded into BigQuery.  
+- [Dataset Search](https://datasetsearch.research.google.com/): The Dataset Search is a search engine designed specifically for data sets; you can use this to search for specific data sets. 
+
+
+
+
+
+
+
+
