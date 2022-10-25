@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Decision making - 3&nbsp; Working with spreadsheets</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/3_meeting_needs.html" rel="next">
+<link href="../code/1_introduction.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with spreadsheets</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Decision making</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Ask questions to make data driven decisions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Effective questions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_spreadsheets.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with spreadsheets</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_meeting_needs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Balance team and steakholder needs</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#spreadsheets-in-google-sheet" id="toc-spreadsheets-in-google-sheet" class="nav-link active" data-scroll-target="#spreadsheets-in-google-sheet"><span class="toc-section-number">3.1</span>  Spreadsheets in Google Sheet</a>
+  <ul class="collapse">
+  <li><a href="#resources-for-excel" id="toc-resources-for-excel" class="nav-link" data-scroll-target="#resources-for-excel"><span class="toc-section-number">3.1.1</span>  Resources for excel</a></li>
+  <li><a href="#resources-for-google-sheets" id="toc-resources-for-google-sheets" class="nav-link" data-scroll-target="#resources-for-google-sheets"><span class="toc-section-number">3.1.2</span>  Resources for Google sheets</a></li>
+  </ul></li>
+  <li><a href="#formulas" id="toc-formulas" class="nav-link" data-scroll-target="#formulas"><span class="toc-section-number">3.2</span>  Formulas</a>
+  <ul class="collapse">
+  <li><a href="#auto-filling" id="toc-auto-filling" class="nav-link" data-scroll-target="#auto-filling"><span class="toc-section-number">3.2.1</span>  Auto filling</a></li>
+  <li><a href="#absolute-referencing" id="toc-absolute-referencing" class="nav-link" data-scroll-target="#absolute-referencing"><span class="toc-section-number">3.2.2</span>  Absolute referencing</a></li>
+  </ul></li>
+  <li><a href="#errors-and-fixes" id="toc-errors-and-fixes" class="nav-link" data-scroll-target="#errors-and-fixes"><span class="toc-section-number">3.3</span>  Errors and fixes</a>
+  <ul class="collapse">
+  <li><a href="#pro-tip-spotting-errors-in-spreadsheets-with-conditional-formatting" id="toc-pro-tip-spotting-errors-in-spreadsheets-with-conditional-formatting" class="nav-link" data-scroll-target="#pro-tip-spotting-errors-in-spreadsheets-with-conditional-formatting"><span class="toc-section-number">3.3.1</span>  Pro tip: Spotting errors in spreadsheets with conditional formatting</a></li>
+  </ul></li>
+  <li><a href="#functions-101" id="toc-functions-101" class="nav-link" data-scroll-target="#functions-101"><span class="toc-section-number">3.4</span>  Functions 101</a>
+  <ul class="collapse">
+  <li><a href="#relative-absolute-and-mixed-references" id="toc-relative-absolute-and-mixed-references" class="nav-link" data-scroll-target="#relative-absolute-and-mixed-references"><span class="toc-section-number">3.4.1</span>  Relative, absolute, and mixed references</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="toc-section-number">3.4.2</span>  References</a></li>
+  </ul></li>
+  <li><a href="#structured-thinking" id="toc-structured-thinking" class="nav-link" data-scroll-target="#structured-thinking"><span class="toc-section-number">3.5</span>  Structured thinking</a></li>
+  <li><a href="#the-importance-of-context" id="toc-the-importance-of-context" class="nav-link" data-scroll-target="#the-importance-of-context"><span class="toc-section-number">3.6</span>  The importance of context</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Working with spreadsheets</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Let’s briefly go again through each phase of the data life cycle: plan, capture, manage, analyze, archive, and destroy.</p>
+<ul>
+<li><p><strong>Plan</strong> for the users who will work within a spreadsheet by developing organizational standards. This can mean formatting your cells, the headings you choose to highlight, the color scheme, and the way you order your data points. When you take the time to set these standards, you will improve communication, ensure consistency, and help people be more efficient with their time.</p></li>
+<li><p><strong>Capture</strong> data by the source by connecting spreadsheets to other data sources, such as an online survey application or a database. This data will automatically be updated in the spreadsheet. That way, the information is always as current and accurate as possible.</p></li>
+<li><p><strong>Manage</strong> different kinds of data with a spreadsheet. This can involve storing, organizing, filtering, and updating information. Spreadsheets also let you decide who can access the data, how the information is shared, and how to keep your data safe and secure.</p></li>
+<li><p><strong>Analyze</strong> data in a spreadsheet to help make better decisions. Some of the most common spreadsheet analysis tools include formulas to aggregate data or create reports, and pivot tables for clear, easy-to-understand visuals.</p></li>
+<li><p><strong>Archive</strong> any spreadsheet that you don’t use often, but might need to reference later with built-in tools. This is especially useful if you want to store historical data before it gets updated.</p></li>
+<li><p><strong>Destroy</strong> your spreadsheet when you are certain that you will never need it again, if you have better backup copies, or for legal or security reasons. Keep in mind, lots of businesses are required to follow certain rules or have measures in place to make sure data is destroyed properly.</p></li>
+</ul>
+<p>Spreadsheet shortcuts can help you become more efficient with spreadsheets. If you’d like to learn more, you can explore the collection of <a href="https://support.google.com/docs/answer/181110">Google Sheets shortcuts</a>, or visit the <a href="https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f">Microsoft Excel shortcuts</a> page if you are using Excel.</p>
+<section id="spreadsheets-in-google-sheet" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="spreadsheets-in-google-sheet"><span class="header-section-number">3.1</span> Spreadsheets in Google Sheet</h2>
+<p>The link to the finished spreadsheet is <a href="https://docs.google.com/spreadsheets/d/1_wFdBiH4ctoA0bVyyReJ9hBu1Hmj6Jh0Jpo0z-R18Qc/edit?resourcekey=0-4MdCgWBSKFZqE7rnk8A-qw#gid=932264330">here</a></p>
+<ul>
+<li>The column headers. The first row of the spreadsheet is for data <strong>attributes</strong>, which is another name for column headers. An attribute is a characteristic or quality of data used to label a column in a table. It’s basically labeling the type of data in each column.</li>
+</ul>
+<section id="resources-for-excel" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="resources-for-excel"><span class="header-section-number">3.1.1</span> Resources for excel</h3>
+<ul>
+<li><p><a href="https://support.microsoft.com/en-us/office/office-quick-starts-25f909da-3e76-443d-94f4-6cdf7dedc51e#ID0EAADAAA=At_work_or_school">Office Quick Starts</a>: Scroll down to the Downloadable guides section to d​ownload the Excel Quick Start Guide: This PDF guide begins with a labeled map of Excel that can guide you through the basic tasks you can accomplish in Excel.</p></li>
+<li><p><a href="https://support.microsoft.com/en-us/office/excel-for-windows-training-9bc05390-e94c-46af-a5b3-d7c22f6990bb?wt.mc_id=otc_home">Excel video training</a>: This is a collection of step-by-step videos to use all sorts of Excel features, including adding and working within rows, columns, and cells; formatting; using formulas and functions; and adding charts and pivot tables.</p></li>
+<li><p><a href="https://support.microsoft.com/en-us/office/sort-data-in-a-range-or-table-62d0b95d-2a90-4610-a6ae-2e545c4a4654">Sort data in a range or table</a>: This page guides you through all of the steps you will need to sort data by number, text, and color. You’ll also have the option to sort by custom list so that you can customize exactly what you want to sort.</p></li>
+<li><p><a href="https://support.microsoft.com/en-us/office/filter-data-in-a-range-or-table-01832226-31b5-4568-8806-38c37dcc180e">Filter data in a range or table</a>: This article has step-by-step instructions on how to filter an Excel spreadsheet to show only the data you want to see. You can also use built-in comparison operators, such as “greater than” and “top 10” to reveal only the most relevant data.</p></li>
+<li><p><a href="https://support.microsoft.com/en-us/office/quick-start-format-a-worksheet-d70f75a2-23e6-4c92-83d6-2f219e4ad42e">Format a worksheet</a>: The guide will help you select and format your Excel spreadsheet, then change the borders, shading, colors, and text. This can help improve your spreadsheet’s readability.</p></li>
+<li><p>Pro tip: If you’re searching for information about using customizable options, check out <a href="https://support.microsoft.com/en-us/office/guidelines-for-organizing-and-formatting-data-on-a-worksheet-90895cad-6c85-4e02-90d3-8798660166e3">Microsoft’s Guidelines for organizing and formatting data</a> on a worksheet. This article provides clear methods for creating easy-to-read spreadsheets.</p></li>
+</ul>
+</section>
+<section id="resources-for-google-sheets" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="resources-for-google-sheets"><span class="header-section-number">3.1.2</span> Resources for Google sheets</h3>
+<ul>
+<li><p><a href="https://support.google.com/a/users/answer/9300022">Google Sheets cheat sheet</a>: The cheat sheet puts all the basics of Sheets on a single page for easy reference. Here, you can learn about customizing your spreadsheet and the data inside; working with rows, columns, and cells; sharing your spreadsheet with others; creating different versions and copies of a spreadsheet; and more.</p></li>
+<li><p><a href="https://support.google.com/a/users/answer/9300311?hl=en&amp;ref_topic=9296423">Get started with Sheets</a>: Create and import files: This guide is a step-by-step guide for working with Sheets. You start by learning how to open a spreadsheet, then move on to adding data.</p></li>
+<li><p><a href="https://support.google.com/docs/answer/3540681?co=GENIE.Platform%3DDesktop&amp;hl=en">Sort and filter your data</a>: This resource can help you organize data in Sheets. Use this guide to sort part or all of a spreadsheet. You can sort by text, number, and color. Then, learn how to create filters to show only certain data while hiding the rest. Finally, the article includes information on creating, saving, and removing a filter view.</p></li>
+<li><p><a href="https://support.google.com/docs/answer/46973?co=GENIE.Platform%3DDesktop&amp;hl=en&amp;oco=0">Edit and format a spreadsheet</a>: This will help you make easy-to-read spreadsheets. You will learn how to assign a color, customize borders around cells, and change the appearance of text. If you’d like to give your spreadsheet a theme, you can scroll to the bottom of the page and find how to apply it to parts of your spreadsheet.</p></li>
+<li><p>Tip: Microsoft Excel and Google Sheets are very similar in terms of calculations, formulas, functions, and many other features. But there are some differences, which can make it tricky to switch from one to the other. If you are moving between Excel and Google Sheets, find a quick list of the differences between the two kinds of spreadsheet applications in Overview: <a href="https://support.google.com/a/users/answer/9331278?hl=en">Differences between Sheets and Excel</a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="formulas" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="formulas"><span class="header-section-number">3.2</span> Formulas</h2>
+<p>A <strong>formula</strong> is a set of instructions that perform a specific calculation.</p>
+<p>Formulas are built on <strong>operators</strong> which are symbols that name the type of operation or calculation to be performed. For example, a plus sign is a common operator.</p>
+<p>If you already have data in your spreadsheet, you can use cell references in your formulas instead. A <strong>cell reference</strong> is a single cell or range of cells in a worksheet that can be used in a formula. Cell references contain the letter of the column and the number of the row where the data is.</p>
+<p>A <strong>range of cells</strong> is a collection of two or more cells. A range can include cells from the same row or column, or from different columns and rows collected together.</p>
+<section id="auto-filling" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="auto-filling"><span class="header-section-number">3.2.1</span> Auto filling</h3>
+<p>The lower-right corner of each cell has a fill handle. It is a small green square in Microsoft Excel and a small blue square in Google Sheets.</p>
+<p>Click the fill handle for a cell and drag it down a column to auto-fill other cells in the column with the same value or formula in that cell.</p>
+<p>Click the fill handle for a cell and drag it across a row to auto-fill other cells in the row with the same value or formula in that cell.</p>
+<p>If you want to create a numbered sequence in a column or row, do the following: 1) Fill in the first two numbers of the sequence in two adjacent cells, 2) Select to highlight the cells, and 3) Drag the fill handle to the last cell to complete the sequence of numbers. For example, to insert 1 through 100 in each row of column A, enter 1 in cell A1 and 2 in cell A2. Then, select to highlight both cells, click the fill handle in cell A2, and drag it down to cell A100. This auto-fills the numbers sequentially so you don’t have to type them in each cell.</p>
+</section>
+<section id="absolute-referencing" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="absolute-referencing"><span class="header-section-number">3.2.2</span> Absolute referencing</h3>
+<p>Absolute referencing is marked by a dollar sign (<span class="math inline">\(). For example, =\)</span>A$10 has absolute referencing for both the column and the row value</p>
+<p>Relative references (which is what you normally do e.g.&nbsp;“=A10”) will change anytime the formula is copied and pasted. They are in relation to where the referenced cell is located. For example if you copied “=A10” to the cell to the right it would become “=B10”. With absolute referencing “=$A<span class="math inline">\(10” copied to the cell to the right would remain “=\)</span>A$10”. But if you copied $A10 to the cell below, it would change to $A11 because the row value isn’t an absolute reference.</p>
+<p>Absolute references will not change when you copy and paste the formula in a different cell. The cell being referenced is always the same.</p>
+<p><strong>To easily switch between absolute and relative referencing in the formula bar, highlight the reference you want to change and press the F4</strong> key; for example, if you want to change the absolute reference, $A$10, in your formula to a relative reference, A10, highlight $A$10 in the formula bar and then press the F4 key to make the change.</p>
+</section>
+</section>
+<section id="errors-and-fixes" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="errors-and-fixes"><span class="header-section-number">3.3</span> Errors and fixes</h2>
+<ul>
+<li>One error you may encounter is the <strong>DIV error</strong>. The DIV error happens when a formula is trying to divide a value in a cell by zero or by an empty cell. To avoid this problem, we can have this spreadsheet automatically enter not applicable whenever a cell in column A contains a zero that would cause the error. To do this, we’ll use the <strong>IFERROR</strong> function. If it encounters a DIV error caused by a cell that contains the zero, the phrase “Not applicable” will be inserted.</li>
+<li>In Google Sheets, <strong>ERROR</strong> tells us the formula can’t be interpreted as it is input. This is also known as a parsing error.</li>
+<li>Another type of error is <strong>N/A</strong>. The N/A error tells you that the data in your formula can’t be found by the spreadsheet. Generally, this means the data doesn’t exist. This can happen if we use the VLOOKUP functions but there is a slight difference in how things are typed, i.e.&nbsp;almond vs almonds</li>
+<li>Speaking of typos, sometimes a typo can cause a <strong>NAME error</strong>. A NAME error can happen when a formula’s name isn’t recognized or understood.</li>
+<li>Sometimes an error is caused by inconsistent or wrong data. For instance, the <strong>NUM error</strong> tells us that a formula’s calculation can’t be performed as specified by the data. The data doesn’t make sense for that calculation.</li>
+<li>The <strong>VALUE error</strong> can indicate a problem with a formula or referenced cells.</li>
+<li>The REF error often comes up when cells being referenced in a formula have been deleted, thus making the formula unable to perform the calculation</li>
+</ul>
+<p>As a follow-up to what you learned in the previous video, here are a few best practices and helpful tips. These strategies will help you avoid spreadsheet errors to begin with, making your life in analytics a whole lot less stressful:</p>
+<ol type="1">
+<li>Filter data to make your spreadsheet less complex and busy.</li>
+<li>Use and freeze headers so you know what is in each column, even when scrolling.</li>
+<li>When multiplying numbers, use an asterisk (*) not an X.</li>
+<li>Start every formula and function with an equal sign (=).</li>
+<li>Whenever you use an open parenthesis, make sure there is a closed parenthesis on the other end to match.</li>
+<li>Change the font to something easy to read.</li>
+<li>Set the border colors to white so that you are working in a blank sheet.</li>
+<li>Create a tab with just the raw data, and a separate tab with just the data you need.</li>
+</ol>
+<section id="pro-tip-spotting-errors-in-spreadsheets-with-conditional-formatting" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="pro-tip-spotting-errors-in-spreadsheets-with-conditional-formatting"><span class="header-section-number">3.3.1</span> Pro tip: Spotting errors in spreadsheets with conditional formatting</h3>
+<p>Conditional formatting can be used to highlight cells a different color based on their contents. This feature can be extremely helpful when you want to locate all errors in a large spreadsheet. For example, using conditional formatting, you can highlight in yellow all cells that contain an error, and then work to fix them.</p>
+<section id="in-excel" class="level4" data-number="3.3.1.1">
+<h4 data-number="3.3.1.1" class="anchored" data-anchor-id="in-excel"><span class="header-section-number">3.3.1.1</span> In excel</h4>
+<ul>
+<li>Click the gray triangle above row number 1 and to the left of Column A to select all cells in the spreadsheet.</li>
+<li>From the main menu, click Home, and then click Conditional Formatting to select Highlight Cell Rules &gt; More Rules.</li>
+<li>For Select a Rule Type, choose Use a formula to determine which cells to format.</li>
+<li>For Format values where this formula is true, enter =ISERROR(A1).</li>
+<li>Click the Format button, select the Fill tab, select yellow (or any other color), and then click OK.</li>
+<li>Click OK to close the format rule window.</li>
+</ul>
+</section>
+<section id="in-google-sheets" class="level4" data-number="3.3.1.2">
+<h4 data-number="3.3.1.2" class="anchored" data-anchor-id="in-google-sheets"><span class="header-section-number">3.3.1.2</span> In Google Sheets</h4>
+<ul>
+<li>Click the empty rectangle above row number 1 and to the left of Column A to select all cells in the spreadsheet. In the Step-by-step in spreadsheets video, this was called the Select All button.</li>
+<li>From the main menu, click Format and select Conditional Formatting to open the Conditional format rules pane on the right.</li>
+<li>While in the Single Color tab, under Format rules, use the drop-down to select Custom formula is, enter =ISERROR(A1), select yellow (or any other color) for the formatting style, and then click Done.</li>
+</ul>
+</section>
+</section>
+</section>
+<section id="functions-101" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="functions-101"><span class="header-section-number">3.4</span> Functions 101</h2>
+<p>A <strong>function</strong> is a preset command that automatically performs a specific process or task using the data</p>
+<p><strong>COUNTIF</strong> is an example of a function that returns a value based on a condition that the data range is evaluated for. The function counts the number of cells that meet the criteria. For example, in an expense spreadsheet, use COUNTIF to count the number of cells that contain a reimbursement for “airfare.”</p>
+<p>The <strong>TEXT</strong> function converts a number into text according to a specified format. In this case, you want to list the months of the year.</p>
+<section id="relative-absolute-and-mixed-references" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="relative-absolute-and-mixed-references"><span class="header-section-number">3.4.1</span> Relative, absolute, and mixed references</h3>
+<p><strong>Relative references</strong> (cells referenced without a dollar sign, like A2) will change when you copy and paste the function into a different cell. With relative references, the location of the cell that contains the function determines the cells used by the function.</p>
+<p><strong>Absolute references</strong> (cells fully referenced with a dollar sign, like <code>$A$2</code>) will not change when you copy and paste the function into a different cell. With absolute references, the cells referenced always remain the same.</p>
+<p>** Mixed references** (cells partially referenced with a dollar sign, like <code>$A2</code> or <code>A$2</code>) will change when you copy and paste the function into a different cell. With mixed references, the location of the cell that contains the function determines the cells used by the function, but only the row or column is relative (not both).</p>
+<p>In spreadsheets, you can press the <strong>F4</strong> key to toggle between relative, absolute, and mixed references in a function. Click the cell containing the function, highlight the referenced cells in the formula bar, and then press F4 to toggle between and select relative, absolute, or mixed referencing.</p>
+</section>
+<section id="references" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="references"><span class="header-section-number">3.4.2</span> References</h3>
+<p>Use these links to discover the most popular shortcuts, for <a href="https://support.google.com/chromebook/answer/183101?hl=en">Chromebook</a>, <a href="https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec">PC</a>, and <a href="https://support.apple.com/en-us/HT201236">Mac.</a></p>
+</section>
+</section>
+<section id="structured-thinking" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="structured-thinking"><span class="header-section-number">3.5</span> Structured thinking</h2>
+<ul>
+<li><p>The <strong>problem domain</strong>: the specific area of analysis that encompasses every activity affecting or affected by the problem</p></li>
+<li><p><strong>Contest</strong>: The condition in which something exists or happens</p></li>
+<li><p><strong>Structured thinking</strong> is the process of recognizing the current problem or situation, organizing available information, revealing gaps and opportunities, and identifying the options</p></li>
+<li><p>A <strong>scope of work</strong> or SOW is an agreed- upon outline of the work you’re going to perform on a project, it sets the expectations and boundaries of a project. try not to confuse statement of work with scope of work, which are both abbreviated as SOW. Although they both are used to define deliverables and a timeline, they aren’t the same and shouldn’t be used interchangeably. A <strong>statement of work</strong> is a document that clearly identifies the products and services a vendor or contractor will provide to an organization. It includes objectives, guidelines, deliverables, schedule, and costs. A scope of work may be included in a statement of work to help define project outcomes.</p></li>
+<li><p>Examples of <a href="https://www.coursera.org/articles/data-analytics-projects-for-beginners">analytics projects for beginners</a></p></li>
+</ul>
+<p>An example for a SOW:</p>
+<ul>
+<li><p>Deliverable: What work is being done, and what things are being created as a result of this project? When the project is complete, what are you expected to deliver to the stakeholders? Be specific here. Will you collect data for this project? How much, or for how long?</p></li>
+<li><p>Timeline: The timeline is a way of mapping expectations for how long each step of the process should take. The timeline should be specific enough to help all involved decide if a project is on schedule. When will the deliverables be completed? How long do you expect the project will take to complete? If all goes as planned, how long do you expect each component of the project will take? When can we expect to reach each milestone?</p></li>
+<li><p>Milestones, i.e.&nbsp;significant tasks you will confirm along your timeline to help everyone know the project is on track. This is closely related to your timeline. What are the major milestones for progress in your project? How do you know when a given part of the project is considered complete?</p></li>
+<li><p>Reports: Good SOWs also set boundaries for how and when you’ll give status updates to stakeholders. How will you communicate progress with stakeholders and sponsors, and how often? Will progress be reported weekly? Monthly? When milestones are completed? What information will status reports contain?</p></li>
+</ul>
+<p>SOWs should also contain information specific to what is and isn’t considered part of the project. The scope of your project is everything that you are expected to complete or accomplish, defined to a level of detail that doesn’t leave any ambiguity or confusion about whether a given task or item is part of the project or not.</p>
+</section>
+<section id="the-importance-of-context" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="the-importance-of-context"><span class="header-section-number">3.6</span> The importance of context</h2>
+<p>A data analyst considers who, what, when, where, why, and how in order to put data into context.</p>
+<p>Context is the condition in which something exists or happens. Context is important in data analytics because it helps you sift through huge amounts of disorganized data and turn it into something meaningful. The fact is, data has little value if it is not paired with context.</p>
+<p>Context can turn raw data into meaningful information. It is very important for data analysts to contextualize their data. This means giving the data perspective by defining it. To do this, you need to identify:</p>
+<ul>
+<li>Who: The person or organization that created, collected, and/or funded the data collection</li>
+<li>What: The things in the world that data could have an impact on</li>
+<li>Where: The origin of the data</li>
+<li>When: The time when the data was created or collected</li>
+<li>Why: The motivation behind the creation or collection</li>
+<li>How: The method used to create or collect it</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/1_introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Effective questions</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/3_meeting_needs.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Balance team and steakholder needs</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

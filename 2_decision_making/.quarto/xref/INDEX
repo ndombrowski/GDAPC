@@ -1,0 +1,14 @@
+{
+  "index.qmd": {
+    "index.html": "9e67171d"
+  },
+  "code/1_introduction.qmd": {
+    "1_introduction.html": "2c009b76"
+  },
+  "code/2_spreadsheets.qmd": {
+    "2_spreadsheets.html": "8ca40406"
+  },
+  "code/3_meeting_needs.qmd": {
+    "3_meeting_needs.html": "a1699572"
+  }
+}

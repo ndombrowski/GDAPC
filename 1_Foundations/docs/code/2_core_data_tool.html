@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Introduction to data science - 3&nbsp; Core data tools</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/3_jobs.html" rel="next">
+<link href="../code/1_introduction.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core data tools</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../" class="sidebar-logo-link">
+      <img src="../images/tree_of_life.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Introduction to data science</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to data analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data, data everywhere</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_core_data_tool.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core data tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_jobs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Job opportunities</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#columns-and-rows-and-cells-oh-my" id="toc-columns-and-rows-and-cells-oh-my" class="nav-link active" data-scroll-target="#columns-and-rows-and-cells-oh-my"><span class="toc-section-number">3.1</span>  Columns and rows and cells, oh my!</a>
+  <ul class="collapse">
+  <li><a href="#useful-links" id="toc-useful-links" class="nav-link" data-scroll-target="#useful-links"><span class="toc-section-number">3.1.1</span>  Useful links</a></li>
+  </ul></li>
+  <li><a href="#sql-in-action" id="toc-sql-in-action" class="nav-link" data-scroll-target="#sql-in-action"><span class="toc-section-number">3.2</span>  SQL in action</a>
+  <ul class="collapse">
+  <li><a href="#writing-queries" id="toc-writing-queries" class="nav-link" data-scroll-target="#writing-queries"><span class="toc-section-number">3.2.1</span>  Writing queries</a></li>
+  <li><a href="#the-where-clause" id="toc-the-where-clause" class="nav-link" data-scroll-target="#the-where-clause"><span class="toc-section-number">3.2.2</span>  The where clause</a></li>
+  <li><a href="#adding-comments" id="toc-adding-comments" class="nav-link" data-scroll-target="#adding-comments"><span class="toc-section-number">3.2.3</span>  Adding comments</a></li>
+  <li><a href="#aliases" id="toc-aliases" class="nav-link" data-scroll-target="#aliases"><span class="toc-section-number">3.2.4</span>  Aliases</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="toc-section-number">3.2.5</span>  Resources</a></li>
+  </ul></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization"><span class="toc-section-number">3.3</span>  Visualization</a>
+  <ul class="collapse">
+  <li><a href="#resources-tableau" id="toc-resources-tableau" class="nav-link" data-scroll-target="#resources-tableau"><span class="toc-section-number">3.3.1</span>  Resources: Tableau</a></li>
+  <li><a href="#resourcesr" id="toc-resourcesr" class="nav-link" data-scroll-target="#resourcesr"><span class="toc-section-number">3.3.2</span>  Resources:R</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Core data tools</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="columns-and-rows-and-cells-oh-my" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="columns-and-rows-and-cells-oh-my"><span class="header-section-number">3.1</span> Columns and rows and cells, oh my!</h2>
+<p>Main features of a spreadsheet:</p>
+<ul>
+<li><strong>Row</strong>: organized horizontally and ordered by number. A row is also called an <strong>observation</strong>. An observation includes all of the attributes for something contained in a row of a data table.</li>
+<li><strong>Column</strong>: organized vertically and by letter</li>
+<li><strong>Cell</strong>: Each cell is meant for one data point, it is named by combining the column letter and the row number where the cell is located</li>
+<li>Labeling data is important for organization. Adding labels to the top of the columns will make it easier to reference and find data later on when you’re doing analysis. These column names are also called <strong>attributes</strong>, i.e.&nbsp;a characteristic or quality of the data used to label a column in a table</li>
+</ul>
+<p>Organizing data:</p>
+<p>See <code>data/playground.xlsx</code> for an example.</p>
+<ol type="1">
+<li>Select all data, so its organized together</li>
+<li>Go to Data menu –&gt; Sort range</li>
+<li>Choose whether or not we have a header</li>
+<li>Select Siblings and decide how you want to sort</li>
+</ol>
+<p>A <strong>formula</strong> is a set of instructions that performs a specific action using the data in a spreadsheet.</p>
+<ol type="1">
+<li>Click into C5 (the cell empty cell in the siblings column)</li>
+<li>type an ‘=’ sign. All formulas begin with this symbol</li>
+<li>Type in what cells we want to analyse <code>C2+C3+C4</code> to calculate the total number of siblings</li>
+</ol>
+<p>Displaying a chart:</p>
+<ol type="1">
+<li>Select the all data</li>
+<li>Select Insert –&gt; Chart –&gt; Bar (the bar can be rotated with change chart type in the chart design tab)</li>
+<li>Try to update a value and see what happens with the chart</li>
+<li>To change the title of your chart, double click on the chart. You should find that a “Chart Editor” menu displays on the side of your screen. Click on “Chart &amp; axis titles”, and then enter the name of your chart in the “Title Text” box. If you’re using Microsoft Excel, you can double click on the title in the chart to edit directly.</li>
+</ol>
+<section id="useful-links" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="useful-links"><span class="header-section-number">3.1.1</span> Useful links</h3>
+<ul>
+<li><a href="https://support.google.com/a/users/answer/9282959?visit_id=637361702049227170-1815413770&amp;rd=1">Google Sheets Training an Help</a></li>
+<li><a href="https://support.google.com/a/users/answer/9300022">Google Sheets Cheat Sheet</a></li>
+<li><a href="https://support.microsoft.com/en-us/office/excel-video-training-9bc05390-e94c-46af-a5b3-d7c22f6990bb">Microsoft Excel Training</a></li>
+</ul>
+</section>
+</section>
+<section id="sql-in-action" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sql-in-action"><span class="header-section-number">3.2</span> SQL in action</h2>
+<p>SQL can do lots of the same things with data that spreadsheets can do. You can use it to store, organize and analyze your data, among other things. But like any good sequel, it’s on a larger scale, bigger, more action-packed.</p>
+<p><strong>Query</strong>: A request for data or information from a database.</p>
+<section id="writing-queries" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="writing-queries"><span class="header-section-number">3.2.1</span> Writing queries</h3>
+<p>The structure for a basic query looks like this</p>
+<p><img width="400" src="../images/sql1.png"></p>
+<p>You can write your SQL queries in all lowercase and don’t have to worry about extra spaces between words. However, using <strong>capitalization</strong> and indentation can help you read the information more easily. Keep your queries neat, and they will be easier to review or troubleshoot if you need to check them later on.</p>
+<p><img width="400" src="../images/sql2.png"></p>
+<p>Notice that the SQL statement shown above has a <strong>semicolon</strong> at the end. The semicolon is a statement terminator and is part of the American National Standards Institute (ANSI) SQL-92 standard, which is a recommended common syntax for adoption by all SQL databases. However, not all SQL databases have adopted or enforce the semicolon, so it’s possible you may come across some SQL statements that aren’t terminated with a semicolon. If a statement works without a semicolon, it’s fine.</p>
+</section>
+<section id="the-where-clause" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="the-where-clause"><span class="header-section-number">3.2.2</span> The where clause</h3>
+<p>However, if you are looking for all customers with a last name that begins with the letters “Ch,” the WHERE clause would be:</p>
+<pre><code>WHERE field1 LIKE 'Ch%'</code></pre>
+<p>You can conclude that the LIKE clause is very powerful because it allows you to tell the database to look for a certain pattern! The percent sign (%) is used as a <strong>wildcard</strong> to match one or more characters. In the example above, both Chavez and Chen would be returned. Note that in some databases an asterisk (*) is used as the wildcard instead of a percent sign (%).</p>
+</section>
+<section id="adding-comments" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="adding-comments"><span class="header-section-number">3.2.3</span> Adding comments</h3>
+<p>Some tables aren’t designed with descriptive enough naming conventions. In the example, field1 was the column for a customer’s last name, but you wouldn’t know it by the name. A better name would have been something such as last_name. In these cases, you can place comments alongside your SQL to help you remember what the name represents. <strong>Comments</strong> are text placed between certain characters, /* and */, or after two dashes (–) as shown below.</p>
+<p><img width="400" src="../images/sql3.png"></p>
+<p>Two dashes (–) are generally supported. So it is best to use – and be consistent with it. You can use # in place of – in the above query, but # is not recognized in all SQL versions; for example, MySQL doesn’t recognize #. You can also place comments between /* and */ if the database you are using supports it.</p>
+</section>
+<section id="aliases" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="aliases"><span class="header-section-number">3.2.4</span> Aliases</h3>
+<p>You can also make it easier on yourself by assigning a new name or alias to the column or table names to make them easier to work with (and avoid the need for comments). This is done with a SQL AS clause. In the example below, the alias last_name has been assigned to field1 and the alias customers assigned to table. These aliases are good for the duration of the query only. An alias doesn’t change the actual name of a column or table in the database.</p>
+<p><img width="400" src="../images/sql4.png"></p>
+</section>
+<section id="resources" class="level3" data-number="3.2.5">
+<h3 data-number="3.2.5" class="anchored" data-anchor-id="resources"><span class="header-section-number">3.2.5</span> Resources</h3>
+<p><a href="https://www.w3schools.com/sql/default.asp">W3Schools SQL Tutorial</a>: If you would like to explore a detailed tutorial of SQL, this is the perfect place to start. This tutorial includes interactive examples you can edit, test, and recreate. Use it as a reference or complete the whole tutorial to practice using SQL. Click the green Start learning SQL now button or the Next button to begin the tutorial.</p>
+<p><a href="https://towardsdatascience.com/sql-cheat-sheet-776f8e3189fa">SQL Cheat Sheet</a>: For more advanced learners, go through this article for standard SQL syntax used in PostgreSQL. By the time you are finished, you will know a lot more about SQL and will be prepared to use it for business analysis and other tasks.</p>
+</section>
+</section>
+<section id="visualization" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="visualization"><span class="header-section-number">3.3</span> Visualization</h2>
+<p>Steps to plan a data visualization:</p>
+<ol type="1">
+<li>Explore the data for patterns</li>
+<li>Plan your visuals</li>
+<li>Create visuals: Line charts track sales over time, Maps connect sales to locations, Piecharts show customer segments, bar charts can compare total visitors to visitors that make a purchase</li>
+</ol>
+<section id="resources-tableau" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="resources-tableau"><span class="header-section-number">3.3.1</span> Resources: Tableau</h3>
+<p>If you want to explore Tablue, lool <a href="https://public.tableau.com/app/resources/learn">here</a> Tableau Public is free, easy to use, and full of helpful information. Fir some inspirations, go <a href="https://public.tableau.com/app/discover/viz-of-the-day">here</a></p>
+</section>
+<section id="resourcesr" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="resourcesr"><span class="header-section-number">3.3.2</span> Resources:R</h3>
+<p>You could easily spend days exploring all the resources provided at RStudio.com, but the <a href="https://rstudio.com/resources/cheatsheets/">RStudio Cheatsheets</a> and the <a href="https://rstudio.cloud/learn/primers/3">RStudio Visualize Data Primer</a> are great places to start.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/1_introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data, data everywhere</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/3_jobs.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Job opportunities</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
