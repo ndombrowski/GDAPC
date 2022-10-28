@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nina Dombrowski">
 
-<title>GDA: Preparing data</title>
+<title>GDA: Processing data data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./code/1_data_types_and_structures.html" rel="next">
+<link href="./code/1_data_integrity.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">GDA: Preparing data</h1>
+      <h1 class="quarto-secondary-nav-title">GDA: Processing data data</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">GDA: Preparing data</a> 
+      <a href="./">GDA: Processing data data</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -95,27 +95,22 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prepare data for exploration</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prepare data for processing</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./code/1_data_types_and_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data types and structures</span></a>
+  <a href="./code/1_data_integrity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./code/2_bias_ethics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bias, credibility, privacy, ethics and access</span></a>
+  <a href="./code/2_data_cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data cleaning</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./code/3_working_with_databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with databases</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./code/4_data_orga_and_online_presence.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Organizing data and managing your online presence</span></a>
+  <a href="./code/3_sql_and_data_cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></a>
   </div>
 </li>
     </ul>
@@ -127,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#prepare-data-for-exploration" id="toc-prepare-data-for-exploration" class="nav-link active" data-scroll-target="#prepare-data-for-exploration"><span class="toc-section-number">1</span>  Prepare data for exploration</a></li>
+  <li><a href="#prepare-data-for-processing" id="toc-prepare-data-for-processing" class="nav-link active" data-scroll-target="#prepare-data-for-processing"><span class="toc-section-number">1</span>  Prepare data for processing</a></li>
   </ul>
 </nav>
     </div>
@@ -136,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">GDA: Preparing data</h1>
+<h1 class="title d-none d-lg-block">GDA: Processing data data</h1>
 </div>
 
 
@@ -156,18 +151,18 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="prepare-data-for-exploration" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Prepare data for exploration</h1>
-<p>As you continue to build on your understanding of the topics from the first two courses, you’ll also be introduced to new topics that will help you gain practical data analytics skills. You’ll learn how to use tools like spreadsheets and SQL to extract and make use of the right data for your objectives and how to organize and protect your data. Current Google data analysts will continue to instruct and provide you with hands-on ways to accomplish common data analyst tasks with the best tools and resources.</p>
-<p><strong>Course objectives</strong></p>
+<section id="prepare-data-for-processing" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Prepare data for processing</h1>
+<p>You’ll learn how to check and clean your data using spreadsheets and SQL as well as how to verify and report your data cleaning results. Current Google data analysts will continue to instruct and provide you with hands-on ways to accomplish common data analyst tasks with the best tools and resources.</p>
+<p>Learners who complete this certificate program will be equipped to apply for introductory-level jobs as data analysts. No previous experience is necessary.</p>
+<p>By the end of this course, you will be able to do the following:</p>
 <ul>
-<li>Find out how analysts decide which data to collect for analysis.</li>
-<li>Learn about structured and unstructured data, data types, and data formats.</li>
-<li>Discover how to identify different types of bias in data to help ensure data credibility.</li>
-<li>Explore how analysts use spreadsheets and SQL with databases and data sets.</li>
-<li>Examine open data and the relationship between and importance of data ethics and data privacy.</li>
-<li>Gain an understanding of how to access databases and extract, filter, and sort the data they contain.</li>
-<li>Learn the best practices for organizing data and keeping it secure.</li>
+<li>Learn how to check for data integrity.</li>
+<li>Discover data cleaning techniques using spreadsheets.</li>
+<li>Develop basic SQL queries for use on databases.</li>
+<li>Apply basic SQL functions for cleaning and transforming data.</li>
+<li>Gain an understanding of how to verify the results of cleaning data.</li>
+<li>Explore the elements and importance of data cleaning reports.</li>
 </ul>
 
 
@@ -276,8 +271,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./code/1_data_types_and_structures.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data types and structures</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./code/1_data_integrity.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

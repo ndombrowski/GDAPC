@@ -4,5 +4,14 @@
   },
   "code/1_data_types_and_structures.qmd": {
     "1_data_types_and_structures.html": "77dd6941"
+  },
+  "code/2_bias_ethics.qmd": {
+    "2_bias_ethics.html": "a93e3025"
+  },
+  "code/3_working_with_databases.qmd": {
+    "3_working_with_databases.html": "5523a654"
+  },
+  "code/4_data_orga_and_online_presence.qmd": {
+    "4_data_orga_and_online_presence.html": "a3011f09"
   }
 }

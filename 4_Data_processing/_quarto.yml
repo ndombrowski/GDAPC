@@ -4,14 +4,13 @@ project:
   output-dir: docs
 
 book:
-  title: "GDA: Preparing data"
+  title: "GDA: Processing data data"
   author: "Nina Dombrowski"
   chapters:
     - index.qmd
-    - code/1_data_types_and_structures.qmd
-    - code/2_bias_ethics.qmd
-    - code/3_working_with_databases.qmd
-    - code/4_data_orga_and_online_presence.qmd
+    - code/1_data_integrity.qmd
+    - code/2_data_cleaning.qmd
+    - code/3_sql_and_data_cleaning.qmd
 
 format:
   html:

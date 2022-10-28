@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Preparing data - 4&nbsp; Working with databases</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/4_data_orga_and_online_presence.html" rel="next">
+<link href="../code/2_bias_ethics.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with databases</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Preparing data</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prepare data for exploration</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_data_types_and_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data types and structures</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_bias_ethics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bias, credibility, privacy, ethics and access</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_working_with_databases.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with databases</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_data_orga_and_online_presence.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Organizing data and managing your online presence</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#database-features" id="toc-database-features" class="nav-link active" data-scroll-target="#database-features"><span class="toc-section-number">4.1</span>  Database features</a></li>
+  <li><a href="#managing-data-with-metadata" id="toc-managing-data-with-metadata" class="nav-link" data-scroll-target="#managing-data-with-metadata"><span class="toc-section-number">4.2</span>  Managing data with metadata</a></li>
+  <li><a href="#accessing-data-sources" id="toc-accessing-data-sources" class="nav-link" data-scroll-target="#accessing-data-sources"><span class="toc-section-number">4.3</span>  Accessing data sources</a>
+  <ul class="collapse">
+  <li><a href="#data-import" id="toc-data-import" class="nav-link" data-scroll-target="#data-import"><span class="toc-section-number">4.3.1</span>  Data import</a></li>
+  <li><a href="#import-html-tables-from-the-web" id="toc-import-html-tables-from-the-web" class="nav-link" data-scroll-target="#import-html-tables-from-the-web"><span class="toc-section-number">4.3.2</span>  Import HTML tables from the web</a></li>
+  </ul></li>
+  <li><a href="#sorting-and-filtering" id="toc-sorting-and-filtering" class="nav-link" data-scroll-target="#sorting-and-filtering"><span class="toc-section-number">4.4</span>  Sorting and filtering</a></li>
+  <li><a href="#working-with-sql" id="toc-working-with-sql" class="nav-link" data-scroll-target="#working-with-sql"><span class="toc-section-number">4.5</span>  Working with SQL</a>
+  <ul class="collapse">
+  <li><a href="#setting-up-bigquery-including-sandbox-and-billing-options" id="toc-setting-up-bigquery-including-sandbox-and-billing-options" class="nav-link" data-scroll-target="#setting-up-bigquery-including-sandbox-and-billing-options"><span class="toc-section-number">4.5.1</span>  Setting up BigQuery, including sandbox and billing options</a></li>
+  <li><a href="#other-databases" id="toc-other-databases" class="nav-link" data-scroll-target="#other-databases"><span class="toc-section-number">4.5.2</span>  Other databases</a></li>
+  <li><a href="#using-bigquery" id="toc-using-bigquery" class="nav-link" data-scroll-target="#using-bigquery"><span class="toc-section-number">4.5.3</span>  Using BigQuery</a></li>
+  <li><a href="#sql-basics" id="toc-sql-basics" class="nav-link" data-scroll-target="#sql-basics"><span class="toc-section-number">4.5.4</span>  SQL basics</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with databases</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="database-features" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="database-features"><span class="header-section-number">4.1</span> Database features</h2>
+<ul>
+<li>A <strong>database</strong> is a collection of data stored in a computer system.</li>
+<li><strong>Relational database</strong>: A database that contains a series of related tables that can be connected via their relationships. They allow data analysts to organize and link data based on what the data has in common. For two tables to have a relationship, one or more of the same fields must exist inside both tables. Tables in a relational database are connected by the fields they have in common.</li>
+<li><strong>Normalization</strong> is a process of organizing data in a relational database. For example, creating tables and establishing relationships between those tables. It is applied to eliminate data redundancy, increase data integrity, and reduce complexity in a database.</li>
+<li><strong>Primary key</strong>: A identifier that references a column in which each value is unique. n other words, it’s a column of a table that is used to uniquely identify each record within that table. If you do decide to include a primary key, it should be unique, meaning no two rows can have the same primary key. Also, it cannot be null or blank.</li>
+<li><strong>Foreign key</strong>: A field within a table that is a primary key in another table. In other words, a foreign key is how one table can be connected to another. A table can have only one primary but multiple foreign keys. These keys are what create the relationships between tables in a relational database, which helps organize and connect data across multiple tables in the database.</li>
+<li>Some tables don’t require a primary key</li>
+<li>Both primary and foreign keys connect tables in relational databases</li>
+<li>A primary key may also be constructed using multiple columns of a table. This type of primary key is called a <strong>composite key</strong></li>
+</ul>
+</section>
+<section id="managing-data-with-metadata" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="managing-data-with-metadata"><span class="header-section-number">4.2</span> Managing data with metadata</h2>
+<ul>
+<li><strong>Metadata</strong>: Data about data but not data itself. Metadata tells you where the data comes from, when and how it was created, and what it’s all about. Metadata helps data analysts interpret the contents of the data within a database. Metadata also makes data more reliable by making sure it’s accurate, precise, relevant, and timely.</li>
+<li>Metadata helps data analysts interpret the contents of the data within a database</li>
+<li>Examples of parts of metadata: Title and description, tags and categories, who created it and when it was created, who last modified it and when, who can access or update it?</li>
+<li>A <strong>metadata repository</strong> is a database specifically created to store metadata.These repositories describe where metadata came from, keep it in an accessible form so it can be used quickly and easily, and keep it in a common structure for everyone who may need to use it. They:
+<ul>
+<li>Describe the state and location of metadata</li>
+<li>Describe the structures of the tables inside</li>
+<li>Describe how the data flows through the repository</li>
+<li>Keeps track of who accesses the metadata and when</li>
+</ul></li>
+</ul>
+<p>Types of metadata:</p>
+<ul>
+<li>Descriptive: Metadata that describes a piece of data and can be used to identify it at a later point in time, i.e.&nbsp;ID numbers of students</li>
+<li>Structural: Metadata that indicates how a piece of data is organized and whether it is part of one, or more than one, data collection</li>
+<li>Administrative: Metadata that indicates the technical source and details of a digital asset, i.e.&nbsp;The date and time a photo was taken</li>
+</ul>
+<p>Managing metadata:</p>
+<ul>
+<li>Metadata is stored in a single, central location and it gives the company standardized information about all of its data. This is done in two ways:
+<ul>
+<li>Metadata includes information about where each system is located and where the data sets are located within those systems</li>
+<li>The metadata describes how all of the data is connected between the various systems</li>
+</ul></li>
+<li><strong>Data governance</strong> is a process to ensure the formal management of a company’s data assets. This gives an organization better control of their data and helps a company manage issues related to data security and privacy, integrity, usability, and internal and external data flows.</li>
+</ul>
+</section>
+<section id="accessing-data-sources" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="accessing-data-sources"><span class="header-section-number">4.3</span> Accessing data sources</h2>
+<section id="data-import" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="data-import"><span class="header-section-number">4.3.1</span> Data import</h3>
+<p><strong>Google Sheets</strong></p>
+<p>In Google Sheets, you can use the <code>IMPORTRANGE</code> function. It enables you to specify a range of cells in the other spreadsheet to duplicate in the spreadsheet you are working in. You must allow access to the spreadsheet containing the data the first time you import the data.</p>
+</section>
+<section id="import-html-tables-from-the-web" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="import-html-tables-from-the-web"><span class="header-section-number">4.3.2</span> Import HTML tables from the web</h3>
+<p>Importing HTML tables is a very basic method to extract or “scrape” data from public web pages. <a href="https://www.thedataschool.co.uk/anna-prosvetova/web-scraping-made-easy-import-html-tables-or-lists-using-google-sheets-and-excel">Web scraping made easy</a> introduces how to do this with Google Sheets or Microsoft Excel.</p>
+<p><strong>Google Sheets</strong></p>
+<p>In Google Sheets, you can use the <code>IMPORTHTML</code> function. It enables you to import the data from an HTML table (or list) on a web page.</p>
+<p><strong>Excel</strong></p>
+<ul>
+<li>Step 1: Open a new or existing spreadsheet.</li>
+<li>Step 2: Click Data in the main menu and select the From Web option.</li>
+<li>Step 3: Enter the URL and click OK.</li>
+<li>Step 4: In the Navigator, select which table to import.</li>
+<li>Step 5: Click Load to load the data from the table into your spreadsheet.</li>
+</ul>
+</section>
+</section>
+<section id="sorting-and-filtering" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sorting-and-filtering"><span class="header-section-number">4.4</span> Sorting and filtering</h2>
+<ul>
+<li><strong>Sorting</strong> involves arranging data into a meaningful order to make it easier to understand, analyze, and visualize</li>
+<li><strong>Filtering</strong> means showing only the data that meets a specific criteria while hiding the rest</li>
+</ul>
+</section>
+<section id="working-with-sql" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="working-with-sql"><span class="header-section-number">4.5</span> Working with SQL</h2>
+<section id="setting-up-bigquery-including-sandbox-and-billing-options" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="setting-up-bigquery-including-sandbox-and-billing-options"><span class="header-section-number">4.5.1</span> Setting up BigQuery, including sandbox and billing options</h3>
+<p>BigQuery is a data warehouse on Google Cloud that data analysts can use to query, filter large datasets, aggregate results, and perform complex operations.</p>
+<p>Types of accounts:</p>
+<ul>
+<li>A <strong>Sandbox</strong> account is available at no charge and anyone with a Google account can log in and use it. . There are a couple of limitations to this account type. For example, you get a maximum of 12 projects at a time. It also doesn’t allow you to insert new records to a database or update the field values of existing records. Setup instructions are found <a href="https://scribehow.com/shared/Use_the_BigQuery_Sandbox__2g5j853nR2-Ze5P_9w18tg">here</a></li>
+<li>The <strong>free trial</strong> gives you access to more of what BigQuery has to offer with fewer overall limitations. The free trial offers 300 dollars in credit for use in Google Cloud during the first 90 days. After you spend the $300 credit or after 90 days, your free trial will expire and you will need to personally select to upgrade to a paid account to keep working in Google Cloud.</li>
+</ul>
+<p>How to get to the BigQuery console:</p>
+<ul>
+<li>In your browser, go to console.cloud.google.com/bigquery taking you to the main dashboard for the Google Cloud Platform. To navigate to BigQuery from the dashboard, do the following:
+<ul>
+<li>Click the Navigation menu icon (Hamburger icon) in the banner.</li>
+<li>Scroll down to the BIG DATA section.</li>
+<li>Click BigQuery and select SQL workspace.</li>
+</ul></li>
+</ul>
+</section>
+<section id="other-databases" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="other-databases"><span class="header-section-number">4.5.2</span> Other databases</h3>
+<ul>
+<li><a href="https://dev.mysql.com/doc/mysql-getting-started/en/">Getting started with MySQL</a>: This is a guide to setting up and using MySQL.</li>
+<li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/tutorial-getting-started-with-the-database-engine?view=sql-server-ver15">Getting started with Microsoft SQL Server</a>: This is a tutorial to get started using SQL Server.</li>
+<li><a href="https://www.postgresql.org/docs/10/tutorial-start.html">Getting started with PostgreSQL</a>: This is a tutorial to get started using PostgreSQL.</li>
+<li><a href="https://www.sqlite.org/quickstart.html">Getting started with SQLite</a>: This is a quick start guide for using SQLite.</li>
+</ul>
+</section>
+<section id="using-bigquery" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="using-bigquery"><span class="header-section-number">4.5.3</span> Using BigQuery</h3>
+<p><strong>Play with some public data</strong></p>
+<ol start="0" type="1">
+<li>Go to console.cloud.google.com/bigquery</li>
+<li>Navigate to the Explorer menu in BigQuery.</li>
+<li>Type the word public in the search box and enter. 3 Click “Broaden search to all projects”</li>
+<li>Find the bigquery-public-data and pin it.</li>
+</ol>
+</section>
+<section id="sql-basics" class="level3" data-number="4.5.4">
+<h3 data-number="4.5.4" class="anchored" data-anchor-id="sql-basics"><span class="header-section-number">4.5.4</span> SQL basics</h3>
+<p>With SQL, <strong>capitalization</strong> usually doesn’t matter. You could write SELECT or select or SeLeCT. They all work! But if you use capitalization as part of a consistent style your queries will look more professional.</p>
+<p>To write SQL queries like a pro, it is always a good idea to use all caps for clause starters (e.g., SELECT, FROM, WHERE, etc.). Functions should also be in all caps (e.g., SUM()). Column names should be all lowercase (refer to the section on snake_case later in this guide). Table names should be in CamelCase (refer to the section on CamelCase later in this guide). This helps keep your queries consistent and easier to read while not impacting the data that will be pulled when you run them</p>
+<p>For the most part, it also doesn’t matter if you use single <strong>quotes</strong> ’ ’ or double quotes ” ” when referring to strings.</p>
+<p>But there are two situations where it does matter what kind of quotes you use:</p>
+<ul>
+<li>When you want strings to be identifiable in any SQL dialect (i.e.&nbsp;WHERE country = ‘US’)</li>
+<li>When your string contains an apostrophe or quotation marks (i.e.&nbsp;“Shepherd’s pie”)</li>
+</ul>
+<p>Within each SQL dialect there are rules for what is accepted and what isn’t. But a general rule across almost all SQL dialects is to use single quotes for strings.</p>
+<p>It is important to always make sure that the output of your query has easy-to-understand names. However, Never use spaces. The best practice is to use <strong>snake_case</strong>. This means that ‘total tickets’, which has a space between the two words, should be written as ‘total_tickets’ with an underscore instead of a space.</p>
+<p>You can also use <strong>CamelCase</strong> capitalization when naming your table. CamelCase capitalization means that you capitalize the start of each word, like a two-humped (Bactrian) camel. So the table TicketsByOccasion uses CamelCase capitalization.</p>
+<p>As a general rule, you want to keep the length of each line in a query &lt;= 100 characters. This makes your queries easy to read.</p>
+<p><strong>Multi-line comments</strong> If you make comments that take up multiple lines, you can use – for each line. Or, if you have more than two lines of comments, it might be cleaner and easier is to use /* to start the comment and */ to close the comment.</p>
+<p>Key terms:</p>
+<ul>
+<li>SELECT is the section of a query that indicates what data you want SQL to return to you</li>
+<li>FROM is the section of a query that indicates which table the desired data comes from.</li>
+<li>WHERE is the section of a query that indicates any filters you’d like to apply to your dataset</li>
+<li>you’re sorting how you want your results to appear with ORDER BY.</li>
+<li>LIMIT tells SQL to only return the top five most popular names and their counts</li>
+</ul>
+<pre><code>SELECT name, count FROM `lithe-vault-366813.babynames.names_2014` 
+WHERE gender = "M"
+Order BY count DESC
+LIMIT 5</code></pre>
+<p>Some more resources:</p>
+<ul>
+<li><a href="https://sublime-text-unofficial-documentation.readthedocs.io/en/latest/search_and_replace/search_and_replace_overview.html">Search and replace in Sublime Text</a></li>
+<li><a href="https://www.regular-expressions.info/tutorialcnt.html">Regex tutorial</a> (if you don’t know what regular expressions are)</li>
+<li><a href="https://jdhao.github.io/2019/02/28/sublime_text_regex_cheat_sheet/">Regex cheat sheet</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/2_bias_ethics.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bias, credibility, privacy, ethics and access</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/4_data_orga_and_online_presence.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Organizing data and managing your online presence</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

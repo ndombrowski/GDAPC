@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Preparing data - 3&nbsp; Bias, credibility, privacy, ethics and access</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/3_working_with_databases.html" rel="next">
+<link href="../code/1_data_types_and_structures.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bias, credibility, privacy, ethics and access</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Preparing data</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prepare data for exploration</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_data_types_and_structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data types and structures</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_bias_ethics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bias, credibility, privacy, ethics and access</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_working_with_databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with databases</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_data_orga_and_online_presence.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Organizing data and managing your online presence</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#unbiased-and-objectice-data" id="toc-unbiased-and-objectice-data" class="nav-link active" data-scroll-target="#unbiased-and-objectice-data"><span class="toc-section-number">3.1</span>  Unbiased and objectice data</a></li>
+  <li><a href="#identifying-good-data-sources" id="toc-identifying-good-data-sources" class="nav-link" data-scroll-target="#identifying-good-data-sources"><span class="toc-section-number">3.2</span>  Identifying good data sources</a></li>
+  <li><a href="#data-ethics-and-privacy" id="toc-data-ethics-and-privacy" class="nav-link" data-scroll-target="#data-ethics-and-privacy"><span class="toc-section-number">3.3</span>  Data ethics and privacy</a>
+  <ul class="collapse">
+  <li><a href="#aspects-of-data-ethics" id="toc-aspects-of-data-ethics" class="nav-link" data-scroll-target="#aspects-of-data-ethics"><span class="toc-section-number">3.3.1</span>  Aspects of data ethics:</a></li>
+  <li><a href="#data-anonymization" id="toc-data-anonymization" class="nav-link" data-scroll-target="#data-anonymization"><span class="toc-section-number">3.3.2</span>  Data anonymization</a></li>
+  </ul></li>
+  <li><a href="#open-data" id="toc-open-data" class="nav-link" data-scroll-target="#open-data"><span class="toc-section-number">3.4</span>  Open data</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bias, credibility, privacy, ethics and access</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="unbiased-and-objectice-data" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="unbiased-and-objectice-data"><span class="header-section-number">3.1</span> Unbiased and objectice data</h2>
+<ul>
+<li><strong>Bias</strong>: A preference in favor of or against a person, group of people, or thing</li>
+<li><strong>Data bias</strong>: A type of error that systematically skews results in a certain direction</li>
+</ul>
+<p>Types of data bias:</p>
+<ul>
+<li><strong>Sampling bias</strong>: When a sample is not representative of the population as a whole, avoid this by choosing a sample at random</li>
+<li><strong>Observer bias</strong>: Sometimes referred to as experimenter bias or research bias. It is the tendency for different people to observe things differently</li>
+<li><strong>Interpretation bias</strong>: The tendency to always interpret ambiguous situations in a positive, or negative way</li>
+<li><strong>Confirmation bias</strong>: The tendency to search for, or interpret information in a way that confirms preexisting beliefs</li>
+</ul>
+</section>
+<section id="identifying-good-data-sources" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="identifying-good-data-sources"><span class="header-section-number">3.2</span> Identifying good data sources</h2>
+<ul>
+<li><strong>Reliable</strong>: Data that is based on accurate, complete and unbiased information and that’s been vetted and proven fit for use</li>
+<li><strong>Original</strong>: When dealing with data through a second or third party source, be sure to validate it with the original source</li>
+<li><strong>Comprehensive</strong>: The data contains all critical information needed</li>
+<li><strong>Current</strong>: The usefulness of data decreases as time passes</li>
+<li><strong>Cited</strong>: Citing makes the information you’re providing more credible: Who created the data set? Is it part of a credible organization? When was the data last refreshed?</li>
+</ul>
+</section>
+<section id="data-ethics-and-privacy" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="data-ethics-and-privacy"><span class="header-section-number">3.3</span> Data ethics and privacy</h2>
+<ul>
+<li><strong>Ethics</strong>: well-founded standards of right and wrong that prescribe what humans ought to do, usually in terms of rights, obligations, benefits to society, fairness or specific virtues</li>
+<li><strong>Data ethics</strong>: well- founded standards of right and wrong that dictate how data is collected, shared, and used</li>
+</ul>
+<section id="aspects-of-data-ethics" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="aspects-of-data-ethics"><span class="header-section-number">3.3.1</span> Aspects of data ethics:</h3>
+<ul>
+<li><strong>Ownership</strong>: This answers the question who owns data? I.e. Individuals own the raw data they provide, and they have primary control over its usage, how it’s processed and how it’s shared.</li>
+<li><strong>Transaction transparency</strong>: All data processing activities and algorithms should be completely explainable and understood by the individual who provides their data. This is in response to concerns over data bias</li>
+<li><strong>Consent</strong>: An individual’s right to know explicit details about how and why their data will be used before agreeing to provide it</li>
+<li><strong>Currency</strong>: Individuals should be aware of financial transactions resulting from the use of their personal data and the scale of these transactions</li>
+<li><strong>Privacy</strong>: Preserving a data subject’s information and activity any time a data transaction occurs, i.e.&nbsp;information privacy or data protection. It also covers a person’s legal right to their data:
+<ul>
+<li>Protection from unauthorized access to our private data,</li>
+<li>Freedom from inappropriate use of our data,</li>
+<li>The right to inspect, update, or correct our data,</li>
+<li>The ability to give consent to use our data,</li>
+<li>The legal right to access our data</li>
+</ul></li>
+<li><strong>Openness</strong>: Free access, usage, and sharing of data</li>
+</ul>
+</section>
+<section id="data-anonymization" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="data-anonymization"><span class="header-section-number">3.3.2</span> Data anonymization</h3>
+<p><strong>Data anonymization</strong> is the process of protecting people’s private or sensitive data by eliminating that kind of information. Typically, data anonymization involves blanking, hashing, or masking personal information, often by using fixed-length codes to represent data columns, or hiding data with altered values.</p>
+<p>Healthcare and financial data are two of the most sensitive types of data. That’s why data in these two industries usually goes through de-identification, which is a process used to wipe data clean of all personally identifying information.</p>
+</section>
+</section>
+<section id="open-data" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="open-data"><span class="header-section-number">3.4</span> Open data</h2>
+<ul>
+<li>Open data must be available as a whole, preferably by downloading over the Internet in a convenient and modifiable form</li>
+<li>Open data must be provided under terms that allow reuse and redistribution including the ability to use it with other datasets</li>
+<li>Everyone must be able to use, reuse, and redistribute the data, i.e.&nbsp;<strong>universal participation </strong> should be possible</li>
+<li><strong>Interoperability</strong> is key to open data’s success. Interoperability is the ability of data systems and services to openly connect and share data</li>
+</ul>
+<p>One of the biggest benefits of open data is that credible databases can be used more widely. Basically, this means that all of that good data can be leveraged, shared, and combined with other data. But it is important to think about the individuals being represented by the public, open data, too.</p>
+<p><strong>Personal identifiable information (PII) </strong> is data that is reasonably likely to identify a person and make information known about them. It is important to keep this data safe. PII can include a person’s address, credit card information, social security number, medical records, and more.</p>
+<p>Resources:</p>
+<ul>
+<li><a href="https://www.data.gov/">U.S. government data site</a>: Data.gov is one of the most comprehensive data sources in the US. This resource gives users the data and tools that they need to do research, and even helps them develop web and mobile applications and design data visualizations.</li>
+<li><a href="https://www.census.gov/data.html">U.S. Census Bureau</a>: This open data source offers demographic information from federal, state, and local governments, and commercial entities in the U.S. too.</li>
+<li><a href="https://www.opendatanetwork.com/">Open Data Network</a>: This data source has a really powerful search engine and advanced filters. Here, you can find data on topics like finance, public safety, infrastructure, and housing and development.</li>
+<li><a href="https://cloud.google.com/public-datasets">Google Cloud Public Datasets</a>: There are a selection of public datasets available through the Google Cloud Public Dataset Program that you can find already loaded into BigQuery.<br>
+</li>
+<li><a href="https://datasetsearch.research.google.com/">Dataset Search</a>: The Dataset Search is a search engine designed specifically for data sets; you can use this to search for specific data sets.</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/1_data_types_and_structures.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data types and structures</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/3_working_with_databases.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with databases</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

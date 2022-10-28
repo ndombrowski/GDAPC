@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Processing data data - 3&nbsp; Data cleaning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/3_sql_and_data_cleaning.html" rel="next">
+<link href="../code/1_data_integrity.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data cleaning</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Processing data data</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prepare data for processing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_data_integrity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_data_cleaning.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data cleaning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_sql_and_data_cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#basics" id="toc-basics" class="nav-link active" data-scroll-target="#basics"><span class="toc-section-number">3.1</span>  Basics</a></li>
+  <li><a href="#recognzing-and-remedying-dirty-data" id="toc-recognzing-and-remedying-dirty-data" class="nav-link" data-scroll-target="#recognzing-and-remedying-dirty-data"><span class="toc-section-number">3.2</span>  Recognzing and remedying dirty data</a></li>
+  <li><a href="#cleaning-data" id="toc-cleaning-data" class="nav-link" data-scroll-target="#cleaning-data"><span class="toc-section-number">3.3</span>  Cleaning data</a></li>
+  <li><a href="#data-cleaning-in-spreadsheets" id="toc-data-cleaning-in-spreadsheets" class="nav-link" data-scroll-target="#data-cleaning-in-spreadsheets"><span class="toc-section-number">3.4</span>  Data cleaning in spreadsheets</a>
+  <ul class="collapse">
+  <li><a href="#conditional-formatting" id="toc-conditional-formatting" class="nav-link" data-scroll-target="#conditional-formatting"><span class="toc-section-number">3.4.1</span>  Conditional formatting</a></li>
+  <li><a href="#removing-duplicates" id="toc-removing-duplicates" class="nav-link" data-scroll-target="#removing-duplicates"><span class="toc-section-number">3.4.2</span>  Removing duplicates</a></li>
+  <li><a href="#making-formats-consistent" id="toc-making-formats-consistent" class="nav-link" data-scroll-target="#making-formats-consistent"><span class="toc-section-number">3.4.3</span>  Making formats consistent</a></li>
+  <li><a href="#cleaning-text-strings" id="toc-cleaning-text-strings" class="nav-link" data-scroll-target="#cleaning-text-strings"><span class="toc-section-number">3.4.4</span>  Cleaning text strings</a></li>
+  <li><a href="#trim-white-space" id="toc-trim-white-space" class="nav-link" data-scroll-target="#trim-white-space"><span class="toc-section-number">3.4.5</span>  Trim white space</a></li>
+  <li><a href="#change-text-loweruppercaseproper-case" id="toc-change-text-loweruppercaseproper-case" class="nav-link" data-scroll-target="#change-text-loweruppercaseproper-case"><span class="toc-section-number">3.4.6</span>  Change Text Lower/Uppercase/Proper Case</a></li>
+  <li><a href="#delete-formatting" id="toc-delete-formatting" class="nav-link" data-scroll-target="#delete-formatting"><span class="toc-section-number">3.4.7</span>  Delete formatting</a></li>
+  </ul></li>
+  <li><a href="#optimizing-the-data-cleaning-process" id="toc-optimizing-the-data-cleaning-process" class="nav-link" data-scroll-target="#optimizing-the-data-cleaning-process"><span class="toc-section-number">3.5</span>  Optimizing the data cleaning process</a>
+  <ul class="collapse">
+  <li><a href="#countif" id="toc-countif" class="nav-link" data-scroll-target="#countif"><span class="toc-section-number">3.5.1</span>  Countif</a></li>
+  <li><a href="#len" id="toc-len" class="nav-link" data-scroll-target="#len"><span class="toc-section-number">3.5.2</span>  Len</a></li>
+  <li><a href="#left-and-right" id="toc-left-and-right" class="nav-link" data-scroll-target="#left-and-right"><span class="toc-section-number">3.5.3</span>  LEFT and RIGHT</a></li>
+  <li><a href="#mid" id="toc-mid" class="nav-link" data-scroll-target="#mid"><span class="toc-section-number">3.5.4</span>  MID</a></li>
+  <li><a href="#concatenate" id="toc-concatenate" class="nav-link" data-scroll-target="#concatenate"><span class="toc-section-number">3.5.5</span>  Concatenate</a></li>
+  <li><a href="#split" id="toc-split" class="nav-link" data-scroll-target="#split"><span class="toc-section-number">3.5.6</span>  SPLIT</a></li>
+  <li><a href="#trim" id="toc-trim" class="nav-link" data-scroll-target="#trim"><span class="toc-section-number">3.5.7</span>  TRIM</a></li>
+  </ul></li>
+  <li><a href="#workflow-automatation" id="toc-workflow-automatation" class="nav-link" data-scroll-target="#workflow-automatation"><span class="toc-section-number">3.6</span>  Workflow automatation</a></li>
+  <li><a href="#different-data-perspectives" id="toc-different-data-perspectives" class="nav-link" data-scroll-target="#different-data-perspectives"><span class="toc-section-number">3.7</span>  Different data perspectives</a>
+  <ul class="collapse">
+  <li><a href="#pivot-table" id="toc-pivot-table" class="nav-link" data-scroll-target="#pivot-table"><span class="toc-section-number">3.7.1</span>  Pivot table</a></li>
+  <li><a href="#vlookup" id="toc-vlookup" class="nav-link" data-scroll-target="#vlookup"><span class="toc-section-number">3.7.2</span>  VLOOKUP</a></li>
+  </ul></li>
+  <li><a href="#data-mapping" id="toc-data-mapping" class="nav-link" data-scroll-target="#data-mapping"><span class="toc-section-number">3.8</span>  Data mapping</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data cleaning</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>The problem with data cleaning is that it usually requires a lot of time, energy, and attention from a junior data analyst. One of the best ways to lessen the negative impacts of data cleaning is to have a plan of action or a specific approach to cleaning the data.</p>
+<section id="basics" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="basics"><span class="header-section-number">3.1</span> Basics</h2>
+<p><strong>Dirty data</strong> is data that’s incomplete, incorrect, or irrelevant to the problem you’re trying to solve.</p>
+<p><strong>Data engineers</strong> transform data into a useful format for analysis and give it a reliable infrastructure. This means they develop, maintain, and test databases, data processors and related systems.</p>
+<p><strong>Data warehousing specialists</strong> develop processes and procedures to effectively store and organize data. They make sure that data is available, secure, and backed up to prevent loss.</p>
+<p>A <strong>null</strong> is an indication that a value does not exist in a data set. Note that it’s not the same as a zero. In the case of a survey, a null would mean the customers skipped that question. A zero would mean they provided zero as their response.</p>
+</section>
+<section id="recognzing-and-remedying-dirty-data" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="recognzing-and-remedying-dirty-data"><span class="header-section-number">3.2</span> Recognzing and remedying dirty data</h2>
+<p>Types of dirty data:</p>
+<ul>
+<li>Duplicate data</li>
+<li>Outdated data</li>
+<li>Incomplete data</li>
+<li>Incorrect/inaccurate data</li>
+<li>Inconsistent data or formatting</li>
+<li>Missing data or nulls</li>
+<li>Different currencies, different date formats, etc</li>
+<li>Inconsistent field length, i.e.&nbsp;<strong>field length</strong> is a tool for determining how many characters can be keyed into a field. his is part of data validation. <strong>Data validation</strong> is a tool for checking the accuracy and quality of data before adding or importing it.</li>
+</ul>
+</section>
+<section id="cleaning-data" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="cleaning-data"><span class="header-section-number">3.3</span> Cleaning data</h2>
+<p>Some of the errors you might come across while cleaning your data could include:</p>
+<ul>
+<li>Not checking spelling errors</li>
+<li>Forgetting to document errors</li>
+<li>Not checking for misfielded values, i.e.&nbsp;a misfielded value happens when the values are entered into the wrong field</li>
+<li>Overlooking missing values</li>
+<li>Looking at a subset of the data and not the full picture</li>
+<li>Loosing track of business objectives</li>
+<li>Not fixing the source of the error</li>
+<li>Not analyzing the system prior to cleaning</li>
+<li>Not backing up your data prior to cleaning</li>
+<li>Not accounting for data cleaning in your deadline/process</li>
+</ul>
+<p><strong>Data merging</strong> is the process of combining two or more datasets into a single dataset. This presents a unique challenge because when two totally different datasets are combined, the information is almost guaranteed to be inconsistent and misaligned.</p>
+<p><strong>Compatibility</strong> describes how well two or more datasets are able to work together. Questions to ask: - Do I have all the data I need? - Does the data I need exists within these datasets? - Do the datasets need to be cleaned or are they ready for me to use? - Are the datasets cleaned to the same standard?</p>
+<p>Resources:</p>
+<ul>
+<li><a href="https://support.microsoft.com/en-us/office/top-ten-ways-to-clean-your-data-2844b620-677c-47a7-ac3e-c2e157d1db19">Top ten ways to clean your data</a>: Review an orderly guide to data cleaning in Microsoft Excel.</li>
+<li><a href="https://support.google.com/a/users/answer/9604139?hl=en#zippy=">10 Google Workspace tips to clean up data</a>: Learn best practices for data cleaning in Google Sheets.</li>
+</ul>
+</section>
+<section id="data-cleaning-in-spreadsheets" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="data-cleaning-in-spreadsheets"><span class="header-section-number">3.4</span> Data cleaning in spreadsheets</h2>
+<section id="conditional-formatting" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="conditional-formatting"><span class="header-section-number">3.4.1</span> Conditional formatting</h3>
+<p><strong>Conditional formatting</strong> is a spreadsheet tool that changes how cells appear when values meet (or don’t meet) specific conditions. We can for example use it to highlight blank cells.</p>
+<p>First, we select the columns we want to work on.</p>
+<p>To select non-adjacent rows or columns, hold Ctrl and select the row or column numbers (in my case the windows button). I.e. we can first select all cells and then press control and i.e.&nbsp;columns F and H if we want to unselect them.</p>
+<p>Go to format –&gt; conditional formatting –&gt; format rules –&gt; is empty –&gt; change formatting style to pink</p>
+</section>
+<section id="removing-duplicates" class="level3" data-number="3.4.2">
+<h3 data-number="3.4.2" class="anchored" data-anchor-id="removing-duplicates"><span class="header-section-number">3.4.2</span> Removing duplicates</h3>
+<p>Go to data –&gt; data cleanup –&gt; remove duplicates</p>
+</section>
+<section id="making-formats-consistent" class="level3" data-number="3.4.3">
+<h3 data-number="3.4.3" class="anchored" data-anchor-id="making-formats-consistent"><span class="header-section-number">3.4.3</span> Making formats consistent</h3>
+<p>I.e. sometimes date formats are not consistent, to clean this:</p>
+<p>Select relevant column –&gt; Format –&gt; Number –&gt; Date</p>
+</section>
+<section id="cleaning-text-strings" class="level3" data-number="3.4.4">
+<h3 data-number="3.4.4" class="anchored" data-anchor-id="cleaning-text-strings"><span class="header-section-number">3.4.4</span> Cleaning text strings</h3>
+<p>A <strong>text string</strong> is a group of characters within a cell, most often composed of letters. An important characteristic of a text string is its length, which is the number of characters in it.</p>
+<p><strong>Split</strong> is a tool that divides a text string around the specified character and puts each fragment into a new and separate cell. Split is helpful when you have more than one piece of data in a cell and you want to separate them out, i.e.&nbsp;first and last name. To do this:</p>
+<p>Select column –&gt; Data –&gt; Split text to column (in GoogleSheets, delimiter is automaticall detected)</p>
+<p>Dealing with text that actually is a number:</p>
+<p>Select column –&gt; Data –&gt; Split text to columns</p>
+</section>
+<section id="trim-white-space" class="level3" data-number="3.4.5">
+<h3 data-number="3.4.5" class="anchored" data-anchor-id="trim-white-space"><span class="header-section-number">3.4.5</span> Trim white space</h3>
+<p>In Excel, you can use the <code>TRIM</code> command to get rid of white spaces. In any space beneath your data (such as cell A10), type =TRIM(A1). Then, drag the bottom right corner of the cell to the bottom right to call the data without the white spaces.</p>
+</section>
+<section id="change-text-loweruppercaseproper-case" class="level3" data-number="3.4.6">
+<h3 data-number="3.4.6" class="anchored" data-anchor-id="change-text-loweruppercaseproper-case"><span class="header-section-number">3.4.6</span> Change Text Lower/Uppercase/Proper Case</h3>
+<p>If you are using <a href="https://support.microsoft.com/en-us/office/change-the-case-of-text-in-excel-adc65f5b-958f-46a2-4d23-ab4d5faf48a8">Microsoft Excel</a>, this documentation explains how to use a formula to change the case of a text string. Follow these instructions to clean the string text and then move on to the confirmation and reflection section of this activity.</p>
+<p>If you’re completing this exercise using Google Sheets, you’ll need to install an add-in that will give you the functionality needed to easily clean string data and change cases.</p>
+<p>Google Sheets Add-on Instructions:</p>
+<ul>
+<li>Click on the Add-Ons option at the top of Google Sheets.</li>
+<li>Click on Get add-ons.</li>
+<li>Search for ChangeCase.</li>
+<li>Select the column you want to edit</li>
+<li>Click on the Add-Ons tab and select ChangeCase. Select the option All uppercase. Notice the other options that you could have chosen if needed.</li>
+</ul>
+</section>
+<section id="delete-formatting" class="level3" data-number="3.4.7">
+<h3 data-number="3.4.7" class="anchored" data-anchor-id="delete-formatting"><span class="header-section-number">3.4.7</span> Delete formatting</h3>
+<p>f you want to clear the formatting for any or all cells, you can find the command in the Format tab. To clear formatting:</p>
+<ol type="1">
+<li>Select the data for which you want to delete the formatting. In this case, highlight all the data in the spreadsheet by clicking and dragging over Rows 1-8.</li>
+<li>Click the Format tab and select the Clear Formatting option.</li>
+</ol>
+<p>In Excel, go to the Home tab, then hover over Clear and select Clear Formats.</p>
+<p>You will notice that all the cells have had their formatting removed.</p>
+</section>
+</section>
+<section id="optimizing-the-data-cleaning-process" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="optimizing-the-data-cleaning-process"><span class="header-section-number">3.5</span> Optimizing the data cleaning process</h2>
+<section id="countif" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="countif"><span class="header-section-number">3.5.1</span> Countif</h3>
+<p><strong>COUNTIF</strong> is a function that returns the number of cells that match a specified value. Basically, it counts the number of times a value appears in a range of cells.</p>
+<p>Every function has a certain syntax that needs to be followed for it to work. <strong>Syntax</strong> is a predetermined structure that includes all required information and its proper placement.</p>
+<p><code>=COUNTIF(range, "value")</code> for example: <code>=COUNTIF(range, "&lt;100")</code></p>
+</section>
+<section id="len" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="len"><span class="header-section-number">3.5.2</span> Len</h3>
+<p><strong>LEN</strong> is a function that tells you the length of the text string by counting the number of characters it contains. This is useful when cleaning data if you have a certain piece of information in your spreadsheet that you know must contain a certain length.</p>
+<p><code>LEN(range)</code></p>
+</section>
+<section id="left-and-right" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="left-and-right"><span class="header-section-number">3.5.3</span> LEFT and RIGHT</h3>
+<p><strong>LEFT</strong> is a function that gives you a set number of characters from the left side of a text string. <strong>RIGHT</strong> is a function that gives you a set number of characters from the right side of a text string.</p>
+<p><code>LEFT(range, number of characters)</code></p>
+</section>
+<section id="mid" class="level3" data-number="3.5.4">
+<h3 data-number="3.5.4" class="anchored" data-anchor-id="mid"><span class="header-section-number">3.5.4</span> MID</h3>
+<p><strong>MID</strong> is a function that gives you a segment from the middle of a text string.</p>
+<p><code>MID(range, reference starting point, number of middle characters)</code></p>
+</section>
+<section id="concatenate" class="level3" data-number="3.5.5">
+<h3 data-number="3.5.5" class="anchored" data-anchor-id="concatenate"><span class="header-section-number">3.5.5</span> Concatenate</h3>
+<p><strong>CONCATENATE</strong>, which is a function that joins together two or more text strings.</p>
+<p><code>=CONCATENATE(item1, item2)</code></p>
+</section>
+<section id="split" class="level3" data-number="3.5.6">
+<h3 data-number="3.5.6" class="anchored" data-anchor-id="split"><span class="header-section-number">3.5.6</span> SPLIT</h3>
+<p>The <strong>SPLIT</strong> function divides text around a specified character or string, and puts each fragment of text into a separate cell in the row.</p>
+<p><code>=SPLOT(cell, "delimiter")</code></p>
+</section>
+<section id="trim" class="level3" data-number="3.5.7">
+<h3 data-number="3.5.7" class="anchored" data-anchor-id="trim"><span class="header-section-number">3.5.7</span> TRIM</h3>
+<p><strong>TRIM</strong> is a function that removes leading, trailing, and repeated spaces in data. Sometimes when you import data, your cells have extra spaces, which can get in the way of your analysis.</p>
+<p><code>=TRIM(range)</code></p>
+</section>
+</section>
+<section id="workflow-automatation" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="workflow-automatation"><span class="header-section-number">3.6</span> Workflow automatation</h2>
+<p>Basically, workflow automation is the process of automating parts of your work.</p>
+<ul>
+<li>Towards Data Science’s <a href="https://towardsdatascience.com/automating-scientific-data-analysis-part-1-c9979cd0817e">Automating Scientific Data Analysis</a></li>
+<li>MIT News’ <a href="https://news.mit.edu/2016/automating-big-data-analysis-1021">Automating Big-Data Analysis</a></li>
+<li>TechnologyAdvice’s <a href="https://technologyadvice.com/blog/information-technology/top-10-workflow-automation-software/">10 of the Best Options for Workflow Automation Software</a></li>
+</ul>
+</section>
+<section id="different-data-perspectives" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="different-data-perspectives"><span class="header-section-number">3.7</span> Different data perspectives</h2>
+<section id="pivot-table" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="pivot-table"><span class="header-section-number">3.7.1</span> Pivot table</h3>
+<p>Select the data we want to use –&gt; Insert –&gt; Pivot table –&gt; Add row (i.e.&nbsp;total profits), you can also add another row, i.e.&nbsp;products</p>
+</section>
+<section id="vlookup" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="vlookup"><span class="header-section-number">3.7.2</span> VLOOKUP</h3>
+<p><strong>VLOOKUP</strong> stands for vertical lookup. It’s a function that searches for a certain value in a column to return a corresponding piece of information. When data analysts look up information for a project, it’s rare for all of the data they need to be in the same place. Usually, you’ll have to search across multiple sheets or even different databases.</p>
+<p><code>=VLOOKUP(data to look up, 'where to look'!Range, column, false)</code></p>
+<p>In our example, this will be the name of a spreadsheet followed by an exclamation point. The exclamation point indicates that we’re referencing a cell in a different sheet from the one we’re currently working in.</p>
+<p>The column in the range containing the value to return.</p>
+<p>The word “false,” means that an exact match is what we’re looking for.</p>
+</section>
+</section>
+<section id="data-mapping" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="data-mapping"><span class="header-section-number">3.8</span> Data mapping</h2>
+<p><strong>Data mapping</strong> is the process of matching fields from one database to another. This is very important to the success of data migration, data integration, and lots of other data management activities.</p>
+<p>The first step to data mapping is identifying what data needs to be moved. This includes the tables and the fields within them. We also need to define the desired format for the data once it reaches its destination.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/1_data_integrity.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/3_sql_and_data_cleaning.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

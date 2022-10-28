@@ -64,7 +64,96 @@ In Google Sheets, you can use the `IMPORTHTML` function. It enables you to impor
 
 
 
+## Sorting and filtering
 
+- **Sorting** involves arranging data into a meaningful order to make it easier to understand, analyze, and visualize
+- **Filtering** means showing only the data that meets a specific criteria while hiding the rest
+
+
+
+
+## Working with SQL
+
+### Setting up BigQuery, including sandbox and billing options
+
+BigQuery is a data warehouse on Google Cloud that data analysts can use to query, filter large datasets, aggregate results, and perform complex operations. 
+
+Types of accounts: 
+
+- A **Sandbox** account is available at no charge and anyone with a Google account can log in and use it. . There are a couple of limitations to this account type. For example, you get a maximum of 12 projects at a time. It also doesn't allow you to insert new records to a database or update the field values of existing records. Setup instructions are found [here](https://scribehow.com/shared/Use_the_BigQuery_Sandbox__2g5j853nR2-Ze5P_9w18tg)
+- The **free trial** gives you access to more of what BigQuery has to offer with fewer overall limitations. The free trial offers 300 dollars in credit for use in Google Cloud during the first 90 days. After you spend the $300 credit or after 90 days, your free trial will expire and you will need to personally select to upgrade to a paid account to keep working in Google Cloud.
+
+How to get to the BigQuery console:
+
+- In your browser, go to console.cloud.google.com/bigquery taking you to the main dashboard for the Google Cloud Platform. To navigate to BigQuery from the dashboard, do the following:
+    - Click the Navigation menu icon (Hamburger icon) in the banner.
+    - Scroll down to the BIG DATA section.
+    - Click BigQuery and select SQL workspace.
+
+
+### Other databases
+
+- [Getting started with MySQL](https://dev.mysql.com/doc/mysql-getting-started/en/): This is a guide to setting up and using MySQL.
+- [Getting started with Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/tutorial-getting-started-with-the-database-engine?view=sql-server-ver15): This is a tutorial to get started using SQL Server.
+- [Getting started with PostgreSQL](https://www.postgresql.org/docs/10/tutorial-start.html): This is a tutorial to get started using PostgreSQL.
+- [Getting started with SQLite](https://www.sqlite.org/quickstart.html): This is a quick start guide for using SQLite.
+
+
+### Using BigQuery
+
+**Play with some public data**
+
+0. Go to console.cloud.google.com/bigquery
+1. Navigate to the Explorer menu in BigQuery.
+2. Type the word public in the search box and enter.
+3  Click "Broaden search to all projects"
+4. Find the bigquery-public-data and pin it.
+
+
+### SQL basics
+
+With SQL, **capitalization** usually doesn’t matter. You could write SELECT or select or SeLeCT. They all work! But if you use capitalization as part of a consistent style your queries will  look more professional.
+
+To write SQL queries like a pro, it is always a good idea to use all caps for clause starters (e.g., SELECT, FROM, WHERE, etc.). Functions should also be in all caps (e.g., SUM()). Column names should be all lowercase (refer to the section on snake_case later in this guide). Table names should be in CamelCase (refer to the section on CamelCase later in this guide). This helps keep your queries consistent and easier to read while not impacting the data that will be pulled when you run them
+
+For the most part, it also doesn’t matter if you use single **quotes** ' ' or double quotes " " when referring to strings. 
+
+But there are two situations where it does matter what kind of quotes you use:
+
+- When you want strings to be identifiable in any SQL dialect (i.e. WHERE country = 'US')
+- When your string contains an apostrophe or quotation marks (i.e. "Shepherd's pie")
+
+Within each SQL dialect there are rules for what is accepted and what isn’t. But a general rule across almost all SQL dialects is to use single quotes for strings. 
+
+It is important to always make sure that the output of your query has easy-to-understand names. However, Never use spaces. The best practice is to use **snake_case**. This means that 'total tickets', which has a space between the two words, should be written as 'total_tickets' with an underscore instead of a space. 
+
+You can also use **CamelCase** capitalization when naming your table. CamelCase capitalization means that you capitalize the start of each word, like a two-humped (Bactrian) camel. So the table TicketsByOccasion uses CamelCase capitalization.
+
+As a general rule, you want to keep the length of each line in a query <= 100 characters. This makes your queries easy to read.
+
+**Multi-line comments**
+If you make comments that take up multiple lines, you can use -- for each line. Or, if you have more than two lines of comments, it might be cleaner and easier is to use /* to start the comment and */ to close the comment. 
+
+Key terms:
+
+- SELECT is the section of a query that indicates what data you want SQL to return to you
+- FROM is the section of a query that indicates which table the desired data comes from. 
+- WHERE is the section of a query that indicates any filters you’d like to apply to your dataset
+- you’re sorting how you want your results to appear with ORDER BY.
+- LIMIT tells SQL to only return the top five most popular names and their counts
+
+```
+SELECT name, count FROM `lithe-vault-366813.babynames.names_2014` 
+WHERE gender = "M"
+Order BY count DESC
+LIMIT 5
+```
+
+Some more resources:
+
+- [Search and replace in Sublime Text](https://sublime-text-unofficial-documentation.readthedocs.io/en/latest/search_and_replace/search_and_replace_overview.html)
+- [Regex tutorial](https://www.regular-expressions.info/tutorialcnt.html) (if you don’t know what regular expressions are)
+- [Regex cheat sheet](https://jdhao.github.io/2019/02/28/sublime_text_regex_cheat_sheet/)
 
 
 

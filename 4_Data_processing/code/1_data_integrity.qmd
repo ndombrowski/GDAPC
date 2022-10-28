@@ -1,0 +1,126 @@
+# Data integrity
+
+**Data integrity** is the accuracy, completeness, consistency, and trustworthiness of data throughout its lifecycle. A good analysis depends on the integrity of the data, and data integrity usually depends on using a common format. So it is important to double-check how dates are formatted to make sure what you think is December 10, 2020 isn’t really October 12, 2020, and vice versa.
+
+Data integrity can be compromised in lots of different ways. There's a chance data can be compromised every time it's replicated, transferred, or manipulated in any way. 
+    - **Data replication** is the process of storing data in multiple locations. If you're replicating data at different times in different places, there's a chance your data will be out of sync.
+    - **Data transfer** is the process of copying data from a storage device to memory, or from one computer to another. 
+    - **Data manipulation**: The process of changing data to make it more organized and easier to read
+
+It's also important to check that the data you use aligns with the business objective. 
+
+- Clean data + alignment to business objective = accurate conclusions
+- Alignment to business objective + additional data cleaning = accurate conclusions 
+- Alignment to business objective + newly discovered variables + constraints = accurate conclusions 
+  
+## Resources to check data integrity in excel
+
+- [VLOOKUP](https://support.microsoft.com/en-us/office/vlookup-function-0bbc8083-26fe-4963-8ab8-93a18ad188a1) is a spreadsheet function that searches for a certain value in a column to return a related piece of information. Using VLOOKUP can save a lot of time; without it, you have to look up dates and names manually.
+- [DATEDIF](https://support.microsoft.com/en-us/office/datedif-function-25dba1a4-2812-480b-84dd-8b32a451b35c) function to automatically calculate the difference between the dates in column
+    
+    
+## Dealing with insufficient data
+
+Types of insufficient data:
+
+- No data
+- To little data
+- Wrong data, including data with errors
+- Data from only one source
+- Data that keeps updating (and thus is still incoming and maybe not complete)
+- Outdated data
+- Geographically-limited data
+
+Way to address insufficient data:
+
+- Gather the data on a small scale to perform a preliminary analysis and then request additional time to complete the analysis after you have collected more data
+- If there isn’t time to collect data, perform the analysis using proxy data from other datasets
+- Identify trends with available data
+- Wait for more data if time allows
+- Talk with stakeholders and adjust objective
+- Look for new dataset
+- Identify errors in the data and, if possible, correct them at the source by looking for a pattern in the errors
+
+
+### The importance of sample size
+
+When you use **sample size** or a sample, you use a part of a population that's representative of the population. The goal is to get enough information from a small group within a population to make predictions or conclusions about the whole population.
+
+When you only use a small sample of a population, it can lead to uncertainty. You can't really be 100 percent sure that your statistics are a complete and accurate representation of the population. This leads to **sampling bias**, i.e. when a sample isn't representative of the population as a whole. 
+
+Using random sampling can help address some of those issues with sampling bias. **Random sampling** is a way of selecting a sample from a population so that every possible type of the sample has an equal chance of being chosen.
+
+
+### Calculating sample size
+
+- **Population**: The entire group that you are interested in for your study. For example, if you are surveying people in your company, the population would be all the employees in your company.
+- **Sample**: A subset of your population. 
+- **Margin of error**: Since a sample is used to represent a population, the sample’s results are expected to differ from what the result would have been if you had surveyed the entire population. This difference is called the margin of error. The smaller the margin of error, the closer the results of the sample are to what the result would have been if you had surveyed the entire population. 
+- **Confidence level**: How confident you are in the survey results or the probability that your sample accurately reflects the greater population. For example, a 95% confidence level means that if you were to run the same survey 100 times, you would get similar results 95 of those 100 times. Confidence level is targeted before you start your study because it will affect how big your margin of error is at the end of your study. Having a 99 percent confidence level is ideal. But most industries hope for at least a 90 or 95 percent confidence level. 
+- **Confidence interval**: The range of possible values that the population’s result would be at the confidence level of the study. This range is the sample result +/- the margin of error.
+- **Statistical significance**: The determination of whether your result could be due to random chance or not. The greater the significance, the less due to chance.
+
+Basic rules:
+
+- Don’t use a sample size less than 30. It has been statistically proven that 30 is the smallest sample size where an average result of a sample starts to represent the average result of a population. This recommendation is based on the Central Limit Theorem (CLT). As sample size increases, the results more closely resemble the normal (bell-shaped) distribution from a large number of samples. A sample of 30 is the smallest sample size for which the CLT is still valid.
+- The confidence level most commonly used is 95%, but 90% can work in some cases. 
+- For a higher confidence level, use a larger sample size
+- To decrease the margin of error, use a larger sample size
+- For greater statistical significance, use a larger sample size
+
+Refer to the [Determine the Best Sample Size video](https://www.coursera.org/learn/process-data/lecture/mSj5A/determine-the-best-sample-size) for a demonstration of a sample size calculator, or refer to the [Sample Size Calculator reading](https://www.coursera.org/learn/process-data/supplement/ZqcDw/sample-size-calculator) for additional information. 
+
+
+## Testing your data
+
+### Statistical power
+
+- **Statistical power** is the probability of getting meaningful results from a test
+- **Hypothesis testing** is a way to see if a survey or experiment has meaningful results
+- If a test is statistically significant, it means the results of the test are real and not an error caused by random chance. Usually, you need a statistical power of at least 0.8 or 80% to consider your results statistically significant
+
+Read more [here](https://machinelearningmastery.com/statistical-power-and-power-analysis-in-python/)
+
+
+### Determine the best sample size
+
+A sample size calculator tells you how many people you need to interview (or things you need to test) to get results that represent the target population. See the tutorials folder for an example of a calculator for sample size. To other examples:
+
+- [Sample size calculator by surveymonkey.com](https://www.surveymonkey.com/mp/sample-size-calculator/)
+- [Sample size calculator by raosoft.com](http://www.raosoft.com/samplesize.html)
+
+After you have plugged your information into one of these calculators, it will give you a recommended sample size. Keep in mind, the calculated sample size is the minimum number to achieve what you input for confidence level and margin of error.
+
+If you are working with a survey, you will also need to think about the estimated response rate to figure out how many surveys you will need to send out. For example, if you need a sample size of 100 individuals and your estimated response rate is 10%, you will need to send your survey to 1,000 individuals to get the 100 responses you need for your analysis.
+
+
+### Consider the margin of error
+
+Margin of error is the maximum amount that the sample results are expected to differ from those of the actual population. More technically, the margin of error defines a range of values below and above the average result for the sample. 
+
+Margin of error helps you understand how reliable the data from your hypothesis testing is.
+
+The closer to zero the margin of error, the closer your results from your sample would match results from the overall population.
+
+To calculate the margin of error, we need:
+
+- Population size
+- Sample size
+- Confidence level
+
+Some online calculators:
+
+- [Margin of error calculator by G​ood Calculators (free online calculators) ](https://goodcalculators.com/margin-of-error-calculator/)
+- [Margin of error calculator by CheckMarket](https://www.checkmarket.com/sample-size-calculator/#sample-size-margin-of-error-calculator)
+
+
+
+
+
+
+
+
+
+
+
+

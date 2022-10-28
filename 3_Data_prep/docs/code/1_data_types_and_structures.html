@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../code/2_bias_ethics.html" rel="next">
 <link href="../index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -102,6 +103,21 @@ ul.task-list li input[type="checkbox"] {
   <a href="../code/1_data_types_and_structures.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data types and structures</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_bias_ethics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bias, credibility, privacy, ethics and access</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_working_with_databases.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Working with databases</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_data_orga_and_online_presence.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Organizing data and managing your online presence</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -124,6 +140,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#boolean-logic" id="toc-boolean-logic" class="nav-link" data-scroll-target="#boolean-logic"><span class="toc-section-number">2.3.2</span>  Boolean logic</a></li>
   <li><a href="#data-table-components" id="toc-data-table-components" class="nav-link" data-scroll-target="#data-table-components"><span class="toc-section-number">2.3.3</span>  Data table components</a></li>
   <li><a href="#wide-and-long-data" id="toc-wide-and-long-data" class="nav-link" data-scroll-target="#wide-and-long-data"><span class="toc-section-number">2.3.4</span>  Wide and long data</a></li>
+  <li><a href="#data-transformation" id="toc-data-transformation" class="nav-link" data-scroll-target="#data-transformation"><span class="toc-section-number">2.3.5</span>  Data transformation</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -179,8 +196,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>Discrete data</strong>: Data that’s counted and has a limited number of values. For example number of people who visit a hospital on a daily basis (10, 20, 200) or the rooms max. allowed capacity or sold tickets per month</p></li>
 <li><p><strong>Nominal data</strong>: A type of qualitative data that is organized without a set order; i.e.&nbsp;yes, no, or unsure</p></li>
 <li><p><strong>Ordinal data</strong>: A type of qualitative data with a set order or scale; i.e.&nbsp;if we ask a group of people to rank a movie from 1-5</p></li>
-<li><p><strong>Internal data</strong>: Data that lives within a companies own system. I.e. Wages of employees tracked by HR or product inventory levels</p></li>
-<li><p><strong>External data</strong>: data that lives and is generated outside of an organization, i.e.&nbsp;National average wages for the various positions throughout your organization</p></li>
+<li><p><strong>Internal data</strong>: Data that lives within a companies own system, also called primary data. I.e. Wages of employees tracked by HR or product inventory levels</p></li>
+<li><p><strong>External data</strong>: data that lives and is generated outside of an organization, also called secondary data. I.e. National average wages for the various positions throughout your organization</p></li>
 <li><p><strong>Structured data</strong>: data that’s organized in a certain format, such as rows and columns. Spreadsheets and relational databases are two examples of software that store data in a structured way. Structured data that is grouped together to form relations enables analysts to more easily store, search, and analyze the data.</p></li>
 <li><p><strong>Unstructured data</strong>: data that is not organized in any easily identifiable manner, i.e.&nbsp;audio or video files</p></li>
 </ul>
@@ -241,8 +258,38 @@ ul.task-list li input[type="checkbox"] {
 <section id="wide-and-long-data" class="level3" data-number="2.3.4">
 <h3 data-number="2.3.4" class="anchored" data-anchor-id="wide-and-long-data"><span class="header-section-number">2.3.4</span> Wide and long data</h3>
 <ul>
-<li><strong>Wide data</strong>: every data subject has a single row with multiple columns to hold the values of various attributes of the subject. Wide data lets you easily identify and quickly compare different columns.</li>
-<li><strong>Long data</strong>: data in which each row is one time point per subject, so each subject will have data in multiple rows. Long data is a great format for storing and organizing data when there’s multiple variables for each subject at each time point that we want to observe. With this long data format, we can store and analyze all of this data using fewer columns.</li>
+<li><strong>Wide data</strong>: every data subject has a single row with multiple columns to hold the values of various attributes of the subject. Wide data lets you easily identify and quickly compare different columns. Wide data is preferred when:
+<ul>
+<li>Creating tables and charts with a few variables about each subject</li>
+<li>Comparing straightforward line graphs</li>
+</ul></li>
+<li><strong>Long data</strong>: data in which each row is one time point per subject, so each subject will have data in multiple rows. Long data is a great format for storing and organizing data when there’s multiple variables for each subject at each time point that we want to observe. With this long data format, we can store and analyze all of this data using fewer columns. This is the preferred format when:
+<ul>
+<li>Storing a lot of variables about each subject. For example, 60 years worth of interest rates for each bank</li>
+<li>Performing advanced statistical analysis or graphing</li>
+</ul></li>
+</ul>
+</section>
+<section id="data-transformation" class="level3" data-number="2.3.5">
+<h3 data-number="2.3.5" class="anchored" data-anchor-id="data-transformation"><span class="header-section-number">2.3.5</span> Data transformation</h3>
+<p>= the process of changing the data’s format, structure, or values.</p>
+<p>Data transformation usually involves:</p>
+<ul>
+<li>Adding, copying, or replicating data</li>
+<li>Deleting fields or records</li>
+<li>Standardizing the names of variables</li>
+<li>Renaming, moving, or combining columns in a database</li>
+<li>Joining one set of data with another</li>
+<li>Saving a file in a different format. For example, saving a spreadsheet as a comma separated values (CSV) file.</li>
+</ul>
+<p>Goals for data transformation might be:</p>
+<ul>
+<li>Data organization: better organized data is easier to use</li>
+<li>Data compatibility: different applications or systems can then use the same data</li>
+<li>Data migration: data with matching formats can be moved from one system to another</li>
+<li>Data merging: data with the same organization can be merged together</li>
+<li>Data enhancement: data can be displayed with more detailed fields</li>
+<li>Data comparison: apples-to-apples comparisons of the data can then be made</li>
 </ul>
 
 
@@ -355,6 +402,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../code/2_bias_ethics.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Bias, credibility, privacy, ethics and access</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

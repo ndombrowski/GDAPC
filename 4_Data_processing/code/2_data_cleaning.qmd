@@ -1,0 +1,227 @@
+# Data cleaning
+
+The problem with data cleaning is that it usually requires a lot of  time, energy, and attention from a junior data analyst. One of the best ways to lessen the negative impacts of data cleaning is to have a plan of action or a specific approach to cleaning the data.
+
+## Basics
+
+**Dirty data** is data that's incomplete, incorrect, or irrelevant to the problem you're trying to solve.
+
+**Data engineers** transform data into a useful format for analysis and give it a reliable infrastructure. This means they develop, maintain, and test databases, data processors and related systems.
+
+**Data warehousing specialists** develop processes and procedures to effectively store and organize data. They make sure that data is available, secure, and backed up to prevent loss. 
+
+A **null** is an indication that a value does not exist in a data set. Note that it's not the same as a zero. In the case of a survey, a null would mean the customers skipped that question. A zero would mean they provided zero as their response.
+
+
+## Recognzing and remedying dirty data
+
+Types of dirty data:
+
+- Duplicate data
+- Outdated data
+- Incomplete data
+- Incorrect/inaccurate data
+- Inconsistent data or formatting
+- Missing data or nulls
+- Different currencies, different date formats, etc
+- Inconsistent field length, i.e. **field length** is a tool for determining how many characters can be keyed into a field. his is part of data validation. **Data validation** is a tool for checking the accuracy and quality of data before adding or importing it.
+
+
+## Cleaning data
+
+Some of the errors you might come across while cleaning your data could include:
+
+- Not checking spelling errors
+- Forgetting to document errors
+- Not checking for misfielded values, i.e. a misfielded value happens when the values are entered into the wrong field
+- Overlooking missing values
+- Looking at a subset of the data and not the full picture
+- Loosing track of business objectives
+- Not fixing the source of the error
+- Not analyzing the system prior to cleaning
+- Not backing up your data prior to cleaning
+- Not accounting for data cleaning in your deadline/process
+
+**Data merging** is the process of combining two or more datasets into a single dataset. This presents a unique challenge because when two totally different datasets are combined, the information is almost guaranteed to be inconsistent and misaligned.
+
+**Compatibility** describes how well two or more datasets are able to work together. Questions to ask:
+- Do I have all the data I need?
+- Does the data I need exists within these datasets?
+- Do the datasets need to be cleaned or are they ready for me to use?
+- Are the datasets cleaned to the same standard?
+
+Resources:
+
+- [Top ten ways to clean your data](https://support.microsoft.com/en-us/office/top-ten-ways-to-clean-your-data-2844b620-677c-47a7-ac3e-c2e157d1db19): Review an orderly guide to data cleaning in Microsoft Excel.
+- [10 Google Workspace tips to clean up data](https://support.google.com/a/users/answer/9604139?hl=en#zippy=): Learn best practices for data cleaning in Google Sheets.
+
+
+## Data cleaning in spreadsheets
+
+### Conditional formatting
+
+**Conditional formatting** is a spreadsheet tool that changes how cells appear when values meet (or don't meet) specific conditions. We can for example use it to highlight blank cells.
+
+First, we select the columns we want to work on.
+
+To select non-adjacent rows or columns, hold Ctrl and select the row or column numbers (in my case the windows button). I.e. we can first select all cells and then press control and i.e. columns F and H if we want to unselect them.
+
+Go to format --> conditional formatting --> format rules --> is empty --> change formatting style to pink
+
+
+### Removing duplicates
+
+Go to data --> data cleanup --> remove duplicates
+
+
+### Making formats consistent
+
+I.e. sometimes date formats are not consistent, to clean this:
+
+Select relevant column --> Format --> Number --> Date  
+
+
+### Cleaning text strings
+
+A **text string** is a group of characters within a cell, most often composed of letters. An important characteristic of a text string is its length, which is the number of characters in it. 
+
+**Split** is a tool that divides a text string around the specified character and puts each fragment into a new and separate cell. Split is helpful when you have more than one piece of data in a cell and you want to separate them out, i.e. first and last name. To do this:
+
+Select column --> Data --> Split text to column (in GoogleSheets, delimiter is automaticall detected)
+
+Dealing with text that actually is a number:
+
+Select column --> Data --> Split text to columns
+
+
+### Trim white space
+
+In Excel, you can use the `TRIM` command to get rid of white spaces. In any space beneath your data (such as cell A10), type =TRIM(A1). Then, drag the bottom right corner of the cell to the bottom right to call the data without the white spaces.
+
+### Change Text Lower/Uppercase/Proper Case 
+
+If you are using [Microsoft Excel](https://support.microsoft.com/en-us/office/change-the-case-of-text-in-excel-adc65f5b-958f-46a2-4d23-ab4d5faf48a8), this documentation explains how to use a formula to change the case of a text string. Follow these instructions to clean the string text and then move on to the confirmation and reflection section of this activity. 
+
+If you’re completing this exercise using Google Sheets, you’ll need to install an add-in that will give you the functionality needed to easily clean string data and change cases. 
+
+Google Sheets Add-on Instructions:
+
+- Click on the Add-Ons option at the top of Google Sheets.
+- Click on Get add-ons.
+- Search for ChangeCase.
+- Select the column you want to edit
+- Click on the Add-Ons tab and select ChangeCase. Select the option All uppercase. Notice the other options that you could have chosen if needed.
+
+
+### Delete formatting
+
+f you want to clear the formatting for any or all cells, you can find the command in the Format tab. To clear formatting:
+
+1. Select the data for which you want to delete the formatting. In this case, highlight all the data in the spreadsheet by clicking and dragging over Rows 1-8.
+2. Click the Format tab and select the Clear Formatting option.
+
+In Excel, go to the Home tab, then hover over Clear and select Clear Formats.
+
+You will notice that all the cells have had their formatting removed.
+
+
+## Optimizing the data cleaning process
+
+### Countif
+
+**COUNTIF** is a function that returns the number of cells that match a specified value. Basically, it counts the number of times a value appears in a range of cells.
+
+Every function has a certain syntax that needs to be followed for it to work. **Syntax** is a predetermined structure that includes all required information and its proper placement.
+
+`=COUNTIF(range, "value")` for example: `=COUNTIF(range, "<100")`
+
+
+### Len
+
+**LEN** is a function that tells you the length of the text string by counting the number of characters it contains. This is useful when cleaning data if you have a certain piece of information in your spreadsheet that you know must contain a certain length.
+
+`LEN(range)`
+
+
+### LEFT and RIGHT
+
+**LEFT** is a function that gives you a set number of characters from the left side of a text string. **RIGHT** is a function that gives you a set number of characters from the right side of a text string.
+
+`LEFT(range, number of characters)`
+
+
+### MID
+
+**MID** is a function that gives you a segment from the middle of a text string.
+
+`MID(range, reference starting point, number of middle characters)`
+
+
+### Concatenate
+
+**CONCATENATE**, which is a function that joins together two or more text strings. 
+
+`=CONCATENATE(item1, item2)`
+
+
+### SPLIT
+
+The **SPLIT** function divides text around a specified character or string, and puts each fragment of text into a separate cell in the row. 
+
+`=SPLOT(cell, "delimiter")`
+
+
+
+
+### TRIM
+
+**TRIM** is a function that removes leading, trailing, and repeated spaces in data. Sometimes when you import data, your cells have extra spaces, which can get in the way of your analysis.
+
+`=TRIM(range)`
+
+
+## Workflow automatation
+
+Basically, workflow automation is the process of automating parts of your work. 
+
+- Towards Data Science’s [Automating Scientific Data Analysis](https://towardsdatascience.com/automating-scientific-data-analysis-part-1-c9979cd0817e)
+- MIT News’ [Automating Big-Data Analysis](https://news.mit.edu/2016/automating-big-data-analysis-1021)
+- TechnologyAdvice’s [10 of the Best Options for Workflow Automation Software ](https://technologyadvice.com/blog/information-technology/top-10-workflow-automation-software/)
+
+
+
+## Different data perspectives
+
+### Pivot table
+
+Select the data we want to use --> Insert --> Pivot table --> Add row (i.e. total profits), you can also add another row, i.e. products
+
+
+### VLOOKUP
+
+**VLOOKUP** stands for vertical lookup. It's a function that searches for a certain value in a column to return a corresponding piece of information. When data analysts look up information for a project, it's rare for all of the data they need to be in the same place. Usually, you'll have to search across multiple sheets or even different databases.
+
+`=VLOOKUP(data to look up, 'where to look'!Range, column, false)`
+
+In our example, this will be the name of a spreadsheet followed by an exclamation point. The exclamation point indicates that we're referencing a cell in a different sheet from the one we're currently working in.
+
+The column in the range containing the value to return.
+
+The word "false," means that an exact match is what we're looking for.
+
+
+
+## Data mapping
+
+**Data mapping** is the process of matching fields from one database to another. This is very important to the success of data migration, data integration, and lots of other data management activities.
+
+The first step to data mapping is identifying what data needs to be moved. This includes the tables and the fields within them. We also need to define the desired format for the data once it reaches its destination. 
+
+
+
+
+
+
+
+
+

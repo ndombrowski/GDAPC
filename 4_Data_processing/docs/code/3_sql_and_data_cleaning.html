@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Processing data data - 4&nbsp; Using SQL to clean data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/2_data_cleaning.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Processing data data</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prepare data for processing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_data_integrity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_data_cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data cleaning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_sql_and_data_cleaning.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#widely-used-sql-queries" id="toc-widely-used-sql-queries" class="nav-link active" data-scroll-target="#widely-used-sql-queries"><span class="toc-section-number">4.1</span>  Widely used SQL queries</a>
+  <ul class="collapse">
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select"><span class="toc-section-number">4.1.1</span>  Select</a></li>
+  <li><a href="#insert-data-into-databases" id="toc-insert-data-into-databases" class="nav-link" data-scroll-target="#insert-data-into-databases"><span class="toc-section-number">4.1.2</span>  Insert data into databases</a></li>
+  <li><a href="#creating-a-new-table" id="toc-creating-a-new-table" class="nav-link" data-scroll-target="#creating-a-new-table"><span class="toc-section-number">4.1.3</span>  Creating a new table</a></li>
+  </ul></li>
+  <li><a href="#cleaning-string-variables-using-sql" id="toc-cleaning-string-variables-using-sql" class="nav-link" data-scroll-target="#cleaning-string-variables-using-sql"><span class="toc-section-number">4.2</span>  Cleaning string variables using SQL</a>
+  <ul class="collapse">
+  <li><a href="#removing-duplicates" id="toc-removing-duplicates" class="nav-link" data-scroll-target="#removing-duplicates"><span class="toc-section-number">4.2.1</span>  Removing duplicates</a></li>
+  <li><a href="#length" id="toc-length" class="nav-link" data-scroll-target="#length"><span class="toc-section-number">4.2.2</span>  LENGTH</a></li>
+  <li><a href="#trim" id="toc-trim" class="nav-link" data-scroll-target="#trim"><span class="toc-section-number">4.2.3</span>  TRIM</a></li>
+  <li><a href="#find-min-and-max-values" id="toc-find-min-and-max-values" class="nav-link" data-scroll-target="#find-min-and-max-values"><span class="toc-section-number">4.2.4</span>  Find min and max values</a></li>
+  <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="toc-section-number">4.2.5</span>  Missing data</a></li>
+  <li><a href="#correct-misspellings" id="toc-correct-misspellings" class="nav-link" data-scroll-target="#correct-misspellings"><span class="toc-section-number">4.2.6</span>  Correct misspellings</a></li>
+  <li><a href="#check-how-many-rows-contain-a-specific-piece-of-info" id="toc-check-how-many-rows-contain-a-specific-piece-of-info" class="nav-link" data-scroll-target="#check-how-many-rows-contain-a-specific-piece-of-info"><span class="toc-section-number">4.2.7</span>  Check how many rows contain a specific piece of info</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Spreadsheets: - Generated with a program - Access to the data you input - Stored locally - Smaller datasets - Work on it independently - Build-in functionalities</p>
+<p>SQL: - A language used to interact with database programs - Can pull information from different sources in the database - Stored across a database - Larger datasets - Track changes across a team - Useful across multiple programs</p>
+<p>Some database products have their own variant of SQL, and these different varieties of SQL dialects are what help you communicate with each database product.</p>
+<ul>
+<li>LearnSQL’s blog, <a href="https://learnsql.com/blog/what-sql-dialect-to-learn/">What Is a SQL Dialect, and Which One Should You Learn?</a></li>
+<li>Datacamp’s blog, <a href="https://www.datacamp.com/community/blog/sql-differences">SQL Server, PostgreSQL, MySQL… what’s the difference? Where do I start?</a> Note that there is an error in this blog article. The comparison table incorrectly states that SQlite uses subqueries instead of window functions. Refer to the <a href="https://sqlite.org/windowfunctions.html0">SQLite Window Functions</a> documentation for proper clarification.</li>
+<li>SQL Tutorial’s tutorial, <a href="https://www.sqltutorial.org/what-is-sql/">What is SQL</a></li>
+</ul>
+<section id="widely-used-sql-queries" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="widely-used-sql-queries"><span class="header-section-number">4.1</span> Widely used SQL queries</h2>
+<p>Queries were run using BigQuery after uploading the file in <code>data/customer_data.csv</code> as well as <code>data/cars.csv</code> to the sandbox</p>
+<section id="select" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="select"><span class="header-section-number">4.1.1</span> Select</h3>
+<p>SELECT and FROM help specify what data we want to extract from the database and use.</p>
+<pre class="{sql}"><code>SELECT name, city
+FROM `lithe-vault-366813.customer_data.customer_address` 
+LIMIT 5</code></pre>
+</section>
+<section id="insert-data-into-databases" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="insert-data-into-databases"><span class="header-section-number">4.1.2</span> Insert data into databases</h3>
+<p>Notice, with the BigQuery sandbox account, you won’t be able to use <code>INSERT INTO</code> or <code>UPDATE</code></p>
+<p>We add new data like this:</p>
+<ol type="1">
+<li>Define into which table we want to add data</li>
+<li>Specify which columns we’re adding this data to by typing their names in the parentheses</li>
+<li>Say what we want to add</li>
+</ol>
+<pre class="{sql}"><code>INSERT INTO `lithe-vault-366813.customer_data.customer_address`
+    (customer_id, adress, city, state, zipcode, country)
+VALUES 
+    (2645, '333 SQL Road', 'Jackson', 'MI', 49202, 'US')</code></pre>
+<p>We change data like this:</p>
+<ol type="1">
+<li>Define what table we want to update</li>
+<li>Let it know what value we’re trying to change</li>
+<li>Tell SQL where we want to make the change</li>
+</ol>
+<pre class="{sql}"><code>UPDATE `lithe-vault-366813.customer_data.customer_address`
+SET address = '123 New Address'
+WHERE customer_id = 2645</code></pre>
+</section>
+<section id="creating-a-new-table" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="creating-a-new-table"><span class="header-section-number">4.1.3</span> Creating a new table</h3>
+<p>If we want to create a new table for this database, we can use the <code>CREATE TABLE IF NOT EXISTS</code> statement.</p>
+<p>Keep in mind, just running a SQL query doesn’t actually create a table for the data we extract. It just stores it in our local memory. To save it, we’ll need to download it as a spreadsheet or save the result into a new table.</p>
+<p>Another good thing to keep in mind, if you’re creating lots of tables within a database, you’ll want to use the <code>DROP TABLE IF EXISTS</code> statement to clean up after yourself.</p>
+</section>
+</section>
+<section id="cleaning-string-variables-using-sql" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="cleaning-string-variables-using-sql"><span class="header-section-number">4.2</span> Cleaning string variables using SQL</h2>
+<section id="removing-duplicates" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="removing-duplicates"><span class="header-section-number">4.2.1</span> Removing duplicates</h3>
+<p>Earlier, we covered how to remove duplicates in spreadsheets using the Remove duplicates tool. In SQL, we can do the same thing by including <code>DISTINCT</code> in our SELECT statement.</p>
+<pre class="{sql}"><code>SELECT DISTINCT customer_id
+FROM `lithe-vault-366813.customer_data.customer_address` 
+LIMIT 20</code></pre>
+</section>
+<section id="length" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="length"><span class="header-section-number">4.2.2</span> LENGTH</h3>
+<p>If we already know the length our string variables are supposed to be, we can use LENGTH to double-check that our string variables are consistent. For some databases, this query is written as LEN, but it does the same thing.</p>
+<p>To remind ourselves what our results mean, we can label this column in our results as letters_in_country.</p>
+<pre class="{sql}"><code>SELECT LENGTH(country) AS letters_in_country
+FROM `lithe-vault-366813.customer_data.customer_address` </code></pre>
+<p>It seems like almost all of them are 2s, which means the country field contains only two letters. But let’s check out if countries are incorrectly listed in our table.</p>
+<pre class="{sql}"><code>SELECT country
+FROM `lithe-vault-366813.customer_data.customer_address` 
+WHERE LENGTH(country) &gt; 2</code></pre>
+<p>The incorrectly listed countries show up as USA instead of US</p>
+<p>We still need to fix this problem so we can pull a list of all the customers in the US, including the two that have USA instead of US. The good news is that we can account for this error in our results by using the <strong>substring function</strong> in our SQL query.</p>
+<p>We’re going to use the substring function to pull the first two letters of each country so that all of them are consistent and only contain two letters.</p>
+<p>To use the substring function, we first need to tell SQL the column where we found this error, country. Then we specify which letter to start with.Then we specify which letter to start with. We want SQL to pull the first two letters, so we’re starting with the first letter, so we type in 1. Then we need to tell SQL how many letters, including this first letter, to pull. Since we want the first two letters, we need SQL to pull two total letters, so we type in 2.</p>
+<pre class="{sql}"><code>SELECT customer_id
+FROM `lithe-vault-366813.customer_data.customer_address` 
+WHERE SUBSTR(country, 1, 2) = 'US'</code></pre>
+<p>When we run this query, we get a list of all customer IDs of customers whose country is the US, including the customers that had USA instead of US.</p>
+</section>
+<section id="trim" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="trim"><span class="header-section-number">4.2.3</span> TRIM</h3>
+<p>This is really useful if you find entries with extra spaces and need to eliminate those extra spaces for consistency.</p>
+<p>We first want SQL to filter for states that have more than two letters:</p>
+<pre class="{sql}"><code>SELECT  state
+FROM `lithe-vault-366813.customer_data.customer_address` 
+WHERE LENGTH(state) &gt; 2</code></pre>
+<p>We have one state that has more than two letters. But hold on, how can this state that seems like it has two letters, O and H for Ohio, have more than two letters? The extra characters must be a space</p>
+<p>Lets deal with this:</p>
+<pre class="{sql}"><code>SELECT  DISTINCT customer_id
+FROM `lithe-vault-366813.customer_data.customer_address` 
+WHERE TRIM(state) = 'OH'</code></pre>
+</section>
+<section id="find-min-and-max-values" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="find-min-and-max-values"><span class="header-section-number">4.2.4</span> Find min and max values</h3>
+<p>In another dataframe, we inspect car measurements. The length column should contain numeric measurements of the cars. So you will check that the minimum and maximum lengths in the dataset align with the data description, which states that the lengths in this column should range from 141.1 to 208.1.</p>
+<pre class="{sql}"><code>SELECT
+  MIN(length) AS min_length,
+  MAX(length) AS max_length
+FROM `lithe-vault-366813.cars.car_info` </code></pre>
+</section>
+<section id="missing-data" class="level3" data-number="4.2.5">
+<h3 data-number="4.2.5" class="anchored" data-anchor-id="missing-data"><span class="header-section-number">4.2.5</span> Missing data</h3>
+<p>Missing values can create errors or skew your results during analysis. You’re going to want to check your data for null or missing values. These values might appear as a blank cell or the word null in BigQuery.</p>
+<p>We find such instances with:</p>
+<pre class="{sql}"><code>SELECT *
+FROM `lithe-vault-366813.cars.car_info` 
+WHERE num_of_doors IS NULL</code></pre>
+<p>This does not work in the sandbox, but one way to update these values is</p>
+<pre class="{sql}"><code>UPDATE cars.car_info
+SET num_of_doors = "four"
+WHERE
+  make = "dodge"
+  AND fuel_type = "gas"
+  AND body_style = "sedan";</code></pre>
+</section>
+<section id="correct-misspellings" class="level3" data-number="4.2.6">
+<h3 data-number="4.2.6" class="anchored" data-anchor-id="correct-misspellings"><span class="header-section-number">4.2.6</span> Correct misspellings</h3>
+<p>Imagine some numbers write tow instead of two, we can correct this with:</p>
+<pre class="{sql}"><code>UPDATE cars.car_info
+SET num_of_cylinders = "two"
+WHERE num_of_cylinders = "tow";</code></pre>
+</section>
+<section id="check-how-many-rows-contain-a-specific-piece-of-info" class="level3" data-number="4.2.7">
+<h3 data-number="4.2.7" class="anchored" data-anchor-id="check-how-many-rows-contain-a-specific-piece-of-info"><span class="header-section-number">4.2.7</span> Check how many rows contain a specific piece of info</h3>
+<p>We have measurements of 70, which is too high. Before you delete anything, you should check to see how many rows contain this erroneous value as a precaution so that you don’t end up deleting 50% of your data. If there are too many (for instance, 20% of your rows have the incorrect 70 value), then you would want to check back in with the sales manager to inquire if these should be deleted or if the 70 should be updated to another value. Use the query below to count how many rows you would be deleting:</p>
+<pre class="{sql}"><code>SELECT COUNT(*) AS num_rows_to_delete
+FROM `lithe-vault-366813.cars.car_info` 
+WHERE compression_ratio = 70;</code></pre>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/2_data_cleaning.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data cleaning</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

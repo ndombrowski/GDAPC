@@ -1,0 +1,217 @@
+---
+title: "Using SQL to clean data"
+execute: 
+  eval: false
+---
+
+Spreadsheets:
+- Generated with a program
+- Access to the data you input
+- Stored locally
+- Smaller datasets
+- Work on it independently
+- Build-in functionalities
+
+SQL:
+- A language used to interact with database programs
+- Can pull information from different sources in the database
+- Stored across a database
+- Larger datasets
+- Track changes across a team
+- Useful across multiple programs 
+
+Some database products have their own variant of SQL, and these different varieties of SQL dialects are what help you communicate with each database product.
+
+- LearnSQL’s blog, [What Is a SQL Dialect, and Which One Should You Learn?](https://learnsql.com/blog/what-sql-dialect-to-learn/)
+- Datacamp’s blog, [SQL Server, PostgreSQL, MySQL... what's the difference? Where do I start?](https://www.datacamp.com/community/blog/sql-differences)
+Note that there is an error in this blog article. The comparison table incorrectly states that SQlite uses subqueries instead of window functions. Refer to the [SQLite Window Functions](https://sqlite.org/windowfunctions.html0) documentation for proper clarification.
+- SQL Tutorial’s tutorial, [What is SQL](https://www.sqltutorial.org/what-is-sql/)
+
+
+## Widely used SQL queries
+
+Queries were run using BigQuery after uploading the file in `data/customer_data.csv` as well as `data/cars.csv` to the sandbox
+
+### Select
+
+SELECT and FROM help specify what data we want to extract from the database and use.
+
+```{sql}
+SELECT name, city
+FROM `lithe-vault-366813.customer_data.customer_address` 
+LIMIT 5
+```
+
+### Insert data into databases
+
+Notice, with the BigQuery sandbox account, you won't be able to use `INSERT INTO` or `UPDATE`
+
+We add new data like this:
+
+1. Define into which table we want to add data
+2. Specify which columns we're adding this data to by typing their names in the parentheses
+3. Say what we want to add
+
+```{sql}
+INSERT INTO `lithe-vault-366813.customer_data.customer_address`
+    (customer_id, adress, city, state, zipcode, country)
+VALUES 
+    (2645, '333 SQL Road', 'Jackson', 'MI', 49202, 'US')
+```
+
+We change data like this:
+
+1. Define what table we want to update
+2. Let it know what value we're trying to change
+3. Tell SQL where we want to make the change
+
+```{sql}
+UPDATE `lithe-vault-366813.customer_data.customer_address`
+SET address = '123 New Address'
+WHERE customer_id = 2645
+```
+
+### Creating a new table
+
+If we want to create a new table for this database, we can use the `CREATE TABLE IF NOT EXISTS` statement. 
+ 
+Keep in mind, just running a SQL query doesn't actually create a table for the data we extract. It just stores it in our local memory. To save it, we'll need to download it as a spreadsheet or save the result into a new table.
+
+Another good thing to keep in mind, if you're creating lots of tables within a database, you'll want to use the `DROP TABLE IF EXISTS` statement to clean up after yourself.
+
+
+
+## Cleaning string variables using SQL
+
+### Removing duplicates
+
+Earlier, we covered how to remove duplicates in spreadsheets using the Remove duplicates tool. In SQL, we can do the same thing by including `DISTINCT` in our SELECT statement. 
+
+```{sql}
+SELECT DISTINCT customer_id
+FROM `lithe-vault-366813.customer_data.customer_address` 
+LIMIT 20
+```
+
+
+### LENGTH
+
+If we already know the length our string variables are supposed to be, we can use LENGTH to double-check that our string variables are consistent. For some databases, this query is written as LEN, but it does the same thing.
+
+To remind ourselves what our results mean, we can label this column in our results as letters_in_country. 
+
+```{sql}
+SELECT LENGTH(country) AS letters_in_country
+FROM `lithe-vault-366813.customer_data.customer_address` 
+```
+
+It seems like almost all of them are 2s, which means the country field contains only two letters. But  let's check out if countries are incorrectly listed in our table. 
+
+```{sql}
+SELECT country
+FROM `lithe-vault-366813.customer_data.customer_address` 
+WHERE LENGTH(country) > 2
+```
+
+The incorrectly listed countries show up as USA instead of US
+
+ We still need to fix this problem so we can pull a list of all the customers in the US, including the two that have USA instead of US. The good news is that we can account for this error in our results by using the **substring function** in our SQL query. 
+
+We're going to use the substring function to pull the first two letters of each country so that all of them are consistent and only contain two letters. 
+
+To use the substring function, we first need to tell SQL the column where we found this error, country. Then we specify which letter to start with.Then we specify which letter to start with. We want SQL to pull the first two letters, so we're starting with the first letter, so we type in 1. Then we need to tell SQL how many letters, including this first letter, to pull. Since we want the first two letters, we need SQL to pull two total letters, so we type in 2.
+
+```{sql}
+SELECT customer_id
+FROM `lithe-vault-366813.customer_data.customer_address` 
+WHERE SUBSTR(country, 1, 2) = 'US'
+```
+
+When we run this query, we get a list of all customer IDs of customers whose country is the US, including the customers that had USA instead of US. 
+
+
+### TRIM
+
+This is really useful if you find entries with extra spaces and need to eliminate those extra spaces for consistency.
+
+We first want SQL to filter for states that have more than two letters:
+
+```{sql}
+SELECT  state
+FROM `lithe-vault-366813.customer_data.customer_address` 
+WHERE LENGTH(state) > 2
+```
+
+We have one state that has more than two letters. But hold on, how can this state that seems like it has two letters, O and H for Ohio, have more than two letters? The extra characters must be a space
+
+Lets deal with this:
+
+```{sql}
+SELECT  DISTINCT customer_id
+FROM `lithe-vault-366813.customer_data.customer_address` 
+WHERE TRIM(state) = 'OH'
+```
+
+
+### Find min and max values
+
+In another dataframe, we inspect car measurements. 
+The length column should contain numeric measurements of the cars. So you will check that the minimum and maximum lengths in the dataset align with the data description, which states that the lengths in this column should range from 141.1 to 208.1. 
+
+```{sql}
+SELECT
+  MIN(length) AS min_length,
+  MAX(length) AS max_length
+FROM `lithe-vault-366813.cars.car_info` 
+```
+
+
+### Missing data
+
+Missing values can create errors or skew your results during analysis. You’re going to want to check your data for null or missing values. These values might appear as a blank cell or the word null in BigQuery. 
+
+We find such instances with:
+
+```{sql}
+SELECT *
+FROM `lithe-vault-366813.cars.car_info` 
+WHERE num_of_doors IS NULL
+```
+
+This does not work in the sandbox, but one way to update these values is 
+
+```{sql}
+UPDATE cars.car_info
+SET num_of_doors = "four"
+WHERE
+  make = "dodge"
+  AND fuel_type = "gas"
+  AND body_style = "sedan";
+```
+
+
+### Correct misspellings
+
+Imagine some numbers write tow instead of two, we can correct this with:
+
+```{sql}
+UPDATE cars.car_info
+SET num_of_cylinders = "two"
+WHERE num_of_cylinders = "tow";
+```
+
+
+### Check how many rows contain a specific piece of info
+
+We have measurements of 70, which is too high. Before you delete anything, you should check to see how many rows contain this erroneous value as a precaution so that you don’t end up deleting 50% of your data. If there are too many (for instance, 20% of your rows have the incorrect 70 value), then you would want to check back in with the sales manager to inquire if these should be deleted or if the 70 should be updated to another value. Use the query below to count how many rows you would be deleting:
+
+```{sql}
+SELECT COUNT(*) AS num_rows_to_delete
+FROM `lithe-vault-366813.cars.car_info` 
+WHERE compression_ratio = 70;
+```
+
+
+
+
+

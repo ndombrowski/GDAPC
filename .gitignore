@@ -1,4 +1,4 @@
-/.quarto/
+*.quarto/
 *.xlsx
 *.pdf
 *.png

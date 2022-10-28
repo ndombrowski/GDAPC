@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Processing data data - 2&nbsp; Data integrity</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/2_data_cleaning.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Processing data data</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prepare data for processing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_data_integrity.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_data_cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data cleaning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_sql_and_data_cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#resources-to-check-data-integrity-in-excel" id="toc-resources-to-check-data-integrity-in-excel" class="nav-link active" data-scroll-target="#resources-to-check-data-integrity-in-excel"><span class="toc-section-number">2.1</span>  Resources to check data integrity in excel</a></li>
+  <li><a href="#dealing-with-insufficient-data" id="toc-dealing-with-insufficient-data" class="nav-link" data-scroll-target="#dealing-with-insufficient-data"><span class="toc-section-number">2.2</span>  Dealing with insufficient data</a>
+  <ul class="collapse">
+  <li><a href="#the-importance-of-sample-size" id="toc-the-importance-of-sample-size" class="nav-link" data-scroll-target="#the-importance-of-sample-size"><span class="toc-section-number">2.2.1</span>  The importance of sample size</a></li>
+  <li><a href="#calculating-sample-size" id="toc-calculating-sample-size" class="nav-link" data-scroll-target="#calculating-sample-size"><span class="toc-section-number">2.2.2</span>  Calculating sample size</a></li>
+  </ul></li>
+  <li><a href="#testing-your-data" id="toc-testing-your-data" class="nav-link" data-scroll-target="#testing-your-data"><span class="toc-section-number">2.3</span>  Testing your data</a>
+  <ul class="collapse">
+  <li><a href="#statistical-power" id="toc-statistical-power" class="nav-link" data-scroll-target="#statistical-power"><span class="toc-section-number">2.3.1</span>  Statistical power</a></li>
+  <li><a href="#determine-the-best-sample-size" id="toc-determine-the-best-sample-size" class="nav-link" data-scroll-target="#determine-the-best-sample-size"><span class="toc-section-number">2.3.2</span>  Determine the best sample size</a></li>
+  <li><a href="#consider-the-margin-of-error" id="toc-consider-the-margin-of-error" class="nav-link" data-scroll-target="#consider-the-margin-of-error"><span class="toc-section-number">2.3.3</span>  Consider the margin of error</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p><strong>Data integrity</strong> is the accuracy, completeness, consistency, and trustworthiness of data throughout its lifecycle. A good analysis depends on the integrity of the data, and data integrity usually depends on using a common format. So it is important to double-check how dates are formatted to make sure what you think is December 10, 2020 isn’t really October 12, 2020, and vice versa.</p>
+<p>Data integrity can be compromised in lots of different ways. There’s a chance data can be compromised every time it’s replicated, transferred, or manipulated in any way. - <strong>Data replication</strong> is the process of storing data in multiple locations. If you’re replicating data at different times in different places, there’s a chance your data will be out of sync. - <strong>Data transfer</strong> is the process of copying data from a storage device to memory, or from one computer to another. - <strong>Data manipulation</strong>: The process of changing data to make it more organized and easier to read</p>
+<p>It’s also important to check that the data you use aligns with the business objective.</p>
+<ul>
+<li>Clean data + alignment to business objective = accurate conclusions</li>
+<li>Alignment to business objective + additional data cleaning = accurate conclusions</li>
+<li>Alignment to business objective + newly discovered variables + constraints = accurate conclusions</li>
+</ul>
+<section id="resources-to-check-data-integrity-in-excel" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="resources-to-check-data-integrity-in-excel"><span class="header-section-number">2.1</span> Resources to check data integrity in excel</h2>
+<ul>
+<li><a href="https://support.microsoft.com/en-us/office/vlookup-function-0bbc8083-26fe-4963-8ab8-93a18ad188a1">VLOOKUP</a> is a spreadsheet function that searches for a certain value in a column to return a related piece of information. Using VLOOKUP can save a lot of time; without it, you have to look up dates and names manually.</li>
+<li><a href="https://support.microsoft.com/en-us/office/datedif-function-25dba1a4-2812-480b-84dd-8b32a451b35c">DATEDIF</a> function to automatically calculate the difference between the dates in column</li>
+</ul>
+</section>
+<section id="dealing-with-insufficient-data" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="dealing-with-insufficient-data"><span class="header-section-number">2.2</span> Dealing with insufficient data</h2>
+<p>Types of insufficient data:</p>
+<ul>
+<li>No data</li>
+<li>To little data</li>
+<li>Wrong data, including data with errors</li>
+<li>Data from only one source</li>
+<li>Data that keeps updating (and thus is still incoming and maybe not complete)</li>
+<li>Outdated data</li>
+<li>Geographically-limited data</li>
+</ul>
+<p>Way to address insufficient data:</p>
+<ul>
+<li>Gather the data on a small scale to perform a preliminary analysis and then request additional time to complete the analysis after you have collected more data</li>
+<li>If there isn’t time to collect data, perform the analysis using proxy data from other datasets</li>
+<li>Identify trends with available data</li>
+<li>Wait for more data if time allows</li>
+<li>Talk with stakeholders and adjust objective</li>
+<li>Look for new dataset</li>
+<li>Identify errors in the data and, if possible, correct them at the source by looking for a pattern in the errors</li>
+</ul>
+<section id="the-importance-of-sample-size" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="the-importance-of-sample-size"><span class="header-section-number">2.2.1</span> The importance of sample size</h3>
+<p>When you use <strong>sample size</strong> or a sample, you use a part of a population that’s representative of the population. The goal is to get enough information from a small group within a population to make predictions or conclusions about the whole population.</p>
+<p>When you only use a small sample of a population, it can lead to uncertainty. You can’t really be 100 percent sure that your statistics are a complete and accurate representation of the population. This leads to <strong>sampling bias</strong>, i.e.&nbsp;when a sample isn’t representative of the population as a whole.</p>
+<p>Using random sampling can help address some of those issues with sampling bias. <strong>Random sampling</strong> is a way of selecting a sample from a population so that every possible type of the sample has an equal chance of being chosen.</p>
+</section>
+<section id="calculating-sample-size" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="calculating-sample-size"><span class="header-section-number">2.2.2</span> Calculating sample size</h3>
+<ul>
+<li><strong>Population</strong>: The entire group that you are interested in for your study. For example, if you are surveying people in your company, the population would be all the employees in your company.</li>
+<li><strong>Sample</strong>: A subset of your population.</li>
+<li><strong>Margin of error</strong>: Since a sample is used to represent a population, the sample’s results are expected to differ from what the result would have been if you had surveyed the entire population. This difference is called the margin of error. The smaller the margin of error, the closer the results of the sample are to what the result would have been if you had surveyed the entire population.</li>
+<li><strong>Confidence level</strong>: How confident you are in the survey results or the probability that your sample accurately reflects the greater population. For example, a 95% confidence level means that if you were to run the same survey 100 times, you would get similar results 95 of those 100 times. Confidence level is targeted before you start your study because it will affect how big your margin of error is at the end of your study. Having a 99 percent confidence level is ideal. But most industries hope for at least a 90 or 95 percent confidence level.</li>
+<li><strong>Confidence interval</strong>: The range of possible values that the population’s result would be at the confidence level of the study. This range is the sample result +/- the margin of error.</li>
+<li><strong>Statistical significance</strong>: The determination of whether your result could be due to random chance or not. The greater the significance, the less due to chance.</li>
+</ul>
+<p>Basic rules:</p>
+<ul>
+<li>Don’t use a sample size less than 30. It has been statistically proven that 30 is the smallest sample size where an average result of a sample starts to represent the average result of a population. This recommendation is based on the Central Limit Theorem (CLT). As sample size increases, the results more closely resemble the normal (bell-shaped) distribution from a large number of samples. A sample of 30 is the smallest sample size for which the CLT is still valid.</li>
+<li>The confidence level most commonly used is 95%, but 90% can work in some cases.</li>
+<li>For a higher confidence level, use a larger sample size</li>
+<li>To decrease the margin of error, use a larger sample size</li>
+<li>For greater statistical significance, use a larger sample size</li>
+</ul>
+<p>Refer to the <a href="https://www.coursera.org/learn/process-data/lecture/mSj5A/determine-the-best-sample-size">Determine the Best Sample Size video</a> for a demonstration of a sample size calculator, or refer to the <a href="https://www.coursera.org/learn/process-data/supplement/ZqcDw/sample-size-calculator">Sample Size Calculator reading</a> for additional information.</p>
+</section>
+</section>
+<section id="testing-your-data" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="testing-your-data"><span class="header-section-number">2.3</span> Testing your data</h2>
+<section id="statistical-power" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="statistical-power"><span class="header-section-number">2.3.1</span> Statistical power</h3>
+<ul>
+<li><strong>Statistical power</strong> is the probability of getting meaningful results from a test</li>
+<li><strong>Hypothesis testing</strong> is a way to see if a survey or experiment has meaningful results</li>
+<li>If a test is statistically significant, it means the results of the test are real and not an error caused by random chance. Usually, you need a statistical power of at least 0.8 or 80% to consider your results statistically significant</li>
+</ul>
+<p>Read more <a href="https://machinelearningmastery.com/statistical-power-and-power-analysis-in-python/">here</a></p>
+</section>
+<section id="determine-the-best-sample-size" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="determine-the-best-sample-size"><span class="header-section-number">2.3.2</span> Determine the best sample size</h3>
+<p>A sample size calculator tells you how many people you need to interview (or things you need to test) to get results that represent the target population. See the tutorials folder for an example of a calculator for sample size. To other examples:</p>
+<ul>
+<li><a href="https://www.surveymonkey.com/mp/sample-size-calculator/">Sample size calculator by surveymonkey.com</a></li>
+<li><a href="http://www.raosoft.com/samplesize.html">Sample size calculator by raosoft.com</a></li>
+</ul>
+<p>After you have plugged your information into one of these calculators, it will give you a recommended sample size. Keep in mind, the calculated sample size is the minimum number to achieve what you input for confidence level and margin of error.</p>
+<p>If you are working with a survey, you will also need to think about the estimated response rate to figure out how many surveys you will need to send out. For example, if you need a sample size of 100 individuals and your estimated response rate is 10%, you will need to send your survey to 1,000 individuals to get the 100 responses you need for your analysis.</p>
+</section>
+<section id="consider-the-margin-of-error" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="consider-the-margin-of-error"><span class="header-section-number">2.3.3</span> Consider the margin of error</h3>
+<p>Margin of error is the maximum amount that the sample results are expected to differ from those of the actual population. More technically, the margin of error defines a range of values below and above the average result for the sample.</p>
+<p>Margin of error helps you understand how reliable the data from your hypothesis testing is.</p>
+<p>The closer to zero the margin of error, the closer your results from your sample would match results from the overall population.</p>
+<p>To calculate the margin of error, we need:</p>
+<ul>
+<li>Population size</li>
+<li>Sample size</li>
+<li>Confidence level</li>
+</ul>
+<p>Some online calculators:</p>
+<ul>
+<li><a href="https://goodcalculators.com/margin-of-error-calculator/">Margin of error calculator by G​ood Calculators (free online calculators)</a></li>
+<li><a href="https://www.checkmarket.com/sample-size-calculator/#sample-size-margin-of-error-calculator">Margin of error calculator by CheckMarket</a></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prepare data for processing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/2_data_cleaning.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data cleaning</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
