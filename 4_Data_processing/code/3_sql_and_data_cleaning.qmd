@@ -212,6 +212,80 @@ WHERE compression_ratio = 70;
 ```
 
 
+### Converting between data types
+
+#### Strings and numbers
+
+CAST can be used to convert anything from one data type to another.
+
+Let's start by trying to the different purchase prices. For this, we loaded the table `data/Furniture-Store-Transaction-Table.csv` into BigQuery
+
+```{sql}
+SELECT purchase_price  
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+ORDER BY purchase_price DESC
+```
+
+When we do this we see there is sth wrong with the order:
+
+1: 89.85  
+2: 799.99  
+3: 58.89  
+
+The problem is that the database doesn't recognize that these are numbers, so it didn't sort them that way. If we go back to the customer_purchase table and take a look at its schema, we can see what datatype that database thinks purchase underscore price is a string while it is a **float**, i.e. a number that contains a decimal.
+
+**Typecasting** means converting data from one type to another, which is what we'll do with the CAST function.
+
+```{sql}
+SELECT CAST(purchase_price AS FLOAT64)  
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+ORDER BY CAST(purchase_price AS FLOAT64) DESC
+```
+
+#### Dates
+
+The furniture store owner has asked us to look at purchases that occurred during their sales promotion period in December. 
+
+```{sql}
+SELECT date, purchase_price 
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+WHERE date BETWEEN '2020-12-01' AND '2020-12-31'
+```
+
+Four purchases occurred in December, but the date field looks odd. That's because the database recognizes this date field as datetime, which consists of the date and time. Our SQL query still works correctly, even if the date field is datetime instead of date. But we can tell SQL to convert the date field into the date data type so we see just the day and not the time. 
+
+```{sql}
+SELECT CAST(date AS date) AS date_only,
+  purchase_price
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+WHERE date BETWEEN '2020-12-01' AND '2020-12-31'
+```
+
+### Combining strings
+
+**CONCAT** lets you add strings together to create new text strings that can be used as unique keys. 
+
+The owner wants to know if customers prefer certain colors, so the owner can manage store inventory accordingly. The problem is, the product_code is the same, regardless of the product color. We need to find another way to separate products by color.
+
+```{sql}
+SELECT CONCAT(product_code, product_color) AS new_product_code
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+WHERE product = 'couch'
+```
+
+
+### Identify non-null values
+
+**COALESCE** can be used to return non-null values in a list. Null values are missing values. If you have a field that's optional in your table, it'll have null in that field for rows that don't have appropriate values to put there. I.e. we have some rows with missing product information.
+
+We want to use the product_name column to understand what kind of product was sold. We want a list of product names, but if names aren't available, then give us the product code. Here is where we type "COALESCE." then we tell SQL which column to check first, product, and which column to check second if the first column is null, product_code.
+
+```{sql}
+SELECT DISTINCT COALESCE(product, product_code) AS product_info
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+```
+
+
 
 
 

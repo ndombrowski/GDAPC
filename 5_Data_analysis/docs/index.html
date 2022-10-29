@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nina Dombrowski">
 
-<title>GDA: Processing data data</title>
+<title>GDA: Data analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./code/1_data_integrity.html" rel="next">
+<link href="./code/1_organizing_data.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">GDA: Processing data data</h1>
+      <h1 class="quarto-secondary-nav-title">GDA: Data analysis</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">GDA: Processing data data</a> 
+      <a href="./">GDA: Data analysis</a> 
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -95,32 +95,17 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prepare data for processing</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Analyze Data to Answer Questions</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./code/1_data_integrity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></a>
+  <a href="./code/1_organizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Organizing the data to begin analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./code/2_data_cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data cleaning</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./code/3_sql_and_data_cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./code/4_verifying_and_reporting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Verifying and reporting results</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./code/5_hiring_process.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">About the data-analyst hiring process</span></a>
+  <a href="./code/2_converting_and_formatting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Converting and formatting data</span></a>
   </div>
 </li>
     </ul>
@@ -132,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#prepare-data-for-processing" id="toc-prepare-data-for-processing" class="nav-link active" data-scroll-target="#prepare-data-for-processing"><span class="toc-section-number">1</span>  Prepare data for processing</a></li>
+  <li><a href="#analyze-data-to-answer-questions" id="toc-analyze-data-to-answer-questions" class="nav-link active" data-scroll-target="#analyze-data-to-answer-questions"><span class="toc-section-number">1</span>  Analyze Data to Answer Questions</a></li>
   </ul>
 </nav>
     </div>
@@ -141,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">GDA: Processing data data</h1>
+<h1 class="title d-none d-lg-block">GDA: Data analysis</h1>
 </div>
 
 
@@ -161,18 +146,16 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="prepare-data-for-processing" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Prepare data for processing</h1>
-<p>You’ll learn how to check and clean your data using spreadsheets and SQL as well as how to verify and report your data cleaning results. Current Google data analysts will continue to instruct and provide you with hands-on ways to accomplish common data analyst tasks with the best tools and resources.</p>
-<p>Learners who complete this certificate program will be equipped to apply for introductory-level jobs as data analysts. No previous experience is necessary.</p>
-<p>By the end of this course, you will be able to do the following:</p>
+<section id="analyze-data-to-answer-questions" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Analyze Data to Answer Questions</h1>
+<p>In this course, you’ll explore the “analyze” phase of the data analysis process. You’ll take what you’ve learned to this point and apply it to your analysis to make sense of the data you’ve collected. You’ll learn how to organize and format your data using spreadsheets and SQL to help you look at and think about your data in different ways. You’ll also find out how to perform complex calculations on your data to complete business objectives. You’ll learn how to use formulas, functions, and SQL queries as you conduct your analysis.</p>
+<p>By the end of this course, you will:</p>
 <ul>
-<li>Learn how to check for data integrity.</li>
-<li>Discover data cleaning techniques using spreadsheets.</li>
-<li>Develop basic SQL queries for use on databases.</li>
-<li>Apply basic SQL functions for cleaning and transforming data.</li>
-<li>Gain an understanding of how to verify the results of cleaning data.</li>
-<li>Explore the elements and importance of data cleaning reports.</li>
+<li>Learn how to organize data for analysis.</li>
+<li>Discover the processes for formatting and adjusting data.</li>
+<li>Gain an understanding of how to aggregate data in spreadsheets and by using SQL.</li>
+<li>Use formulas and functions in spreadsheets for data calculations.</li>
+<li>Learn how to complete calculations using SQL queries.</li>
 </ul>
 
 
@@ -281,8 +264,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./code/1_data_integrity.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./code/1_organizing_data.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Organizing the data to begin analysis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

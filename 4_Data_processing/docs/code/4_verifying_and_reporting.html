@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Processing data data - 5&nbsp; Verifying and reporting results</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/5_hiring_process.html" rel="next">
+<link href="../code/3_sql_and_data_cleaning.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Verifying and reporting results</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Processing data data</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Prepare data for processing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_data_integrity.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data integrity</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_data_cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data cleaning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_sql_and_data_cleaning.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_verifying_and_reporting.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Verifying and reporting results</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/5_hiring_process.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">About the data-analyst hiring process</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#manually-verifying-data" id="toc-manually-verifying-data" class="nav-link active" data-scroll-target="#manually-verifying-data"><span class="toc-section-number">5.1</span>  Manually verifying data</a>
+  <ul class="collapse">
+  <li><a href="#dealing-with-misspellings" id="toc-dealing-with-misspellings" class="nav-link" data-scroll-target="#dealing-with-misspellings"><span class="toc-section-number">5.1.1</span>  Dealing with misspellings</a></li>
+  </ul></li>
+  <li><a href="#documenting-results-and-the-cleaning-process" id="toc-documenting-results-and-the-cleaning-process" class="nav-link" data-scroll-target="#documenting-results-and-the-cleaning-process"><span class="toc-section-number">5.2</span>  Documenting results and the cleaning process</a></li>
+  <li><a href="#advanced-functions-for-speedy-data-cleaning" id="toc-advanced-functions-for-speedy-data-cleaning" class="nav-link" data-scroll-target="#advanced-functions-for-speedy-data-cleaning"><span class="toc-section-number">5.3</span>  Advanced functions for speedy data cleaning</a>
+  <ul class="collapse">
+  <li><a href="#insert-data" id="toc-insert-data" class="nav-link" data-scroll-target="#insert-data"><span class="toc-section-number">5.3.1</span>  Insert data</a></li>
+  <li><a href="#pulling-data-from-other-data-sources" id="toc-pulling-data-from-other-data-sources" class="nav-link" data-scroll-target="#pulling-data-from-other-data-sources"><span class="toc-section-number">5.3.2</span>  Pulling data from other data sources</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Verifying and reporting results</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="manually-verifying-data" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="manually-verifying-data"><span class="header-section-number">5.1</span> Manually verifying data</h2>
+<p><strong>Verification</strong> is a process to confirm that a data cleaning effort was well- executed and the resulting data is accurate and reliable. It involves rechecking your clean dataset, doing some manual clean ups if needed, and taking a moment to sit back and really think about the original purpose of the project.</p>
+<p>The first step in verification is returning to your original, unclean dataset and comparing it to what you have now.</p>
+<p>The most common problems are:</p>
+<ul>
+<li>Sources of errors: Did you use the right tools and functions to find the source of the errors in your dataset?</li>
+<li>Null data: Did you search for NULLs using conditional formatting and filters?</li>
+<li>Misspelled words: Did you locate all misspellings?</li>
+<li>Mistyped numbers: Did you double-check that your numeric data has been entered correctly?</li>
+<li>Extra spaces and characters: Did you remove any extra spaces or characters using the TRIM function?</li>
+<li>Duplicates: Did you remove duplicates in spreadsheets using the Remove Duplicates function or DISTINCT in SQL?</li>
+<li>Mismatched data types: Did you check that numeric, date, and string data are typecast correctly?</li>
+<li>Messy (inconsistent) strings: Did you make sure that all of your strings are consistent and meaningful?</li>
+<li>Messy (inconsistent) date formats: Did you format the dates consistently throughout your dataset?</li>
+<li>Misleading variable labels (columns): Did you name your columns meaningfully?</li>
+<li>Truncated data: Did you check for truncated or missing data that needs correction?</li>
+<li>Business Logic: Did you check that the data makes sense given your knowledge of the business?</li>
+</ul>
+<p>Seeing the big picture:</p>
+<ol type="1">
+<li>Consider the business problem to know what data you need</li>
+<li>Consider the goal of your project and if the data helps achieve that goal</li>
+<li>Consider the data, i.e.&nbsp;is it capable of meeting the goals; asking whether the data makes sense</li>
+</ol>
+<section id="dealing-with-misspellings" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="dealing-with-misspellings"><span class="header-section-number">5.1.1</span> Dealing with misspellings</h3>
+<p><strong>COUNTA</strong> counts the total number of values within a specified range. Note that there’s also function called <strong>COUNT</strong>, which only counts the numerical values within a specified range.</p>
+<p>If you’re working in SQL, you can address misspellings using a <strong>CASE</strong> statement. The CASE statement goes through one or more conditions and returns a value as soon as a condition is met. I.e. in the example below, a customers first name was misspelled</p>
+<pre class="{sql}"><code>SELECT customer_id, 
+    CASE
+        WHEN first_name = 'Tnoy' THEN 'Tony'
+        WHEN first_name = 'Tmo' THEN 'Tom'
+        ELSE first_name
+        END AS cleaned_name
+FROM customer_data.customer_name</code></pre>
+</section>
+</section>
+<section id="documenting-results-and-the-cleaning-process" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="documenting-results-and-the-cleaning-process"><span class="header-section-number">5.2</span> Documenting results and the cleaning process</h2>
+<p><strong>Documentation</strong> which is the process of tracking changes, additions, deletions and errors involved in your data cleaning effort.</p>
+<p>Having a record of how a data set evolved does three very important things:</p>
+<ol type="1">
+<li>Recover data-cleaning errors</li>
+<li>Inform other users of changes</li>
+<li>Determine the quality of the data</li>
+</ol>
+<p>A <strong>changelog</strong> is a file containing a chronologically ordered list of modifications made to a project. It’s usually organized by version and includes the date followed by a list of added, improved, and removed features.</p>
+<p>Typically, a changelog records this type of information:</p>
+<ul>
+<li>Data, file, formula, query, or any other component that changed</li>
+<li>Description of what changed</li>
+<li>Date of the change</li>
+<li>Person who made the change</li>
+<li>Person who approved the change</li>
+<li>Version number</li>
+<li>Reason for the change</li>
+</ul>
+<p>Categories of changes:</p>
+<ul>
+<li>Added: new features introduced</li>
+<li>Changed: changes in existing functionality</li>
+<li>Deprecated: features about to be removed</li>
+<li>Removed: features that have been removed</li>
+<li>Fixed: bug fixes</li>
+<li>Security: lowering vulnerabilities</li>
+</ul>
+<p>General rules:</p>
+<ul>
+<li>Changelogs are for humans, not machines, so write legibly.</li>
+<li>Every version should have its own entry.</li>
+<li>Each change should have its own line.</li>
+<li>Group the same types of changes. For example, Fixed should be grouped separately from Added.</li>
+<li>Versions should be ordered chronologically starting with the latest.</li>
+<li>The release date of each version should be noted.</li>
+</ul>
+<p>Let’s start with the spreadsheet. We can use Sheet’s version history, which provides a real-time tracker of all the changes and who made them from individual cells to the entire worksheet. To find this feature, click the File tab, and then select Version history. If you want to check out changes in a specific cell, we can right-click and select Show Edit History.</p>
+<p>The way you create and view a changelog with SQL depends on the software program you’re using. Essentially, all you have to do is specify exactly what you did and why when you commit a query to the repository as a new and improved query. Another option is to just add comments as you go while you’re cleaning data in SQL. Query history, which tracks all the queries you’ve run in BigQuery. If an analyst is making changes to an existing SQL query that is shared across the company, the company most likely uses what is called a <strong>version control system</strong>.</p>
+<p>Here is how a version control system affects a change to a query:</p>
+<ul>
+<li>A company has official versions of important queries in their version control system.</li>
+<li>An analyst makes sure the most up-to-date version of the query is the one they will change. This is called <strong>syncing</strong></li>
+<li>The analyst makes a change to the query.</li>
+<li>The analyst might ask someone to review this change. This is called a <strong>code review</strong> and can be informally or formally done. An informal review could be as simple as asking a senior analyst to take a look at the change.</li>
+<li>After a reviewer approves the change, the analyst submits the updated version of the query to a repository in the company’s version control system. This is called a <strong>code commit</strong>. A best practice is to document exactly what the change was and why it was made in a comments area. Going back to our example of a query that pulls daily revenue, a comment might be: Updated revenue to include revenue coming from the new product, Calypso.</li>
+<li>After the change is submitted, everyone else in the company will be able to access and use this new query when they sync to the most up-to-date queries stored in the version control system.</li>
+<li>If the query has a problem or business needs change, the analyst can undo the change to the query using the version control system. The analyst can look at a chronological list of all changes made to the query and who made each change. Then, after finding their own change, the analyst can revert to the previous version.</li>
+<li>The query is back to what it was before the analyst made the change. And everyone at the company sees this reverted, original query, too.</li>
+</ul>
+</section>
+<section id="advanced-functions-for-speedy-data-cleaning" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="advanced-functions-for-speedy-data-cleaning"><span class="header-section-number">5.3</span> Advanced functions for speedy data cleaning</h2>
+<section id="insert-data" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="insert-data"><span class="header-section-number">5.3.1</span> Insert data</h3>
+<p>The <a href="https://support.google.com/docs/answer/3093340?hl=en">IMPORTRANGE</a> function in Google Sheets and the <a href="https://professor-excel.com/how-to-paste-cell-links/">Paste Link</a> feature (a Paste Special option in Microsoft Excel) both allow you to insert data from one sheet to another. Using these on a large amount of data is more efficient than manual copying and pasting.</p>
+</section>
+<section id="pulling-data-from-other-data-sources" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="pulling-data-from-other-data-sources"><span class="header-section-number">5.3.2</span> Pulling data from other data sources</h3>
+<p>The <a href="https://support.google.com/docs/answer/3093343?hl=en">QUERY</a> function is also useful when you want to pull data from another spreadsheet. The QUERY function’s SQL-like ability can extract specific data within a spreadsheet. For a large amount of data, using the QUERY function is faster than filtering data manually.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/3_sql_and_data_cleaning.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/5_hiring_process.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">About the data-analyst hiring process</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

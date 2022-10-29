@@ -1,0 +1,70 @@
+# About the data-analyst hiring process
+
+## Resumees
+
+If you are transitioning from a different career and don’t yet have relevant work experience, then you may want to pick a format that highlights your technical skills and portfolio projects. Some resume formats include a Summary or Goals section at the top to help candidates add context to their application, while other resume formats avoid these sections completely and save that space for sections such as Skills and Experience.  
+
+Whatever format you pick, make sure to follow the one-page rule and keep the completed version on just a single page.
+
+The summary section might be a good spot to point out if you're transitioning into a new career role.
+
+Focus on your accomplishments first, and explain them using the formula “Accomplished X, as measured by Y, by doing Z.” Phrase your work experience and duties using Problem-Action-Result (PAR) statements. 
+
+
+### Technical skills
+
+Example skills to add:
+
+- Strong analytical skills
+- Pattern recognition
+- Relational databases and SQL
+- Strong data visualization skills
+- Proficiency with spreadsheets, SQL, R, and Tableau
+
+Add a section for programming languages
+
+
+### Soft skills
+
+- Presentation skills
+- Collaboration 
+- Communication
+- Research
+- Problem-solving skills 
+- Adaptability 
+-  Attention to detail 
+
+
+
+
+
+## Kaggle's CareerCon resources
+
+Kaggle’s CareerCon is an annual and free digital event whose aim is to help new data analysts land their first job in the field. Browse the full sessions for [CareerCon 2019](https://www.youtube.com/playlist?list=PLqFaTIg4myu-npFrYu6cO7h7AI6bkcOlL) and check out [Portfolio and resume analysis with data science hiring managers](https://www.youtube.com/watch?v=cBbYhhH399c&list=PLqFaTIg4myu-npFrYu6cO7h7AI6bkcOlL&index=8): A panel of hiring managers discusses what they are seeking in candidates and how they examine different resumes submitted by job seekers like you. 
+
+Other resources:
+
+- [How to build a compelling data science portfolio and resume](https://www.youtube.com/watch?v=xrhPjE7wHas&list=PLqFaTIg4myu-dNobDHQZPrD2wH27PthCG)
+- [Overview of the Data Science Interview Process](https://www.youtube.com/watch?v=X6orAXDIrds&list=PLqFaTIg4myu-dNobDHQZPrD2wH27PthCG&index=5)
+- [Live Breakdown of Common Data Science Interview Questions](https://www.youtube.com/watch?v=aXUsrKPTBvY&list=PLqFaTIg4myu-dNobDHQZPrD2wH27PthCG&index=6)
+- [Am I a Good Fit? Identifying Your Best Data Science Job Opportunities](https://www.youtube.com/watch?v=0W0Zrc-m5r8&list=PLqFaTIg4myu-dNobDHQZPrD2wH27PthCG&index=2)
+- [Real Stories from a Panel of Successful Career Switchers](https://www.youtube.com/watch?v=iP0Fxg4oqUQ&list=PLqFaTIg4myu-dNobDHQZPrD2wH27PthCG&index=8)
+
+
+
+
+
+As the survey has too few responses and numerous duplicates that are skewing results, you should remove the duplicates and continue analyzing the remaining 29 responses.
+
+false
+
+
+She says: Spreadsheets have a great tool for that called remove duplicates. Does this mean the team has to remove the duplicate data in a spreadsheet before transferring data to our database?
+
+no
+
+
+
+
+
+

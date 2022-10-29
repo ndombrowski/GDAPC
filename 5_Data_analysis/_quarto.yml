@@ -4,15 +4,13 @@ project:
   output-dir: docs
 
 book:
-  title: "GDA: Processing data data"
+  title: "GDA: Data analysis"
   author: "Nina Dombrowski"
   chapters:
     - index.qmd
-    - code/1_data_integrity.qmd
-    - code/2_data_cleaning.qmd
-    - code/3_sql_and_data_cleaning.qmd
-    - code/4_verifying_and_reporting.qmd
-    - code/5_hiring_process.qmd
+    - code/1_organizing_data.qmd
+    - code/2_converting_and_formatting.qmd
+    - code/3_aggregating_data.qmd
 
 format:
   html:

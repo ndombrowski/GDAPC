@@ -30,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../code/4_verifying_and_reporting.html" rel="next">
 <link href="../code/2_data_cleaning.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -112,6 +113,16 @@ ul.task-list li input[type="checkbox"] {
   <a href="../code/3_sql_and_data_cleaning.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Using SQL to clean data</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_verifying_and_reporting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Verifying and reporting results</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/5_hiring_process.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">About the data-analyst hiring process</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -136,6 +147,9 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#missing-data" id="toc-missing-data" class="nav-link" data-scroll-target="#missing-data"><span class="toc-section-number">4.2.5</span>  Missing data</a></li>
   <li><a href="#correct-misspellings" id="toc-correct-misspellings" class="nav-link" data-scroll-target="#correct-misspellings"><span class="toc-section-number">4.2.6</span>  Correct misspellings</a></li>
   <li><a href="#check-how-many-rows-contain-a-specific-piece-of-info" id="toc-check-how-many-rows-contain-a-specific-piece-of-info" class="nav-link" data-scroll-target="#check-how-many-rows-contain-a-specific-piece-of-info"><span class="toc-section-number">4.2.7</span>  Check how many rows contain a specific piece of info</a></li>
+  <li><a href="#converting-between-data-types" id="toc-converting-between-data-types" class="nav-link" data-scroll-target="#converting-between-data-types"><span class="toc-section-number">4.2.8</span>  Converting between data types</a></li>
+  <li><a href="#combining-strings" id="toc-combining-strings" class="nav-link" data-scroll-target="#combining-strings"><span class="toc-section-number">4.2.9</span>  Combining strings</a></li>
+  <li><a href="#identify-non-null-values" id="toc-identify-non-null-values" class="nav-link" data-scroll-target="#identify-non-null-values"><span class="toc-section-number">4.2.10</span>  Identify non-null values</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -284,6 +298,53 @@ WHERE num_of_cylinders = "tow";</code></pre>
 <pre class="{sql}"><code>SELECT COUNT(*) AS num_rows_to_delete
 FROM `lithe-vault-366813.cars.car_info` 
 WHERE compression_ratio = 70;</code></pre>
+</section>
+<section id="converting-between-data-types" class="level3" data-number="4.2.8">
+<h3 data-number="4.2.8" class="anchored" data-anchor-id="converting-between-data-types"><span class="header-section-number">4.2.8</span> Converting between data types</h3>
+<section id="strings-and-numbers" class="level4" data-number="4.2.8.1">
+<h4 data-number="4.2.8.1" class="anchored" data-anchor-id="strings-and-numbers"><span class="header-section-number">4.2.8.1</span> Strings and numbers</h4>
+<p>CAST can be used to convert anything from one data type to another.</p>
+<p>Let’s start by trying to the different purchase prices. For this, we loaded the table <code>data/Furniture-Store-Transaction-Table.csv</code> into BigQuery</p>
+<pre class="{sql}"><code>SELECT purchase_price  
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+ORDER BY purchase_price DESC</code></pre>
+<p>When we do this we see there is sth wrong with the order:</p>
+<p>1: 89.85<br>
+2: 799.99<br>
+3: 58.89</p>
+<p>The problem is that the database doesn’t recognize that these are numbers, so it didn’t sort them that way. If we go back to the customer_purchase table and take a look at its schema, we can see what datatype that database thinks purchase underscore price is a string while it is a <strong>float</strong>, i.e.&nbsp;a number that contains a decimal.</p>
+<p><strong>Typecasting</strong> means converting data from one type to another, which is what we’ll do with the CAST function.</p>
+<pre class="{sql}"><code>SELECT CAST(purchase_price AS FLOAT64)  
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+ORDER BY CAST(purchase_price AS FLOAT64) DESC</code></pre>
+</section>
+<section id="dates" class="level4" data-number="4.2.8.2">
+<h4 data-number="4.2.8.2" class="anchored" data-anchor-id="dates"><span class="header-section-number">4.2.8.2</span> Dates</h4>
+<p>The furniture store owner has asked us to look at purchases that occurred during their sales promotion period in December.</p>
+<pre class="{sql}"><code>SELECT date, purchase_price 
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+WHERE date BETWEEN '2020-12-01' AND '2020-12-31'</code></pre>
+<p>Four purchases occurred in December, but the date field looks odd. That’s because the database recognizes this date field as datetime, which consists of the date and time. Our SQL query still works correctly, even if the date field is datetime instead of date. But we can tell SQL to convert the date field into the date data type so we see just the day and not the time.</p>
+<pre class="{sql}"><code>SELECT CAST(date AS date) AS date_only,
+  purchase_price
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+WHERE date BETWEEN '2020-12-01' AND '2020-12-31'</code></pre>
+</section>
+</section>
+<section id="combining-strings" class="level3" data-number="4.2.9">
+<h3 data-number="4.2.9" class="anchored" data-anchor-id="combining-strings"><span class="header-section-number">4.2.9</span> Combining strings</h3>
+<p><strong>CONCAT</strong> lets you add strings together to create new text strings that can be used as unique keys.</p>
+<p>The owner wants to know if customers prefer certain colors, so the owner can manage store inventory accordingly. The problem is, the product_code is the same, regardless of the product color. We need to find another way to separate products by color.</p>
+<pre class="{sql}"><code>SELECT CONCAT(product_code, product_color) AS new_product_code
+FROM `lithe-vault-366813.customer_data.customer_purchase` 
+WHERE product = 'couch'</code></pre>
+</section>
+<section id="identify-non-null-values" class="level3" data-number="4.2.10">
+<h3 data-number="4.2.10" class="anchored" data-anchor-id="identify-non-null-values"><span class="header-section-number">4.2.10</span> Identify non-null values</h3>
+<p><strong>COALESCE</strong> can be used to return non-null values in a list. Null values are missing values. If you have a field that’s optional in your table, it’ll have null in that field for rows that don’t have appropriate values to put there. I.e. we have some rows with missing product information.</p>
+<p>We want to use the product_name column to understand what kind of product was sold. We want a list of product names, but if names aren’t available, then give us the product code. Here is where we type “COALESCE.” then we tell SQL which column to check first, product, and which column to check second if the first column is null, product_code.</p>
+<pre class="{sql}"><code>SELECT DISTINCT COALESCE(product, product_code) AS product_info
+FROM `lithe-vault-366813.customer_data.customer_purchase` </code></pre>
 
 
 </section>
@@ -395,6 +456,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../code/4_verifying_and_reporting.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Verifying and reporting results</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

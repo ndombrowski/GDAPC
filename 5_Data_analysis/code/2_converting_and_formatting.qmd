@@ -1,0 +1,172 @@
+---
+execute: 
+  eval: false
+---
+
+# Converting and formatting data
+
+## Converting data types in spreadsheets
+
+### Converting
+
+On the format toolbar at the top of the sheet, you'll find a menu that can help you convert these numbers into specific data types. 
+
+For another case, imagine the temperatures are in Fahrenheit, but for your analysis you need them to be in Celsius. For this we can use the **CONVERT** function. Make sure after using formulas to convert them to static values to not have weird mess-ups later.
+
+`=CONVERT(B3, "F", "C")`
+
+We could also convert the wind speed from miles per hour (mph) to meters per second (m/s) using CONVERT
+
+`=CONVERT(D2, "mph", "m/s")`
+
+
+
+### Combining data from two cells (spreadsheets)
+
+The **CONCAT** function in spreadsheets can combine any kinds of data.
+
+`=CONCAT(A2, B2)`
+
+If you want to put the space in between, you need to use the full **CONCATENATE** function, which allows you to combine multiple strings. 
+
+`=CONCATENATE(A2, " ",  B2)`
+
+
+### Data validation (spreadsheets)
+
+**Data validation** allows you to control what can and can't be entered in your worksheet. 
+
+Usually, data validation is used to **add drop-down lists** to cells with predetermined options for users to choose from. 
+
+1. Select the column we want to add a drop-down menu to
+2. Go to data --> Data validation
+3. Add the criteria, i.e. if we want to add a list of items other users can choose from
+
+We can also create **custom checkboxes**
+
+1. Go into the column we want to create checkboxes in
+2. Go into the data validation menu: data --> Data validation
+3. Select checkbox
+4. Use custom cell values, i.e. 
+
+We can also use data validation to **protect structured data and formulas**:
+
+1. Go to data --> Data validation
+2. Check the option to reject invalid inputs, which helps make sure our custom tools will continue to run correctly, even if someone puts the wrong data in by mistake
+
+
+### Conditional formatting (spreadsheets)
+
+1. Format --> Conditional formatting
+2. Select cells
+3. Define rules
+
+
+### Transforming data in SQL
+
+Refer to [Conversion Rules in Standard SQL](https://cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) for a full list of functions and associated rules. 
+
+#### The CAST function (syntax and examples)
+
+CAST is an American National Standards Institute (ANSI) function used in lots of programming languages, including BigQuery.
+
+`CAST (expression AS typename)`
+
+Where expression is the data to be converted and typename is the data type to be returned.
+
+The following CAST statement returns a string from a numeric identified by the variable MyCount in the table called MyTable. 
+
+`CAST (MyCount AS STRING) FROM MyTable`
+
+The following CAST statement returns an integer from a string identified by the variable MyVarcharCol in the table called MyTable. (An integer is any whole number.)
+
+`SELECT CAST (MyVarcharCol AS INT) FROM MyTable`
+
+
+
+## Combining multiple datasets
+
+Datetime values have the format of YYYY-MM-DD hh: mm: ss format, so date and time are retained together. The following CAST statement returns a datetime value from a date. 
+
+`SELECT CAST (MyDate AS DATETIME) FROM MyTable`
+
+
+#### The SAFE_CAST function
+
+Using the CAST function in a query that fails returns an error in BigQuery. To avoid errors in the event of a failed query, use the SAFE_CAST function instead. The SAFE_CAST function returns a value of Null instead of an error when a query fails. 
+
+`SELECT SAFE_CAST(MyDate AS STRING) FROM MyTable`
+
+
+References:
+
+- [CAST and CONVERT](https://docs.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql?view=sql-server-ver15): SQL Server reference documentation
+- [MySQL CAST Functions and Operators](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html): MySQL reference documentation
+- [How to: SQL Type Casting](https://www.blendo.co/blog/how-to-sql-type-casting/): Blog about type casting that has links to other SQL short guides
+
+
+## Combining strings using CONCAT in SQL
+
+```{sql}
+SELECT 
+    usertype,
+    --create a new column by combining to columns
+    CONCAT(start_station_name, " to ", end_station_name) AS route,
+    --count number of rows to calculate the nr of trips
+    COUNT(*) AS num_trips,
+    --get average trip duration for each route
+    ROUND(AVG(CAST(tripduration AS int64)/60),2)
+FROM bigquery-public-data.new_york.citibike_trips
+--Since we're using COUNT and AVERAGE functions in our select clause, we have to use GROUP BY to group together summary rows
+GROUP BY start_station_name, end_station_name, usertype
+--- organize data to find the most common trips
+ORDER BY num_trips DESC
+```
+ 
+
+## Strings in spreadsheets
+
+Let's build a simple formula to separate the dates in these strings. We know that LEN tells us the length of a string. Let's check how long these datetime strings are now. 
+
+`=LEN(C2)` tells us that the start-times contain 19 characters
+
+We notice that all of the datetime strings have a space separating the date and the timestamp. So we can actually use FIND to figure out where the date ends.
+
+`=FIND(" ", C3)` tells us that the space is the 11th character.
+
+We can use the LEFT and RIGHT functions to select which parts of the string we want to isolate in a new column. We'll use RIGHT on one of these cells to indicate that we want to grab the right side.
+
+`=RIGHT(C2, 8)` extracts the time (19 - 11 = 8)
+
+`=LEFT(D3, 10)` pulls out the date
+
+
+## Manipulating strings in SQL
+
+- **CONCAT**: A function that adds strings together to create new text strings that can be used as unique keys, i.e. `CONCAT (‘Google’, ‘.com’);`
+- **CONCAT_WS**: A function that adds two or more strings together with a separator, i.e. `CONCAT_WS (‘ . ’, ‘www’, ‘google’, ‘com’)`
+- **CONCAT with +**: Adds two or more strings together using the + operator, i.e. `‘Google’ + ‘.com’`
+
+W3 Schools is an excellent resource for interactive SQL learning, and the following links will guide you through transforming your data using SQL:
+
+- [SQL functions](https://www.w3schools.com/sql/sql_ref_sqlserver.asp): This is a comprehensive list of functions to get you started. Click on each function, where you will learn about the definition, usage, examples, and even be able to create and run your own query for practice. Try it out for yourself!   
+- [SQL Keywords](https://www.w3schools.com/sql/sql_ref_keywords.asp): This is a helpful SQL keywords reference to bookmark as you increase your knowledge of SQL. This list of keywords are reserved words that you will use as your need to perform different operations in the database grows.
+
+
+## Get support when getting stuck
+
+Resources: 
+
+- [List of Google Sheets functions](https://support.google.com/docs/table/25273?hl=en): This is a comprehensive list of the Google Sheets functions and syntax. Each function is listed with a link to learn more.
+- [List of spreadsheet functions](https://exceljet.net/excel-functions): This is a comprehensive list of Excel spreadsheet functions with links to more detailed explanations. This is a useful resource to save so that you can reference it often; that way, you’ll have access to functions and examples that you can apply to your work. 
+- [List of spreadsheet formulas](https://exceljet.net/formulas): Similar to the previous resource, this comprehensive list of Excel spreadsheet formulas with links to more detailed explanations and can be saved and referenced any time you need to check out a formula for your analysis. 
+
+**Stack Overflow** is an online platform where programmers ask code-related questions and peers are available to suggest answers. You can ask questions about programming languages such as SQL and R (which you will learn about in Course 7), data tools, and much more. Follow the steps below to get started on Stack Overflow.
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,76 @@
+---
+execute:
+    eval: false
+---
+
+
+# Organizing the data to begin analysis
+
+## Basics
+
+**Analysis** is the process used to make sense of the data collected. The goal of analysis is to identify trends and relationships within the data so that you can accurately answer the question you're asking. To do this, you should stick to the 4 phases of analysis:
+
+1. Organize data:  A data analyst uses data organization to decide which data is relevant to their analysis and which data types and variables are appropriate
+2. Format and adjust data
+3. Get input from others
+4. Transform data
+
+
+## Organzing data
+
+Sorting and filtering are two ways you can keep things organized when you format and adjust data to work with it.  For example, a filter can help you find errors or outliers so you can fix or flag them before your analysis. **Outliers** are data points that are very different from similarly collected data and might not be reliable values. 
+
+Examples were run with BigQuery using `data/movie_data.csv`
+
+
+### Spreadsheets
+
+If **Sort sheet** is applied, all of the data in a spreadsheet is sorted by the conditions of a single column, but the related information across each row stays together.
+
+**Sort range** doesn't keep the information across rows together. When you sort a range, you're selecting a specific collection of cells or the range that you want the sorting limited to. Nothing else on the spreadsheet gets rearranged but the specified cells.
+
+A formula do use is the **sort function**, i.e. `=SORT(A2:D6, 2, TRUE)`
+
+1. Start with the first cell the data is collected from and separate with a colon until the last cell we want to include
+2. After the comma, to separate the range from what we are sorting by: column B. You should keep in mind that this part of the function doesn't recognize column letters. So in this case, we use the corresponding number instead, which is 2, since column B is the second column in our range.
+3. In this next part you'll need to decide whether you want the data in this column to be in ascending or descending order. A TRUE statement is in ascending order, and FALSE is descending. 
+
+A **customized sort order** is when you sort data in a spreadsheet using multiple conditions. This means that sorting will be based on the order of the conditions you select. You can do that easily with the "Sort range" and "advanced sorting" option under Data.
+
+Similar to the SORT function in Google Sheets, Excel includes custom sort capabilities that are available from the menu. After you select the data range, click the Sort & Filter button to select the criteria for sorting.
+
+
+### SQL
+
+You can use the **ORDER BY** clause to sort results returned in a query. By default, the ORDER BY clause sorts data in ascending order. 
+
+```{sql}
+SELECT * 
+FROM `lithe-vault-366813.movie_data.movies`
+ORDER BY Release_Date DESC
+```
+
+Combine sorting and filtering. First, we'll check that the ORDER BY clause is always the last line. That makes sure that all the results of the query you're running are sorted by that clause. Then, we'll add a new line for the WHERE clause after FROM and before ORDER BY.
+
+```{sql}
+SELECT * 
+FROM `lithe-vault-366813.movie_data.movies`
+WHERE Genre = 'Comedy'
+ORDER BY Release_Date DESC
+```
+
+We can also filter for two conditions at once using the AND filter. 
+
+```{sql}
+SELECT * 
+FROM `lithe-vault-366813.movie_data.movies`
+WHERE Genre = 'Comedy' AND Revenue > 3000000
+ORDER BY Release_Date DESC
+```
+
+
+
+
+
+
+

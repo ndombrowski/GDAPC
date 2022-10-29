@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "GDA: Data analysis",
+    "section": "",
+    "text": "In this course, you’ll explore the “analyze” phase of the data analysis process. You’ll take what you’ve learned to this point and apply it to your analysis to make sense of the data you’ve collected. You’ll learn how to organize and format your data using spreadsheets and SQL to help you look at and think about your data in different ways. You’ll also find out how to perform complex calculations on your data to complete business objectives. You’ll learn how to use formulas, functions, and SQL queries as you conduct your analysis.\nBy the end of this course, you will:\n\nLearn how to organize data for analysis.\nDiscover the processes for formatting and adjusting data.\nGain an understanding of how to aggregate data in spreadsheets and by using SQL.\nUse formulas and functions in spreadsheets for data calculations.\nLearn how to complete calculations using SQL queries."
+  },
+  {
+    "objectID": "code/1_organizing_data.html",
+    "href": "code/1_organizing_data.html",
+    "title": "2  Organizing the data to begin analysis",
+    "section": "",
+    "text": "Analysis is the process used to make sense of the data collected. The goal of analysis is to identify trends and relationships within the data so that you can accurately answer the question you’re asking. To do this, you should stick to the 4 phases of analysis:\n\nOrganize data: A data analyst uses data organization to decide which data is relevant to their analysis and which data types and variables are appropriate\nFormat and adjust data\nGet input from others\nTransform data"
+  },
+  {
+    "objectID": "code/1_organizing_data.html#organzing-data",
+    "href": "code/1_organizing_data.html#organzing-data",
+    "title": "2  Organizing the data to begin analysis",
+    "section": "2.2 Organzing data",
+    "text": "2.2 Organzing data\nSorting and filtering are two ways you can keep things organized when you format and adjust data to work with it. For example, a filter can help you find errors or outliers so you can fix or flag them before your analysis. Outliers are data points that are very different from similarly collected data and might not be reliable values.\nExamples were run with BigQuery using data/movie_data.csv\n\n2.2.1 Spreadsheets\nIf Sort sheet is applied, all of the data in a spreadsheet is sorted by the conditions of a single column, but the related information across each row stays together.\nSort range doesn’t keep the information across rows together. When you sort a range, you’re selecting a specific collection of cells or the range that you want the sorting limited to. Nothing else on the spreadsheet gets rearranged but the specified cells.\nA formula do use is the sort function, i.e. =SORT(A2:D6, 2, TRUE)\n\nStart with the first cell the data is collected from and separate with a colon until the last cell we want to include\nAfter the comma, to separate the range from what we are sorting by: column B. You should keep in mind that this part of the function doesn’t recognize column letters. So in this case, we use the corresponding number instead, which is 2, since column B is the second column in our range.\nIn this next part you’ll need to decide whether you want the data in this column to be in ascending or descending order. A TRUE statement is in ascending order, and FALSE is descending.\n\nA customized sort order is when you sort data in a spreadsheet using multiple conditions. This means that sorting will be based on the order of the conditions you select. You can do that easily with the “Sort range” and “advanced sorting” option under Data.\nSimilar to the SORT function in Google Sheets, Excel includes custom sort capabilities that are available from the menu. After you select the data range, click the Sort & Filter button to select the criteria for sorting.\n\n\n2.2.2 SQL\nYou can use the ORDER BY clause to sort results returned in a query. By default, the ORDER BY clause sorts data in ascending order.\nSELECT * \nFROM `lithe-vault-366813.movie_data.movies`\nORDER BY Release_Date DESC\nCombine sorting and filtering. First, we’ll check that the ORDER BY clause is always the last line. That makes sure that all the results of the query you’re running are sorted by that clause. Then, we’ll add a new line for the WHERE clause after FROM and before ORDER BY.\nSELECT * \nFROM `lithe-vault-366813.movie_data.movies`\nWHERE Genre = 'Comedy'\nORDER BY Release_Date DESC\nWe can also filter for two conditions at once using the AND filter.\nSELECT * \nFROM `lithe-vault-366813.movie_data.movies`\nWHERE Genre = 'Comedy' AND Revenue > 3000000\nORDER BY Release_Date DESC"
+  }
+]

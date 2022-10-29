@@ -1,0 +1,118 @@
+# Verifying and reporting results
+
+## Manually verifying data
+
+**Verification** is a process to confirm that a data cleaning effort was well- executed and the resulting data is accurate and reliable. It involves rechecking your clean dataset, doing some manual clean ups if needed, and taking a moment to sit back and really think about the original purpose of the project.
+
+The first step in verification is returning to your original, unclean dataset and comparing it to what you have now. 
+
+The most common problems are:
+
+- Sources of errors: Did you use the right tools and functions to find the source of the errors in your dataset?
+- Null data: Did you search for NULLs using conditional formatting and filters?
+- Misspelled words: Did you locate all misspellings?
+- Mistyped numbers: Did you double-check that your numeric data has been entered correctly?
+- Extra spaces and characters: Did you remove any extra spaces or characters using the TRIM function?
+- Duplicates: Did you remove duplicates in spreadsheets using the Remove Duplicates function or DISTINCT in SQL?
+- Mismatched data types: Did you check that numeric, date, and string data are typecast correctly?
+- Messy (inconsistent) strings: Did you make sure that all of your strings are consistent and meaningful?
+- Messy (inconsistent) date formats: Did you format the dates consistently throughout your dataset?
+- Misleading variable labels (columns): Did you name your columns meaningfully?
+- Truncated data: Did you check for truncated or missing data that needs correction?
+- Business Logic: Did you check that the data makes sense given your knowledge of the business? 
+
+Seeing the big picture:
+
+1. Consider the business problem to know what data you need
+2. Consider the goal of your project and if the data helps achieve that goal
+3. Consider the data, i.e. is it capable of meeting the goals; asking whether the data makes sense
+
+
+### Dealing with misspellings
+
+**COUNTA** counts the total number of values within a specified range. Note that there's also function called **COUNT**, which only counts the numerical values within a specified range. 
+
+If you're working in SQL, you can address misspellings using a **CASE** statement. The CASE statement goes through one or more conditions and returns a value as soon as a condition is met. I.e. in the example below, a customers first name was misspelled 
+
+```{sql}
+SELECT customer_id, 
+    CASE
+        WHEN first_name = 'Tnoy' THEN 'Tony'
+        WHEN first_name = 'Tmo' THEN 'Tom'
+        ELSE first_name
+        END AS cleaned_name
+FROM customer_data.customer_name
+```
+
+
+
+## Documenting results and the cleaning process
+
+**Documentation** which is the process of tracking changes, additions, deletions and errors involved in your data cleaning effort.
+
+Having a record of how a data set evolved does three very important things:
+
+1. Recover data-cleaning errors
+2. Inform other users of changes
+3. Determine the quality of the data
+
+A **changelog** is a file containing a chronologically ordered list of modifications made to a project. It's usually organized by version and includes the date followed by a list of added, improved, and removed features.
+
+Typically, a changelog records this type of information:  
+
+- Data, file, formula, query, or any other component that changed
+- Description of what changed
+- Date of the change
+- Person who made the change
+- Person who approved the change 
+- Version number 
+- Reason for the change
+
+Categories of changes:
+
+- Added: new features introduced
+- Changed: changes in existing functionality
+- Deprecated: features about to be removed
+- Removed: features that have been removed
+- Fixed: bug fixes
+- Security: lowering vulnerabilities
+
+General rules:
+
+- Changelogs are for humans, not machines, so write legibly.
+- Every version should have its own entry.
+- Each change should have its own line.
+- Group the same types of changes. For example, Fixed should be grouped separately from Added.
+- Versions should be ordered chronologically starting with the latest.
+- The release date of each version should be noted.
+
+Let's start with the spreadsheet. We can use Sheet's version history, which provides a real-time tracker of all the changes and who made them from individual cells to the entire worksheet. To find this feature, click the File tab, and then select Version history. If you want to check out changes in a specific cell, we can right-click and select Show Edit History.
+
+The way you create and view a changelog with SQL depends on the software program you're using. Essentially, all you have to do is specify exactly what you did and why when you commit a query to the repository as a new and improved query. Another option is to just add comments as you go while you're cleaning data in SQL. Query history, which tracks all the queries you've run in BigQuery. If an analyst is making changes to an existing SQL query that is shared across the company, the company most likely uses what is called a **version control system**.
+
+Here is how a version control system affects a change to a query:
+
+- A company has official versions of important queries in their version control system.
+- An analyst makes sure the most up-to-date version of the query is the one they will change. This is called **syncing** 
+- The analyst makes a change to the query.
+- The analyst might ask someone to review this change. This is called a **code review** and can be informally or formally done. An informal review could be as simple as asking a senior analyst to take a look at the change.
+- After a reviewer approves the change, the analyst submits the updated version of the query to a repository in the company's version control system. This is called a **code commit**. A best practice is to document exactly what the change was and why it was made in a comments area. Going back to our example of a query that pulls daily revenue, a comment might be: Updated revenue to include revenue coming from the new product, Calypso.
+- After the change is submitted, everyone else in the company will be able to access and use this new query when they sync to the most up-to-date queries stored in the version control system.
+- If the query has a problem or business needs change, the analyst can undo the change to the query using the version control system. The analyst can look at a chronological list of all changes made to the query and who made each change. Then, after finding their own change, the analyst can revert to the previous version.
+- The query is back to what it was before the analyst made the change. And everyone at the company sees this reverted, original query, too.
+
+
+
+## Advanced functions for speedy data cleaning
+
+### Insert data
+
+The [IMPORTRANGE](https://support.google.com/docs/answer/3093340?hl=en) function in Google Sheets and the [Paste Link](https://professor-excel.com/how-to-paste-cell-links/) feature (a Paste Special option in Microsoft Excel) both allow you to insert data from one sheet to another. Using these on a large amount of data is more efficient than manual copying and pasting. 
+
+### Pulling data from other data sources
+
+The [QUERY](https://support.google.com/docs/answer/3093343?hl=en) function is also useful when you want to pull data from another spreadsheet. The QUERY function's SQL-like ability can extract specific data within a spreadsheet. For a large amount of data, using the QUERY function is faster than filtering data manually. 
+
+
+
+
