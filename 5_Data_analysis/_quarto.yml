@@ -11,6 +11,7 @@ book:
     - code/1_organizing_data.qmd
     - code/2_converting_and_formatting.qmd
     - code/3_aggregating_data.qmd
+    - code/4_data_calculations.qmd
 
 format:
   html:

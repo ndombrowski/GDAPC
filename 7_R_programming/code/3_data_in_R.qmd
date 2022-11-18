@@ -1,0 +1,447 @@
+# Data in R
+
+## R data frames
+
+A **data frame** is a collection of columns. Some rules:
+- columns should be named
+- data stored in your data frame can be many different types, like numeric, factor, or character
+- each column should contain the same number of data items, even if some of those data items are missing
+
+**Tibbles** are like streamlined data frames. They make working with data easier, but they're a little different from standard data frames:
+- tibbles never change the data types of the inputs. They won't change your strings to factors or anything else
+- You can make more changes to base data frames, but tibbles are easier to use. This saves time because you won't have to do as much cleaning or changing data types in tibbles. 
+- Tibbles also never change the names of your variables, and they never create row names
+- tibbles make printing in R easier. They won't accidentally overload your console because they're automatically set to pull up only the first 10 rows and as many columns as fit on screen
+
+Tidy data standards:
+
+- Variables are organized into columns
+- Observations are organized into rows
+- Each value must have its own cell
+
+```{r}
+#load libs
+library("tidyverse")
+```
+
+```{r}
+#load data
+data("diamonds")
+
+#view the first six rows
+head(diamonds)
+```
+
+```{r}
+#get the structure
+str(diamonds)
+```
+```{r}
+#print column names
+colnames(diamonds)
+```
+
+Next, lets use the mutate function to make changes to our data frame. The mutate function is part of the dplyr package which is in the tidyverse. 
+
+```{r}
+#add a new column
+df <- mutate(diamonds, carat_2 = carat * 100)
+head(df)
+```
+
+### Creating dfs
+
+```{r}
+#create some vectors
+names <- c("Julia", "Peter", "Leo", "Sara")
+age <- c(21,14, 17,50 )
+
+#create and view df
+people <- data.frame(names, age)
+people
+```
+
+Now that you have a data frame, you can work with it using all of the tools in `R`. For example, you could use `mutate()` if you wanted to create a new variable that would capture each person's age in twenty years. The code chunk below creates that new variable:
+
+```{r}
+mutate(people, age_in_20 = age + 20)
+```
+
+
+### Creating tibbles
+
+We can easily create tibbles from data sets as follows:
+
+```{r}
+str(as_tibble(diamonds))
+```
+
+## Data import
+
+### The data() function
+
+The default installation of R comes with a number of preloaded datasets that you can practice with. You can use the `data()` function to load these datasets in R. If you run the data function without an argument, R will display a list of the available datasets. If you want to load a specific dataset, just enter its name in the parentheses of the data() function, i.e. `data(mtcars)`.
+
+
+### readr
+
+The goal of readr is to provide a fast and friendly way to read rectangular data. readr supports several read_ functions. Each function refers to a specific file format.
+
+- `read_csv()`: comma separated (CSV) files
+- `read_tsv()`: tab separated files
+- `read_delim()`: general delimited files
+- `read_fwf()`: fixed width files
+- `read_table()`: tabular files where columns are separated by white-space
+- `read_log()`: web log files
+
+The readr package comes with some sample files from built-in datasets that you can use for example code. To list the sample files, you can run the `readr_example()` function with no arguments.
+
+```{r}
+readr_example()
+```
+
+Let's try to read in a table:
+
+```{r}
+read_csv(readr_example("mtcars.csv"))
+```
+
+
+### readxl
+
+To import spreadsheet data into R, you can use the readxl package. The readxl package is part of the tidyverse but is not a core tidyverse package, so you need to load readxl in R by using the library()
+function.
+
+```{r}
+library(readxl)
+```
+
+Lets check out example files first:
+
+```{r}
+readxl_example()
+```
+
+Now, lets read in one of those examples:
+
+```{r}
+read_excel(readxl_example("type-me.xlsx"))
+```
+
+You can use the excel_sheets() function to list the names of the individual sheets.
+
+```{r}
+excel_sheets(readxl_example("type-me.xlsx"))
+```
+
+You can also specify a sheet by name or number.
+
+
+```{r}
+read_excel(readxl_example("type-me.xlsx"), sheet = "numeric_coercion")
+```
+
+### Practice
+
+Read in a dataset
+
+```{r}
+bookings_df <- read_csv("../data/hotel_bookings.csv")
+head(bookings_df)
+```
+
+If you want to create another data frame using `bookings_df` that focuses on the average daily rate, which is referred to as `adr` in the data frame, and  `adults`, you can use the following code chunk to do that:
+
+```{r}
+new_df <- select(bookings_df, adr, adults)
+head(new_df)
+```
+To create new variables in your data frame, you can use the `mutate()` function. This will make changes to the data frame, but not to the original data set you imported. That source data will remain unchanged. 
+```{r}
+mutate(new_df, total = adr/adults)
+```
+
+
+## Cleaning data
+
+### Naming conventions
+
+**Do's**
+
+- Keep your filenames to a reasonable length
+- Use underscores and hyphens for readability
+- Start or end your filename with a letter or number
+- Use a standard date format when applicable; example: YYYY-MM-DD
+- Use filenames for related files that work well with default ordering; example: in chronological order, or logical order using numbers first
+
+
+**Don't**
+
+- Use unnecessary additional characters in filenames
+- Use spaces or “illegal” characters; examples: &, %, #, <, or >
+- Start or end your filename with a symbol
+- Use incomplete or inconsistent date formats; example: M-D-YY
+- Use filenames for related files that do not work well with default ordering; examples: a random system of numbers or date formats, or using letters first
+
+
+### Data exploration
+
+Some useful packages:
+
+- The **Here** package makes referencing files easier
+- The **Skimr** package makes summarizing data really easy and let's you skim through it more quickly
+- The **Janitor** package has functions for cleaning data.
+
+```{r}
+#load libs
+library(palmerpenguins)
+library(here)
+library(skimr)
+library(janitor)
+```
+
+
+Some useful functions are:
+
+- `skim_without_charts()`
+- `glimpse()`
+- `select()`
+
+```{r}
+#summarize data 
+skim_without_charts(penguins)
+```
+First, it gives us a summary with the name of the dataset and the number of rows and columns. It also gives us the column types and a summary of the different data types contained in the data frame.
+
+Or we could use Glimpse to get a really quick idea of what's in this dataset.
+
+```{r}
+glimpse(penguins)
+```
+We can use select to specify certain columns or to exclude columns we don't need right now. Let's say we only need to check the species column.
+
+```{r}
+penguins |> 
+    select(species)
+```
+We can also get everything except the species columns:
+
+```{r}
+penguins |> 
+    select(-species)
+```
+
+### Change column names
+
+The rename function makes it easy to change column names. Starting with the penguin data, we'll type rename and change the name of our island column to island underscore new.
+
+```{r}
+penguins |> 
+    rename(islands_new = island)
+```
+ 
+Let's say we want to change our columns so that they're spelled and formatted correctly. Similar to the rename function, the rename_with() function can change column names to be more consistent. For example, maybe we want all of our column names to be in uppercase. We can use the rename_with() function to do that.
+
+```{r}
+rename_with(penguins, toupper)
+```
+
+The clean names function in the Janitor package will automatically make sure that the column names are unique and consistent. This ensures that there's only characters, numbers, and underscores in the names.
+
+```{r}
+clean_names(penguins)
+```
+
+### Organizing data
+
+Let's start by sorting our data.
+
+```{r}
+#sort data by bill length
+penguins |> 
+    arrange(bill_length_mm)
+```
+
+```{r}
+#sort data by bill length in descending order
+penguins |> 
+    arrange(-bill_length_mm)
+```
+
+You can also sort by data using the group by function. Group by is usually combined with other functions. For example, we might want to group by a certain column and then perform an operation on those groups. With our penguin data, we can group by island and then use the summarize function to get the mean bill length.
+
+```{r}
+penguins |> 
+    group_by(island) |> 
+    #remove rows with NAs
+    drop_na() |> 
+    summarise(mean_bill_length_mm = mean(bill_length_mm))
+```
+
+```{r}
+penguins |> 
+    group_by(island) |> 
+    #remove rows with NAs
+    drop_na() |> 
+    summarise(max_bill_length_mm = max(bill_length_mm))
+```
+
+Both group by and summarize can perform multiple tasks. For example, we could group by island and species and then summarize to calculate both the mean and max. 
+
+```{r}
+penguins |> 
+    group_by(species, island) |> 
+    drop_na() |> 
+    summarise(mean_bill_length_mm = mean(bill_length_mm), max_bill_length_mm = max(bill_length_mm))
+```
+
+Finally we can filter results using the filter function. Let's say we only want data on Adelie penguins. 
+
+```{r}
+penguins |> 
+    filter(species == "Adelie")
+```
+
+
+### Transforming data
+
+Let's start by manually creating a df
+
+```{r}
+#define variables
+id <- c(1:10)
+name <- c("John Mendes", "Rob Stewart", "Rachel Abrahamson", "Christy Hickman", "Johnson Harper", "Candace Miller", "Carlson Landy", "Pansy Jordan", "Darius Berry", "Claudia Garcia")
+job_title <- c("Professional", "Programmer", "Management", "Clerical", "Developer", "Programmer", "Management", "Clerical", "Developer", "Programmer")
+
+#create df
+employee <- data.frame(id, name, job_title)
+
+#view df
+head(employee)
+```
+
+Right now, the first and last names are combined into one column. We can use the separate function to split these into separate columns.
+
+```{r}
+#input: the df, the column we want to split, the names of the new cols, the separator
+separate(employee, name, into = c("first_name", "last_name"), sep = " " )
+```
+
+The separate function has a partner, unite. The unite function allows us to merge columns together.
+
+```{r}
+#input: the df, the column name, columns we want to combine, if needed a separator
+unite(employee, "new_col", name, job_title , sep = ", " )
+```
+
+We can also create new variables in our data frame using the mutate function. We worked with mutate a little bit before to clean and organize our data. But mutate can also be used to add columns with calculations.
+
+Let's go back to our penguin dataset. Right now, the body mass column is measured in grams. Maybe we want to add a column with kilograms.
+
+```{r}
+penguins |> 
+    mutate(body_mass_kg = body_mass_g/1000, flipper_length_m = flipper_length_mm/1000)
+```
+
+
+### Wide to long with tidyr
+
+**Wide data** has observations across several columns. Each column contains data from a different condition of the variable. In this example, different years. 
+
+**Long data** has all the observations in a single column, and variables in separate columns. 
+
+That’s where `pivot_longer()` comes in. As part of the tidyr package, you can use this R function to lengthen the data in a data frame by increasing the number of rows and decreasing the number of columns. Similarly, if you want to convert your data to have more columns and fewer rows, you would use the `pivot_wider()` function.
+
+
+
+
+## Same data, different outcome
+
+Now, we'll work with a very famous data example: Anscombe's quartet. Anscombe's quartet has four datasets that have nearly identical summary statistics. But those summary statistics might be misleading.
+
+```{r}
+#install.packages("Tmisc")
+```
+
+```{r}
+library(Tmisc)
+data(quartet)
+head(quartet)
+```
+
+Let's get a summary of each set with the mean, standard deviation, and correlation for each of these datasets.
+
+```{r}
+quartet |> 
+    group_by(set) |> 
+    summarise(mean(x), sd(x), mean(y), sd(y), cor(x,y))
+```
+
+Based on the summaries we created with our statistical measures, these datasets are identical, but sometimes just looking at the summarized data can be misleading.
+
+Let's put together some simple graphs to help us visualize this data and check if the datasets are actually identical. You'll learn more about plotting data in R later. But for now, we'll just get a quick idea of how this data appears.
+
+```{r}
+ggplot(quartet, aes(x,y)) +
+    geom_point() +
+    geom_smooth(method = lm, se = FALSE) +
+    facet_wrap(~set)
+```
+
+Let's check out another thing, the datasauRus package. The datasauRus creates plots with the Anscombe data in different shapes.
+
+```{r}
+#install.packages("datasauRus")
+```
+
+```{r}
+library(datasauRus)
+```
+
+```{r}
+ggplot(datasaurus_dozen, aes(x, y, colour = dataset)) +
+    geom_point() +
+    theme_void() +
+    theme(legend.position = "none") +
+    facet_wrap(~dataset)
+```
+
+## The bias function
+
+In R, we can actually quantify bias by comparing the actual outcome of our data with the predicted outcome. The bias function finds the average amount that the actual outcome is greater than the predicted outcome. It's included in the sim design package. 
+
+If the model is unbiased, the outcome should be pretty close to zero. A high result means that your data might be biased. 
+
+Let's say we're working with a local weather channel to determine if their weather predictions are biased.
+
+```{r}
+#install.packages("SimDesign")
+```
+
+```{r}
+library("SimDesign")
+```
+
+We'll use the bias function to compare forecasted temperatures with actual temperatures.
+
+```{r}
+#create some vectors with data
+actual_temp <- c(68.3, 70, 72.4, 71, 67, 70)
+predicted_temp <- c(67.9, 69, 71.5, 70, 67, 69)
+
+#apply the bias fct
+bias(actual_temp, predicted_temp)
+```
+
+When we run this we find out that the result Is 0.71. That's pretty close to zero but the prediction seemed biased towards lower temperatures which, means they aren't as accurate as they could be.
+
+If we were seeing consistent bias in our sample, we can use the `sample()` function to inject a randomization element into our R programming
+
+
+```{r}
+penguins %>% 
+  drop_na() %>% 
+  group_by(species) %>%
+  summarise(min(bill_depth_mm))
+```
+

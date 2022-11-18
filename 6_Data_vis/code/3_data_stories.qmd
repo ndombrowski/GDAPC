@@ -1,0 +1,60 @@
+# Crafting stories with data
+
+## Basics
+
+Context is important to understand data. **Context** is the condition in which something exists or happens
+
+**Data storytelling** is communicating the meaning of a data set with visuals and a narrative that are customized for each particular audience. A **narrative** is another word for a story. The key data storystelling steps are:
+
+- **Engage your audience**; i.e. consider who is listening. Some good questions to ask yourself:
+    - What role does the audience play?
+    - What is their stake in the project?
+    - What do they hope to get from the data insights I deliver?
+
+Once, we defined the audience, we can ask, what our key message is. Also its important to keep in mind that not every piece of data is relevant to the questions we are trying to answer. A big part of being a data analyst is knowing how to eliminate the less important details. One way to do this is with something called spotlighting. **Spotlighting** is scanning through the data to quickly identify the most important insights.
+
+- **Create compelling visuals**; i.e. highlight the meaning behind the numbers
+- **Tell the story in an interesting narrative**; i.e. have a beginning, a middle and the end; connect the data you've collected to the project objective and clearly explain important insights from your analysis. An effective data narrative includes characters, a setting, a plot, a big reveal, and an aha moment. The big reveal involves how the data has shown that the problem can be solved. The aha moment is when recommendations are shared.
+
+
+## Tablaeu dashbords
+
+A **dashboard** is a tool that organizes information, typically from multiple data sets, into one central location for tracking, analysis, and simple visualization through charts, graphs, and maps. A **dashboard filter** is a tool for showing only the data that meets a specific criteria while hiding the rest.
+
+An important part of dashboard design is the placement or layout of your charts, graphs, and other visuals. These elements need to be cohesive, which means they're balanced and make good use of the space on the dashboard. 
+
+**Static data** involves providing screenshots or snapshots in presentations or building dashboards using snapshots of data. There are pros and cons to static data.
+
+PROS
+
+- Can tightly control a point-in-time narrative of the data and insight
+- Allows for complex analysis to be explained in-depth to a larger audience
+
+CONS
+
+- Insight immediately begins to lose value and continues to do so the longer the data remains in a static state
+- Snapshots can't keep up with the pace of data change
+
+**Live** data means that you can build dashboards, reports, and views connected to automatically updated data. 
+
+PROS
+
+- Dashboards can be built to be more dynamic and scalable
+- Gives the most up-to-date data to the people who need it at the time when they need it
+- Allows for up-to-date curated views into data with the ability to build a scalable “single source of truth” for various use cases
+- Allows for immediate action to be taken on data that changes frequently
+- Alleviates time/resources spent on processes for every analysis
+
+CONS
+
+- Can take engineering resources to keep pipelines live and scalable, which may be outside the scope of some companies' data resource allocation
+- Without the ability to interpret data, you can lose control of the narrative, which can cause data chaos (i.e. teams coming to conflicting conclusions based on the same data)
+- Can potentially cause a lack of trust if the data isn’t handled proper
+
+
+
+
+
+
+
+

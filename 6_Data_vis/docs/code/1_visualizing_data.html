@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Data analysis - 2&nbsp; Visualizing data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/2_tableau.html" rel="next">
+<link href="../index.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Visualizing data</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Data analysis</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Share Data Through the Art of Visualization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_visualizing_data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_tableau.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data vis with Tableau</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_data_stories.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Crafting stories with data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_presenting_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Presenting your data</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">2.1</span>  Introduction</a>
+  <ul class="collapse">
+  <li><a href="#pre-attentive-attributes-marks-and-channels" id="toc-pre-attentive-attributes-marks-and-channels" class="nav-link" data-scroll-target="#pre-attentive-attributes-marks-and-channels"><span class="toc-section-number">2.1.1</span>  Pre-attentive attributes: marks and channels</a></li>
+  <li><a href="#design-principles" id="toc-design-principles" class="nav-link" data-scroll-target="#design-principles"><span class="toc-section-number">2.1.2</span>  Design principles</a></li>
+  <li><a href="#things-to-avoid" id="toc-things-to-avoid" class="nav-link" data-scroll-target="#things-to-avoid"><span class="toc-section-number">2.1.3</span>  Things to avoid</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="toc-section-number">2.1.4</span>  Resources</a></li>
+  </ul></li>
+  <li><a href="#types-of-graphs" id="toc-types-of-graphs" class="nav-link" data-scroll-target="#types-of-graphs"><span class="toc-section-number">2.2</span>  Types of graphs</a></li>
+  <li><a href="#dynamic-visualizations" id="toc-dynamic-visualizations" class="nav-link" data-scroll-target="#dynamic-visualizations"><span class="toc-section-number">2.3</span>  Dynamic visualizations</a></li>
+  <li><a href="#decision-trees" id="toc-decision-trees" class="nav-link" data-scroll-target="#decision-trees"><span class="toc-section-number">2.4</span>  Decision trees</a></li>
+  <li><a href="#elements-of-art" id="toc-elements-of-art" class="nav-link" data-scroll-target="#elements-of-art"><span class="toc-section-number">2.5</span>  Elements of art</a></li>
+  <li><a href="#principles-of-design" id="toc-principles-of-design" class="nav-link" data-scroll-target="#principles-of-design"><span class="toc-section-number">2.6</span>  Principles of design</a></li>
+  <li><a href="#design-thinking" id="toc-design-thinking" class="nav-link" data-scroll-target="#design-thinking"><span class="toc-section-number">2.7</span>  Design thinking</a></li>
+  <li><a href="#headlines-subtitles-and-labels" id="toc-headlines-subtitles-and-labels" class="nav-link" data-scroll-target="#headlines-subtitles-and-labels"><span class="toc-section-number">2.8</span>  Headlines, subtitles, and labels</a></li>
+  <li><a href="#accessible-visualizations" id="toc-accessible-visualizations" class="nav-link" data-scroll-target="#accessible-visualizations"><span class="toc-section-number">2.9</span>  Accessible visualizations</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Visualizing data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">2.1</span> Introduction</h2>
+<p><strong>Data visualization</strong> is the graphic representation and presentation of data.</p>
+<ol type="1">
+<li>The <a href="https://www.informationisbeautiful.net/visualizations/what-makes-a-good-data-visualization/">McCandless Method</a> lists four elements of good data visualization:</li>
+</ol>
+<ul>
+<li>Information: the data you are working with</li>
+<li>Story: a clear and compelling narrative or concept</li>
+<li>Goal: a specific objective or function for the visual</li>
+<li>Visual form: an effective use of metaphor or visual expression</li>
+</ul>
+<ol start="2" type="1">
+<li><a href="https://junkcharts.typepad.com/junk_charts/junk-charts-trifecta-checkup-the-definitive-guide.html">Kaiser Fung’s Junk Charts Trifecta Checkup</a></li>
+</ol>
+<p>This approach is a useful set of questions that can help consumers of data visualization critique what they are consuming and determine how effective it is. The Checkup has three questions:</p>
+<ul>
+<li>What is the practical question?</li>
+<li>What does the data say?</li>
+<li>What does the visual say?</li>
+</ul>
+<section id="pre-attentive-attributes-marks-and-channels" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="pre-attentive-attributes-marks-and-channels"><span class="header-section-number">2.1.1</span> Pre-attentive attributes: marks and channels</h3>
+<p>Pre-attentive attributes are the elements of a data visualization that people recognize automatically without conscious effort. The essential, basic building blocks that make visuals immediately understandable are called marks and channels.</p>
+<p><strong>Marks</strong> are basic visual objects like points, lines, and shapes. Every mark can be broken down into four qualities:</p>
+<ul>
+<li>Position - Where a specific mark is in space in relation to a scale or to other marks</li>
+<li>Size - How big, small, long, or tall a mark is</li>
+<li>Shape - Whether a specific object is given a shape that communicates something about it</li>
+<li>Color - What color the mark is</li>
+</ul>
+<p><strong>Channels</strong> are visual aspects or variables that represent characteristics of the data. Channels are basically marks that have been used to visualize data. Channels will vary in terms of how effective they are at communicating data based on three elements:</p>
+<ul>
+<li>Accuracy - Are the channels helpful in accurately estimating the values being represented? For example, color is very accurate when communicating categorical differences, like apples and oranges. But it is much less effective when distinguishing quantitative data like 5 from 5.5.</li>
+<li>Popout - How easy is it to distinguish certain values from others? There are many ways of drawing attention to specific parts of a visual, and many of them leverage pre-attentive attributes like line length, size, line width, shape, enclosure, hue, and intensity.</li>
+<li>Grouping - How good is a channel at communicating groups that exist in the data? Consider the proximity, similarity, enclosure, connectedness, and continuity of the channel.</li>
+</ul>
+</section>
+<section id="design-principles" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="design-principles"><span class="header-section-number">2.1.2</span> Design principles</h3>
+<ul>
+<li>Choose the right visual: One of the first things you have to decide is which visual will be the most effective for your audience. Sometimes, a simple table is the best visualization. Other times, you need a more complex visualization to illustrate your point.</li>
+<li>Optimize the data-ink ratio: The data-ink entails focusing on the part of the visual that is essential to understanding the point of the chart. Try to minimize non-data ink like boxes around legends or shadows to optimize the data-ink ratio.</li>
+<li>Use orientation effectively: Make sure the written components of the visual, like the labels on a bar chart, are easy to read. You can change the orientation of your visual to make it easier to read and understand.</li>
+<li>Color: There are a lot of important considerations when thinking about using color in your visuals. These include using color consciously and meaningfully, staying consistent throughout your visuals, being considerate of what colors mean to different people, and using inclusive color scales that make sense for everyone viewing them.</li>
+<li>Number of things: Think about how many elements you include in any visual. If your visualization uses lines, try to plot five or fewer. If that isn’t possible, use color or hue to emphasize important lines. Also, when using visuals like pie charts, try to keep the number of segments to less than seven since too many elements can be distracting.</li>
+</ul>
+</section>
+<section id="things-to-avoid" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="things-to-avoid"><span class="header-section-number">2.1.3</span> Things to avoid</h3>
+<ul>
+<li>Cutting off the y-axis: Changing the scale on the y-axis can make the differences between different groups in your data seem more dramatic, even if the difference is actually quite small.</li>
+<li>Misleading use of a dual y-axis: Using a dual y-axis without clearly labeling it in your data visualization can create extremely misleading charts</li>
+<li>Artificially limiting the scope of the data: If you only consider the part of the data that confirms your analysis, your visualizations will be misleading because they don’t take all of the data into account</li>
+<li>Problematic choices in how data is binned or grouped: It is important to make sure that the way you are grouping data isn’t misleading or misrepresenting your data and disguising important trends and insights</li>
+<li>Using part-to-whole visuals when the totals do not sum up appropriately : If you are using a part-to-whole visual like a pie chart to explain your data, the individual parts should add up to equal 100%. If they don’t, your data visualization will be misleading.</li>
+<li>Hiding trends in cumulative charts: Creating a cumulative chart can disguise more insightful trends by making the scale of the visualization too large to track any changes over time</li>
+<li>Artificially smoothing trends: Adding smooth trend lines between points in a scatter plot can make it easier to read that plot, but replacing the points with just the line can actually make it appear that the point is more connected over time than it actually was</li>
+</ul>
+</section>
+<section id="resources" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="resources"><span class="header-section-number">2.1.4</span> Resources</h3>
+<ul>
+<li><a href="https://www.ted.com/talks/david_mccandless_the_beauty_of_data_visualization?language=en#t-150183">The beauty of data visualization</a>: In this video, David McCandless explains the need for design to not just be beautiful, but for it to be meaningful as well. Data visualization must be able to balance function and form for it to be relevant to your audience.</li>
+<li><a href="https://artscience.blog/home/the-mccandless-method-of-data-presentation">‘The McCandless Method’ of data presentation</a>: At first glance, this blog appears to be written by a David McCandless fan, and it is. However, it contains very useful information and provides an in-depth look at the 5-step process that McCandless uses to present his data.</li>
+<li><a href="https://informationisbeautiful.net/">Information is beautiful</a>: Founded by McCandless himself, this site serves as a hub of sample visualizations that make use of the McCandless method. Explore data from the news, science, the economy, and so much more and learn how to make visual decisions based on facts from all kinds of sources.</li>
+<li><a href="https://informationisbeautiful.net/beautifulnews/">Beautiful daily news</a>: In this McCandless collection, explore uplifting trends and statistics that are beautifully visualized for your creative enjoyment. A new chart is released every day so be sure to visit often to absorb the amazing things happening all over the world.</li>
+<li><a href="https://www.amazon.com/Street-Journal-Guide-Information-Graphics/dp/0393072959">The Wall Street Journal Guide to Information Graphics: The Dos and Don’ts of Presenting Data, Facts, and Figures</a>: This is a comprehensive guide to data visualization, including chapters on basic data visualization principles and how to create useful data visualizations even when you find yourself in a tricky situation. This is a useful book to add to your data visualization library, and you can reference it over and over again.</li>
+<li><a href="https://datavizcatalogue.com/#google_vignette">The data visualization catalogue</a>: Not sure where to start with data visualization? This catalogue features a range of different diagrams, charts, and graphs to help you find the best fit for your project. As you navigate each category, you will get a detailed description of each visualization as well as its function and a list of similar visuals.</li>
+<li><a href="https://www.tableau.com/learn/articles/best-data-visualization-blogs">10 data visualization blogs</a>: Each link will lead you to a blog that is a fountain of information on everything from data storytelling to graphic data. Get your next great idea or just browse through some visual inspiration.</li>
+</ul>
+</section>
+</section>
+<section id="types-of-graphs" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="types-of-graphs"><span class="header-section-number">2.2</span> Types of graphs</h2>
+<ul>
+<li><strong>Bar/column graphs</strong> use size contrast to compare two or more values.Bar graphs are a great way to clarify trends and identify patterns.</li>
+<li>Similar to bar charts, <strong>heatmaps</strong> also use color to compare categories in a data set. They are mainly used to show relationships between two variables and use a system of color-coding to represent different values.</li>
+<li><strong>Line graphs</strong> are a type of visualization that can help your audience understand shifts or changes in your data. They’re usually used to track changes through a period of time, but they can be paired with other factors too.</li>
+<li><strong>Pie charts</strong> show how much each part of something makes up the whole.</li>
+<li><strong>Maps</strong> help organize data geographically. The great thing about maps is they can hold a lot of location-based information and they’re easy for your audience to interpret.</li>
+<li>A <strong>distribution graph</strong> displays the spread of various outcomes in a dataset.</li>
+<li><strong>A histogram</strong> resembles a bar graph, but it’s a chart that shows how often data values fall into certain ranges.</li>
+<li><strong>Correlation charts</strong> can show relationships among data, but they should be used with caution because they might lead viewers to think that the data shows causation. Causation or a cause-effect relationship occurs when an action directly leads to an outcome.</li>
+<li><strong>Scatter plots</strong> show relationships between different variables. Scatter plots are typically used for two variables for a set of data, although additional variables can be displayed.</li>
+</ul>
+</section>
+<section id="dynamic-visualizations" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="dynamic-visualizations"><span class="header-section-number">2.3</span> Dynamic visualizations</h2>
+<ul>
+<li><strong>Static visualizations</strong> do not change over time unless they’re edited. They can be useful when you want to control your data and your data story.</li>
+<li><strong>Dynamic visualizations</strong> are interactive or change over time. The interactive nature of these graphics means that users have some control over what they see.</li>
+</ul>
+</section>
+<section id="decision-trees" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="decision-trees"><span class="header-section-number">2.4</span> Decision trees</h2>
+<p>With so many visualization options out there for you to choose from, how do you decide what is the best way to represent your data?</p>
+<p>A <strong>decision tree</strong> is a decision-making tool that allows you, the data analyst, to make decisions based on key questions that you can ask yourself.</p>
+<p><img width="400" src="../images/decision_tree.png"></p>
+<p>Resources:</p>
+<ul>
+<li><a href="https://www.data-to-viz.com/">From data to visualization</a>: This is an excellent analysis of a larger decision tree. With this comprehensive selection, you can search based on the kind of data you have or click on each graphic example for a definition and proper usage.</li>
+<li><a href="https://www.youtube.com/watch?v=C07k0euBpr8">Selecting the best chart</a>: This two-part YouTube video can help take the guesswork out of data chart selection. Depending on the type of data you are aiming to illustrate, you will be guided through when to use, when to avoid, and several examples of best practices. <a href="https://www.youtube.com/watch?v=qGaIB-bRn-A">Part 2</a> of this video provides even more examples of different charts, ensuring that there is a chart for every type of data out there.</li>
+</ul>
+</section>
+<section id="elements-of-art" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="elements-of-art"><span class="header-section-number">2.5</span> Elements of art</h2>
+<p>The key elements of art are:</p>
+<ul>
+<li><strong>Line</strong>:<br>
+</li>
+<li><strong>Shape</strong>: Shapes are also a great way to add eye-catching contrast, especially size contrast to your data story.<br>
+</li>
+<li><strong>Color</strong>: Colors can be described by their hue, intensity, and value. The hue of a color is basically its name, red, green, blue and so on. Intensity is how bright or dull a color is, and finally, there’s value. The value is how light or dark the colors are in a visualization. Dark values with some black added are called shades of color, like these shades of green. Light values with white added are called tints, like these tints of blue<br>
+</li>
+<li><strong>Space</strong>:<br>
+</li>
+<li><strong>Movement</strong>: Movement is used to create a sense of flow or action in a visualization.</li>
+</ul>
+</section>
+<section id="principles-of-design" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="principles-of-design"><span class="header-section-number">2.6</span> Principles of design</h2>
+<ol type="1">
+<li><strong>Balance</strong>: The design of a data visualization is balanced when the key visual elements, like color and shape, are distributed evenly.</li>
+<li><strong>Emphasis</strong>: Your data visualization should have a focal point, so that your audience knows where to concentrate. In other words, your visualizations should emphasize the most important data so that users recognize it first. Using color and value is one effective way to make this happen.</li>
+<li><strong>Movement</strong>: Movement can refer to the path the viewer’s eye travels as they look at a data visualization, or literal movement created by animations. Movement in data visualization should mimic the way people usually read. You can use lines and colors to pull the viewer’s attention across the page.</li>
+<li><strong>Pattern</strong>: You can use similar shapes and colors to create patterns in your data visualization. This can be useful in a lot of different ways. For example, you can use patterns to highlight similarities between different data sets, or break up a pattern with a unique shape, color, or line to create more emphasis.</li>
+<li><strong>Repetition</strong>: Repeating chart types, shapes, or colors adds to the effectiveness of your visualization.</li>
+<li><strong>Proportion</strong>: Proportion is another way that you can demonstrate the importance of certain data. Using various colors and sizes helps demonstrate that you are calling attention to a specific visual over others. If you make one chart in a dashboard larger than the others, then you are calling attention to it.</li>
+<li><strong>Rhythm</strong>: This refers to creating a sense of movement or flow in your visualization. Rhythm is closely tied to the movement principle. If your finished design doesn’t successfully create a flow, you might want to rearrange some of the elements to improve the rhythm.</li>
+<li><strong>Variety</strong>: Your visualizations should have some variety in the chart types, lines, shapes, colors, and values you use. Variety keeps the audience engaged.</li>
+<li><strong>Unity</strong>: The last principle is unity. This means that your final data visualization should be cohesive. If the visual is disjointed or not well organized, it will be confusing and overwhelming.</li>
+</ol>
+<p><strong>Data composition</strong>, and it’s achieved by combining the individual parts of a visualization and displaying them together as a whole</p>
+<p>Elements for effective visuals:</p>
+<ul>
+<li>Clear meaning</li>
+<li>Sophisticated use of contrast</li>
+<li>Refined execution, i.e.&nbsp;deep attention to detail</li>
+</ul>
+</section>
+<section id="design-thinking" class="level2" data-number="2.7">
+<h2 data-number="2.7" class="anchored" data-anchor-id="design-thinking"><span class="header-section-number">2.7</span> Design thinking</h2>
+<p><strong>Design thinking</strong> is a process used to solve complex problems in a user-centric way.</p>
+<p>Five phases of the design process:</p>
+<ul>
+<li>Emphasize: think about the emotions and needs of the target audience of your data viz</li>
+<li>Define: find your audiences needs, their problems, and your insights</li>
+<li>Ideate: here you start to generate your data viz ideas. You’ll use all of your findings from the empathize and define phases to brainstorm potential data viz solutions</li>
+<li>Prototype: you’ll start putting your charts, dashboards or other visualizations together</li>
+<li>Test: showing visualizations to team members before presenting them to stakeholders</li>
+</ul>
+</section>
+<section id="headlines-subtitles-and-labels" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="headlines-subtitles-and-labels"><span class="header-section-number">2.8</span> Headlines, subtitles, and labels</h2>
+<p>A <strong>headline</strong> is a line of words printed in large letters at the top of the visualization to communicate what data is being presented. The typography and placement of the headline is important too. It’s best to keep it simple. Make it bold or a few sizes larger than the rest of the text and place it directly above the chart, aligned to the left.</p>
+<p>A <strong>subtitle</strong> supports the headline by adding more context and description. Use a font style that matches the rest of the charts elements and place the subtitle directly underneath the headline.</p>
+<p>A <strong>legend</strong> or key identifies the meaning of various elements in a data visualization and can be used as an alternative to labeling data directly. Direct labeling like this keeps your audience’s attention fixed on your graphic and helps them identify data quickly.</p>
+<p>An <strong>annotation</strong> briefly explains data or helps focus the audience on a particular aspect of the data in a visualization.</p>
+<p><img width="400" src="../images/highlighting.png"></p>
+</section>
+<section id="accessible-visualizations" class="level2" data-number="2.9">
+<h2 data-number="2.9" class="anchored" data-anchor-id="accessible-visualizations"><span class="header-section-number">2.9</span> Accessible visualizations</h2>
+<ul>
+<li>Use labeling effectively</li>
+<li>Provide text alternatives, <strong>Alternative text</strong> provides a textual alternative to non-text content. It allows the content and function of the image to be accessible to those with visual or certain cognitive disabilities.</li>
+<li>Make data from charts and diagrams available in a text-based format through an export to Sheets or Excel</li>
+<li>You can also make it easier for people to see and hear content by separating foreground from background</li>
+<li>Red-green color blindness is the most common and occurs when red and green look like the same color. You can avoid placing green on red or red on green in your visualizations.</li>
+<li>Blue-yellow color blindness is less common and occurs when it is difficult to tell the difference between blue and green, or yellow and red. You can also avoid using these colors on top of or next to each other.</li>
+<li>Avoid relying solely on color to convey information, and instead distinguished with different textures and shapes.</li>
+<li>Avoid over complicating data visualizations by including too much information</li>
+<li>A companion table displays the same data as the visualization, but in a table format and as such might help some people access the data better</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Share Data Through the Art of Visualization</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/2_tableau.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data vis with Tableau</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

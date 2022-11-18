@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Data analysis - 5&nbsp; Data calculations</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/3_aggregating_data.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data calculations</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Data analysis</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Analyze Data to Answer Questions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_organizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Organizing the data to begin analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_converting_and_formatting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Converting and formatting data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_aggregating_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregating data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_data_calculations.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data calculations</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#spreadsheets" id="toc-spreadsheets" class="nav-link active" data-scroll-target="#spreadsheets"><span class="toc-section-number">5.1</span>  Spreadsheets</a>
+  <ul class="collapse">
+  <li><a href="#countif" id="toc-countif" class="nav-link" data-scroll-target="#countif"><span class="toc-section-number">5.1.1</span>  COUNTIF</a></li>
+  <li><a href="#sumif" id="toc-sumif" class="nav-link" data-scroll-target="#sumif"><span class="toc-section-number">5.1.2</span>  SUMIF</a></li>
+  <li><a href="#maxifs" id="toc-maxifs" class="nav-link" data-scroll-target="#maxifs"><span class="toc-section-number">5.1.3</span>  MAXIFS</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources"><span class="toc-section-number">5.1.4</span>  Resources</a></li>
+  <li><a href="#composite-functions" id="toc-composite-functions" class="nav-link" data-scroll-target="#composite-functions"><span class="toc-section-number">5.1.5</span>  Composite functions</a></li>
+  </ul></li>
+  <li><a href="#pivot-tables" id="toc-pivot-tables" class="nav-link" data-scroll-target="#pivot-tables"><span class="toc-section-number">5.2</span>  Pivot tables</a></li>
+  <li><a href="#more-sql-calculations" id="toc-more-sql-calculations" class="nav-link" data-scroll-target="#more-sql-calculations"><span class="toc-section-number">5.3</span>  More SQL calculations</a>
+  <ul class="collapse">
+  <li><a href="#queries-and-calculations" id="toc-queries-and-calculations" class="nav-link" data-scroll-target="#queries-and-calculations"><span class="toc-section-number">5.3.1</span>  Queries and calculations</a></li>
+  <li><a href="#groupby" id="toc-groupby" class="nav-link" data-scroll-target="#groupby"><span class="toc-section-number">5.3.2</span>  Groupby</a></li>
+  </ul></li>
+  <li><a href="#the-data-validation-process" id="toc-the-data-validation-process" class="nav-link" data-scroll-target="#the-data-validation-process"><span class="toc-section-number">5.4</span>  The data validation process</a></li>
+  <li><a href="#sql-with-temporary-tables" id="toc-sql-with-temporary-tables" class="nav-link" data-scroll-target="#sql-with-temporary-tables"><span class="toc-section-number">5.5</span>  SQL with temporary tables</a>
+  <ul class="collapse">
+  <li><a href="#multiple-table-variations" id="toc-multiple-table-variations" class="nav-link" data-scroll-target="#multiple-table-variations"><span class="toc-section-number">5.5.1</span>  Multiple table variations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data calculations</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="spreadsheets" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="spreadsheets"><span class="header-section-number">5.1</span> Spreadsheets</h2>
+<p>Some basic math examples to follow are <a href="https://docs.google.com/spreadsheets/d/1edywJhpeMgXWXb_7MZVhL1SmThA5WCEr0tXjsFAYA3k/edit?resourcekey=0-B0-TV3wqddmS3AmdxPoc5A#gid=0">here</a> and <a href="">here</a></p>
+<p>Conditional functions are functions that perform a specific task, but only on cells that satisfy some defined criteria. They are usually identified with an IF suffix adjoined to the desired operation. They are frequently used when constructing more complex queries that cannot be accomplished using more basic functions.</p>
+<section id="countif" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="countif"><span class="header-section-number">5.1.1</span> COUNTIF</h3>
+<p>Some examples to follow are <a href="https://docs.google.com/spreadsheets/d/1zSwKJBRegmcu0KyRuFSERmKWgsz4XSlhQ8PVIvB9dlc/edit?resourcekey=0-oxrI4dM6Tyf4U4q8pQqIYg#gid=0">here</a></p>
+<p><strong>COUNTIF</strong> returns the number of cells that match a specified value.</p>
+<p><code>=COUNTIF(range, "value")</code>, i.e.&nbsp;if we want to get values greater than 1 <code>=COUNTIF(B2:B50, "&gt;1")</code></p>
+<p><strong>COUNTIFS</strong> allows you to create a COUNTIF function with multiple conditions. The basic syntax for COUNTIF is:</p>
+<p><code>COUNTIFS(criteria_range1, criterion1, [criteria_range2, criterion2, ...])</code></p>
+</section>
+<section id="sumif" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="sumif"><span class="header-section-number">5.1.2</span> SUMIF</h3>
+<p><strong>SUMIF</strong> is a function that adds numeric data based on one condition.</p>
+<p><code>=SUMIF(range, criteria/condition, [sum_range])</code>. I.e. if we only want to sum things in column C if the quantity in colum B is 1, we do <code>=SUMIF(B2:B50, "1", C2:C50)</code></p>
+<p>you could also build in multiple conditions by using the <strong>SUMIFS</strong> function. SUMIF and SUMIFS are very similar, but SUMIFS can include multiple conditions. The basic syntax is:</p>
+<p><code>=SUMIFS(sum_range, criteria_range1, criterion1, [criteria_range2, criterion2, ...])</code></p>
+</section>
+<section id="maxifs" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="maxifs"><span class="header-section-number">5.1.3</span> MAXIFS</h3>
+<p>The <strong>MAXIFS</strong> function returns the maximum value among cells specified by a given set of conditions or criteria</p>
+<p>The MAXIFS function is slightly different from the other three functions. The easiest way to observe the difference is to examine the syntax:</p>
+<p>The MAXIFS function can input more than one constraint. This is where the optional range2 and constraint2 come into play.</p>
+<p><code>=MAXIFS(max_range, range1, criteria1, [range2], [criteria2], ...)</code></p>
+</section>
+<section id="resources" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="resources"><span class="header-section-number">5.1.4</span> Resources</h3>
+<ul>
+<li><a href="https://exceljet.net/excel-functions/excel-ifs-function">How to use the Excel IFS function</a>: This resource includes an explanation and example of the IFS function in Excel. This is a great reference if you are interested in learning more about IFS. The example is a useful way to understand this function and how it can be used.</li>
+<li><a href="https://exceljet.net/formula/vlookup-with-multiple-criteria">VLOOKUP in Excel with multiple criteria</a>: Similar to the previous resource, this resource goes into more detail about how to use VLOOKUP with multiple criteria. Being able to apply VLOOKUP with multiple criteria will be a useful skill, so check out this resource for more guidance on how you can start using it on your own spreadsheet data.<br>
+</li>
+<li><a href="https://exceljet.net/formula/index-and-match-with-multiple-criteria">INDEX and MATCH in Excel with multiple criteria</a>: This resource explains how to use the INDEX and MATCH functions with multiple criteria. It also includes an example which helps demonstrate how these functions work with multiple criteria and actual data.</li>
+<li><a href="https://support.microsoft.com/en-us/office/using-if-with-and-or-and-not-functions-d895f58c-b36c-419e-b1f2-5c193a236d97">Using IF with AND, OR, and NOT functions in Excel</a>: This resource combines IF with AND, OR, and NOT functions to create more complex functions. By combining these functions, you can perform your tasks more efficiently and cover more criteria at once.</li>
+</ul>
+</section>
+<section id="composite-functions" class="level3" data-number="5.1.5">
+<h3 data-number="5.1.5" class="anchored" data-anchor-id="composite-functions"><span class="header-section-number">5.1.5</span> Composite functions</h3>
+<p><strong>SUMPRODUCT</strong> is a function that multiplies arrays and returns the sum of those products. An <strong>array</strong> is kind of like a range in a spreadsheet. But keep in mind, an array is a collection of values in cells, not the cells themselves.</p>
+<p><code>=sumproduct(array1, [array2]...)</code></p>
+<p>To check out the example, go <a href="https://docs.google.com/spreadsheets/d/1_jTXpgjH_4yeA0fdp1bVsL2HUHm8Ko_ETNabQxxlhO8/edit#gid=278417751">here</a>.</p>
+<p><img width="400," src="../images/sumproduct.png"></p>
+<p>Sumproduct does all the calculations shown in the image above by doing the following:</p>
+<p><code>=sumproduct(B3:B7, C3:C7)</code></p>
+<p>The <strong>profit margin</strong> is a percentage that indicates how many cents of profit have been generated for each dollar of sale. We can easily include this in our calculations:</p>
+<p><code>=SUMPRODUCT(B3:B7, C3:C7, D3:D7)</code></p>
+</section>
+</section>
+<section id="pivot-tables" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="pivot-tables"><span class="header-section-number">5.2</span> Pivot tables</h2>
+<p>Pivot tables let you view data in multiple ways to find insights and trends. We’ve talked before about how pivot tables help with cleaning and organizing your data including sorting and grouping data. But pivot tables can also help with calculations. For example, they’re great for quickly calculating sums and averages.</p>
+<p>A pivot table has four basic parts: rows, columns, values, and filters.</p>
+<ul>
+<li>The rows of a pivot table organize and group data you select horizontally.</li>
+<li>The columns organize and display values from your data vertically. Similar to rows, columns can be pulled directly from the data set or created using values.</li>
+<li>Values are used to calculate and count data. This is where you input the variables you want to measure. This is also how you create calculated fields in your pivot table. As a refresher, a calculated field is a new field within a pivot table that carries out certain calculations based on the values of other fields</li>
+<li>he filters section of a pivot table enables you to apply filters based on specific criteria <e2>&lt;80&gt;&lt;94&gt; just like filters in regular spreadsheets</e2></li>
+</ul>
+<p>The example data can be found <a href="https://docs.google.com/spreadsheets/d/10MaK6Gj8SVkv27XgJ08V40pm6bAKuRpudZmiqOG9-mo/edit#gid=0">here</a> and another example is <a href="https://docs.google.com/spreadsheets/d/1fb-jxPRvmWq0IMOf6lPTmiGLjfChypp9msIHHUHWfVA/edit?resourcekey=0-dGzziS01cDjhaxoDBlHKsw#gid=1416948307">here</a></p>
+<ol type="1">
+<li>find out how much revenue was generated each year</li>
+<li>build a pivot table to show this</li>
+<li>In our pivot table, we can also find the average revenue per movie</li>
+<li>check our findings for some possible trends</li>
+</ol>
+<ul>
+<li>Insert –&gt; Pivot table</li>
+<li>Rename sheet</li>
+<li>Rows –&gt; release data to find revenue/year. To only get the year, right click somewhere in column A –&gt; Create pivot date group –&gt; year</li>
+<li>Click Add button for Values to add the box office revenue</li>
+<li>This populates the columns next to the release dates with the total box office revenue and each year. These calculations are automatic because the pivot table is already set to summarize the data using the sum function</li>
+</ul>
+<p>Next, we add another column for the average revenue earned by each year’s movie</p>
+<ul>
+<li><p>Add value –&gt; Box office revenue and change sum to average</p></li>
+<li><p>We see that one year, 2015, is particularly low and we might want to ask why</p></li>
+<li><p>Add value –&gt; Box office revenue and count function to see that 2015 was the year with the most movies but it still has a low box office revenue. Was it because none of the movies earned a lot of revenue?</p></li>
+<li><p>Cp pivot table into A10 and rename the column names to distinguish this table from the old one</p></li>
+<li><p>Select D11 and add a filter to box office revenue –&gt; filter by condition –&gt; less than –&gt; 10,000,000</p></li>
+<li><p>We see the whole table changing</p></li>
+<li><p>Control that the average values are still correct</p></li>
+<li><p>Add value –&gt; calculated field. A <strong>calculated field</strong> is a new field within a pivot table that carries out certain calculations based on the values of other fields.</p></li>
+<li><p>Add <code>=SUM('Box Office Revenue ($)'/count('Box Office Revenue ($)'))</code></p></li>
+</ul>
+<p>Let’s run a quick formula to find the percentage of movies for each year that earned less than $10 million. - Add header in G10 (a cell outside of the pivot table) - Divide the number of movies in the copy table by the number of movies in the original table</p>
+</section>
+<section id="more-sql-calculations" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="more-sql-calculations"><span class="header-section-number">5.3</span> More SQL calculations</h2>
+<section id="queries-and-calculations" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="queries-and-calculations"><span class="header-section-number">5.3.1</span> Queries and calculations</h3>
+<p>An <strong>operator</strong> is a symbol that names the type of operation or calculation to be performed in a formula.</p>
+<p>The syntax of a query is its structure. It should include all the specific details of the data you want to pull into a new table where those details should be placed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    columnA, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    columnB</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    ColumnA <span class="op">+</span> columnB <span class="kw">AS</span> columnX</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> tableX</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>let’s say you only wanted the remainder from a division calculation. Well, you need a different operator for this, the modulo operator. The <strong>modulo</strong> operator is represented by the percent symbol. This is an operator that returns the remainder when one number is divided by another.</p>
+<p>To follow these examples below, we uploaded the <code>data/avocado.csv</code> data into BiqQuery.</p>
+<p>Our goal is to find out the total number of bags of avocados sold on each date at each location using this data. We want to make sure that the total column is just small, large, and extra-large bags added together.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Date</span>, Region, Small_Bags, Large_Bags, XLarge_Bags, Total_Bags,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">---add the calculation to the query</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  Small_Bags <span class="op">+</span> Large_Bags <span class="op">+</span> XLarge_Bags <span class="kw">AS</span> total_bags_calc</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> avocado_data.avocado_prices</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that we have verified the total number of bags, we can use those values in another query. We need to find what percent of the total number of bags were small bags.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Date</span>, Region, Total_Bags, Small_Bags,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">---find the percentage of small bags</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  (Small_Bags<span class="op">/</span> Total_Bags)<span class="op">*</span><span class="dv">100</span> <span class="kw">AS</span> Small_bags_perc</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> avocado_data.avocado_prices</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This gives an error: division by zero 0/0. This means that somewhere in the dataset there is total bags equal to zero. We’ll have to fix this in our query. We can fix this using the WHERE command. Using <code>&lt;&gt;</code> tells the server that the values we are calculating should not be equal to the value we specify. Alternatively, we could also use <code>!=</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">Date</span>, Region, Total_Bags, Small_Bags,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">---find the percentage of small bags</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  (Small_Bags<span class="op">/</span> Total_Bags)<span class="op">*</span><span class="dv">100</span> <span class="kw">AS</span> Small_bags_perc</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> avocado_data.avocado_prices</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  Total_Bags <span class="op">&lt;&gt;</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="groupby" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="groupby"><span class="header-section-number">5.3.2</span> Groupby</h3>
+<p><strong>GROUP BY</strong> is a command that groups rows that have the same values from a table into summary rows. The GROUP BY command is used with SELECT statements. In a basic SELECT FROM or SELECT-FROM-WHERE query, GROUP BY comes at the end of the query.</p>
+<p>The <strong>EXTRACT</strong> command lets us pull one part of a given date to use.</p>
+<p>We’ll work with a database, with data from a bike sharing system. We want to find out how many rides people took on these bikes per year.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">---extract year from the start time column</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">EXTRACT</span>(<span class="dt">YEAR</span> <span class="kw">FROM</span> STARTTIME) <span class="kw">AS</span> <span class="dt">year</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">---count the bike rides in the starttime column</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> number_of_rides</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york.citibike_trips</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">---group the data by year</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dt">year</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">--- organize the results</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dt">year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s try something else with the <code>new_york_subway</code> public dataset:</p>
+<ul>
+<li>Open the bigquery-public-data dropdown in the Explorer menu and scroll until you find new_york_subway.</li>
+<li>Open the dropdown and click subway_ridership_2013_present to open and examine the dataset.</li>
+<li>click subway_ridership_2013_present to open and examine the dataset.</li>
+</ul>
+<p>The change_2018_raw column describes the change in weekly ridership from 2017 to 2018 in raw numbers. Suppose you want to find data on the change in weekly ridership from 2013 to 2014. You can use SQL to subtract the number of riders in 2013 from the number of riders in 2014.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  station_name, ridership_2013, ridership_2014,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  ridership_2014 <span class="op">-</span> ridership_2013 <span class="kw">AS</span> change_in_2014_raw</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york_subway.subway_ridership_2013_present</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The original dataset describes average weekly ridership for each individual year. Suppose you want to find average weekly ridership for a longer period of time, such as the multi-year period from 2013-2016.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  station_name, ridership_2013, ridership_2014, ridership_2015, ridership_2016,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  (ridership_2013 <span class="op">+</span> ridership_2014 <span class="op">+</span> ridership_2015 <span class="op">+</span> ridership_2016)<span class="op">/</span><span class="dv">4</span> <span class="kw">AS</span> average</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york_subway.subway_ridership_2013_present`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="the-data-validation-process" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="the-data-validation-process"><span class="header-section-number">5.4</span> The data validation process</h2>
+<p>The <strong>data validation process</strong> involves checking and rechecking the quality of your data so that it is complete, accurate, secure, and consistent.</p>
+<p>It is important that whenever you do calculations, you always check to make sure you’ve done them in the right way. Sometimes you’ll run data validation checks that are common-sense checks.</p>
+<p>The following list outlines six types of data validation and the purpose of each, and includes examples and limitations.</p>
+<ul>
+<li>Checking that the data type is correct</li>
+<li>Checking that the data range is correct</li>
+<li>Check that the data meets certain conditions or criteria for a field</li>
+<li>Check that the data makes sense in the context of other related data, i.e.&nbsp;shipping dates should not be earlier than construction dates</li>
+<li>Check that the data follows or conforms to a set structure, i.e.&nbsp;for MP3 files or HTML code</li>
+<li>Check that the application code systematically performs any of the previously mentioned validations during user data input.</li>
+</ul>
+</section>
+<section id="sql-with-temporary-tables" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sql-with-temporary-tables"><span class="header-section-number">5.5</span> SQL with temporary tables</h2>
+<p>A <strong>temporary table</strong> is a database table that is created and exists temporarily on a database server.</p>
+<ul>
+<li>They are automatically deleted from the database when you end your SQL session.</li>
+<li>They can be used as a holding area for storing values if you are making a series of calculations. This is sometimes referred to as pre-processing of the data.</li>
+<li>They can collect the results of multiple, separate queries. This is sometimes referred to as data staging. Staging is useful if you need to perform a query on the collected data or merge the collected data.</li>
+<li>They can store a filtered subset of the database. You don<e2>&lt;80&gt;&lt;99&gt;t need to select and filter the data each time you work with it. In addition, using fewer SQL commands helps to keep your data clean.</e2></li>
+</ul>
+<p>The <strong>WITH</strong> clause is a type of temporary table that you can query from multiple times. The WITH clause approximates a temporary table. Basically, this means it creates something that does the same thing as a temporary table.</p>
+<p>When you use temporary tables, you make your own work more efficient. Naming and using temp tables can help you deal with a lot of data in a more streamlined way, so you don’t get lost repeating query after query with the same code that you could just include in a temp table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---create temp table</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> trips_over_1_hr <span class="kw">AS</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span>  </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york.citibike_trips</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> tripduration <span class="op">&gt;=</span><span class="dv">60</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- count how many trips are 60+ minutes long</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">COUNT</span> (<span class="op">*</span>) <span class="kw">AS</span> cnt</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> trips_over_1_hr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Lets look at another example in the public <code>austin_bikeshare</code></p>
+<p>Consider the following scenario: A bikeshare company has reached a recent milestone, and their marketing team wants to write a blog post that <e2>&lt;80&gt;&lt;9c&gt;congratulates<e2>&lt;80&gt;&lt;9d&gt; their most-used bike on being so popular. They want to include the name of the station that the bike is most likely to be found.</e2></e2></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> longest_used_bike <span class="kw">AS</span> (</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">SELECT</span> bikeid,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(duration_minutes) <span class="kw">AS</span> trip_duration</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.austin_bikeshare.bikeshare_trips` </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> bikeid</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ORDER</span> <span class="kw">BY</span> trip_duration <span class="kw">DESC</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LIMIT</span> <span class="dv">1</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)  </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">--- find station with longest bikeshare ride started</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> trips.start_station_id,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> trip_ct</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> longest_used_bike <span class="kw">AS</span> longest</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.austin_bikeshare.bikeshare_trips` <span class="kw">AS</span> trips</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> longest.bikeid <span class="op">=</span> trips.bikeid</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> trips.start_station_id</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> trip_ct <span class="kw">DESC</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="multiple-table-variations" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="multiple-table-variations"><span class="header-section-number">5.5.1</span> Multiple table variations</h3>
+<p>The <strong>SELECT INTO</strong> statement is a good example of how to get a temp table done. This statement copies data from one table into a new table but it doesn’t add the new table to the database. It’s useful if you want to make a copy of a table with a specific condition, like a query with a WHERE clause</p>
+<p>Unfortunately, this command does not work in BigQuery so far.</p>
+<p>If lots of people will be using the same table, then the <strong>CREATE TABLE</strong> statement might be the better option. This statement does add the table into the database.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/3_aggregating_data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregating data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

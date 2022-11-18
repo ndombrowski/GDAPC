@@ -1,0 +1,458 @@
+# Data visualization in R
+
+Some useful packages for data vis in R are:
+
+- ggplot2 
+- Plotly 
+- Lattice 
+- RGL 
+- Dygraphs 
+- Leaflet 
+- Highcharter 
+- Patchwork 
+- gganimate
+- ggridges
+
+In ggplot2 an **aesthetic** is a visual property of an object in your plot. For example, in a scatter plot aesthetics include things like the size, shape or color of your data points. 
+
+A **geom** refers to the geometric object used to represent your data. For example, you can use points to create a scatter plot, bars to create a bar chart, or lines to create a line diagram.
+
+**Facets** let you display smaller groups or subsets of your data. With facets, you can create separate plots for all the variables in your dataset.
+
+The **label and annotate functions** let you customize your plot. You can add text like titles, subtitles and captions to communicate the purpose of your plot or highlight important data. 
+
+The grammar of graphics in ggplot2:
+
+- start with the ggplot function and choose a dataset to work with,
+- add a geom_function to display your data
+- map the variables you want to plot in the argument of the aes function
+
+```
+ggplot(data=<DATA>) +
+    <GEOM_FUNCTION>(mapping=aes(<AESTHETIC MAPPINGS>))
+```
+
+
+## Getting started
+
+First let's load the data and have a look:
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+```{r}
+head(penguins)
+```
+Suppose you want to plot the relationship between body mass and flipper length in the three penguin species. You can choose a specific geom that fits the type of data you have. Points show the relationship between two quantitative variables. A scatterplot of points would be an effective way to display the relationship between the two variables. You can put flipper length on the x-axis and body mass on the y-axis. 
+
+For this we need:
+
+1. The **ggplot()** function, which creates a coordinate system that you can add layers to. The first argument of the ggplot() function is the dataset to use in the plot. In this case, it’s `penguins`.
+2. You use a `+` symbol to add a new layer to your plot. You complete your plot by adding one or more layers to ggplot().
+3.  Add a **geom** function. The geom_point() function uses points to create scatterplots, the geom_bar function uses bars to create bar charts, and so on. Each geom function in ggplot2 takes **a mapping argument**. This defines how variables in your dataset are mapped to visual properties. The mapping argument is always paired with the **aes()** function. The x and y arguments of the aes() function specify which variables to map to the x-axis and the y-axis of the coordinate system. **Mapping** means matching up a specific variable in your dataset with a specific aesthetic. For example, you can map a variable to the x- axis of your plot, or you can map a variable to the y-axis of your plot.
+
+```{r}
+ggplot(penguins) +
+    geom_point(mapping = aes(x=flipper_length_mm, y = body_mass_g))
+```
+
+You can write the same section of code above using a different syntax with the mapping argument inside the ggplot() call: 
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g)) +
+    geom_point()
+```
+
+
+## Exploring aesthethics
+
+We can map variables, as well as color, size and shape, to aesthetics. Let's add a third variable to our scatter plot by mapping it to a new aesthetic. We'll map the variable species to the aesthetic color by adding some code inside the parentheses of the aes function.
+
+Using more than one aesthetic can also be a way to make your visuals more accessible because it gives your viewers more than one way to make sense of your data.
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point()
+```
+
+We can also use shape to highlight the different penguin species.
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g, shape = species)) +
+    geom_point()
+```
+
+If we want we can map more than one aesthetic to the same variable. Let's map both color and shape to species. 
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g, shape = species, color = species)) +
+    geom_point()
+```
+
+Let's add size as well and map three aesthetics to species. If we add size equal species, each colored shape will also be a different size.
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g, shape = species, color = species, size = species)) +
+    geom_point()
+```
+
+We can also map species to the alpha aesthetic, which controls the transparency of the points. Alpha is a good option when you've got a dense plot with lots of data points.
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g, alpha = species)) +
+    geom_point()
+```
+
+You can also set the aesthetic apart from a specific variable. Let's say we want to change the color of all the points to purple. Here we don't want to map color to a specific variable like species. We just want every point in our scatter plot to be purple. So we need to set our new piece of code outside of the aes function and use quotation marks for our color value. If we want to change the appearance of our overall plot without regard to specific variables, we write code outside of the aes function.
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g)) +
+    geom_point(color="purple")
+```
+
+
+## Different geom functions
+
+### Smooting
+
+Smoothing enables the detection of a data trend even when you can't easily notice a trend from the plotted data points. Ggplot2’s smoothing functionality is helpful because it adds a smoothing line as another layer to a plot; the smoothing line helps the data to make sense to a casual observer.
+
+To change the type of plot, we can put **geom_smooth** in place of geom underscore point.
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g)) +
+    geom_smooth(color="purple")
+```
+
+Instead of points, there's a smooth line that fits the data. The geom underscore smooth function's useful for showing general trends in our data.
+
+We can even use two geoms in the same plot. Let's say we want to show the relationship between the trend line and the data points more clearly.
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g)) +
+    geom_point() +
+    geom_smooth(color="purple")
+```
+
+Let's say we want to plot a separate line for each species of penguin. We can add the line type aesthetic to our code and map it to the variable species. Geom underscore smooth will draw a different line with a different line type for each species of penguin.
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g)) +
+    geom_smooth(aes(linetype = species))
+```
+
+There are two types of smoothing:
+
+- Loess smoothing: The loess smoothing process is best for smoothing plots with less than 1000 points.
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g)) +
+    geom_smooth(method = "loess")
+```
+
+- Gam smoothing: Gam smoothing, or generalized additive model smoothing, is useful for smoothing plots with a large number of points.
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g)) +
+    geom_smooth(method="gam", formula = y ~s(x))
+```
+
+
+### Jittering
+
+The **geom_jitter** function creates a scatter plot and then adds a small amount of random noise to each point in the plot. Jittering helps us deal with over-plotting, which happens when the data points in a plot overlap with each other. Jittering makes the points easier to find.
+
+
+```{r}
+ggplot(penguins, aes(x=flipper_length_mm, y = body_mass_g)) +
+    geom_jitter()
+```
+
+
+
+### Barcharts
+
+For this, lets work with the diamond dataset that is already part of the ggplot package.
+
+```{r}
+ggplot(diamonds, aes(x=cut)) +
+    geom_bar()
+```
+
+Notice that we didn't supply a variable for the y-axis. When you use geom_bar, R automatically counts how many times each x-value appears in the data, and then shows the counts on the y-axis. The default for geom_bar is to count rows.
+
+```{r}
+ggplot(diamonds, aes(x=cut)) +
+    geom_bar()
+```
+
+Geom underscore bar uses several aesthetics that you're already familiar with, such as color, size, and alpha. Let's add the color aesthetic to our plot and map it to the variable cut. We write the code the same way as we did with scatter plots and add color equals cut after x equals cut. The color aesthetic adds color to the outline of each bar.
+
+```{r}
+ggplot(diamonds, aes(x=cut, color = cut)) +
+    geom_bar()
+```
+
+We can use the fill aesthetic to add color to the inside of each bar. In our code, we put fill equals cut in place of color equals cut.
+
+```{r}
+ggplot(diamonds, aes(x=cut, fill = cut)) +
+    geom_bar()
+```
+
+If we map fill to a new variable, geom underscore bar will display what's called a stacked bar chart. Let's map fill to clarity instead of cut.
+
+```{r}
+ggplot(diamonds, aes(x=cut, fill = clarity)) +
+    geom_bar()
+```
+
+
+## Aesthetics and facets
+
+**Facet functions** let you display smaller groups or subsets of your data. A facet is a side or section of an object, like the sides of a gemstone. Facets show different sides of your data by placing each subset on its own plot.
+
+Facet functions in ggplot2:
+
+- `Facet_wrap()`: To facet your plot by a single variable, use facet underscore wrap
+- `Facet_grid()`: facet your plot with two variables. `facet_grid` will include plots even if they are empty
+
+
+### Facet_wrap
+ 
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    facet_wrap(~species)
+```
+
+Let's try faceting the diamonds dataset. Earlier, we made a bar chart that showed the number of diamonds for each category of cut. Fair, good, very good, premium, and ideal. We can use facet underscore wrap on the cut variable to create a separate plot for each category of cut.
+ 
+```{r}
+ggplot(diamonds, aes(x = color, fill = cut)) +
+    geom_bar() +
+    facet_wrap(~cut)
+```
+
+### Facet_grid
+ 
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    facet_grid(sex~species)
+```
+
+If we want, we can focus our plot on only one of the two variables. For example, we can tell R to remove sex from the vertical dimension of the plot and just show species. 
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    facet_grid(~sex)
+```
+
+
+## Filtering and plots
+
+Filtering your data before you plot it allows you to focus on specific subsets of your data and gain more targeted insights. To do this, just include the dplyr filter() function in your ggplot syntax. 
+
+```{r}
+penguins |>
+    filter(species == "Adelie") |> 
+    ggplot(aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
+    geom_point(alpha = 0.3,  position = position_jitter()) + 
+    stat_smooth(method = "lm")
+```
+
+We can also filter using several categories:
+
+
+```{r}
+penguins |>
+    filter(species == "Adelie") |> 
+    filter(sex == "female") |> 
+    ggplot(aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
+    geom_point(alpha = 0.3,  position = position_jitter()) + 
+    stat_smooth(method = "lm")
+```
+
+
+## Conditional coloring
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+    geom_point(aes(color = ifelse(flipper_length_mm > 200, "red", "grey"))) 
+```
+
+
+## Annotation layer
+
+### Titles, subtiles and labels
+
+To **annotate** means to add notes to a document or diagram to explain or comment upon it.
+
+The **label function** is useful for adding informative labels to a plot such as titles, subtitles, and captions. For example, we can add a title to our plot that shows the relationship between body mass and flipper length for the three penguin species. 
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    labs(title="Palmer Penguins: Body mass versus flipper length")
+```
+
+We can also add a subtitle to our plot to highlight important information about our data.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    labs(title="Palmer Penguins: Body mass versus flipper length",
+         subtitle = "Sample of three penguin species")
+```
+
+We can add a caption to our plot in the same way. Captions let us show the source of our data. 
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    labs(title="Palmer Penguins: Body mass versus flipper length",
+         subtitle = "Sample of three penguin species",
+         caption = "Data collected by Dr. Kirsten Gorman")
+```
+
+We can also combine this with some variables, i.e. the min and max values.
+
+```{r}
+min_length <- min(penguins$flipper_length_mm, na.rm = TRUE)
+max_length <- max(penguins$flipper_length_mm, na.rm = TRUE)
+```
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    labs(title="Palmer Penguins: Body mass versus flipper length",
+         subtitle = paste0("Min length: ", min_length, " and max length: ", max_length))
+```
+
+Now you want to clean up the x and y axis labels to make sure they are really clear.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    labs(title="Palmer Penguins: Body mass versus flipper length",
+         subtitle = paste0("Min length: ", min_length, " and max length: ", max_length),
+         x = "Flipper length (mm)",
+         y = "Body mass (g)")
+```
+
+
+### Labelling data points inside the grid
+
+If we want to put text inside the grid to call out specific data points, we can use the annotate function. For example, let's say we want to highlight the data from the Gentoo penguins. 
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    labs(title="Palmer Penguins: Body mass versus flipper length",
+         subtitle = "Sample of three penguin species",
+         caption = "Data collected by Dr. Kirsten Gorman") +
+    #annotate has information on: the type of label, the location of the label and the context of the label
+    annotate("text", x = 220, y = 3500, label = "Gentoos are the largest")
+```
+
+We can customize our annotation even more. Let's say we want to change the color of our text.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    labs(title="Palmer Penguins: Body mass versus flipper length",
+         subtitle = "Sample of three penguin species",
+         caption = "Data collected by Dr. Kirsten Gorman") +
+    #annotate has information on: the type of label, the location of the label and the context of the label
+    annotate("text", x = 220, y = 3500, label = "Gentoos are the largest", color = "purple", fontface="bold", size=4.5, angle = 25)
+```
+
+By this point, our code is getting pretty long. If you want to use less code, you can store your plot as a variable in R.
+
+```{r}
+p <-
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() +
+    labs(title="Palmer Penguins: Body mass versus flipper length",
+         subtitle = "Sample of three penguin species",
+         caption = "Data collected by Dr. Kirsten Gorman")
+```
+
+Now, instead of writing all the code again, we can just call p and add an annotation to it like this.
+
+```{r}
+p + annotate("text", x = 220, y = 3500, label = "Gentoos are the largest")
+```
+
+## Saving your visualizations
+
+To save our plots, we can use the Export option in the plots tab of RStudio or the ggsave function provided by the ggplot2 package.
+
+
+### Export
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+    geom_point() 
+```
+
+Let's use the Export option in the plots tab to save our plot. We can save it as an image file or a PDF file. 
+
+
+### Ggsave
+
+Ggsave is a useful function for saving a plot. It defaults to saving the last plot that you displayed and uses the size of the current graphics device. Let's try saving our plot as a PNG file using ggsave.
+
+```{r}
+ggsave("../output/Three_penguin_species.png")
+```
+
+### Using a graphics device
+
+In most cases, ggsave() is the simplest way to save your plot. But there are situations when it might be best to save your plot by writing it directly to a graphics device. 
+
+A graphics device allows a plot to appear on your computer. Examples include:
+
+- A window on your computer (screen device)
+- A PDF, PNG, or JPEG file (file device)
+- An SVG, or scalable vector graphics file (file device)
+
+Example of using png():
+
+```{r}
+png(file = "../output/png_example.png", bg = "transparent")
+plot(1:10)
+rect(1, 5, 3, 7, col = "white")
+
+dev.off()
+```
+
+Example of using pdf():
+
+```{r}
+pdf(file = "../output/pdf_example.pdf",    
+       width = 4,     
+       height = 4) 
+
+plot(x = 1:10, y = 1:10)
+abline(v = 0)
+text(x = 0, y = 1, labels = "Random text")
+
+dev.off()
+```
+
+
+
+
+
+
+
+
+
+
+
+

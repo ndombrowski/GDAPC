@@ -1,0 +1,90 @@
+# Documentation and reports
+
+**R Markdown** is a file format for making dynamic documents with R. You can use an R Markdown file as a code notebook to save, organize, and document your analysis using code chunks, comments, and other features.
+
+Markdown lets you create a record of your analysis and conclusions in a document. It ties together your code and your report so you can share every step of your analysis.
+
+R Markdown documents are written in Markdown. **Markdown** is a syntax for formatting plain text files. Using Markdown makes it easier to write and format text in your document. 
+
+Markdown is also easy to read and to learn. For example, if you want to italicize a word or phrase in Markdown, just add a single underscore or asterisk right before and after the word. When you create a report of the document, the Markdown formatting is no longer visible, just the word or phrase in italics.
+
+R Markdown lets you convert your files into lots of different formats too. You can create HTML, PDF, and Word documents, or you can convert to a slide presentation or dashboard. 
+
+Code added to an RMD file is usually called a **code chunk**.
+
+
+Some popular packages with templates for R Markdown include the following:
+
+- The vitae package contains templates for creating and maintaining a résumé or curriculum vitae (CV)
+- The rticles package provides templates for various journals and publishers
+- The learnr package makes it easy to turn any R Markdown document into an interactive tutorial 
+- The bookdown package facilitates writing books and long-form articles
+- The flexdashboard package lets you publish a group of related data visualizations as a dashboard
+
+
+
+
+### Exercise
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+choco <- read_csv("../data/flavors_of_cacao.csv")
+head(choco)
+```
+
+When you check out the column headings in your data frame you notice that the first column is named Company...Maker.if.known. (Note: The period after known is part of the variable name.) For the sake of clarity and consistency, you decide to rename this column Company (without a period at the end).
+
+
+```{r}
+choco |> 
+    rename(Company = `Company 
+(Maker-if known)`)
+```
+
+```{r}
+trimmed_flavors_df <- choco |> 
+    select(Rating, `Cocoa
+Percent`, `Company
+Location`)
+
+head(trimmed_flavors_df)
+```
+
+Next, you select the basic statistics that can help your team better understand the ratings system in your data. You want to use the summarize() and sd() functions to find the standard deviation of the rating for your data.
+
+```{r}
+choco |> 
+    summarise(sd(Rating))
+```
+
+After completing your analysis of the rating system, you determine that any rating greater than or equal to 3.9 points can be considered a high rating. You also know that Chocolate and Tea considers a bar to be super dark chocolate if the bar's cocoa percent is greater than or equal to 75%. You decide to create a new data frame to find out which chocolate bars meet these two conditions. You want to apply the filter() function to the variables Cocoa.Percent and Rating. Add the code chunk that lets you filter the data frame for chocolate bars that contain at least 75% cocoa and have a rating of at least 3.9 points.
+
+```{r}
+best_trimmed_flavors_df <- choco |> 
+    filter(`Cocoa
+Percent` >= 75 & Rating >= 3.9)
+```
+
+Now that you’ve cleaned and organized your data, you’re ready to create some useful data visualizations. Your team assigns you the task of creating a series of visualizations based on requests from the Chocolate and Tea management team. You decide to use ggplot2 to create your visuals. 
+
+You want to use the geom_bar() function to create a bar chart. Add the code chunk that lets you create a bar chart with the variable Company.Location on the x-axis.
+
+```{r}
+ggplot(data = best_trimmed_flavors_df) +
+    geom_bar(aes(x = `Company
+Location`))
+```
+
+Your bar chart reveals the locations that produce the highest-rated chocolate bars. To get a better idea of the specific rating for each location, you’d like to highlight each bar. 
+
+```{r}
+ggplot(data = best_trimmed_flavors_df) +
+  geom_bar(mapping = aes(x = `Company
+Location`))
+```
+
+
+

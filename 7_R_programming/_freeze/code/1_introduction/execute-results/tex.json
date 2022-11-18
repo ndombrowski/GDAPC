@@ -1,0 +1,20 @@
+{
+  "hash": "a4a5a55c0b718eaa5fabf6e4d6a146a8",
+  "result": {
+    "markdown": "# Introduction into (R) Programming\n\n**Computer programming** refers to giving instructions to a computer to perform an action or set of actions. **Programming languages** are the words and symbols we use to write instructions for computers to follow. Programming languages have their own set of rules for how these words and symbols should be used, called **syntax**. **Coding** is writing instructions to the computer in the syntax of a specific programming language.\n\n**R** is a programming language frequently used for statistical analysis, visualization and other data analysis. R is based on another programming language named S. In the 1970s, John Chambers created S for internal use at Bell Labs, a famous scientific research facility. The title R refers to the first names of its two authors and plays on a single- letter title of its predecessor S. \n\n**RStudio**'s an IDE or integrated development environment. This means that RStudio brings together all the tools you might want to use in a single place. There are two main ways of writing code in RStudio: using the console or using the source editor. You can type commands directly into the console, but they'll be forgotten when you close your current session. \n\n**Packages** are units of reproducible R code. Members of the R community create packages to keep track of the R functions that they write and reuse. Packages offer a helpful combination of code, reusable R functions, descriptive documentation, tests for checking your code, and sample data sets. \n\nThe lubridate package that you are about to install is part of the tidyverse. The **tidyverse** is a collection of packages in R with a common design philosophy for data manipulation, exploration, and visualization. For a lot of data analysts, the tidyverse is an essential tool. You will learn more about the tidyverse later on in this course.\n\n\n## Installing packages\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ninstall.packages(\"tidyverse\")\n```\n:::\n\n\n\n\n## Loading a library\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# | warning: false\nlibrary(tidyverse)\n```\n:::\n",
+    "supporting": [
+      "1_introduction_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

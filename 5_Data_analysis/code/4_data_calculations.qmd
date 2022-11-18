@@ -1,0 +1,308 @@
+---
+engine: knitr
+execute: 
+  eval: false
+---
+
+# Data calculations
+
+## Spreadsheets
+
+Some basic math examples to follow are [here](https://docs.google.com/spreadsheets/d/1edywJhpeMgXWXb_7MZVhL1SmThA5WCEr0tXjsFAYA3k/edit?resourcekey=0-B0-TV3wqddmS3AmdxPoc5A#gid=0) and [here]()
+
+Conditional functions are functions that perform a specific task, but only on cells that satisfy some defined criteria. They are usually identified with an IF suffix adjoined to the desired operation. They are frequently used when constructing more complex queries that cannot be accomplished using more basic functions.
+
+### COUNTIF
+
+Some examples to follow are [here](https://docs.google.com/spreadsheets/d/1zSwKJBRegmcu0KyRuFSERmKWgsz4XSlhQ8PVIvB9dlc/edit?resourcekey=0-oxrI4dM6Tyf4U4q8pQqIYg#gid=0)
+
+**COUNTIF** returns the number of cells that match a specified value. 
+
+`=COUNTIF(range, "value")`, i.e. if we want to get values greater than 1 `=COUNTIF(B2:B50, ">1")`
+
+**COUNTIFS** allows you to create a COUNTIF function with multiple conditions. The basic syntax for COUNTIF is: 
+
+`COUNTIFS(criteria_range1, criterion1, [criteria_range2, criterion2, ...])`
+
+
+
+### SUMIF
+
+**SUMIF** is a function that adds numeric data based on one condition.
+
+`=SUMIF(range, criteria/condition, [sum_range]) `. I.e. if we only want to sum things in column C if the quantity in colum B is 1, we do `=SUMIF(B2:B50, "1", C2:C50)`
+
+you could also build in multiple conditions by using the **SUMIFS** function. SUMIF and SUMIFS are very similar, but SUMIFS can include multiple conditions. The basic syntax is: 
+
+`=SUMIFS(sum_range, criteria_range1, criterion1, [criteria_range2, criterion2, ...])`
+
+
+
+### MAXIFS
+
+The **MAXIFS** function returns the maximum value among cells specified by a given set of conditions or criteria
+
+The MAXIFS function is slightly different from the other three functions. The easiest way to observe the difference is to examine the syntax: 
+
+The MAXIFS function can input more than one constraint. This is where the optional range2 and constraint2 come into play. 
+
+`=MAXIFS(max_range, range1, criteria1, [range2], [criteria2], ...)`
+
+
+### Resources
+
+- [How to use the Excel IFS function](https://exceljet.net/excel-functions/excel-ifs-function): This resource includes an explanation and example of the IFS function in Excel. This is a great reference if you are interested in learning more about IFS. The example is a useful way to understand this function and how it can be used. 
+- [VLOOKUP in Excel with multiple criteria](https://exceljet.net/formula/vlookup-with-multiple-criteria): Similar to the previous resource, this resource goes into more detail about how to use VLOOKUP with multiple criteria. Being able to apply VLOOKUP with multiple criteria will be a useful skill, so check out this resource for more guidance on how you can start using it on your own spreadsheet data.  
+- [INDEX and MATCH in Excel with multiple criteria](https://exceljet.net/formula/index-and-match-with-multiple-criteria): This resource explains how to use the INDEX and MATCH functions with multiple criteria. It also includes an example which helps demonstrate how these functions work with multiple criteria and actual data. 
+- [Using IF with AND, OR, and NOT functions in Excel](https://support.microsoft.com/en-us/office/using-if-with-and-or-and-not-functions-d895f58c-b36c-419e-b1f2-5c193a236d97): This resource combines IF with AND, OR, and NOT functions to create more complex functions. By combining these functions, you can perform your tasks more efficiently and cover more criteria at once. 
+
+
+
+### Composite functions
+
+**SUMPRODUCT** is a function that multiplies arrays and returns the sum of those products. An **array** is kind of like a range in a spreadsheet. But keep in mind, an array is a collection of values in cells, not the cells themselves. 
+
+`=sumproduct(array1, [array2]...)`
+
+To check out the example, go [here](https://docs.google.com/spreadsheets/d/1_jTXpgjH_4yeA0fdp1bVsL2HUHm8Ko_ETNabQxxlhO8/edit#gid=278417751).
+
+<img width=400, src="../images/sumproduct.png">
+
+Sumproduct does all the calculations shown in the image above by doing the following:
+
+`=sumproduct(B3:B7, C3:C7)`
+
+The **profit margin** is a percentage that indicates how many cents of profit have been generated for each dollar of sale. We can easily include this in our calculations:
+
+`=SUMPRODUCT(B3:B7, C3:C7, D3:D7)`
+
+
+
+
+## Pivot tables
+
+Pivot tables let you view data in multiple ways to find insights and trends. We've talked before about how pivot tables help with cleaning and organizing your data including sorting and grouping data. But pivot tables can also help with calculations. For example, they're great for quickly calculating sums and averages.
+
+A pivot table has four basic parts: rows, columns, values, and filters. 
+
+- The rows of a pivot table organize and group data you select horizontally. 
+- The columns organize and display values from your data vertically. Similar to rows, columns can be pulled directly from the data set or created using values. 
+- Values are used to calculate and count data. This is where you input the variables you want to measure. This is also how you create calculated fields in your pivot table. As a refresher, a calculated field is a new field within a pivot table that carries out certain calculations based on the values of other fields
+- he filters section of a pivot table enables you to apply filters based on specific criteria — just like filters in regular spreadsheets
+
+The example data can be found [here](https://docs.google.com/spreadsheets/d/10MaK6Gj8SVkv27XgJ08V40pm6bAKuRpudZmiqOG9-mo/edit#gid=0) and another example is [here](https://docs.google.com/spreadsheets/d/1fb-jxPRvmWq0IMOf6lPTmiGLjfChypp9msIHHUHWfVA/edit?resourcekey=0-dGzziS01cDjhaxoDBlHKsw#gid=1416948307)
+
+1. find out how much revenue was generated each year
+2. build a pivot table to show this
+3. In our pivot table, we can also find the average revenue per movie
+4. check our findings for some possible trends
+
+- Insert --> Pivot table
+- Rename sheet
+- Rows --> release data to find revenue/year. To only get the year, right click somewhere in column A --> Create pivot date group --> year
+- Click Add button for Values to add the box office revenue
+- This populates the columns next to the release dates with the total box office revenue and each year. These calculations are automatic because the pivot table is already set to summarize the data using the sum function
+
+Next, we add another column for the average revenue earned by each year's movie
+
+- Add value --> Box office revenue and change sum to average
+- We see that one year, 2015, is particularly low and we might want to ask why
+- Add value --> Box office revenue and count function to see that 2015 was the year with the most movies but it still has a low box office revenue. Was it because none of the movies earned a lot of revenue?
+
+- Cp pivot table into A10 and rename the column names to distinguish this table from the old one
+- Select D11 and add a filter to box office revenue --> filter by condition -->  less than --> 10,000,000
+- We see the whole table changing
+
+- Control that the average values are still correct
+- Add value --> calculated field. A **calculated field** is a new field within a pivot table that carries out certain calculations based on the values of other fields.
+- Add `=SUM('Box Office Revenue ($)'/count('Box Office Revenue ($)'))`
+
+Let's run a quick formula to find the percentage of movies for each year that earned less than $10 million. 
+- Add header in G10 (a cell outside of the pivot table)
+- Divide the number of movies in the copy table by the number of movies in the original table
+
+
+
+## More SQL calculations
+
+### Queries and calculations
+
+An **operator** is a symbol that names the type of operation or calculation to be performed in a formula. 
+
+The syntax of a query is its structure. It should include all the specific details of the data you want to pull into a new table where those details should be placed. 
+
+```{sql}
+SELECT
+    columnA, 
+    columnB
+    ColumnA + columnB AS columnX
+FROM tableX
+```
+
+let's say you only wanted the remainder from a division calculation. Well, you need a different operator for this, the modulo operator. The **modulo** operator is represented by the percent symbol. This is an operator that returns the remainder when one number is divided by another. 
+
+To follow these examples below, we uploaded the `data/avocado.csv` data into BiqQuery. 
+
+Our goal is to find out the total number of bags of avocados sold on each date at each location using this data. We want to make sure that the total column is just small, large, and extra-large bags added together.
+
+```{sql}
+SELECT 
+  Date, Region, Small_Bags, Large_Bags, XLarge_Bags, Total_Bags,
+  ---add the calculation to the query
+  Small_Bags + Large_Bags + XLarge_Bags AS total_bags_calc
+FROM avocado_data.avocado_prices
+```
+
+Now that we have verified the total number of bags, we can use those values in another query. We need to find what percent of the total number of bags were small bags. 
+
+```{sql}
+SELECT 
+  Date, Region, Total_Bags, Small_Bags,
+  ---find the percentage of small bags
+  (Small_Bags/ Total_Bags)*100 AS Small_bags_perc
+FROM avocado_data.avocado_prices
+```
+
+This gives an error: division by zero 0/0. This means that somewhere in the dataset there is total bags equal to zero. We'll have to fix this in our query. We can fix this using the WHERE command. Using `<> ` tells the server that the values we are calculating should not be equal to the value we specify. Alternatively, we could also use `!=`
+
+```{sql}
+SELECT 
+  Date, Region, Total_Bags, Small_Bags,
+  ---find the percentage of small bags
+  (Small_Bags/ Total_Bags)*100 AS Small_bags_perc
+FROM avocado_data.avocado_prices
+WHERE 
+  Total_Bags <> 0
+```
+
+
+### Groupby
+
+**GROUP BY** is a command that groups rows that have the same values from a table into summary rows. The GROUP BY command is used with SELECT statements. In a basic SELECT FROM or SELECT-FROM-WHERE query, GROUP BY comes at the end of the query.
+
+The **EXTRACT** command lets us pull one part of a given date to use. 
+
+We'll work with a database, with data from a bike sharing system. We want to find out how many rides people took on these bikes per year.
+
+```{sql}
+SELECT 
+  ---extract year from the start time column
+  EXTRACT(YEAR FROM STARTTIME) AS year,
+  ---count the bike rides in the starttime column
+  COUNT(*) AS number_of_rides
+FROM bigquery-public-data.new_york.citibike_trips
+---group the data by year
+GROUP BY year
+--- organize the results
+ORDER BY year
+```
+
+Let's try something else with the `new_york_subway` public dataset:
+
+- Open the bigquery-public-data dropdown in the Explorer menu and scroll until you find new_york_subway. 
+- Open the dropdown and click subway_ridership_2013_present to open and examine the dataset.
+- click subway_ridership_2013_present to open and examine the dataset.
+
+The change_2018_raw column describes the change in weekly ridership from 2017 to 2018 in raw numbers. Suppose you want to find data on the change in weekly ridership from 2013 to 2014. You can use SQL to subtract the number of riders in 2013 from the number of riders in 2014. 
+
+```{sql}
+SELECT 
+  station_name, ridership_2013, ridership_2014,
+  ridership_2014 - ridership_2013 AS change_in_2014_raw
+FROM bigquery-public-data.new_york_subway.subway_ridership_2013_present
+```
+
+The original dataset describes average weekly ridership for each individual year. Suppose you want to find average weekly ridership for a longer period of time, such as the multi-year period from 2013-2016. 
+
+```{sql}
+SELECT 
+  station_name, ridership_2013, ridership_2014, ridership_2015, ridership_2016,
+  (ridership_2013 + ridership_2014 + ridership_2015 + ridership_2016)/4 AS average
+FROM `bigquery-public-data.new_york_subway.subway_ridership_2013_present`
+```
+
+
+## The data validation process
+
+The **data validation process** involves checking and rechecking the quality of your data so that it is complete, accurate, secure, and consistent. 
+
+It is important that whenever you do calculations, you always check to make sure you've done them in the right way. Sometimes you'll run data validation checks that are common-sense checks.
+
+The following list outlines six types of data validation and the purpose of each, and includes examples and limitations.
+
+- Checking that the data type is correct
+- Checking that the data range is correct
+- Check that the data meets certain conditions or criteria for a field
+- Check that the data makes sense in the context of other related data, i.e. shipping dates should not be earlier than construction dates 
+- Check that the data follows or conforms to a set structure, i.e. for MP3 files or HTML code
+-  Check that the application code systematically performs any of the previously mentioned validations during user data input.
+
+
+## SQL with temporary tables
+
+A **temporary table** is a database table that is created and exists temporarily on a database server.
+
+- They are automatically deleted from the database when you end your SQL session.
+- They can be used as a holding area for storing values if you are making a series of calculations. This is sometimes referred to as pre-processing of the data.
+- They can collect the results of multiple, separate queries. This is sometimes referred to as data staging. Staging is useful if you need to perform a query on the collected data or merge the collected data.
+- They can store a filtered subset of the database. You don’t need to select and filter the data each time you work with it. In addition, using fewer SQL commands helps to keep your data clean.
+
+The **WITH** clause is a type of temporary table that you can query from multiple times. The WITH clause approximates a temporary table. Basically, this means it creates something that does the same thing as a temporary table.
+
+When you use temporary tables, you make your own work more efficient. Naming and using temp tables can help you deal with a lot of data in a more streamlined way, so you don't get lost repeating query after query with the same code that you could just include in a temp table. 
+
+```{sql}
+---create temp table
+WITH trips_over_1_hr AS(
+SELECT *  
+FROM bigquery-public-data.new_york.citibike_trips
+WHERE tripduration >=60
+)
+
+-- count how many trips are 60+ minutes long
+SELECT 
+COUNT (*) AS cnt
+FROM trips_over_1_hr
+```
+
+
+Lets look at another example in the public `austin_bikeshare`
+
+Consider the following scenario: A bikeshare company has reached a recent milestone, and their marketing team wants to write a blog post that “congratulates” their most-used bike on being so popular. They want to include the name of the station that the bike is most likely to be found. 
+
+```{sql}
+WITH longest_used_bike AS (
+  SELECT bikeid,
+  SUM(duration_minutes) AS trip_duration
+  FROM `bigquery-public-data.austin_bikeshare.bikeshare_trips` 
+  GROUP BY bikeid
+  ORDER BY trip_duration DESC
+  LIMIT 1
+)  
+
+--- find station with longest bikeshare ride started
+SELECT trips.start_station_id,
+  COUNT(*) AS trip_ct
+FROM longest_used_bike AS longest
+INNER JOIN `bigquery-public-data.austin_bikeshare.bikeshare_trips` AS trips
+ON longest.bikeid = trips.bikeid
+GROUP BY trips.start_station_id
+ORDER BY trip_ct DESC
+LIMIT 1
+```
+
+
+### Multiple table variations
+
+The **SELECT INTO** statement is a good example of how to get a temp table done. This statement copies data from one table into a new table but it doesn't add the new table to the database. It's useful if you want to make a copy of a table with a specific condition, like a query with a WHERE clause
+
+Unfortunately, this command does not work in BigQuery so far.
+
+If lots of people will be using the same table, then the **CREATE TABLE** statement might be the better option. This statement does add the table into the database. 
+
+
+
+
+To sort your spreadsheet by city in ascending order, you can use one of two methods. You can use the SORT function syntax =SORT(A2:R210, 11, TRUE). You can also select A2-R210, then use the drop-down menu to Sort Sheet by Column K from A to Z.
+
+To add cells O2 and P2, use the function =SUM(O2,P2). You can also use the formula =O2+P2.

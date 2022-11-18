@@ -1,2 +1,394 @@
+---
+engine: knitr
+execute: 
+  eval: false
+---
+
 # Aggregating data
+
+- **Aggregation** means collecting or gathering many separate pieces into a whole. 
+- **Data aggregation** is the process of gathering data from multiple sources in order to combine it into a single summarized collection. 
+- In data analytics, **a summarized collection**, or summary, describes identifying the data you need and gathering it all together in one place. 
+
+
+## VLOOKUP (spreadsheets)
+
+### Cleanup
+
+**VALUE** is a function that converts a text string that represents a number to a numerical value.
+
+`=VALUE(A4)`
+
+**TRIM** automatically deletes any extra spaces added to the cell.
+
+`=TRIM(A4)`
+
+Remove duplicates with `remove duplictes`
+
+
+### VLOOKUP in action
+
+**VLOOKUP** stands for vertical lookup. Basically, it's a function that searches for a certain value in a column to return a corresponding piece of information. The basic syntax looks like follows:
+
+`=VLOOKUP(103, A2:B26, 2, FALSE)`
+
+Here:
+
+- 103 is the value to search for
+- A2:B26 is the range that will be searched
+- VLOOKUP will not recognize column names such as A, B, or C. We use a number to indicate the column, i.e. we want to search for a match in the 2nd column that we want to add
+- FALSE tells VLOOKUP to find an exact match. If this said true, the function will return only a close match
+
+Another example for finding matching data in another sheet:
+
+`=vlookup(A2, 'Employee Rates'!$A$2:$B$5,2, FALSE)`
+
+Be sure to put single quotation marks around the spreadsheet name and add an exclamation point after it. This is the way to reference the other spreadsheet.
+
+We can also search using words
+
+`=VLOOKUP("Nigeria", A2:C10, 2, false)`
+
+
+### Potential issues
+
+- VLOOKUP only returns the first match it finds
+- VLOOKUP can only return a value from the data to the right. It can't look left. So for this to work, we have to move the data around
+- Let's say the first few rows of a VLOOKUP have returned the correct result. But when you drive the function down the column, problems start popping up. This is probably because the table array part of the function hasn't been locked or made absolute. An **absolute reference** is a reference that is locked so that rows and columns won't change when copied. You can fix this issue by wrapping the table array in dollar signs.
+- Locking the spreadsheet. This stops other people from making changes and breaking functions.
+- If the spreadsheet needs to be shared you can use **MATCH**, which is a function used to locate the position of a specific lookup value and can help you with version control. 
+
+
+Resources:
+
+- [How to use VLOOKUP in Excel](https://support.microsoft.com/en-us/office/vlookup-function-0bbc8083-26fe-4963-8ab8-93a18ad188a1): This tutorial includes a video to help you get a general understanding of how the VLOOKUP function works in Excel, as well as practical examples to look through.
+- [How to use Excel's VLOOKUP function](https://edu.gcfglobal.org/en/excel-tips/how-to-use-excels-vlookup-function/1/): This article shares a specific example around how to apply VLOOKUP in your searches.
+
+
+## Aggregating in SQL
+
+### The importance of aliases
+
+**Aliases** are used in SQL queries to create temporary names for a column or table. Aliasing is the process of using aliases. In SQL queries, aliases are implemented by making use of the AS command and often make things more readable. 
+
+```{sql}
+SELECT column_name AS alias_name
+from table_name;
+```
+
+
+- [SQL Aliases](https://www.w3schools.com/sql/sql_alias.asp): This tutorial on aliasing is a really useful resource to have when you start practicing writing queries and aliasing tables on your own. It also demonstrates how aliasing works with real tables. 
+- [SQL Alias](https://www.sqltutorial.org/sql-alias/): This detailed introduction to aliasing includes multiple examples. This is another great resource to reference if you need more examples. 
+- [Using Column Aliasing](https://documentation.sas.com/?cdcId=pgmsascdc&cdcVersion=9.4_3.5&docsetId=sqlproc&docsetTarget=p0aymxwsvbt5wcn1lncugwjtf758.htm&locale=en): This is a guide that focuses on column aliasing specifically. Generally, you will be aliasing entire tables, but if you find yourself needing to alias just a column, this is a great resource to have bookmarked.  
+
+
+
+
+### JOINs
+
+Examples were run in BiqQuery using `data/employees_table.csv` and `data/departments_table.csv`
+
+**JOIN** is a SQL clause that's used to combine rows from two or more tables based on a related column.
+
+Types of join:
+
+<img width=400 src="../images/joins.png">
+
+- An inner JOIN is a function that returns records with matching values in both tables. When we input JOIN into SQL, it usually defaults to inner JOIN
+- A LEFT JOIN is a function that will return all the records from the left table and only the matching records from the right table. 
+- RIGHT JOIN does the opposite. It will return all records from the right table and only the matching records from the left. 
+- OUTER join combines RIGHT and LEFT JOIN to return all matching records in both tables. This means it will return all records in both tables.
+
+Let's get a list of employees with their department name, excluding any employee without a department ID. the The department ID record is used in both tables, so we can use an INNER JOIN to return a list with only those employees.
+
+```{sql}
+SELECT 
+  --- give column names
+  employees.name AS employee_name,
+  employees.role AS employee_role,
+  departments.name AS department_name
+FROM 
+  employee_data.employees
+INNER JOIN
+  employee_data.departments 
+  ---specify which column and each table will contain the matching JOIN key 
+  ON employees.department_id = departments.department_id
+```
+
+Now, let's try out one last JOIN: OUTER. OUTER JOIN will fetch all of the employee names and departments.
+
+```{sql}
+SELECT 
+  --- give column names
+  employees.name AS employee_name,
+  employees.role AS employee_role,
+  departments.name AS department_name
+FROM 
+  employee_data.employees
+FULL OUTER JOIN
+  employee_data.departments 
+  ---specify which column and each table will contain the matching JOIN key 
+  ON employees.department_id = departments.department_id
+```
+
+Another example on the public dataset `world_bank_intl_education`
+
+```{sql}
+SELECT 
+    `bigquery-public-data.world_bank_intl_education.international_education`.country_name, 
+    `bigquery-public-data.world_bank_intl_education.country_summary`.country_code, 
+    `bigquery-public-data.world_bank_intl_education.international_education`.value
+FROM 
+    `bigquery-public-data.world_bank_intl_education.international_education`
+INNER JOIN 
+    `bigquery-public-data.world_bank_intl_education.country_summary` 
+ON `bigquery-public-data.world_bank_intl_education.country_summary`.country_code = `bigquery-public-data.world_bank_intl_education.international_education`.country_code
+```
+
+This basic query joins the tables on the country_code foreign key, and returns the country name, country code, and value column. This is quite a long, unwieldy query for such a basic result! The length of each table name (which must include the full address for each table for BigQuery to know where to pull the data from) makes this hard to read and work with. 
+
+However, you can solve this by setting an alias for each table.
+
+```{sql}
+SELECT 
+    edu.country_name,
+    summary.country_code,
+    edu.value
+FROM 
+    `bigquery-public-data.world_bank_intl_education.international_education` AS edu
+INNER JOIN 
+    `bigquery-public-data.world_bank_intl_education.country_summary` AS summary
+ON edu.country_code = summary.country_code
+```
+
+Now that you’ve confirmed that the JOIN statement works, try to answer an actual data question using this dataset. What is the average amount of money spent per region on education? Copy, paste, and run the following query: 
+
+```{sql}
+SELECT 
+    AVG(edu.value) average_value, summary.region
+FROM 
+    `bigquery-public-data.world_bank_intl_education.international_education` AS edu
+INNER JOIN 
+    `bigquery-public-data.world_bank_intl_education.country_summary` AS summary
+ON edu.country_code = summary.country_code
+WHERE summary.region IS NOT null
+GROUP BY summary.region
+ORDER BY average_value DESC
+```
+
+
+Resources:
+
+- [SQL JOINs](https://www.w3schools.com/sql/sql_join.asp): This is a good basic explanation of JOINs with examples. If you need a quick reminder of what the different JOINs do, this is a great resource to bookmark and come back to later.  
+- [Database JOINs - Introduction to JOIN Types and Concepts](https://www.essentialsql.com/introduction-database-joins/): This is a really thorough introduction to JOINs. Not only does this article explain what JOINs are and how to use them, but it also explains the various scenarios in more detail of when and why you would use the different JOINs. This is a great resource if you are interested in learning more about the logic behind JOINing.
+- [SQL JOINs: Bringing Data Together One Join at a Time](https://towardsdatascience.com/sql-join-8212e3eb9fde): Not only does this resource have a detailed explanation of JOINs with examples, but it also provides example data that you can use to follow along with their step-by-step guide. This is a useful way to practice JOINs with some real data.
+- [SQL JOIN](https://www.dofactory.com/sql/join): This is another resource that provides a clear explanation of JOINs and uses examples to demonstrate how they work. The examples also combine JOINs with aliasing. This is a great opportunity to see how JOINs can be combined with other SQL concepts that you have been learning about in this course.  
+
+
+
+
+## COUNT and COUNT DISTINCT
+
+These examples were run in BigQuery with `data/warehouse.csv` and `data/orders.csv`
+
+**COUNT** is a query that returns the number of rows in a specified range, but **COUNT DISTINCT** is a little different. COUNT DISTINCT is a query that only returns the distinct values in that range. 
+
+From this query, we're actually going to start with a FROM statement so that we can alias our tables. **Aliasing** is when you temporarily name a table or column in your query to make it easier to read and write.
+
+```{sql}
+SELECT 
+  orders.*,
+  warehouse.warehouse_alias,
+  warehouse.state
+---create aliases for our tables
+FROM
+  warehouse_orders.Orders AS orders
+--we need both the warehouse details and the order details because we want to report on the distribution of orders by state
+JOIN
+  warehouse_orders.Warehouse AS warehouse ON
+  orders.warehouse_id = warehouse.warehouse_id
+```
+
+Now, we want to count how many states are in our ordered data.
+
+```{sql}
+SELECT 
+  COUNT(warehouse.state) AS num_states
+FROM
+---create aliases for our table
+  warehouse_orders.Orders AS orders
+--we need both the warehouse details and the order details because we want to report on the distribution of orders by state
+JOIN
+  warehouse_orders.Warehouse AS warehouse ON
+  orders.warehouse_id = warehouse.warehouse_id
+```
+
+Wait, that's not quite right. This query returned over 9,000 states because we counted every single row that included a state. But we actually want to count the distinct states. 
+
+```{sql}
+SELECT 
+  COUNT (DISTINCT warehouse.state) AS num_states
+FROM
+---create aliases for our table
+  warehouse_orders.Orders AS orders
+--we need both the warehouse details and the order details because we want to report on the distribution of orders by state
+JOIN
+  warehouse_orders.Warehouse AS warehouse ON
+  orders.warehouse_id = warehouse.warehouse_id
+```
+
+According to these results, we have three distinct states in our Orders data. 
+
+Let's check out what happens when we group by the state column in the warehouse table
+
+```{sql}
+SELECT 
+  warehouse.state AS state,
+  COUNT(DISTINCT order_id) AS num_orders
+FROM
+---create aliases for our table
+  warehouse_orders.Orders AS orders
+--we need both the warehouse details and the order details because we want to report on the distribution of orders by state
+JOIN
+  warehouse_orders.Warehouse AS warehouse ON
+  orders.warehouse_id = warehouse.warehouse_id
+GROUP BY 
+  warehouse.state
+```
+
+Now we have three rows, one of each state represented in the Orders data. And our COUNT DISTINCT on the number of orders sums up the count we ran earlier: 9,999.
+
+
+## Subqueries
+
+A **subquery** is a SQL query that is nested inside of a larger query. 
+
+With subqueries you can combine different pieces of logic together. Because the logic of your outer query relies on the inner query, you can get more done with a single query. This means all of the logic is in one place, which makes it more efficient and easier to read.
+
+The statement containing the subquery can also be called the **outer query** or the outer select. This makes the subquery the **inner query** or inner select. 
+
+The inner query executes first so that the results can be passed on to the outer query to use. 
+
+There are a few rules that subqueries must follow:
+
+- Subqueries must be enclosed within parentheses
+- A subquery can have only one column specified in the SELECT clause. But if you want a subquery to compare multiple columns, those columns must be selected in the main query.
+- Subqueries that return more than one row can only be used with multiple value operators, such as the IN operator which allows you to specify multiple values in a WHERE clause.
+- A subquery can’t be nested in a SET command. The SET command is used with UPDATE to specify which columns (and values) are to be updated in a table.
+
+### Examples
+These examples you use the public data new_york and citibike_stations.
+
+For the first statement, let's say we want to compare the number of bikes available at a station to the average number of bikes available. We're going to use this query to pull the average number of bikes available. Then we're going to incorporate it as a subquery.
+
+We want to select the station ID and the number of bikes available. Then we'll put the SELECT query that's pulling the average number of bikes inside that outer query by using parentheses.
+
+```{sql}
+SELECT  
+  station_id, 
+  num_bikes_available,
+  (SELECT
+    AVG(num_bikes_available)
+  FROM
+    bigquery-public-data.new_york_citibike.citibike_stations) AS avg_num_bikes_available
+FROM 
+  bigquery-public-data.new_york_citibike.citibike_stations
+```
+
+It's really common to see subqueries nested in FROM and WHERE statements. So let's try those next. We could use a FROM statement to calculate the number of rides that have started at each station over time.
+
+```{sql}
+SELECT
+  station_id,
+  name,
+  number_of_rides AS number_of_rides_starting_at_station
+FROM
+  (
+    SELECT start_station_id,
+      COUNT(*) AS number_of_rides
+    FROM bigquery-public-data.new_york_citibike.citibike_trips
+    GROUP BY start_station_id
+  )
+  AS station_num_trips
+  INNER JOIN
+
+  bigquery-public-data.new_york_citibike.citibike_stations ON station_id = start_station_id
+  ORDER BY number_of_rides DESC
+```
+
+Let's use a WHERE statement. The bike-sharing company has two kinds of users: subscribers and one-time customers. Let's say we wanted a list of stations subscribers used.
+
+```{sql}
+SELECT
+  station_id, 
+  name
+FROM bigquery-public-data.new_york_citibike.citibike_stations
+WHERE 
+  ---use IN so that we can specify multiple values and this WHERE statement
+  station_id IN
+  --- put subquery in parenthesis to tell we only want data on specific customers
+  (SELECT start_station_id
+  FROM bigquery-public-data.new_york_citibike.citibike_trips
+  WHERE usertype = 'Subscriber')
+```
+
+
+## Using subqueries to aggregate data
+
+We've used functions like WHERE to filter our data before, but the WHERE function can't be used with aggregate functions. For example, you can use WHERE on a statement and follow it with GROUP BY. 
+
+But when you want to use GROUP BY first and then use WHERE on that output, you'll need a different function. This is where HAVING comes in. **HAVING** basically allows you to add a filter to your query instead of the underlying table when you're working with aggregate functions. 
+
+Similarly, **CASE** returns records with your conditions by allowing you to include if/then statements in your query.
+
+For this example, we use the warehouse_orders previously loaded in BiqQuery
+
+We've been asked to calculate what percentage of the orders are fulfilled by each warehouse. Basically, we're interested in knowing which warehouses are delivering the most orders.
+
+```{sql}
+SELECT 
+  --- decide what to select (3rd)
+  Warehouse.warehouse_id,
+  ---use concat to get a unique warehouse name
+  CONCAT(Warehouse.state, ": ", Warehouse.warehouse_alias) AS warehouse_name,
+  --- get nr of orders per warehouse
+  COUNT(Orders.order_id) AS number_of_orders,
+  ---add subquery to pull the total nr of orders
+  (SELECT COUNT(*)
+    FROM warehouse_orders.Orders as Orders)
+    --- close subquery and name column
+    AS total_orders,
+    -- use a CASE statement to create categories for our warehouses
+    CASE 
+      WHEN COUNT(Orders.order_id)/ (SELECT COUNT(*) FROM warehouse_orders.Orders AS Orders) <= 0.2
+      THEN "filfilled 0-20% of Orders"
+      WHEN COUNT(Orders.order_id)/ (SELECT COUNT(*) FROM warehouse_orders.Orders AS Orders) > 0.2
+      AND COUNT(Orders.order_id)/ (SELECT COUNT(*) FROM warehouse_orders.Orders AS Orders) <= 0.6
+      THEN "fulfilled 21-60% of Orders"
+    ELSE "fulfilled more than 60% of Orders"
+    END AS fulfillment_summary
+---add aliases (ideally write first to make the rest easier)
+FROM warehouse_orders.Warehouse AS Warehouse
+--- Join with orders and add alias (write second)
+LEFT JOIN warehouse_orders.Orders AS Orders ON Orders.warehouse_id = Warehouse.warehouse_id
+GROUP BY Warehouse.warehouse_id, warehouse_name
+--- remove orders from warehouses that are not yet running
+HAVING COUNT(Orders.order_id) > 0
+```
+
+
+Resources:
+
+- [SQL HAVING](http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_having.asp.html): This is an overview of the HAVING clause, including what it is and a tutorial on how and when it works.
+- [SQL CASE](https://www.w3schools.com/sql/sql_case.asp): Explore the usage of the CASE statement and examples of how it works.
+- [SQL IF](https://www.w3schools.com/sql/func_mysql_if.asp): This is a tutorial of the IF function and offers examples that you can practice with.
+- [SQL COUNT](http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_func_count.asp.html): The COUNT function is just as important as all the rest, and this tutorial offers multiple examples to review.
+  
+- [SQL subqueries](https://www.w3resource.com/sql/subqueries/understanding-sql-subqueries.php): This detailed introduction includes the definition of a subquery, its purpose in SQL, when and how to use it, and what the results will be
+- [Writing subqueries in SQL](https://mode.com/sql-tutorial/sql-sub-queries/): Explore the basics of subqueries in this interactive tutorial, including examples and practice problems that you can work through
+
+
+
+
+
 

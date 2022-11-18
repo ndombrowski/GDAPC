@@ -1,0 +1,47 @@
+# General notes
+
+## Case studies
+
+**Case studies** are practice data analytics projects. When you're job hunting, you might be asked to do a case study after the pre-screen call or the first interview. The case study is a common way for employers to assess job skills and gain insight into how you approach common data-related challenges.
+
+Best practices:
+
+- make sure your case study answers the question being asked
+- make sure that you're communicating the steps you've taken and the assumptions you made about the data
+- Some cases studies can be found [here](https://www.holistics.io/blog/startup-data-analyst-interview-case-studies/)
+
+## Portfolios
+
+A **portfolio** is a collection of case studies that can be shared with potential employers. Portfolios can be stored on public websites like GitHub, Kaggle, or Tableau, or on your blog. 
+
+Best practices:
+
+- The best portfolios are personal, unique, and simple
+- your portfolio should represent your own work. While getting ideas from other portfolios is inspiring, directly copying (or only slightly modifying) others’ work and sharing it in your own portfolio is never acceptable. 
+- Be cautious even with open or public datasets. Unless you are using data that you personally collected, ask the owner of the data for permission before you post anything related to the data in your portfolio. You should always take full responsibility for what you publish by getting the right permissions as needed. 
+
+
+## Interview questions
+
+Technical ones:
+
+"What are your preferred tools for analysis?"  This is a chance to demonstrate that you are well-versed in data analysis, with proficiency in SQL, Excel, and R programming.
+
+"How do you maintain integrity in your data?"  Reliability and accuracy are essential parts of good data analysis, and any issues with your data can have a major impact on data-driven business decisions. Be prepared to discuss the methods you use for error checking and validation.
+
+"Do you understand different SQL functions and the roles they play?"  SQL is arguably one of the most important skills for you to have as a data analyst. This is an opportunity to demonstrate your understanding of different types of SQL functions and their value or result.
+
+
+Personal:
+
+"Was there a time when you took initiative during a project and what was the outcome?" This question can come in many forms with slightly different wording, but the goal is to understand your leadership abilities and how you have used them in the past. 
+
+"What was the most challenging project you have ever been faced with?" This question is usually meant to assess your problem-solving and interpersonal skills. Come to the interview prepared with several different examples of how you successfully navigated a difficult project or situation in the past. 
+
+"How would you explain a complex topic to a stakeholder who was unfamiliar with it?" This question helps your interviewer get a sense of how skilled you are at communicating effectively in high-pressure or sensitive circumstances.
+
+"How do you cope when things don’t go according to plan?" It is important to be adaptable, especially when things don’t go the way you expected. This question provides a great opportunity for you to explain how you coped with unexpected changes and adapted quickly to a different course of action.
+
+
+[Interview Warmup](https://grow.google/certificates/interview-warmup/) is a tool that helps you practice answering questions to get more confident and comfortable with interviewing.
+

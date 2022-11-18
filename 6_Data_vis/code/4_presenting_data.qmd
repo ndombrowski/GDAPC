@@ -1,0 +1,50 @@
+# Presenting your data
+
+## Presenting with a framework
+
+The framework for your presentation starts with your understanding of the business task, give your audience context to better understand your data and help you focus on the most important information.
+
+You also want to make sure you're outlining and connecting with your business metrics by showcasing what business metrics you use. You can help your audience understand the impact your findings will have.
+
+
+## Weaving data into your presentation
+
+- It's helpful for your audience to understand what data was available during data collection. You can also tell them if any new relevant data has come up, or if you discovered that you need different data.
+- Next, you'll want to establish the initial hypothesis. Your initial hypothesis is a theory you're trying to prove or disprove with data. You want to establish your hypothesis early in the presentation. That way, when you present your data, your audience has the right context to put it in
+- Next, you'll want to explain the solution to your business tasks using examples and visualizations
+- For good presentation of visualizations, we can use the **McCandless Method** moves from the general to the specific, like it's building a pyramid:
+    - Introduce the graphic by name
+    - Answer obvious questions before they are asked, i.e. where is this data from, and what does it cover, how should the audience read the graph?
+    - State the insight of your graphic
+    - Call out data that support our insights
+    - Tell the audience why this insight matters and present the possible business impact of the solution and clear action stakeholders can take
+
+
+## Examples of great spoken presentations
+
+TED Talks are short, spoken messages with important ideas. Take some time to watch the three TED talks linked below, which were carefully selected as model examples of great presentations. As you watch the videos, ask yourself how they each show characteristics of an effective presentation:
+
+- [The 3 bones of networking](https://www.youtube.com/watch?v=4OTPJZnBP8s)
+- [Grit: The power of passion and perseverance](https://www.youtube.com/watch?v=H14bBuluwB8)
+- [Looking for a job? Highlight your ability, not your experience](https://www.youtube.com/watch?v=guXxy8LH2QM)
+
+
+
+## Preparing for the Q&A
+
+- Understanding your stakeholder's expectations will help you predict the questions they might ask
+- Make sure you have a clear understanding of the objective and what the stakeholders wanted
+- A great way to identify audience questions is to do a test run of your presentation, i.e via "colleague test."
+- Ask a manager or other analysts what sort of questions were normally asked by your specific audience in the past
+- be prepared to consider and describe to your stakeholders any limitations in your data. You can do this by critically analyzing the patterns you've discovered in your data for integrity. Use your understanding of the strengths and weaknesses of the tools you use in your analysis to pinpoint any limitations they may have introduced
+- Avoid having a single question derail a presentation and propose following-up offline
+
+
+
+
+
+
+
+
+
+

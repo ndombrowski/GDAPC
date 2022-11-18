@@ -1,0 +1,180 @@
+# Visualizing data
+
+## Introduction
+
+**Data visualization** is the graphic representation and presentation of data.
+
+1) The [McCandless Method](https://www.informationisbeautiful.net/visualizations/what-makes-a-good-data-visualization/) lists four elements of good data visualization: 
+
+- Information: the data you are working with
+- Story: a clear and compelling narrative or concept
+- Goal: a specific objective or function for the visual
+- Visual form: an effective use of metaphor or visual expression
+
+2) [Kaiser Fung’s Junk Charts Trifecta Checkup](https://junkcharts.typepad.com/junk_charts/junk-charts-trifecta-checkup-the-definitive-guide.html)
+
+This approach is a useful set of questions that can help consumers of data visualization critique what they are consuming and determine how effective it is. The Checkup has three questions:
+
+- What is the practical question? 
+- What does the data say?
+- What does the visual say? 
+
+### Pre-attentive attributes: marks and channels
+
+Pre-attentive attributes are the elements of a data visualization that people recognize automatically without conscious effort. The essential, basic building blocks that make visuals immediately understandable are called marks and channels. 
+
+**Marks** are basic visual objects like points, lines, and shapes. Every mark can be broken down into four qualities: 
+
+- Position - Where a specific mark is in space in relation to a scale or to other marks
+- Size - How big, small, long, or tall a mark is
+- Shape - Whether a specific object is given a shape that communicates something about it
+- Color - What color the mark is
+
+**Channels** are visual aspects or variables that represent characteristics of the data. Channels are basically marks that have been used to visualize data. Channels will vary in terms of how effective they are at communicating data based on three elements: 
+
+- Accuracy - Are the channels helpful in accurately estimating the values being represented? For example, color is very accurate when communicating categorical differences, like apples and oranges. But it is much less effective when distinguishing quantitative data like 5 from 5.5.
+- Popout - How easy is it to distinguish certain values from others? There are many ways of drawing attention to specific parts of a visual, and many of them leverage pre-attentive attributes like line length, size, line width, shape, enclosure, hue, and intensity.
+- Grouping - How good is a channel at communicating groups that exist in the data? Consider the proximity, similarity, enclosure, connectedness, and continuity of the channel.
+
+
+### Design principles
+
+- Choose the right visual: One of the first things you have to decide is which visual will be the most effective for your audience. Sometimes, a simple table is the best visualization. Other times, you need a more complex visualization to illustrate your point. 
+- Optimize the data-ink ratio: The data-ink entails focusing on the part of the visual that is essential to understanding the point of the chart. Try to minimize non-data ink like boxes around legends or shadows to optimize the data-ink ratio.
+- Use orientation effectively: Make sure the written components of the visual, like the labels on a bar chart, are easy to read. You can change the orientation of your visual to make it easier to read and understand. 
+- Color: There are a lot of important considerations when thinking about using color in your visuals. These include using color consciously and meaningfully, staying consistent throughout your visuals, being considerate of what colors mean to different people, and using inclusive color scales that make sense for everyone viewing them.
+- Number of things: Think about how many elements you include in any visual. If your visualization uses lines, try to plot five or fewer. If that isn’t possible, use color or hue to emphasize important lines. Also, when using visuals like pie charts, try to keep the number of segments to less than seven since too many elements can be distracting. 
+
+
+### Things to avoid
+
+- Cutting off the y-axis: Changing the scale on the y-axis can make the differences between different groups in your data seem more dramatic, even if the difference is actually quite small. 
+- Misleading use of a dual y-axis: Using a dual y-axis without clearly labeling it in your data visualization can create extremely misleading charts
+- Artificially limiting the scope of the data: If you only consider the part of the data that confirms your analysis, your visualizations will be misleading because they don’t take all of the data into account
+- Problematic choices in how data is binned or grouped: It is important to make sure that the way you are grouping data isn’t misleading or misrepresenting your data and disguising important trends and insights
+- Using part-to-whole visuals when the totals do not sum up appropriately : If you are using a part-to-whole visual like a pie chart to explain your data, the individual parts should add up to equal 100%. If they don’t, your data visualization will be misleading. 
+- Hiding trends in cumulative charts: Creating a cumulative chart can disguise more insightful trends by making the scale of the visualization too large to track any changes over time
+- Artificially smoothing trends: Adding smooth trend lines between points in a scatter plot can make it easier to read that plot, but replacing the points with just the line can actually make it appear that the point is more connected over time than it actually was
+
+### Resources
+
+- [The beauty of data visualization](https://www.ted.com/talks/david_mccandless_the_beauty_of_data_visualization?language=en#t-150183): In this video, David McCandless explains the need for design to not just be beautiful, but for it to be meaningful as well. Data visualization must be able to balance function and form for it to be relevant to your audience. 
+- [‘The McCandless Method’ of data presentation](https://artscience.blog/home/the-mccandless-method-of-data-presentation): At first glance, this blog appears to be written by a David McCandless fan, and it is. However, it contains very useful information and provides an in-depth look at the 5-step process that McCandless uses to present his data.
+- [Information is beautiful](https://informationisbeautiful.net/): Founded by McCandless himself, this site serves as a hub of sample visualizations that make use of the McCandless method. Explore data from the news, science, the economy, and so much more and learn how to make visual decisions based on facts from all kinds of sources. 
+- [Beautiful daily news](https://informationisbeautiful.net/beautifulnews/): In this McCandless collection, explore uplifting trends and statistics that are beautifully visualized for your creative enjoyment. A new chart is released every day so be sure to visit often to absorb the amazing things happening all over the world.
+- [The Wall Street Journal Guide to Information Graphics: The Dos and Don'ts of Presenting Data, Facts, and Figures](https://www.amazon.com/Street-Journal-Guide-Information-Graphics/dp/0393072959): This is a comprehensive guide to data visualization, including chapters on basic data visualization principles and how to create useful data visualizations even when you find yourself in a tricky situation. This is a useful book to add to your data visualization library, and you can reference it over and over again. 
+- [The data visualization catalogue](https://datavizcatalogue.com/#google_vignette): Not sure where to start with data visualization? This catalogue features a range of different diagrams, charts, and graphs to help you find the best fit for your project. As you navigate each category, you will get a detailed description of each visualization as well as its function and a list of similar visuals. 
+- [10 data visualization blogs](https://www.tableau.com/learn/articles/best-data-visualization-blogs): Each link will lead you to a blog that is a fountain of information on everything from data storytelling to graphic data. Get your next great idea or just browse through some visual inspiration.  
+
+## Types of graphs
+
+- **Bar/column graphs** use size contrast to compare two or more values.Bar graphs are a great way to clarify trends and identify patterns.
+- Similar to bar charts, **heatmaps** also use color to compare categories in a data set. They are mainly used to show relationships between two variables and use a system of color-coding to represent different values.
+- **Line graphs** are a type of visualization that can help your audience understand shifts or changes in your data. They're usually used to track changes through a period of time, but they can be paired with other factors too.
+- **Pie charts** show how much each part of something makes up the whole.
+- **Maps** help organize data geographically. The great thing about maps is they can hold a lot of location-based information and they're easy for your audience to interpret.
+- A **distribution graph** displays the spread of various outcomes in a dataset. 
+- **A histogram** resembles a bar graph, but it's a chart that shows how often data values fall into certain ranges.
+- **Correlation charts** can show relationships among data, but they should be used with caution because they might lead viewers to think that the data shows causation. Causation or a cause-effect relationship occurs when an action directly leads to an outcome.
+- **Scatter plots** show relationships between different variables. Scatter plots are typically used for two variables for a set of data, although additional variables can be displayed.
+
+
+
+## Dynamic visualizations
+
+- **Static visualizations** do not change over time unless they're edited. They can be useful when you want to control your data and your data story. 
+- **Dynamic visualizations** are interactive or change over time. The interactive nature of these graphics means that users have some control over what they see.
+
+
+## Decision trees
+
+With so many visualization options out there for you to choose from, how do you decide what is the best way to represent your data? 
+
+A **decision tree** is a decision-making tool that allows you, the data analyst, to make decisions based on key questions that you can ask yourself. 
+
+<img width=400 src="../images/decision_tree.png">
+
+Resources:
+
+- [From data to visualization](https://www.data-to-viz.com/): This is an excellent analysis of a larger decision tree. With this comprehensive selection, you can search based on the kind of data you have or click on each  graphic example for a definition and proper usage.
+- [Selecting the best chart](https://www.youtube.com/watch?v=C07k0euBpr8): This two-part YouTube video can help take the guesswork out of data chart selection. Depending on the type of data you are aiming to illustrate, you will be guided through when to use, when to avoid, and several examples of best practices. [Part 2](https://www.youtube.com/watch?v=qGaIB-bRn-A) of this video provides even more examples of different charts, ensuring that there is a chart for every type of data out there. 
+
+
+## Elements of art
+
+The key elements of art are:
+
+- **Line**:  
+- **Shape**: Shapes are also a great way to add eye-catching contrast, especially size contrast to your data story.  
+- **Color**: Colors can be described by their hue, intensity, and value. The hue of a color is basically its name, red, green, blue and so on. Intensity is how bright or dull a color is, and finally, there's value. The value is how light or dark the colors are in a visualization. Dark values with some black added are called shades of color, like these shades of green. Light values with white added are called tints, like these tints of blue  
+- **Space**:  
+- **Movement**: Movement is used to create a sense of flow or action in a visualization. 
+
+
+## Principles of design 
+
+1. **Balance**: The design of a data visualization is balanced when the key visual elements, like color and shape, are distributed evenly. 
+2. **Emphasis**: Your data visualization should have a focal point, so that your audience knows where to concentrate. In other words, your visualizations should emphasize the most important data so that users recognize it first. Using color and value is one effective way to make this happen.
+3. **Movement**: Movement can refer to the path the viewer’s eye travels as they look at a data visualization, or literal movement created by animations. Movement in data visualization should mimic the way people usually read. You can use lines and colors to pull the viewer’s attention across the page. 
+4. **Pattern**: You can use similar shapes and colors to create patterns in your data visualization. This can be useful in a lot of different ways. For example, you can use patterns to highlight similarities between different data sets, or break up a pattern with a unique shape, color, or line to create more emphasis.
+5. **Repetition**: Repeating chart types, shapes, or colors adds to the effectiveness of your visualization. 
+6. **Proportion**: Proportion is another way that you can demonstrate the importance of certain data. Using various colors and sizes helps demonstrate that you are calling attention to a specific visual over others. If you make one chart in a dashboard larger than the others, then you are calling attention to it. 
+7. **Rhythm**: This refers to creating a sense of movement or flow in your visualization. Rhythm is closely tied to the movement principle. If your finished design doesn’t successfully create a flow, you might want to rearrange some of the elements to improve the rhythm.
+8. **Variety**: Your visualizations should have some variety in the chart types, lines, shapes, colors, and values you use. Variety keeps the audience engaged. 
+9. **Unity**: The last principle is unity. This means that your final data visualization should be cohesive. If the visual is disjointed or not well organized, it will be confusing and overwhelming. 
+
+**Data composition**, and it's achieved by combining the individual parts of a visualization and displaying them together as a whole
+
+Elements for effective visuals:
+
+- Clear meaning
+- Sophisticated use of contrast
+- Refined execution, i.e. deep attention to detail
+
+
+## Design thinking
+
+**Design thinking** is a process used to solve complex problems in a user-centric way.
+
+Five phases of the design process:
+
+- Emphasize: think about the emotions and needs of the target audience of your data viz
+- Define: find your audiences needs, their problems, and your insights
+- Ideate: here you start to generate your data viz ideas. You'll use all of your findings from the empathize and define phases to brainstorm potential data viz solutions
+- Prototype: you'll start putting your charts, dashboards or other visualizations together
+- Test: showing visualizations to team members before presenting them to stakeholders
+
+
+
+## Headlines, subtitles, and labels
+
+A **headline** is a line of words printed in large letters at the top of the visualization to communicate what data is being presented. The typography and placement of the headline is important too. It's best to keep it simple. Make it bold or a few sizes larger than the rest of the text and place it directly above the chart, aligned to the left.    
+
+A **subtitle** supports the headline by adding more context and description. Use a font style that matches the rest of the charts elements and place the subtitle directly underneath the headline.
+
+A **legend** or key identifies the meaning of various elements in a data visualization and can be used as an alternative to labeling data directly. Direct labeling like this keeps your audience's attention fixed on your graphic and helps them identify data quickly.
+
+An **annotation** briefly explains data or helps focus the audience on a particular aspect of the data in a visualization. 
+
+<img width=400 src="../images/highlighting.png">
+
+
+
+## Accessible visualizations
+
+- Use labeling effectively
+- Provide text alternatives, **Alternative text** provides a textual alternative to non-text content. It allows the content and function of the image to be accessible to those with visual or certain cognitive disabilities. 
+- Make data from charts and diagrams available in a text-based format through an export to Sheets or Excel
+- You can also make it easier for people to see and hear content by separating foreground from background
+- Red-green color blindness is the most common and occurs when red and green look like the same color. You can avoid placing green on red or red on green in your visualizations. 
+- Blue-yellow color blindness is less common and occurs when it is difficult to tell the difference between blue and green, or yellow and red. You can also avoid using these colors on top of or next to each other.
+- Avoid relying solely on color to convey information, and instead distinguished with different textures and shapes. 
+- Avoid over complicating data visualizations by including too much information
+- A companion table displays the same data as the visualization, but in a table format and as such might help some people access the data better
+
+
+
+
+
+
+

@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: R programming - 3&nbsp; Programming using RStudio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/3_data_in_R.html" rel="next">
+<link href="../code/1_introduction.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming using RStudio</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: R programming</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data Analysis with R Programming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction into (R) Programming</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_rstudio.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming using RStudio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_data_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_data_vis_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data visualization in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/5_documenting_in_R.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Documentation and reports</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#fundamentals" id="toc-fundamentals" class="nav-link active" data-scroll-target="#fundamentals"><span class="toc-section-number">3.1</span>  Fundamentals</a>
+  <ul class="collapse">
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="toc-section-number">3.1.1</span>  Functions</a></li>
+  <li><a href="#comments" id="toc-comments" class="nav-link" data-scroll-target="#comments"><span class="toc-section-number">3.1.2</span>  Comments</a></li>
+  <li><a href="#data-structures" id="toc-data-structures" class="nav-link" data-scroll-target="#data-structures"><span class="toc-section-number">3.1.3</span>  Data structures</a></li>
+  <li><a href="#vectors" id="toc-vectors" class="nav-link" data-scroll-target="#vectors"><span class="toc-section-number">3.1.4</span>  Vectors</a></li>
+  <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists"><span class="toc-section-number">3.1.5</span>  Lists</a></li>
+  <li><a href="#matrices" id="toc-matrices" class="nav-link" data-scroll-target="#matrices"><span class="toc-section-number">3.1.6</span>  Matrices</a></li>
+  <li><a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames"><span class="toc-section-number">3.1.7</span>  Data frames</a></li>
+  </ul></li>
+  <li><a href="#files" id="toc-files" class="nav-link" data-scroll-target="#files"><span class="toc-section-number">3.2</span>  Files</a></li>
+  <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes"><span class="toc-section-number">3.3</span>  Pipes</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="toc-section-number">3.4</span>  Packages</a></li>
+  <li><a href="#dates-and-times-in-r" id="toc-dates-and-times-in-r" class="nav-link" data-scroll-target="#dates-and-times-in-r"><span class="toc-section-number">3.5</span>  Dates and times in R</a>
+  <ul class="collapse">
+  <li><a href="#converting-from-strings" id="toc-converting-from-strings" class="nav-link" data-scroll-target="#converting-from-strings"><span class="toc-section-number">3.5.1</span>  Converting from strings</a></li>
+  <li><a href="#creating-date-time-components" id="toc-creating-date-time-components" class="nav-link" data-scroll-target="#creating-date-time-components"><span class="toc-section-number">3.5.2</span>  Creating date-time components</a></li>
+  <li><a href="#optional-switching-between-existing-date-time-objects" id="toc-optional-switching-between-existing-date-time-objects" class="nav-link" data-scroll-target="#optional-switching-between-existing-date-time-objects"><span class="toc-section-number">3.5.3</span>  Optional: Switching between existing date-time objects</a></li>
+  </ul></li>
+  <li><a href="#operators-and-calculations" id="toc-operators-and-calculations" class="nav-link" data-scroll-target="#operators-and-calculations"><span class="toc-section-number">3.6</span>  Operators and calculations</a></li>
+  <li><a href="#conditional-statements" id="toc-conditional-statements" class="nav-link" data-scroll-target="#conditional-statements"><span class="toc-section-number">3.7</span>  Conditional statements</a>
+  <ul class="collapse">
+  <li><a href="#if-statement" id="toc-if-statement" class="nav-link" data-scroll-target="#if-statement"><span class="toc-section-number">3.7.1</span>  if statement</a></li>
+  <li><a href="#else-statement" id="toc-else-statement" class="nav-link" data-scroll-target="#else-statement"><span class="toc-section-number">3.7.2</span>  else statement</a></li>
+  <li><a href="#else-if-statement" id="toc-else-if-statement" class="nav-link" data-scroll-target="#else-if-statement"><span class="toc-section-number">3.7.3</span>  else if statement</a></li>
+  </ul></li>
+  <li><a href="#keeping-your-code-readable" id="toc-keeping-your-code-readable" class="nav-link" data-scroll-target="#keeping-your-code-readable"><span class="toc-section-number">3.8</span>  Keeping Your Code Readable</a></li>
+  <li><a href="#viewing-data" id="toc-viewing-data" class="nav-link" data-scroll-target="#viewing-data"><span class="toc-section-number">3.9</span>  Viewing data</a></li>
+  <li><a href="#cleaning-data" id="toc-cleaning-data" class="nav-link" data-scroll-target="#cleaning-data"><span class="toc-section-number">3.10</span>  Cleaning data</a></li>
+  <li><a href="#visualizing-data" id="toc-visualizing-data" class="nav-link" data-scroll-target="#visualizing-data"><span class="toc-section-number">3.11</span>  Visualizing data</a></li>
+  <li><a href="#the-tidyverse" id="toc-the-tidyverse" class="nav-link" data-scroll-target="#the-tidyverse"><span class="toc-section-number">3.12</span>  The tidyverse</a>
+  <ul class="collapse">
+  <li><a href="#checking-for-updates" id="toc-checking-for-updates" class="nav-link" data-scroll-target="#checking-for-updates"><span class="toc-section-number">3.12.1</span>  Checking for updates</a></li>
+  <li><a href="#read-tidyverse-vignettes" id="toc-read-tidyverse-vignettes" class="nav-link" data-scroll-target="#read-tidyverse-vignettes"><span class="toc-section-number">3.12.2</span>  Read tidyverse vignettes</a></li>
+  <li><a href="#working-with-pipes" id="toc-working-with-pipes" class="nav-link" data-scroll-target="#working-with-pipes"><span class="toc-section-number">3.12.3</span>  Working with pipes</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Programming using RStudio</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="fundamentals" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="fundamentals"><span class="header-section-number">3.1</span> Fundamentals</h2>
+<section id="functions" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="functions"><span class="header-section-number">3.1.1</span> Functions</h3>
+<p><strong>Functions</strong> are a body of reusable code used to perform specific tasks in R. Functions begin with function names like print or paste, and are usually followed by one or more arguments in parentheses. An <strong>argument</strong> is information that a function in R needs in order to run. I.e. <code>print()</code> will return whatever we include in the values in parentheses.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Coding in R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Coding in R"</code></pre>
+</div>
+</div>
+<p>If you want to find out more about the print function or any function, all you have to do is type a question mark, the function name, and a set of parentheses. This returns a page in the Help window, which helps you learn more about the functions you’re working with. Keep in mind that functions are case-sensitive, so typing Print with a Capital P brings back an error message.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>?<span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Functions are great, but it can be pretty time-consuming to type out lots of values. To save time, we can use variables to represent the values. This lets us call out the values any time we need to with just the variable. A <strong>variable</strong> is a representation of a value in R that can be stored for use later during programming. Variables can also be called objects. A variable name should start with a letter and can also contain numbers and underscores.</p>
+</section>
+<section id="comments" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="comments"><span class="header-section-number">3.1.2</span> Comments</h3>
+<p>Comments are helpful when you want to describe or explain what’s going on in your code. Use them as much as possible so that you and everyone can understand the reasoning behind it. Comments should be used to make an R script more readable. A comment shouldn’t be treated as code, so we’ll put a # in front of it. Then we’ll add our comment. Here’s an example of a variable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is an example of a variable</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>first_variable <span class="ot">&lt;-</span> <span class="st">"My variable"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>first_variable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "My variable"</code></pre>
+</div>
+</div>
+<p>Above the <code>&lt;-</code> is the <strong>assignment operator</strong>. It assigns the value to the variable.</p>
+</section>
+<section id="data-structures" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="data-structures"><span class="header-section-number">3.1.3</span> Data structures</h3>
+<p>A <strong>data structure</strong> is a format for organizing and storing data. The most common data structures in the R programming language include:</p>
+<ul>
+<li>Vectors</li>
+<li>Data frames</li>
+<li>Matrices</li>
+<li>Arrays</li>
+</ul>
+</section>
+<section id="vectors" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="vectors"><span class="header-section-number">3.1.4</span> Vectors</h3>
+<p>A <strong>vector</strong> is a group of data elements of the same type stored in a sequence in R.</p>
+<p>There are two types of vectors: atomic vectors and lists.</p>
+<section id="atomic-vectors" class="level4" data-number="3.1.4.1">
+<h4 data-number="3.1.4.1" class="anchored" data-anchor-id="atomic-vectors"><span class="header-section-number">3.1.4.1</span> Atomic vectors</h4>
+<p>There are six primary types of atomic vectors:</p>
+<ul>
+<li>Logical: True/False</li>
+<li>Integer: Positive or negative whole values</li>
+<li>Double: Decimal values</li>
+<li>Character: String/character values</li>
+<li>Complex</li>
+<li>Raw</li>
+</ul>
+<p>Together, integer and double vectors are known as <strong>numeric vectors</strong> because they both contain numbers.</p>
+</section>
+<section id="creating-vectors" class="level4" data-number="3.1.4.2">
+<h4 data-number="3.1.4.2" class="anchored" data-anchor-id="creating-vectors"><span class="header-section-number">3.1.4.2</span> Creating vectors</h4>
+<p>You can make a vector using the combined function. In R this function is just the letter c followed by the values you want in your vector inside parentheses, i.e.&nbsp;<code>c()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>vec_1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">13</span>,<span class="fl">48.5</span>, <span class="dv">71</span>, <span class="fl">101.5</span>,<span class="dv">2</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vec_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  13.0  48.5  71.0 101.5   2.0</code></pre>
+</div>
+</div>
+</section>
+<section id="determining-the-properties-of-vectors" class="level4" data-number="3.1.4.3">
+<h4 data-number="3.1.4.3" class="anchored" data-anchor-id="determining-the-properties-of-vectors"><span class="header-section-number">3.1.4.3</span> Determining the properties of vectors</h4>
+<p>Every vector you create will have two key properties: type and length.</p>
+<p>You can determine what type of vector you are working with by using the typeof() function. Place the code for the vector inside the parentheses of the function. When you run the function, R will tell you the type. For example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(vec_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+</div>
+<p>You can determine the length of an existing vector<e2>&lt;80&gt;&lt;93&gt;meaning the number of elements it contains<e2>&lt;80&gt;&lt;93&gt;by using the length() function.</e2></e2></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(vec_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<p>You can also check if a vector is a specific type by using an is function: is.logical(), is.double(), is.integer(), is.character().</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(vec_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</section>
+<section id="naming-vectors" class="level4" data-number="3.1.4.4">
+<h4 data-number="3.1.4.4" class="anchored" data-anchor-id="naming-vectors"><span class="header-section-number">3.1.4.4</span> Naming vectors</h4>
+<p>All types of vectors can be named. Names are useful for writing readable code and describing objects in R. You can name the elements of a vector with the names() function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a vector</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#assign names to each element of a vector</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(x) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#view vector</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a b c 
+1 3 5 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="lists" class="level3" data-number="3.1.5">
+<h3 data-number="3.1.5" class="anchored" data-anchor-id="lists"><span class="header-section-number">3.1.5</span> Lists</h3>
+<p>Lists are different from atomic vectors because their elements can be of any type<e2>&lt;80&gt;&lt;94&gt;like dates, data frames, vectors, matrices, and more. Lists can even contain other lists.</e2></p>
+<p>You can create a list with the list() function. Similar to the c() function, the list() function is just list followed by the values you want in your list inside parentheses.</p>
+<section id="determining-the-structure-of-lists" class="level4" data-number="3.1.5.1">
+<h4 data-number="3.1.5.1" class="anchored" data-anchor-id="determining-the-structure-of-lists"><span class="header-section-number">3.1.5.1</span> Determining the structure of lists</h4>
+<p>If you want to find out what types of elements a list contains, you can use the str() function. To do so, place the code for the list inside the parentheses of the function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">list</span>(<span class="st">"a"</span>, 1L, <span class="fl">1.5</span>, <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 4
+ $ : chr "a"
+ $ : int 1
+ $ : num 1.5
+ $ : logi TRUE</code></pre>
+</div>
+</div>
+<p>Let<e2>&lt;80&gt;&lt;99&gt;s use the str() function to discover the structure of our second example. First, let<e2>&lt;80&gt;&lt;99&gt;s assign the list to the variable z to make it easier to input in the str() function.</e2></e2></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="fu">list</span>(<span class="dv">1</span> , <span class="dv">3</span>, <span class="dv">5</span>)))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(z)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 1
+ $ :List of 1
+  ..$ :List of 3
+  .. ..$ : num 1
+  .. ..$ : num 3
+  .. ..$ : num 5</code></pre>
+</div>
+</div>
+<p>The indentation of the $ symbols reflect the nested structure of this list. Here, there are three levels (so there is a list within a list within a list).</p>
+</section>
+<section id="naming-lists" class="level4" data-number="3.1.5.2">
+<h4 data-number="3.1.5.2" class="anchored" data-anchor-id="naming-lists"><span class="header-section-number">3.1.5.2</span> Naming lists</h4>
+<p>Lists, like vectors, can be named. You can name the elements of a list when you first create it with the list() function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="st">'Chicago'</span> <span class="ot">=</span> <span class="dv">1</span>, <span class="st">'New York'</span> <span class="ot">=</span> <span class="dv">2</span>, <span class="st">'Los Angeles'</span> <span class="ot">=</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Chicago
+[1] 1
+
+$`New York`
+[1] 2
+
+$`Los Angeles`
+[1] 3</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="matrices" class="level3" data-number="3.1.6">
+<h3 data-number="3.1.6" class="anchored" data-anchor-id="matrices"><span class="header-section-number">3.1.6</span> Matrices</h3>
+<p>A matrix is a two-dimensional collection of data elements. This means it has both rows and columns. By contrast, a vector is a one-dimensional sequence of data elements. But like vectors, matrices can only contain a single data type. For example, you can<e2>&lt;80&gt;&lt;99&gt;t have both logicals and numerics in a matrix.</e2></p>
+<p>To create a matrix in R, you can use the matrix() function. The matrix() function has two main arguments that you enter in the parentheses. First, add a vector. The vector contains the values you want to place in the matrix. Next, add at least one matrix dimension. You can choose to specify the number of rows or the number of columns by using the code nrow = or ncol =.</p>
+<p>For example, imagine you want to create a 2x3 (two rows by three columns) matrix containing the values 3-8. First, enter a vector containing that series of numbers: c(3:8). Then, enter a comma. Finally, enter nrow = 2 to specify the number of rows.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">8</span>), <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,]    3    5    7
+[2,]    4    6    8</code></pre>
+</div>
+</div>
+<p>You can also choose to specify the number of columns (ncol = ) instead of the number of rows (nrow = ).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">8</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    3    6
+[2,]    4    7
+[3,]    5    8</code></pre>
+</div>
+</div>
+</section>
+<section id="data-frames" class="level3" data-number="3.1.7">
+<h3 data-number="3.1.7" class="anchored" data-anchor-id="data-frames"><span class="header-section-number">3.1.7</span> Data frames</h3>
+<p>Data frames are the most common way of storing and analyzing data in R, so it<e2>&lt;80&gt;&lt;99&gt;s important to understand what they are and how to create them. A data frame is a collection of columns<e2>&lt;80&gt;&lt;93&gt;similar to a spreadsheet or SQL table. Each column has a name at the top that represents a variable, and includes one observation per row. Data frames help summarize data and organize it into a format that is easy to read and use.</e2></e2></p>
+<p>There are a few key things to keep in mind when you are working with data frames:</p>
+<ul>
+<li>Columns should be named.</li>
+<li>Data frames can include many different types of data, like numeric, logical, or character.</li>
+<li>Elements in the same column should be of the same type.</li>
+</ul>
+<section id="creating-dfs" class="level4" data-number="3.1.7.1">
+<h4 data-number="3.1.7.1" class="anchored" data-anchor-id="creating-dfs"><span class="header-section-number">3.1.7.1</span> Creating dfs</h4>
+<p>If you need to manually create a data frame in R, you can use the data.frame() function. The data.frame() function takes vectors as input. In the parentheses, enter the name of the column, followed by an equals sign, and then the vector you want to input for that column.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) , <span class="at">y =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="fl">5.5</span>, <span class="fl">7.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  x   y
+1 1 1.5
+2 2 5.5
+3 3 7.5</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="files" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="files"><span class="header-section-number">3.2</span> Files</h2>
+<p>Let<e2>&lt;80&gt;&lt;99&gt;s go over how to create, copy, and delete files in R. For more information on working with files in R.</e2></p>
+<p>Use the <code>dir.create</code> function to create a new folder, or directory, to hold your files. Place the name of the folder in the parentheses of the function.</p>
+<pre><code>dir.create ("destination_folder")</code></pre>
+<p>Use the file.create() function to create a blank file. Place the name and the type of the file in the parentheses of the function. Your file types will usually be something like .txt, .docx, or .csv.</p>
+<pre><code>file.create ("new_text_file.txt")</code></pre>
+<p>Copying a file can be done using the file.copy() function. In the parentheses, add the name of the file to be copied. Then, type a comma, and add the name of the destination folder that you want to copy the file to.</p>
+<p><code>file.copy ("new_text_file.txt" , "destination_folder")</code></p>
+<p>You can delete R files using the unlink() function. Enter the file<e2>&lt;80&gt;&lt;99&gt;s name in the parentheses of the function.</e2></p>
+<p><code>unlink ("some_.file.csv")</code></p>
+</section>
+<section id="pipes" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="pipes"><span class="header-section-number">3.3</span> Pipes</h2>
+<p>A <strong>pipe</strong> is a tool in R for expressing a sequence of multiple operations. A pipe is represented with <code>%&gt;%</code>.It’s used to apply the output of one function into another function.</p>
+</section>
+<section id="packages" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="packages"><span class="header-section-number">3.4</span> Packages</h2>
+<p><strong>Packages</strong> are units of reproducible R code, and they make it easier to keep track of code. They’re created by members of the R community to keep track of the R functions that they write and reuse</p>
+<p>Packages in R include reusable R functions and documentation about the functions, including how to use them. They also contain sample datasets and tests for checking your code to make sure it does what you want it to do.</p>
+<p>By default, R includes a set of packages called <strong>Base R</strong> that are available to use in RStudio when you start your first programming session.</p>
+<p>To check already installed packages we can type</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">installed.packages</span>())</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Package
+AlgDesign     AlgDesign
+AsioHeaders AsioHeaders
+DBI                 DBI
+Formula         Formula
+KernSmooth   KernSmooth
+MASS               MASS
+                                                                   LibPath
+AlgDesign   /Library/Frameworks/R.framework/Versions/4.2/Resources/library
+AsioHeaders /Library/Frameworks/R.framework/Versions/4.2/Resources/library
+DBI         /Library/Frameworks/R.framework/Versions/4.2/Resources/library
+Formula     /Library/Frameworks/R.framework/Versions/4.2/Resources/library
+KernSmooth  /Library/Frameworks/R.framework/Versions/4.2/Resources/library
+MASS        /Library/Frameworks/R.framework/Versions/4.2/Resources/library
+             Version    Priority
+AlgDesign      1.2.1        &lt;NA&gt;
+AsioHeaders 1.22.1-1        &lt;NA&gt;
+DBI            1.1.3        &lt;NA&gt;
+Formula        1.2-4        &lt;NA&gt;
+KernSmooth   2.23-20 recommended
+MASS          7.3-57 recommended
+                                                    Depends Imports LinkingTo
+AlgDesign                                              &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;
+AsioHeaders                                            &lt;NA&gt;    &lt;NA&gt;      &lt;NA&gt;
+DBI                                   methods, R (&gt;= 3.0.0)    &lt;NA&gt;      &lt;NA&gt;
+Formula                                 R (&gt;= 2.0.0), stats    &lt;NA&gt;      &lt;NA&gt;
+KernSmooth                              R (&gt;= 2.5.0), stats    &lt;NA&gt;      &lt;NA&gt;
+MASS        R (&gt;= 3.3.0), grDevices, graphics, stats, utils methods      &lt;NA&gt;
+                                                                                                                                                 Suggests
+AlgDesign                                                                                                                                            &lt;NA&gt;
+AsioHeaders                                                                                                                                          &lt;NA&gt;
+DBI         blob, covr, DBItest, dbplyr, downlit, dplyr, glue, hms,\nknitr, magrittr, RMariaDB, rmarkdown, rprojroot, RSQLite (&gt;=\n1.1-2), testthat, xml2
+Formula                                                                                                                                              &lt;NA&gt;
+KernSmooth                                                                                                                                  MASS, carData
+MASS                                                                                                                        lattice, nlme, nnet, survival
+            Enhances       License License_is_FOSS License_restricts_use
+AlgDesign       &lt;NA&gt;    GPL (&gt;= 2)            &lt;NA&gt;                  &lt;NA&gt;
+AsioHeaders     &lt;NA&gt;       BSL-1.0            &lt;NA&gt;                  &lt;NA&gt;
+DBI             &lt;NA&gt; LGPL (&gt;= 2.1)            &lt;NA&gt;                  &lt;NA&gt;
+Formula         &lt;NA&gt; GPL-2 | GPL-3            &lt;NA&gt;                  &lt;NA&gt;
+KernSmooth      &lt;NA&gt;     Unlimited            &lt;NA&gt;                  &lt;NA&gt;
+MASS            &lt;NA&gt; GPL-2 | GPL-3            &lt;NA&gt;                  &lt;NA&gt;
+            OS_type MD5sum NeedsCompilation Built
+AlgDesign      &lt;NA&gt;   &lt;NA&gt;              yes 4.2.0
+AsioHeaders    &lt;NA&gt;   &lt;NA&gt;               no 4.2.0
+DBI            &lt;NA&gt;   &lt;NA&gt;               no 4.2.0
+Formula        &lt;NA&gt;   &lt;NA&gt;               no 4.2.0
+KernSmooth     &lt;NA&gt;   &lt;NA&gt;              yes 4.2.1
+MASS           &lt;NA&gt;   &lt;NA&gt;              yes 4.2.1</code></pre>
+</div>
+</div>
+<p>The package column gives the name of the package like cluster or graphics. The priority column tells us what’s needed to use functions from the package. If you come across the word “base” in the priority column, then the package is already installed and loaded.</p>
+<p>Packages can be found in repositories, which are collections of useful packages that are ready to install. You can find repositories on Bioconductor, R-Forge, rOpenSci, or GitHub, but the most commonly used repository is the Comprehensive R Archive Network or CRAN. CRAN stores code and documentation so that you can install packages into your own RStudio space.</p>
+<p>Conflicts happen when packages have functions with the same names as other functions. Basically, the last package loaded is the one whose functions will be used</p>
+</section>
+<section id="dates-and-times-in-r" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="dates-and-times-in-r"><span class="header-section-number">3.5</span> Dates and times in R</h2>
+<p>In this reading, you will learn how to work with dates and times in R using the lubridate package. Lubridate is part of tidyverse.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load required libs</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In R, there are three types of data that refer to an instant in time:</p>
+<ul>
+<li>A date (“2016-08-16”)</li>
+<li>A time within a day (“20:11:59 UTC”)</li>
+<li>And a date-time. This is a date plus a time (“2018-03-31 18:15:48 UTC”)</li>
+</ul>
+<p>For example, to get the current date you can run the today() function. The date appears as year, month, and day.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">today</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2022-11-11"</code></pre>
+</div>
+</div>
+<p>To get the current date-time you can run the now() function. Note that the time appears to the nearest second.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">now</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2022-11-11 14:44:07 CET"</code></pre>
+</div>
+</div>
+<p>When working with R, there are three ways you are likely to create date-time formats:</p>
+<ul>
+<li>From a string</li>
+<li>From an individual date</li>
+<li>From an existing date/time object</li>
+</ul>
+<p>R creates dates in the standard yyyy-mm-dd format by default.</p>
+<section id="converting-from-strings" class="level3" data-number="3.5.1">
+<h3 data-number="3.5.1" class="anchored" data-anchor-id="converting-from-strings"><span class="header-section-number">3.5.1</span> Converting from strings</h3>
+<p>Date/time data often comes as strings. You can convert strings into dates and date-times using the tools provided by lubridate. These tools automatically work out the date/time format. First, identify the order in which the year, month, and day appear in your dates. Then, arrange the letters y, m, and d in the same order. That gives you the name of the lubridate function that will parse your date.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">"2021-01-20"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2021-01-20"</code></pre>
+</div>
+</div>
+<p>It works the same way for any order. For example, month, day, and year. R still returns the date in yyyy-mm-dd format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(<span class="st">"January 20th, 2021"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2021-01-20"</code></pre>
+</div>
+</div>
+<p>These functions also take unquoted numbers and convert them into the yyyy-mm-dd format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="dv">20210120</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2021-01-20"</code></pre>
+</div>
+</div>
+</section>
+<section id="creating-date-time-components" class="level3" data-number="3.5.2">
+<h3 data-number="3.5.2" class="anchored" data-anchor-id="creating-date-time-components"><span class="header-section-number">3.5.2</span> Creating date-time components</h3>
+<p>The ymd() function and its variations create dates. To create a date-time from a date, add an underscore and one or more of the letters h, m, and s (hours, minutes, seconds) to the name of the function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd_hms</span>(<span class="st">"2021-01-20 20:11:59"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2021-01-20 20:11:59 UTC"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy_hm</span>(<span class="st">"01/20/2021 08:01"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2021-01-20 08:01:00 UTC"</code></pre>
+</div>
+</div>
+</section>
+<section id="optional-switching-between-existing-date-time-objects" class="level3" data-number="3.5.3">
+<h3 data-number="3.5.3" class="anchored" data-anchor-id="optional-switching-between-existing-date-time-objects"><span class="header-section-number">3.5.3</span> Optional: Switching between existing date-time objects</h3>
+<p>Finally, you might want to switch between a date-time and a date.</p>
+<p>You can use the function as_date() to convert a date-time to a date. For example, put the current date-time<e2>&lt;80&gt;&lt;94&gt;now()<e2>&lt;80&gt;&lt;94&gt;in the parentheses of the function.</e2></e2></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_date</span>(<span class="fu">now</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2022-11-11"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="operators-and-calculations" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="operators-and-calculations"><span class="header-section-number">3.6</span> Operators and calculations</h2>
+<p><strong>Operators</strong> are defined as a symbol that names the type of operation or calculation to be performed in a formula. Arithmetic operators are used to complete math calculations.</p>
+<p><strong>Arithmetic operators</strong> let you perform basic math operations like addition, subtraction, multiplication, and division.</p>
+<p><img width="500" src="../images/operators.png"></p>
+<p>In the example above, we assume that <code>x &lt;- 2</code> and <code>y &lt;-5</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>quarter_1_sales <span class="ot">&lt;-</span> <span class="fl">35657.98</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>quarter_2_sales <span class="ot">&lt;-</span> <span class="fl">43810.55</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>midyear_sales <span class="ot">&lt;-</span> quarter_1_sales <span class="sc">+</span> quarter_2_sales</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>midyear_sales</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 79468.53</code></pre>
+</div>
+</div>
+<p><strong>Logical operators</strong> return a logical data type such as TRUE or FALSE. There are three primary types of logical operators:</p>
+<p><img width="500" src="../images/log_operators.png"></p>
+<p>The main difference between <strong>element-wise logical operators</strong> (&amp;, |) and <strong>logical operators</strong> (&amp;&amp;, ||) is the way they apply to operations with vectors. The operations with double signs, AND (&amp;&amp;) and logical OR (||), only examine the first element of each vector. The operations with single signs, AND (&amp;) and OR (|), examine all the elements of each vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">&amp;</span> y <span class="sc">&lt;</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE FALSE</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">&amp;&amp;</span> y <span class="sc">&lt;</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><strong>Relational operators</strong>, also known as comparators, allow you to compare values. Relational operators identify how one R object relates to another<e2>&lt;80&gt;&lt;94&gt;like whether an object is less than, equal to, or greater than another object. The output for relational operators is either TRUE or FALSE (which is a logical data type, or boolean).</e2></p>
+<p><img width="500" src="../images/rel_operators.png"></p>
+<p><strong>Assignment operators</strong> let you assign values to variables.</p>
+<p>In many scripting programming languages you can just use the equal sign (=) to assign a variable. For R, the best practice is to use the arrow assignment (&lt;-). Technically, the single arrow assignment can be used in the left or right direction. But the rightward assignment is not generally used in R code.</p>
+</section>
+<section id="conditional-statements" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="conditional-statements"><span class="header-section-number">3.7</span> Conditional statements</h2>
+<p>A <strong>conditional statement</strong> is a declaration that if a certain condition holds, then a certain event must take place.</p>
+<section id="if-statement" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="if-statement"><span class="header-section-number">3.7.1</span> if statement</h3>
+<p>The if statement sets a condition, and if the condition evaluates to TRUE, the R code associated with the if statement is executed.</p>
+<p>In R, you place the code for the condition inside the parentheses of the if statement. The code that has to be executed if the condition is TRUE follows in curly braces (expr). Note that in this case, the second curly brace is placed on its own line of code and identifies the end of the code that you want to execute.</p>
+<pre><code>if (condition) {
+ expr
+}</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"x is a positive number"</span>)</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "x is a positive number"</code></pre>
+</div>
+</div>
+<p>if you change x to a negative number, like -4, then the condition will be FALSE (-4 &gt; 0). If you run the code, R will not execute the print statement. Instead, a blank line will appear as the result.</p>
+</section>
+<section id="else-statement" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="else-statement"><span class="header-section-number">3.7.2</span> else statement</h3>
+<p>The else statement is used in combination with an if statement. This is how the code is structured in R:</p>
+<pre><code>if (condition) {
+  expr1
+} else {
+ expr2
+}</code></pre>
+<p>Let’s try the following:</p>
+<ul>
+<li>If x is greater than 0, R will print <e2>&lt;80&gt;&lt;9c&gt;x is a positive number<e2>&lt;80&gt;&lt;9d&gt;.</e2></e2></li>
+<li>If x is less than or equal to 0, R will print <e2>&lt;80&gt;&lt;9c&gt;x is either a negative number or zero<e2>&lt;80&gt;&lt;9d&gt;.</e2></e2></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">7</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"x is a positive number"</span>)</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"x is either a negative number or zero"</span>)</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "x is either a negative number or zero"</code></pre>
+</div>
+</div>
+</section>
+<section id="else-if-statement" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="else-if-statement"><span class="header-section-number">3.7.3</span> else if statement</h3>
+<p>In some cases, you might want to customize your conditional statement even further by adding the else if statement. The else if statement comes in between the if statement and the else statement. This is the code structure:</p>
+<pre><code>if (condition1) {
+ expr1
+} else if (condition2) {
+ expr2
+} else {
+ expr3
+}</code></pre>
+<p>If the if condition (condition1) is met, then R executes the code in the first expression (expr1). If the if condition is not met, and the else if condition (condition2) is met, then R executes the code in the second expression (expr2). If neither of the two conditions are met, R executes the code in the third expression (expr3).</p>
+<p>In our previous example, using only the if and else statements, R can only print <e2>&lt;80&gt;&lt;9c&gt;x is either a negative number or zero<e2>&lt;80&gt;&lt;9d&gt; if x equals 0 or x is less than zero. Imagine you want R to print the string <e2>&lt;80&gt;&lt;9c&gt;x is zero<e2>&lt;80&gt;&lt;9d&gt; if x equals 0. You need to add another condition using the else if statement.</e2></e2></e2></e2></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (x <span class="sc">&lt;</span> <span class="dv">0</span>) {</span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"x is a negative number"</span>)</span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (x <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"x is zero"</span>)</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"x is a positive number"</span>)</span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "x is a negative number"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="keeping-your-code-readable" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="keeping-your-code-readable"><span class="header-section-number">3.8</span> Keeping Your Code Readable</h2>
+<ul>
+<li>File names should be meaningful</li>
+<li>Avoid using special characters in file names<e2>&lt;80&gt;&lt;94&gt;stick with numbers,letters, dashes, and underscores.</e2></li>
+<li>Variable and function names should be lowercase. Use an underscore _ to separate words within a name. Try to create names that are clear, concise, and meaningful.</li>
+<li>Most operators (== , + , - , &lt;- ,etc.) should be surrounded by spaces.</li>
+<li>Always put a space after a comma (never before).</li>
+<li>Do not place spaces around code in parentheses or square brackets (unless there<e2>&lt;80&gt;&lt;99&gt;s a comma, in which case see above).</e2></li>
+<li>An opening curly brace should never go on its own line and should always be followed by a new line. A closing curly brace should always go on its own line (unless it<e2>&lt;80&gt;&lt;99&gt;s followed by an else statement). Always indent the code inside curly braces.</e2></li>
+<li>When indenting your code, use two spaces. Do not use tabs or mix tabs and spaces.</li>
+<li>Try to limit your code to 80 characters per line. This fits nicely on a printed page with a reasonably sized font.</li>
+<li>Use &lt;- , not = , for assignment.</li>
+<li>Entire commented lines should begin with the comment symbol and a single space: #.</li>
+</ul>
+</section>
+<section id="viewing-data" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="viewing-data"><span class="header-section-number">3.9</span> Viewing data</h2>
+<p>Many of the <code>tidyverse</code> packages contain sample datasets that you can use to practice your <code>R</code> skills. The <code>diamonds</code> dataset in the <code>ggplot2</code> package is a great example for previewing <code>R</code> functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 x 10
+  carat cut       color clarity depth table price     x     y     z
+  &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48</code></pre>
+</div>
+</div>
+<p>In addition to <code>head()</code> there are a number of other useful functions you can use to summarize or preview the data. For example, the <code>str()</code> and <code>glimpse()</code> functions will both return summaries of each column in your data arranged horizontally. You can try out these two functions by running the code chunks below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [53,940 x 10] (S3: tbl_df/tbl/data.frame)
+ $ carat  : num [1:53940] 0.23 0.21 0.23 0.29 0.31 0.24 0.24 0.26 0.22 0.23 ...
+ $ cut    : Ord.factor w/ 5 levels "Fair"&lt;"Good"&lt;..: 5 4 2 4 2 3 3 3 1 3 ...
+ $ color  : Ord.factor w/ 7 levels "D"&lt;"E"&lt;"F"&lt;"G"&lt;..: 2 2 2 6 7 7 6 5 2 5 ...
+ $ clarity: Ord.factor w/ 8 levels "I1"&lt;"SI2"&lt;"SI1"&lt;..: 2 3 5 4 2 6 7 3 4 5 ...
+ $ depth  : num [1:53940] 61.5 59.8 56.9 62.4 63.3 62.8 62.3 61.9 65.1 59.4 ...
+ $ table  : num [1:53940] 55 61 65 58 58 57 57 55 61 61 ...
+ $ price  : int [1:53940] 326 326 327 334 335 336 336 337 337 338 ...
+ $ x      : num [1:53940] 3.95 3.89 4.05 4.2 4.34 3.94 3.95 4.07 3.87 4 ...
+ $ y      : num [1:53940] 3.98 3.84 4.07 4.23 4.35 3.96 3.98 4.11 3.78 4.05 ...
+ $ z      : num [1:53940] 2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 53,940
+Columns: 10
+$ carat   &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23, 0.~
+$ cut     &lt;ord&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, Ver~
+$ color   &lt;ord&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J, I,~
+$ clarity &lt;ord&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS1, ~
+$ depth   &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4, 64~
+$ table   &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62, 58~
+$ price   &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340, 34~
+$ x       &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00, 4.~
+$ y       &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05, 4.~
+$ z       &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39, 2.~</code></pre>
+</div>
+</div>
+<p>Another simple function that you may use regularly is the <code>colnames()</code> function. It returns a list of column names from your dataset. You can check out this function by running the code chunk below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "carat"   "cut"     "color"   "clarity" "depth"   "table"   "price"  
+ [8] "x"       "y"       "z"      </code></pre>
+</div>
+</div>
+</section>
+<section id="cleaning-data" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="cleaning-data"><span class="header-section-number">3.10</span> Cleaning data</h2>
+<p>One of the most frequent tasks you will have to perform as an analyst is to clean and organize your data. <code>R</code> makes this easy! There are many functions you can use to help you perform important tasks easily and quickly.</p>
+<p>For example, you might need to rename the columns, or variables, in your data. There is a function for that: <code>rename().</code> You can check out how it works in the chunk below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(diamonds, <span class="at">carat_new =</span> carat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 53,940 x 10
+   carat_new cut       color clarity depth table price     x     y     z
+       &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1      0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+ 2      0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+ 3      0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+ 4      0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+ 5      0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+ 6      0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+ 7      0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+ 8      0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+ 9      0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+10      0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
+# ... with 53,930 more rows</code></pre>
+</div>
+</div>
+<p>You can rename more than one variable in the same <code>rename()</code> code. The code below demonstrates how:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rename</span>(diamonds, <span class="at">carat_new =</span> carat, <span class="at">cut_new =</span> cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 53,940 x 10
+   carat_new cut_new   color clarity depth table price     x     y     z
+       &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1      0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+ 2      0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+ 3      0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+ 4      0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+ 5      0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+ 6      0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48
+ 7      0.24 Very Good I     VVS1     62.3    57   336  3.95  3.98  2.47
+ 8      0.26 Very Good H     SI1      61.9    55   337  4.07  4.11  2.53
+ 9      0.22 Fair      E     VS2      65.1    61   337  3.87  3.78  2.49
+10      0.23 Very Good H     VS1      59.4    61   338  4     4.05  2.39
+# ... with 53,930 more rows</code></pre>
+</div>
+</div>
+<p>Another handy function for summarizing your data is <code>summarize().</code> You can use it to generate a wide range of summary statistics for your data. For example, if you wanted to know what the mean for <code>carat</code> was in this dataset, you could run the code in the chunk below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(diamonds, <span class="at">mean_carat =</span> <span class="fu">mean</span>(carat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 x 1
+  mean_carat
+       &lt;dbl&gt;
+1      0.798</code></pre>
+</div>
+</div>
+</section>
+<section id="visualizing-data" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="visualizing-data"><span class="header-section-number">3.11</span> Visualizing data</h2>
+<p>With <code>R,</code> you can create data visualizations that are simple and easy to understand or complicated and beautiful just by changing a bit of code. <code>R</code> empowers you to present the same data in so many different ways, which can help you create new insights or highlight important data findings. One of the most commonly used visualization packages is the <code>ggplot2</code> package, which is loaded automatically when you install and load <code>tidyverse.</code></p>
+<p>To build a visualization with <code>ggplot2</code> you layer plot elements together with a <code>+</code> symbol. You will learn a lot more about using <code>ggplot2</code> later in the course, but here is a preview of how easy and flexible it is to make visuals using code:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price)) <span class="sc">+</span></span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2_rstudio_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="336"></p>
+</div>
+</div>
+<p>The code above takes the <code>diamonds</code> data, plots the carat column on the X-axis, the price column on the Y-axis, and represents the data as a scatter plot using the <code>geom_point()</code> command.</p>
+<p><code>ggplot2</code> makes it easy to modify or improve your visuals. For example, if you wanted to change the color of each point so that it represented another variable, such as the cut of the diamond, you can change the code like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">color =</span> cut)) <span class="sc">+</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2_rstudio_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="336"></p>
+</div>
+</div>
+<p>Sometimes when you are trying to represent many different aspects of your data in a visual, it can help to separate out some of the components. For example, you could create a different plot for each type of cut. <code>ggplot2</code> makes it easy to do this with the <code>facet_wrap()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> diamonds, <span class="fu">aes</span>(<span class="at">x =</span> carat, <span class="at">y =</span> price, <span class="at">color =</span> cut)) <span class="sc">+</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>cut)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="2_rstudio_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="336"></p>
+</div>
+</div>
+</section>
+<section id="the-tidyverse" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="the-tidyverse"><span class="header-section-number">3.12</span> The tidyverse</h2>
+<p>Tidyverse is actually a collection of packages in R with a common design philosophy for data manipulation, exploration, and visualization.</p>
+<p>The packages are ggplot2, tibble, tidyr, readr, purrr, dplyr, stringr, and forcats.</p>
+<ul>
+<li><strong>readr</strong> is used for importing data</li>
+<li><strong>Ggplot2</strong> is used for data visualization, specifically plots. With ggplot2, you can create a variety of data viz by applying different visual properties to the data variables.</li>
+<li><strong>Tidyr</strong> is a package used for data cleaning to make tidy data</li>
+<li><strong>Dplyr</strong> offers a consistent set of functions that help you complete some common data manipulation tasks. For example, the select function picks variables based on their names, and the filter function finds cases where certain conditions are true</li>
+<li><strong>Tibble</strong> works with data frames.</li>
+<li><strong>Purrr</strong> works with functions and vectors helping make your code easier to write and more expressive.</li>
+<li><strong>Stringr</strong> includes functions that make it easier to work with strings.</li>
+<li><strong>Forcats</strong> provides tools that solve common problems with factors. As a quick reminder, factors store categorical data in R where the data values are limited and usually based on a finite group like country or year.</li>
+</ul>
+<section id="checking-for-updates" class="level3" data-number="3.12.1">
+<h3 data-number="3.12.1" class="anchored" data-anchor-id="checking-for-updates"><span class="header-section-number">3.12.1</span> Checking for updates</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co">#tidyverse_update()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="read-tidyverse-vignettes" class="level3" data-number="3.12.2">
+<h3 data-number="3.12.2" class="anchored" data-anchor-id="read-tidyverse-vignettes"><span class="header-section-number">3.12.2</span> Read tidyverse vignettes</h3>
+<p>A vignette is documentation that acts as a guide to an R package. A vignette shares details about the problem that the package is designed to solve and how the included functions can help you solve it. The browseVignettes function allows you to read through vignettes of a loaded package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co">#browseVignettes("ggplot2")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="working-with-pipes" class="level3" data-number="3.12.3">
+<h3 data-number="3.12.3" class="anchored" data-anchor-id="working-with-pipes"><span class="header-section-number">3.12.3</span> Working with pipes</h3>
+<p><strong>Nested</strong> describes code that performs a particular function and is contained within code that performs a broader function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load an already installed dataset</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"ToothGrowth"</span>)</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ToothGrowth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   len supp dose
+1  4.2   VC  0.5
+2 11.5   VC  0.5
+3  7.3   VC  0.5
+4  5.8   VC  0.5
+5  6.4   VC  0.5
+6 10.0   VC  0.5</code></pre>
+</div>
+</div>
+<p>Now, let’s say we need to filter and sort this data to organize it for analysis.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co">#apply the filter fct from the dplyr package</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="co">#to only include rows were the dose of vitamin is 0.5</span></span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>filtered_tg <span class="ot">&lt;-</span> <span class="fu">filter</span>(ToothGrowth, dose <span class="sc">==</span> <span class="fl">0.5</span>)</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a><span class="co">#check dimensions</span></span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(ToothGrowth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 60  3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(filtered_tg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20  3</code></pre>
+</div>
+</div>
+<p>Next, lets sort the data with the <code>arrange()</code> fct.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co">#first we have the df, then the column we want to sort by</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(filtered_tg, len)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    len supp dose
+1   4.2   VC  0.5
+2   5.2   VC  0.5
+3   5.8   VC  0.5
+4   6.4   VC  0.5
+5   7.0   VC  0.5
+6   7.3   VC  0.5
+7   8.2   OJ  0.5
+8   9.4   OJ  0.5
+9   9.7   OJ  0.5
+10  9.7   OJ  0.5
+11 10.0   VC  0.5
+12 10.0   OJ  0.5
+13 11.2   VC  0.5
+14 11.2   VC  0.5
+15 11.5   VC  0.5
+16 14.5   OJ  0.5
+17 15.2   OJ  0.5
+18 16.5   OJ  0.5
+19 17.6   OJ  0.5
+20 21.5   OJ  0.5</code></pre>
+</div>
+</div>
+<p>Let’s now use a nested function to do this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(<span class="fu">filter</span>(ToothGrowth, dose <span class="sc">==</span> <span class="fl">0.5</span>), len)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    len supp dose
+1   4.2   VC  0.5
+2   5.2   VC  0.5
+3   5.8   VC  0.5
+4   6.4   VC  0.5
+5   7.0   VC  0.5
+6   7.3   VC  0.5
+7   8.2   OJ  0.5
+8   9.4   OJ  0.5
+9   9.7   OJ  0.5
+10  9.7   OJ  0.5
+11 10.0   VC  0.5
+12 10.0   OJ  0.5
+13 11.2   VC  0.5
+14 11.2   VC  0.5
+15 11.5   VC  0.5
+16 14.5   OJ  0.5
+17 15.2   OJ  0.5
+18 16.5   OJ  0.5
+19 17.6   OJ  0.5
+20 21.5   OJ  0.5</code></pre>
+</div>
+</div>
+<p>Notice that the filter function from our previous code is the nested function. With nested functions, we read from the inside out. The code filters the data first. Then it arranges or sorts it.</p>
+<p>Now, let’s use a pipe:</p>
+<p>The shortcut to enter a pipe is <code>cmd+shift+m</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>filtered_toothgrowh <span class="ot">&lt;-</span> ToothGrowth <span class="sc">|&gt;</span> </span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(dose<span class="sc">==</span><span class="fl">0.5</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(len)</span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>filtered_toothgrowh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    len supp dose
+1   4.2   VC  0.5
+2   5.2   VC  0.5
+3   5.8   VC  0.5
+4   6.4   VC  0.5
+5   7.0   VC  0.5
+6   7.3   VC  0.5
+7   8.2   OJ  0.5
+8   9.4   OJ  0.5
+9   9.7   OJ  0.5
+10  9.7   OJ  0.5
+11 10.0   VC  0.5
+12 10.0   OJ  0.5
+13 11.2   VC  0.5
+14 11.2   VC  0.5
+15 11.5   VC  0.5
+16 14.5   OJ  0.5
+17 15.2   OJ  0.5
+18 16.5   OJ  0.5
+19 17.6   OJ  0.5
+20 21.5   OJ  0.5</code></pre>
+</div>
+</div>
+<p>Building on our example, let’s say we also wanted to compute the average tooth length or len for each of the two supplements used in the study: orange juice or OJ and ascorbic acid or VC.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>filtered_toothgrowh <span class="ot">&lt;-</span> ToothGrowth <span class="sc">|&gt;</span> </span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(dose<span class="sc">==</span><span class="fl">0.5</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#group by tooth supplements</span></span>
+<span id="cb95-4"><a href="#cb95-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(supp) <span class="sc">|&gt;</span> </span>
+<span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">#summarize data by group</span></span>
+<span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">mean_len =</span> <span class="fu">mean</span>(len, <span class="at">na.rm =</span> T), <span class="at">.group =</span> <span class="st">"drop"</span>)</span>
+<span id="cb95-7"><a href="#cb95-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb95-8"><a href="#cb95-8" aria-hidden="true" tabindex="-1"></a>filtered_toothgrowh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 x 3
+  supp  mean_len .group
+  &lt;fct&gt;    &lt;dbl&gt; &lt;chr&gt; 
+1 OJ       13.2  drop  
+2 VC        7.98 drop  </code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/1_introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction into (R) Programming</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/3_data_in_R.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data in R</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

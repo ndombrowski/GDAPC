@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Data analysis - 4&nbsp; Aggregating data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/4_data_calculations.html" rel="next">
+<link href="../code/2_converting_and_formatting.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregating data</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Data analysis</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Analyze Data to Answer Questions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_organizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Organizing the data to begin analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_converting_and_formatting.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Converting and formatting data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_aggregating_data.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregating data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_data_calculations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data calculations</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#vlookup-spreadsheets" id="toc-vlookup-spreadsheets" class="nav-link active" data-scroll-target="#vlookup-spreadsheets"><span class="toc-section-number">4.1</span>  VLOOKUP (spreadsheets)</a>
+  <ul class="collapse">
+  <li><a href="#cleanup" id="toc-cleanup" class="nav-link" data-scroll-target="#cleanup"><span class="toc-section-number">4.1.1</span>  Cleanup</a></li>
+  <li><a href="#vlookup-in-action" id="toc-vlookup-in-action" class="nav-link" data-scroll-target="#vlookup-in-action"><span class="toc-section-number">4.1.2</span>  VLOOKUP in action</a></li>
+  <li><a href="#potential-issues" id="toc-potential-issues" class="nav-link" data-scroll-target="#potential-issues"><span class="toc-section-number">4.1.3</span>  Potential issues</a></li>
+  </ul></li>
+  <li><a href="#aggregating-in-sql" id="toc-aggregating-in-sql" class="nav-link" data-scroll-target="#aggregating-in-sql"><span class="toc-section-number">4.2</span>  Aggregating in SQL</a>
+  <ul class="collapse">
+  <li><a href="#the-importance-of-aliases" id="toc-the-importance-of-aliases" class="nav-link" data-scroll-target="#the-importance-of-aliases"><span class="toc-section-number">4.2.1</span>  The importance of aliases</a></li>
+  <li><a href="#joins" id="toc-joins" class="nav-link" data-scroll-target="#joins"><span class="toc-section-number">4.2.2</span>  JOINs</a></li>
+  </ul></li>
+  <li><a href="#count-and-count-distinct" id="toc-count-and-count-distinct" class="nav-link" data-scroll-target="#count-and-count-distinct"><span class="toc-section-number">4.3</span>  COUNT and COUNT DISTINCT</a></li>
+  <li><a href="#subqueries" id="toc-subqueries" class="nav-link" data-scroll-target="#subqueries"><span class="toc-section-number">4.4</span>  Subqueries</a>
+  <ul class="collapse">
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples"><span class="toc-section-number">4.4.1</span>  Examples</a></li>
+  </ul></li>
+  <li><a href="#using-subqueries-to-aggregate-data" id="toc-using-subqueries-to-aggregate-data" class="nav-link" data-scroll-target="#using-subqueries-to-aggregate-data"><span class="toc-section-number">4.5</span>  Using subqueries to aggregate data</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregating data</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<ul>
+<li><strong>Aggregation</strong> means collecting or gathering many separate pieces into a whole.</li>
+<li><strong>Data aggregation</strong> is the process of gathering data from multiple sources in order to combine it into a single summarized collection.</li>
+<li>In data analytics, <strong>a summarized collection</strong>, or summary, describes identifying the data you need and gathering it all together in one place.</li>
+</ul>
+<section id="vlookup-spreadsheets" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="vlookup-spreadsheets"><span class="header-section-number">4.1</span> VLOOKUP (spreadsheets)</h2>
+<section id="cleanup" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="cleanup"><span class="header-section-number">4.1.1</span> Cleanup</h3>
+<p><strong>VALUE</strong> is a function that converts a text string that represents a number to a numerical value.</p>
+<p><code>=VALUE(A4)</code></p>
+<p><strong>TRIM</strong> automatically deletes any extra spaces added to the cell.</p>
+<p><code>=TRIM(A4)</code></p>
+<p>Remove duplicates with <code>remove duplictes</code></p>
+</section>
+<section id="vlookup-in-action" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="vlookup-in-action"><span class="header-section-number">4.1.2</span> VLOOKUP in action</h3>
+<p><strong>VLOOKUP</strong> stands for vertical lookup. Basically, it’s a function that searches for a certain value in a column to return a corresponding piece of information. The basic syntax looks like follows:</p>
+<p><code>=VLOOKUP(103, A2:B26, 2, FALSE)</code></p>
+<p>Here:</p>
+<ul>
+<li>103 is the value to search for</li>
+<li>A2:B26 is the range that will be searched</li>
+<li>VLOOKUP will not recognize column names such as A, B, or C. We use a number to indicate the column, i.e.&nbsp;we want to search for a match in the 2nd column that we want to add</li>
+<li>FALSE tells VLOOKUP to find an exact match. If this said true, the function will return only a close match</li>
+</ul>
+<p>Another example for finding matching data in another sheet:</p>
+<p><code>=vlookup(A2, 'Employee Rates'!$A$2:$B$5,2, FALSE)</code></p>
+<p>Be sure to put single quotation marks around the spreadsheet name and add an exclamation point after it. This is the way to reference the other spreadsheet.</p>
+<p>We can also search using words</p>
+<p><code>=VLOOKUP("Nigeria", A2:C10, 2, false)</code></p>
+</section>
+<section id="potential-issues" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="potential-issues"><span class="header-section-number">4.1.3</span> Potential issues</h3>
+<ul>
+<li>VLOOKUP only returns the first match it finds</li>
+<li>VLOOKUP can only return a value from the data to the right. It can’t look left. So for this to work, we have to move the data around</li>
+<li>Let’s say the first few rows of a VLOOKUP have returned the correct result. But when you drive the function down the column, problems start popping up. This is probably because the table array part of the function hasn’t been locked or made absolute. An <strong>absolute reference</strong> is a reference that is locked so that rows and columns won’t change when copied. You can fix this issue by wrapping the table array in dollar signs.</li>
+<li>Locking the spreadsheet. This stops other people from making changes and breaking functions.</li>
+<li>If the spreadsheet needs to be shared you can use <strong>MATCH</strong>, which is a function used to locate the position of a specific lookup value and can help you with version control.</li>
+</ul>
+<p>Resources:</p>
+<ul>
+<li><a href="https://support.microsoft.com/en-us/office/vlookup-function-0bbc8083-26fe-4963-8ab8-93a18ad188a1">How to use VLOOKUP in Excel</a>: This tutorial includes a video to help you get a general understanding of how the VLOOKUP function works in Excel, as well as practical examples to look through.</li>
+<li><a href="https://edu.gcfglobal.org/en/excel-tips/how-to-use-excels-vlookup-function/1/">How to use Excel’s VLOOKUP function</a>: This article shares a specific example around how to apply VLOOKUP in your searches.</li>
+</ul>
+</section>
+</section>
+<section id="aggregating-in-sql" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="aggregating-in-sql"><span class="header-section-number">4.2</span> Aggregating in SQL</h2>
+<section id="the-importance-of-aliases" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="the-importance-of-aliases"><span class="header-section-number">4.2.1</span> The importance of aliases</h3>
+<p><strong>Aliases</strong> are used in SQL queries to create temporary names for a column or table. Aliasing is the process of using aliases. In SQL queries, aliases are implemented by making use of the AS command and often make things more readable.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> column_name <span class="kw">AS</span> alias_name</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">from</span> table_name;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><a href="https://www.w3schools.com/sql/sql_alias.asp">SQL Aliases</a>: This tutorial on aliasing is a really useful resource to have when you start practicing writing queries and aliasing tables on your own. It also demonstrates how aliasing works with real tables.</li>
+<li><a href="https://www.sqltutorial.org/sql-alias/">SQL Alias</a>: This detailed introduction to aliasing includes multiple examples. This is another great resource to reference if you need more examples.</li>
+<li><a href="https://documentation.sas.com/?cdcId=pgmsascdc&amp;cdcVersion=9.4_3.5&amp;docsetId=sqlproc&amp;docsetTarget=p0aymxwsvbt5wcn1lncugwjtf758.htm&amp;locale=en">Using Column Aliasing</a>: This is a guide that focuses on column aliasing specifically. Generally, you will be aliasing entire tables, but if you find yourself needing to alias just a column, this is a great resource to have bookmarked.</li>
+</ul>
+</section>
+<section id="joins" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="joins"><span class="header-section-number">4.2.2</span> JOINs</h3>
+<p>Examples were run in BiqQuery using <code>data/employees_table.csv</code> and <code>data/departments_table.csv</code></p>
+<p><strong>JOIN</strong> is a SQL clause that’s used to combine rows from two or more tables based on a related column.</p>
+<p>Types of join:</p>
+<p><img width="400" src="../images/joins.png"></p>
+<ul>
+<li>An inner JOIN is a function that returns records with matching values in both tables. When we input JOIN into SQL, it usually defaults to inner JOIN</li>
+<li>A LEFT JOIN is a function that will return all the records from the left table and only the matching records from the right table.</li>
+<li>RIGHT JOIN does the opposite. It will return all records from the right table and only the matching records from the left.</li>
+<li>OUTER join combines RIGHT and LEFT JOIN to return all matching records in both tables. This means it will return all records in both tables.</li>
+</ul>
+<p>Let’s get a list of employees with their department name, excluding any employee without a department ID. the The department ID record is used in both tables, so we can use an INNER JOIN to return a list with only those employees.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">--- give column names</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  employees.name <span class="kw">AS</span> employee_name,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  employees.<span class="kw">role</span> <span class="kw">AS</span> employee_role,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  departments.name <span class="kw">AS</span> department_name</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  employee_data.employees</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  employee_data.departments </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">---specify which column and each table will contain the matching JOIN key </span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ON</span> employees.department_id <span class="op">=</span> departments.department_id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, let’s try out one last JOIN: OUTER. OUTER JOIN will fetch all of the employee names and departments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">--- give column names</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  employees.name <span class="kw">AS</span> employee_name,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  employees.<span class="kw">role</span> <span class="kw">AS</span> employee_role,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  departments.name <span class="kw">AS</span> department_name</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  employee_data.employees</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FULL</span> <span class="kw">OUTER</span> <span class="kw">JOIN</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  employee_data.departments </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">---specify which column and each table will contain the matching JOIN key </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ON</span> employees.department_id <span class="op">=</span> departments.department_id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Another example on the public dataset <code>world_bank_intl_education</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.international_education`.country_name, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.country_summary`.country_code, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.international_education`.<span class="fu">value</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.international_education`</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.country_summary` </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.country_summary`.country_code <span class="op">=</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.international_education`.country_code</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This basic query joins the tables on the country_code foreign key, and returns the country name, country code, and value column. This is quite a long, unwieldy query for such a basic result! The length of each table name (which must include the full address for each table for BigQuery to know where to pull the data from) makes this hard to read and work with.</p>
+<p>However, you can solve this by setting an alias for each table.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    edu.country_name,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">summary</span>.country_code,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    edu.<span class="fu">value</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.international_education` <span class="kw">AS</span> edu</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.country_summary` <span class="kw">AS</span> <span class="kw">summary</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> edu.country_code <span class="op">=</span> <span class="kw">summary</span>.country_code</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that you<e2>&lt;80&gt;&lt;99&gt;ve confirmed that the JOIN statement works, try to answer an actual data question using this dataset. What is the average amount of money spent per region on education? Copy, paste, and run the following query:</e2></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AVG</span>(edu.<span class="fu">value</span>) average_value, <span class="kw">summary</span>.region</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.international_education` <span class="kw">AS</span> edu</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.world_bank_intl_education.country_summary` <span class="kw">AS</span> <span class="kw">summary</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> edu.country_code <span class="op">=</span> <span class="kw">summary</span>.country_code</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">summary</span>.region <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">null</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">summary</span>.region</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> average_value <span class="kw">DESC</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Resources:</p>
+<ul>
+<li><a href="https://www.w3schools.com/sql/sql_join.asp">SQL JOINs</a>: This is a good basic explanation of JOINs with examples. If you need a quick reminder of what the different JOINs do, this is a great resource to bookmark and come back to later.<br>
+</li>
+<li><a href="https://www.essentialsql.com/introduction-database-joins/">Database JOINs - Introduction to JOIN Types and Concepts</a>: This is a really thorough introduction to JOINs. Not only does this article explain what JOINs are and how to use them, but it also explains the various scenarios in more detail of when and why you would use the different JOINs. This is a great resource if you are interested in learning more about the logic behind JOINing.</li>
+<li><a href="https://towardsdatascience.com/sql-join-8212e3eb9fde">SQL JOINs: Bringing Data Together One Join at a Time</a>: Not only does this resource have a detailed explanation of JOINs with examples, but it also provides example data that you can use to follow along with their step-by-step guide. This is a useful way to practice JOINs with some real data.</li>
+<li><a href="https://www.dofactory.com/sql/join">SQL JOIN</a>: This is another resource that provides a clear explanation of JOINs and uses examples to demonstrate how they work. The examples also combine JOINs with aliasing. This is a great opportunity to see how JOINs can be combined with other SQL concepts that you have been learning about in this course.</li>
+</ul>
+</section>
+</section>
+<section id="count-and-count-distinct" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="count-and-count-distinct"><span class="header-section-number">4.3</span> COUNT and COUNT DISTINCT</h2>
+<p>These examples were run in BigQuery with <code>data/warehouse.csv</code> and <code>data/orders.csv</code></p>
+<p><strong>COUNT</strong> is a query that returns the number of rows in a specified range, but <strong>COUNT DISTINCT</strong> is a little different. COUNT DISTINCT is a query that only returns the distinct values in that range.</p>
+<p>From this query, we’re actually going to start with a FROM statement so that we can alias our tables. <strong>Aliasing</strong> is when you temporarily name a table or column in your query to make it easier to read and write.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  orders.<span class="op">*</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  warehouse.warehouse_alias,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  warehouse.state</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">---create aliases for our tables</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  warehouse_orders.Orders <span class="kw">AS</span> orders</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">--we need both the warehouse details and the order details because we want to report on the distribution of orders by state</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  warehouse_orders.Warehouse <span class="kw">AS</span> warehouse <span class="kw">ON</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  orders.warehouse_id <span class="op">=</span> warehouse.warehouse_id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now, we want to count how many states are in our ordered data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(warehouse.state) <span class="kw">AS</span> num_states</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">---create aliases for our table</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  warehouse_orders.Orders <span class="kw">AS</span> orders</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">--we need both the warehouse details and the order details because we want to report on the distribution of orders by state</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  warehouse_orders.Warehouse <span class="kw">AS</span> warehouse <span class="kw">ON</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  orders.warehouse_id <span class="op">=</span> warehouse.warehouse_id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Wait, that’s not quite right. This query returned over 9,000 states because we counted every single row that included a state. But we actually want to count the distinct states.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span> (<span class="kw">DISTINCT</span> warehouse.state) <span class="kw">AS</span> num_states</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">---create aliases for our table</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  warehouse_orders.Orders <span class="kw">AS</span> orders</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">--we need both the warehouse details and the order details because we want to report on the distribution of orders by state</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  warehouse_orders.Warehouse <span class="kw">AS</span> warehouse <span class="kw">ON</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  orders.warehouse_id <span class="op">=</span> warehouse.warehouse_id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>According to these results, we have three distinct states in our Orders data.</p>
+<p>Let’s check out what happens when we group by the state column in the warehouse table</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  warehouse.state <span class="kw">AS</span> state,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> order_id) <span class="kw">AS</span> num_orders</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">---create aliases for our table</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  warehouse_orders.Orders <span class="kw">AS</span> orders</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">--we need both the warehouse details and the order details because we want to report on the distribution of orders by state</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">JOIN</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  warehouse_orders.Warehouse <span class="kw">AS</span> warehouse <span class="kw">ON</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  orders.warehouse_id <span class="op">=</span> warehouse.warehouse_id</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  warehouse.state</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we have three rows, one of each state represented in the Orders data. And our COUNT DISTINCT on the number of orders sums up the count we ran earlier: 9,999.</p>
+</section>
+<section id="subqueries" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="subqueries"><span class="header-section-number">4.4</span> Subqueries</h2>
+<p>A <strong>subquery</strong> is a SQL query that is nested inside of a larger query.</p>
+<p>With subqueries you can combine different pieces of logic together. Because the logic of your outer query relies on the inner query, you can get more done with a single query. This means all of the logic is in one place, which makes it more efficient and easier to read.</p>
+<p>The statement containing the subquery can also be called the <strong>outer query</strong> or the outer select. This makes the subquery the <strong>inner query</strong> or inner select.</p>
+<p>The inner query executes first so that the results can be passed on to the outer query to use.</p>
+<p>There are a few rules that subqueries must follow:</p>
+<ul>
+<li>Subqueries must be enclosed within parentheses</li>
+<li>A subquery can have only one column specified in the SELECT clause. But if you want a subquery to compare multiple columns, those columns must be selected in the main query.</li>
+<li>Subqueries that return more than one row can only be used with multiple value operators, such as the IN operator which allows you to specify multiple values in a WHERE clause.</li>
+<li>A subquery can<e2>&lt;80&gt;&lt;99&gt;t be nested in a SET command. The SET command is used with UPDATE to specify which columns (and values) are to be updated in a table.</e2></li>
+</ul>
+<section id="examples" class="level3" data-number="4.4.1">
+<h3 data-number="4.4.1" class="anchored" data-anchor-id="examples"><span class="header-section-number">4.4.1</span> Examples</h3>
+<p>These examples you use the public data new_york and citibike_stations.</p>
+<p>For the first statement, let’s say we want to compare the number of bikes available at a station to the average number of bikes available. We’re going to use this query to pull the average number of bikes available. Then we’re going to incorporate it as a subquery.</p>
+<p>We want to select the station ID and the number of bikes available. Then we’ll put the SELECT query that’s pulling the average number of bikes inside that outer query by using parentheses.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span>  </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  station_id, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  num_bikes_available,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">SELECT</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">AVG</span>(num_bikes_available)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york_citibike.citibike_stations) <span class="kw">AS</span> avg_num_bikes_available</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york_citibike.citibike_stations</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>It’s really common to see subqueries nested in FROM and WHERE statements. So let’s try those next. We could use a FROM statement to calculate the number of rides that have started at each station over time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  station_id,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  name,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  number_of_rides <span class="kw">AS</span> number_of_rides_starting_at_station</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  (</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> start_station_id,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> number_of_rides</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york_citibike.citibike_trips</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> start_station_id</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AS</span> station_num_trips</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">INNER</span> <span class="kw">JOIN</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york_citibike.citibike_stations <span class="kw">ON</span> station_id <span class="op">=</span> start_station_id</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">ORDER</span> <span class="kw">BY</span> number_of_rides <span class="kw">DESC</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s use a WHERE statement. The bike-sharing company has two kinds of users: subscribers and one-time customers. Let’s say we wanted a list of stations subscribers used.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  station_id, </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  name</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york_citibike.citibike_stations</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">---use IN so that we can specify multiple values and this WHERE statement</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  station_id <span class="kw">IN</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">--- put subquery in parenthesis to tell we only want data on specific customers</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">SELECT</span> start_station_id</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york_citibike.citibike_trips</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">WHERE</span> usertype <span class="op">=</span> <span class="st">'Subscriber'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="using-subqueries-to-aggregate-data" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="using-subqueries-to-aggregate-data"><span class="header-section-number">4.5</span> Using subqueries to aggregate data</h2>
+<p>We’ve used functions like WHERE to filter our data before, but the WHERE function can’t be used with aggregate functions. For example, you can use WHERE on a statement and follow it with GROUP BY.</p>
+<p>But when you want to use GROUP BY first and then use WHERE on that output, you’ll need a different function. This is where HAVING comes in. <strong>HAVING</strong> basically allows you to add a filter to your query instead of the underlying table when you’re working with aggregate functions.</p>
+<p>Similarly, <strong>CASE</strong> returns records with your conditions by allowing you to include if/then statements in your query.</p>
+<p>For this example, we use the warehouse_orders previously loaded in BiqQuery</p>
+<p>We’ve been asked to calculate what percentage of the orders are fulfilled by each warehouse. Basically, we’re interested in knowing which warehouses are delivering the most orders.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">--- decide what to select (3rd)</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  Warehouse.warehouse_id,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">---use concat to get a unique warehouse name</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">CONCAT</span>(Warehouse.state, <span class="ot">": "</span>, Warehouse.warehouse_alias) <span class="kw">AS</span> warehouse_name,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">--- get nr of orders per warehouse</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">COUNT</span>(Orders.order_id) <span class="kw">AS</span> number_of_orders,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">---add subquery to pull the total nr of orders</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> warehouse_orders.Orders <span class="kw">as</span> Orders)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">--- close subquery and name column</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AS</span> total_orders,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- use a CASE statement to create categories for our warehouses</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">CASE</span> </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>      <span class="cf">WHEN</span> <span class="fu">COUNT</span>(Orders.order_id)<span class="op">/</span> (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> warehouse_orders.Orders <span class="kw">AS</span> Orders) <span class="op">&lt;=</span> <span class="fl">0.2</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>      <span class="cf">THEN</span> <span class="ot">"filfilled 0-20% of Orders"</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>      <span class="cf">WHEN</span> <span class="fu">COUNT</span>(Orders.order_id)<span class="op">/</span> (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> warehouse_orders.Orders <span class="kw">AS</span> Orders) <span class="op">&gt;</span> <span class="fl">0.2</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> <span class="fu">COUNT</span>(Orders.order_id)<span class="op">/</span> (<span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> warehouse_orders.Orders <span class="kw">AS</span> Orders) <span class="op">&lt;=</span> <span class="fl">0.6</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>      <span class="cf">THEN</span> <span class="ot">"fulfilled 21-60% of Orders"</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">ELSE</span> <span class="ot">"fulfilled more than 60% of Orders"</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">END</span> <span class="kw">AS</span> fulfillment_summary</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="co">---add aliases (ideally write first to make the rest easier)</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> warehouse_orders.Warehouse <span class="kw">AS</span> Warehouse</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="co">--- Join with orders and add alias (write second)</span></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> warehouse_orders.Orders <span class="kw">AS</span> Orders <span class="kw">ON</span> Orders.warehouse_id <span class="op">=</span> Warehouse.warehouse_id</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Warehouse.warehouse_id, warehouse_name</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="co">--- remove orders from warehouses that are not yet running</span></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(Orders.order_id) <span class="op">&gt;</span> <span class="dv">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Resources:</p>
+<ul>
+<li><p><a href="http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_having.asp.html">SQL HAVING</a>: This is an overview of the HAVING clause, including what it is and a tutorial on how and when it works.</p></li>
+<li><p><a href="https://www.w3schools.com/sql/sql_case.asp">SQL CASE</a>: Explore the usage of the CASE statement and examples of how it works.</p></li>
+<li><p><a href="https://www.w3schools.com/sql/func_mysql_if.asp">SQL IF</a>: This is a tutorial of the IF function and offers examples that you can practice with.</p></li>
+<li><p><a href="http://www-db.deis.unibo.it/courses/TW/DOCS/w3schools/sql/sql_func_count.asp.html">SQL COUNT</a>: The COUNT function is just as important as all the rest, and this tutorial offers multiple examples to review.</p></li>
+<li><p><a href="https://www.w3resource.com/sql/subqueries/understanding-sql-subqueries.php">SQL subqueries</a>: This detailed introduction includes the definition of a subquery, its purpose in SQL, when and how to use it, and what the results will be</p></li>
+<li><p><a href="https://mode.com/sql-tutorial/sql-sub-queries/">Writing subqueries in SQL</a>: Explore the basics of subqueries in this interactive tutorial, including examples and practice problems that you can work through</p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/2_converting_and_formatting.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Converting and formatting data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/4_data_calculations.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data calculations</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

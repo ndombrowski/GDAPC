@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>GDA: Data analysis - 3&nbsp; Data vis with Tableau</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../code/3_data_stories.html" rel="next">
+<link href="../code/1_visualizing_data.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data vis with Tableau</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">GDA: Data analysis</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Share Data Through the Art of Visualization</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/1_visualizing_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Visualizing data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/2_tableau.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data vis with Tableau</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_data_stories.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Crafting stories with data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_presenting_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Presenting your data</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">3.1</span>  Introduction</a></li>
+  <li><a href="#creating-a-data-vis" id="toc-creating-a-data-vis" class="nav-link" data-scroll-target="#creating-a-data-vis"><span class="toc-section-number">3.2</span>  Creating a data vis</a></li>
+  <li><a href="#data-vis-in-tableau" id="toc-data-vis-in-tableau" class="nav-link" data-scroll-target="#data-vis-in-tableau"><span class="toc-section-number">3.3</span>  Data vis in tableau</a></li>
+  <li><a href="#getting-creative" id="toc-getting-creative" class="nav-link" data-scroll-target="#getting-creative"><span class="toc-section-number">3.4</span>  Getting creative</a></li>
+  <li><a href="#working-with-multiple-data-sources" id="toc-working-with-multiple-data-sources" class="nav-link" data-scroll-target="#working-with-multiple-data-sources"><span class="toc-section-number">3.5</span>  Working with multiple data sources</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data vis with Tableau</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">3.1</span> Introduction</h2>
+<p>Tableau Public is a free platform to publicly share and explore data visualizations online. Anyone can create visualizations using either Tableau Desktop Professional Edition or the free Tableau Public Edition.</p>
+<p>For this course we’re using Tableau Public in browser, which is free. Create account at: public.tableau.com. To follow the first examples use this <a href="https://public.tableau.com/profile/grow.with.google#!/">link</a></p>
+<p>To work with data, click on the World Happiness data and click the button in the top right to make a copy. At this point, Tableau will save a copy of this workbook to your own profile so you can create your own visualizations. Now that you’re working in your own copy, create a new worksheet so you can build a data viz from scratch. You’ll click on Worksheet in the top menu and then New Worksheet. To start building your data viz, add country as a detail in the marks shelf. You can do this by dragging the country table over to the detail icon. This sets up your viz as a world map to represent the data in the table.</p>
+<p>Next, add the happiness score to the color on the mark shelf. This applies a color scheme to the viz, in this case shades of blue. So, to adjust the colors, click the color menu and click edit colors. Then change the color scheme to green, blue, diverging and check the box for stepped colors, which shows a clear difference between the highest and lowest happiness score.</p>
+<p>Because there are three years of data in the table we’re using, you can filter the data to only include 2016. So, we’ll add year to the filter shelf. Then we’ll choose to filter by year and we’ll select 2016.</p>
+<p>We can also focus our visualization on one region, the European region. To do this, move your cursor to the left part of the map to find the view toolbar. Use the tools in this toolbar to pan to and zoom in on the European region.</p>
+<p>Use the lasso selection tool to select just a few countries. Keep only, this applies another filter this time to the country you’re including in your viz.&nbsp;</p>
+<p>To make your viz even better, add the happiness score as a label in the map. You can now see a happiness score for each country on the map. There’s an option to change the data type of the happiness scores from decimals to whole numbers. But when you do this, you lose the contrast that the values with the decimals offers. So, change it back to show the happiness score as a decimal.</p>
+<p>Now, to make it even more interactive, let’s add a filter with a slider. This will allow your audience to filter by happiness score so they can focus on fewer countries.</p>
+<p>But first, let’s bring in more of the map we started with. To do this, hover on the map and select the zoom home icon in the toolbar to reveal more countries on the map.</p>
+<p>Next, we’re going to add happiness score to the filter shelf. We’ll select all values and click next. Then, for the range of values we’ll click OK to accept the default settings. In the filters shelf, click the drop down to open the menu for the happiness score and select Show Filter.</p>
+<p>Resources:</p>
+<ul>
+<li><a href="https://public.tableau.com/profile/grow.with.google#!/">Google Career Certificates page on Tableau Public</a>: This gallery contains all of the visualizations created in the video lessons; you can explore these examples more here.</li>
+<li><a href="https://public.tableau.com/en-us/s/resources">Tableau Public resources page</a>: This links to the resources page, including some how-to videos and sample data.</li>
+<li><a href="https://community.tableau.com/s/">Tableau user forum</a>: Search for answers and connect with other users in the community on the forum page.</li>
+<li><a href="http://www.tableau.com/sites/default/files/media/which_chart_v6_final_0.pdf">Which chart or graph is right for you?</a> This presentation covers 13 of the most popular charts in Tableau.</li>
+<li><a href="https://towardsdatascience.com/the-ultimate-cheat-sheet-on-tableau-charts-642bca94dde5">The Ultimate Cheat Sheet on Tableau Charts.</a> This blog describes 24 chart variations in Tableau and guidelines for use.</li>
+</ul>
+</section>
+<section id="creating-a-data-vis" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="creating-a-data-vis"><span class="header-section-number">3.2</span> Creating a data vis</h2>
+<p>For this tutorial, we use the data in <code>../data/CO2-Dataset.xlsx</code> to make a database that demonstrates the amount of CO2 emissions that come from each country</p>
+<ul>
+<li>Log into tableau public, go to my profile and create a vis</li>
+<li>From the connect to data window, go to the files tab and upload the CO2 dataset</li>
+<li>After the data uploads, the screen will show the data source interface. Underneath connections, double click on the sheet’s CO2 data cleaned to load that data into the main part of the screen. You can also drag and drop the sheet into the area where it says drag tables here</li>
+<li>Underneath connections, double click on the sheet’s CO2 data cleaned to load that data into the main part of the screen.</li>
+<li>Click update now to preview the data you opened in the bottom portion of the screen. By default, Tableau will only show the first 1000 rows in the table, but you can increase the number of rows in the setting above the data view. Each row corresponds to a single data point and each column represents a different feature. Tableau interprets the type of data in each column. Each icon represents a different type of data. For example, a number sign represents numerical data while an abc represents string data. A globe represents geographic data and so on.</li>
+<li>To start the database, choose the sheet 1 tab in the lower left of the display.On the far left of the screen is a banner with column names above a grey line. In tableau, these are called the <strong>dimensions</strong> of the data. Below this line are the different <strong>measures</strong> that you can track for these dimensions.</li>
+<li>To create a chart that displays the CO2 emissions per country, we’re going to start by double clicking the country name dimension.The main display will show a map of the countries on the planet with dots indicating which countries are represented in the data.</li>
+<li>Double click or drag and drop onto the sheet the measures CO2 kilotons. This will change the size of the dots to be proportional to the amount of CO2 emitted.Tableau has a wide selection of options for depicting the measures for a given dimension. Most of these options are contained in the middle column between the main display and the columns with dimensions and measures</li>
+<li>Now, let’s customize the look of our chart to better communicate trends in the data. If we drag and drop a measure on one of the marks such as color, size and label, we can change that aspect of the measures visualization on the chart. For instance, say we want to change the color of the CO2 measure. We would drag the measure CO2 kilotons to the box with the color label.</li>
+<li>But what if we wanted to change the dimensions or measures? Instead of visualizing the CO2 per country, maybe we want to chart the CO2 per capita per region. To do this, we could double click on the dimension region and then do the same for the measure CO2 per capita. This builds a new chart.</li>
+</ul>
+</section>
+<section id="data-vis-in-tableau" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="data-vis-in-tableau"><span class="header-section-number">3.3</span> Data vis in tableau</h2>
+<ul>
+<li>A <strong>diverging color</strong> palette displays two ranges of values using color intensity to show the magnitude of the number and the actual color to show which range the numbers from.</li>
+</ul>
+<p>A diverging color palette in Tableau displays a value’s range by color hue and a value’s magnitude by color intensity. The color palette isn’t used to indicate a margin of error for displayed values.</p>
+</section>
+<section id="getting-creative" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="getting-creative"><span class="header-section-number">3.4</span> Getting creative</h2>
+<p>For this exercise, lets go to the happiness data againt to use this data in this table to figure out what the biggest contributors to a country’s happiness score are</p>
+<ol type="1">
+<li>Worksheet –&gt; new worksheet</li>
+<li>Set the year filter to 2016</li>
+<li>Add Happiness score to the rows shelf and economy to the column shelf, drag country to the details section creating a separate circle for each country and a scatterplot for our data</li>
+<li>Click the analytics tab</li>
+<li>Add a trend line</li>
+<li>Duplicate the sheet to keep original formatting</li>
+<li>Replace economy with family</li>
+<li>Rename sheets to economy and family, do the same for health and generosity</li>
+<li>New Dashbord, drag and drop tables into this</li>
+</ol>
+</section>
+<section id="working-with-multiple-data-sources" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="working-with-multiple-data-sources"><span class="header-section-number">3.5</span> Working with multiple data sources</h2>
+<p>Scenario: You need to create a visualization that shows the CO2 emissions per capita for each country from 2000-2011. You’ll also provide information about each country’s population GDP and energy use.</p>
+<ol type="1">
+<li>Upload CO2 dataset</li>
+<li>Go to data source tab and the connections column, in there use the plus icon to add the energy table, gdp and then population</li>
+<li>Link these tables with joins: First remove the energy by dragging it back into the connections tab</li>
+<li>In CO2 data, click and drag the cleaned data to multiple connections and double click box to open the physical table and create joins</li>
+<li>Open energy and drag energy sheet to right side to CO2 data box. Select year on the left and right to decide what to join on, select country name and country as join clause, close the menu by clicking X</li>
+<li>Year and Year1 have a number sign above it, sth we need to change: click on them and select data. After changing Year (CO2 Data Cleaned) to a Date type, the data preview pane will no longer display properly. To fix this, go to the column list in the lower left of the screen. Select the # icon next to the Year1 (Energy) column. Then, change the data type to Date.</li>
+<li>Drag gdp table under the energy box, change year to date, add new join clause with country name and country1</li>
+<li>Add Pop, change year to date, add new join clause with country name and country total pop</li>
+<li>Change energy use type to number decimal</li>
+<li>Change current gdp to number whole</li>
+<li>Go to sheet1</li>
+<li>Drag country name to details, CO2 per capita to color</li>
+<li>Choose the square and edit colors and change to red green diverging and select stepped color and reverse; in show advanced add 0 and</li>
+<li>Drag year into the filters area, years, next, all, ok</li>
+<li>In filters, right click on year, select show filter, in the new box, seelct year of year and single value, dropdown</li>
+<li></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../code/1_visualizing_data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Visualizing data</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../code/3_data_stories.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Crafting stories with data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

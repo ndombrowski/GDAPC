@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -30,6 +93,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../code/3_aggregating_data.html" rel="next">
 <link href="../code/1_organizing_data.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -107,12 +171,40 @@ ul.task-list li input[type="checkbox"] {
   <a href="../code/2_converting_and_formatting.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Converting and formatting data</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/3_aggregating_data.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregating data</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../code/4_data_calculations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data calculations</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#converting-data-types-in-spreadsheets" id="toc-converting-data-types-in-spreadsheets" class="nav-link active" data-scroll-target="#converting-data-types-in-spreadsheets"><span class="toc-section-number">3.1</span>  Converting data types in spreadsheets</a>
+  <ul class="collapse">
+  <li><a href="#converting" id="toc-converting" class="nav-link" data-scroll-target="#converting"><span class="toc-section-number">3.1.1</span>  Converting</a></li>
+  <li><a href="#combining-data-from-two-cells-spreadsheets" id="toc-combining-data-from-two-cells-spreadsheets" class="nav-link" data-scroll-target="#combining-data-from-two-cells-spreadsheets"><span class="toc-section-number">3.1.2</span>  Combining data from two cells (spreadsheets)</a></li>
+  <li><a href="#data-validation-spreadsheets" id="toc-data-validation-spreadsheets" class="nav-link" data-scroll-target="#data-validation-spreadsheets"><span class="toc-section-number">3.1.3</span>  Data validation (spreadsheets)</a></li>
+  <li><a href="#conditional-formatting-spreadsheets" id="toc-conditional-formatting-spreadsheets" class="nav-link" data-scroll-target="#conditional-formatting-spreadsheets"><span class="toc-section-number">3.1.4</span>  Conditional formatting (spreadsheets)</a></li>
+  <li><a href="#transforming-data-in-sql" id="toc-transforming-data-in-sql" class="nav-link" data-scroll-target="#transforming-data-in-sql"><span class="toc-section-number">3.1.5</span>  Transforming data in SQL</a></li>
+  </ul></li>
+  <li><a href="#combining-multiple-datasets" id="toc-combining-multiple-datasets" class="nav-link" data-scroll-target="#combining-multiple-datasets"><span class="toc-section-number">3.2</span>  Combining multiple datasets</a></li>
+  <li><a href="#combining-strings-using-concat-in-sql" id="toc-combining-strings-using-concat-in-sql" class="nav-link" data-scroll-target="#combining-strings-using-concat-in-sql"><span class="toc-section-number">3.3</span>  Combining strings using CONCAT in SQL</a></li>
+  <li><a href="#strings-in-spreadsheets" id="toc-strings-in-spreadsheets" class="nav-link" data-scroll-target="#strings-in-spreadsheets"><span class="toc-section-number">3.4</span>  Strings in spreadsheets</a></li>
+  <li><a href="#manipulating-strings-in-sql" id="toc-manipulating-strings-in-sql" class="nav-link" data-scroll-target="#manipulating-strings-in-sql"><span class="toc-section-number">3.5</span>  Manipulating strings in SQL</a></li>
+  <li><a href="#get-support-when-getting-stuck" id="toc-get-support-when-getting-stuck" class="nav-link" data-scroll-target="#get-support-when-getting-stuck"><span class="toc-section-number">3.6</span>  Get support when getting stuck</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -133,8 +225,138 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="converting-data-types-in-spreadsheets" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="converting-data-types-in-spreadsheets"><span class="header-section-number">3.1</span> Converting data types in spreadsheets</h2>
+<section id="converting" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="converting"><span class="header-section-number">3.1.1</span> Converting</h3>
+<p>On the format toolbar at the top of the sheet, you’ll find a menu that can help you convert these numbers into specific data types.</p>
+<p>For another case, imagine the temperatures are in Fahrenheit, but for your analysis you need them to be in Celsius. For this we can use the <strong>CONVERT</strong> function. Make sure after using formulas to convert them to static values to not have weird mess-ups later.</p>
+<p><code>=CONVERT(B3, "F", "C")</code></p>
+<p>We could also convert the wind speed from miles per hour (mph) to meters per second (m/s) using CONVERT</p>
+<p><code>=CONVERT(D2, "mph", "m/s")</code></p>
+</section>
+<section id="combining-data-from-two-cells-spreadsheets" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="combining-data-from-two-cells-spreadsheets"><span class="header-section-number">3.1.2</span> Combining data from two cells (spreadsheets)</h3>
+<p>The <strong>CONCAT</strong> function in spreadsheets can combine any kinds of data.</p>
+<p><code>=CONCAT(A2, B2)</code></p>
+<p>If you want to put the space in between, you need to use the full <strong>CONCATENATE</strong> function, which allows you to combine multiple strings.</p>
+<p><code>=CONCATENATE(A2, " ",  B2)</code></p>
+</section>
+<section id="data-validation-spreadsheets" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="data-validation-spreadsheets"><span class="header-section-number">3.1.3</span> Data validation (spreadsheets)</h3>
+<p><strong>Data validation</strong> allows you to control what can and can’t be entered in your worksheet.</p>
+<p>Usually, data validation is used to <strong>add drop-down lists</strong> to cells with predetermined options for users to choose from.</p>
+<ol type="1">
+<li>Select the column we want to add a drop-down menu to</li>
+<li>Go to data –&gt; Data validation</li>
+<li>Add the criteria, i.e.&nbsp;if we want to add a list of items other users can choose from</li>
+</ol>
+<p>We can also create <strong>custom checkboxes</strong></p>
+<ol type="1">
+<li>Go into the column we want to create checkboxes in</li>
+<li>Go into the data validation menu: data –&gt; Data validation</li>
+<li>Select checkbox</li>
+<li>Use custom cell values, i.e.&nbsp;</li>
+</ol>
+<p>We can also use data validation to <strong>protect structured data and formulas</strong>:</p>
+<ol type="1">
+<li>Go to data –&gt; Data validation</li>
+<li>Check the option to reject invalid inputs, which helps make sure our custom tools will continue to run correctly, even if someone puts the wrong data in by mistake</li>
+</ol>
+</section>
+<section id="conditional-formatting-spreadsheets" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="conditional-formatting-spreadsheets"><span class="header-section-number">3.1.4</span> Conditional formatting (spreadsheets)</h3>
+<ol type="1">
+<li>Format –&gt; Conditional formatting</li>
+<li>Select cells</li>
+<li>Define rules</li>
+</ol>
+</section>
+<section id="transforming-data-in-sql" class="level3" data-number="3.1.5">
+<h3 data-number="3.1.5" class="anchored" data-anchor-id="transforming-data-in-sql"><span class="header-section-number">3.1.5</span> Transforming data in SQL</h3>
+<p>Refer to <a href="https://cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules">Conversion Rules in Standard SQL</a> for a full list of functions and associated rules.</p>
+<section id="the-cast-function-syntax-and-examples" class="level4" data-number="3.1.5.1">
+<h4 data-number="3.1.5.1" class="anchored" data-anchor-id="the-cast-function-syntax-and-examples"><span class="header-section-number">3.1.5.1</span> The CAST function (syntax and examples)</h4>
+<p>CAST is an American National Standards Institute (ANSI) function used in lots of programming languages, including BigQuery.</p>
+<p><code>CAST (expression AS typename)</code></p>
+<p>Where expression is the data to be converted and typename is the data type to be returned.</p>
+<p>The following CAST statement returns a string from a numeric identified by the variable MyCount in the table called MyTable.</p>
+<p><code>CAST (MyCount AS STRING) FROM MyTable</code></p>
+<p>The following CAST statement returns an integer from a string identified by the variable MyVarcharCol in the table called MyTable. (An integer is any whole number.)</p>
+<p><code>SELECT CAST (MyVarcharCol AS INT) FROM MyTable</code></p>
+</section>
+</section>
+</section>
+<section id="combining-multiple-datasets" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="combining-multiple-datasets"><span class="header-section-number">3.2</span> Combining multiple datasets</h2>
+<p>Datetime values have the format of YYYY-MM-DD hh: mm: ss format, so date and time are retained together. The following CAST statement returns a datetime value from a date.</p>
+<p><code>SELECT CAST (MyDate AS DATETIME) FROM MyTable</code></p>
+<section id="the-safe_cast-function" class="level4" data-number="3.2.0.1">
+<h4 data-number="3.2.0.1" class="anchored" data-anchor-id="the-safe_cast-function"><span class="header-section-number">3.2.0.1</span> The SAFE_CAST function</h4>
+<p>Using the CAST function in a query that fails returns an error in BigQuery. To avoid errors in the event of a failed query, use the SAFE_CAST function instead. The SAFE_CAST function returns a value of Null instead of an error when a query fails.</p>
+<p><code>SELECT SAFE_CAST(MyDate AS STRING) FROM MyTable</code></p>
+<p>References:</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/cast-and-convert-transact-sql?view=sql-server-ver15">CAST and CONVERT</a>: SQL Server reference documentation</li>
+<li><a href="https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html">MySQL CAST Functions and Operators</a>: MySQL reference documentation</li>
+<li><a href="https://www.blendo.co/blog/how-to-sql-type-casting/">How to: SQL Type Casting</a>: Blog about type casting that has links to other SQL short guides</li>
+</ul>
+</section>
+</section>
+<section id="combining-strings-using-concat-in-sql" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="combining-strings-using-concat-in-sql"><span class="header-section-number">3.3</span> Combining strings using CONCAT in SQL</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    usertype,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">--create a new column by combining to columns</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">CONCAT</span>(start_station_name, <span class="ot">" to "</span>, end_station_name) <span class="kw">AS</span> route,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">--count number of rows to calculate the nr of trips</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> num_trips,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">--get average trip duration for each route</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ROUND</span>(<span class="fu">AVG</span>(<span class="fu">CAST</span>(tripduration <span class="kw">AS</span> int64)<span class="op">/</span><span class="dv">60</span>),<span class="dv">2</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.new_york.citibike_trips</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">--Since we're using COUNT and AVERAGE functions in our select clause, we have to use GROUP BY to group together summary rows</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> start_station_name, end_station_name, usertype</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">--- organize data to find the most common trips</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> num_trips <span class="kw">DESC</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="strings-in-spreadsheets" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="strings-in-spreadsheets"><span class="header-section-number">3.4</span> Strings in spreadsheets</h2>
+<p>Let’s build a simple formula to separate the dates in these strings. We know that LEN tells us the length of a string. Let’s check how long these datetime strings are now.</p>
+<p><code>=LEN(C2)</code> tells us that the start-times contain 19 characters</p>
+<p>We notice that all of the datetime strings have a space separating the date and the timestamp. So we can actually use FIND to figure out where the date ends.</p>
+<p><code>=FIND(" ", C3)</code> tells us that the space is the 11th character.</p>
+<p>We can use the LEFT and RIGHT functions to select which parts of the string we want to isolate in a new column. We’ll use RIGHT on one of these cells to indicate that we want to grab the right side.</p>
+<p><code>=RIGHT(C2, 8)</code> extracts the time (19 - 11 = 8)</p>
+<p><code>=LEFT(D3, 10)</code> pulls out the date</p>
+</section>
+<section id="manipulating-strings-in-sql" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="manipulating-strings-in-sql"><span class="header-section-number">3.5</span> Manipulating strings in SQL</h2>
+<ul>
+<li><strong>CONCAT</strong>: A function that adds strings together to create new text strings that can be used as unique keys, i.e.&nbsp;<code>CONCAT (&lt;e2&gt;&lt;80&gt;&lt;98&gt;Google&lt;e2&gt;&lt;80&gt;&lt;99&gt;, &lt;e2&gt;&lt;80&gt;&lt;98&gt;.com&lt;e2&gt;&lt;80&gt;&lt;99&gt;);</code></li>
+<li><strong>CONCAT_WS</strong>: A function that adds two or more strings together with a separator, i.e.&nbsp;<code>CONCAT_WS (&lt;e2&gt;&lt;80&gt;&lt;98&gt; . &lt;e2&gt;&lt;80&gt;&lt;99&gt;, &lt;e2&gt;&lt;80&gt;&lt;98&gt;www&lt;e2&gt;&lt;80&gt;&lt;99&gt;, &lt;e2&gt;&lt;80&gt;&lt;98&gt;google&lt;e2&gt;&lt;80&gt;&lt;99&gt;, &lt;e2&gt;&lt;80&gt;&lt;98&gt;com&lt;e2&gt;&lt;80&gt;&lt;99&gt;)</code></li>
+<li><strong>CONCAT with +</strong>: Adds two or more strings together using the + operator, i.e.&nbsp;<code>&lt;e2&gt;&lt;80&gt;&lt;98&gt;Google&lt;e2&gt;&lt;80&gt;&lt;99&gt; + &lt;e2&gt;&lt;80&gt;&lt;98&gt;.com&lt;e2&gt;&lt;80&gt;&lt;99&gt;</code></li>
+</ul>
+<p>W3 Schools is an excellent resource for interactive SQL learning, and the following links will guide you through transforming your data using SQL:</p>
+<ul>
+<li><a href="https://www.w3schools.com/sql/sql_ref_sqlserver.asp">SQL functions</a>: This is a comprehensive list of functions to get you started. Click on each function, where you will learn about the definition, usage, examples, and even be able to create and run your own query for practice. Try it out for yourself!<br>
+</li>
+<li><a href="https://www.w3schools.com/sql/sql_ref_keywords.asp">SQL Keywords</a>: This is a helpful SQL keywords reference to bookmark as you increase your knowledge of SQL. This list of keywords are reserved words that you will use as your need to perform different operations in the database grows.</li>
+</ul>
+</section>
+<section id="get-support-when-getting-stuck" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="get-support-when-getting-stuck"><span class="header-section-number">3.6</span> Get support when getting stuck</h2>
+<p>Resources:</p>
+<ul>
+<li><a href="https://support.google.com/docs/table/25273?hl=en">List of Google Sheets functions</a>: This is a comprehensive list of the Google Sheets functions and syntax. Each function is listed with a link to learn more.</li>
+<li><a href="https://exceljet.net/excel-functions">List of spreadsheet functions</a>: This is a comprehensive list of Excel spreadsheet functions with links to more detailed explanations. This is a useful resource to save so that you can reference it often; that way, you<e2>&lt;80&gt;&lt;99&gt;ll have access to functions and examples that you can apply to your work.</e2></li>
+<li><a href="https://exceljet.net/formulas">List of spreadsheet formulas</a>: Similar to the previous resource, this comprehensive list of Excel spreadsheet formulas with links to more detailed explanations and can be saved and referenced any time you need to check out a formula for your analysis.</li>
+</ul>
+<p><strong>Stack Overflow</strong> is an online platform where programmers ask code-related questions and peers are available to suggest answers. You can ask questions about programming languages such as SQL and R (which you will learn about in Course 7), data tools, and much more. Follow the steps below to get started on Stack Overflow.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -242,6 +464,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../code/3_aggregating_data.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Aggregating data</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
